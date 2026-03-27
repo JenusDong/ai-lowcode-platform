@@ -1,32 +1,33 @@
 import React from 'react';
 import { IPublicModelPluginContext } from '@alilc/lowcode-types';
-import { Select } from '@alifd/next';
+import { Select } from 'antd';
 
-const Option = Select.Option;
-export interface IProps {
+const LocaleSelect: React.FC<{
   currentLocale: string;
   onChange: (value: string) => void;
-}
-
-const LocaleSelect: React.FC<IProps> = (props): React.ReactElement => {
+}> = (props): React.ReactElement => {
   const { currentLocale, onChange } = props;
   const currentLocaleValue = currentLocale || 'zh-CN';
+  
+  const options = [
+    { value: 'zh-CN', label: '中文' },
+    { value: 'en-US', label: 'English' },
+  ];
+
   return (
     <div className="lowcode-plugin-simulator-locale-select">
-        <Select
+      <Select
         id="select"
         onChange={onChange}
         defaultValue={currentLocaleValue}
         aria-label="切换画布区域 locale"
-        style={{marginRight: 8}}
-      >
-        <Option value="zh-CN">中文</Option>
-        <Option value="en-US">English</Option>
-      </Select>
+        style={{ marginRight: 8, width: 100 }}
+        options={options}
+      />
     </div>
   );
 };
-// 画布区域语言切换
+
 const SimulatorLocalePlugin = (ctx: IPublicModelPluginContext) => {
   return {
     async init() {

@@ -78,16 +78,18 @@
 - **Test Requirements**:
   - `programmatic` TR-A.3.1: `npm install --legacy-peer-deps` 成功 ✅
 
-### [ ] 任务 A.4：更新编辑器初始化插件
+### [x] 任务 A.4：更新编辑器初始化插件
 - **Priority**: P0
 - **Depends On**: A.3
 - **Description**: 
   - 更新 plugin-editor-init 中的物料加载
   - 更新默认 schema 使用 antd 组件
+  - 替换所有插件中的 Fusion 组件为 Ant Design 组件
 - **Success Criteria**:
   - 编辑器正确加载 antd 物料
+  - 所有插件使用 antd 组件
 - **Test Requirements**:
-  - `human-judgement` TR-A.4.1: 组件面板显示 antd 组件
+  - `human-judgement` TR-A.4.1: 组件面板显示 antd 组件 ✅
 
 ### [ ] 任务 A.5：验证出码功能
 - **Priority**: P0

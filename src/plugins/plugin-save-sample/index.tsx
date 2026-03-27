@@ -1,11 +1,10 @@
 import { IPublicModelPluginContext } from '@alilc/lowcode-types';
-import { Button } from '@alifd/next';
+import { Button } from 'antd';
 import {
   saveSchema,
   resetSchema,
 } from '../../services/mockService';
 
-// 保存功能示例
 const SaveSamplePlugin = (ctx: IPublicModelPluginContext) => {
   return {
     async init() {
@@ -20,7 +19,7 @@ const SaveSamplePlugin = (ctx: IPublicModelPluginContext) => {
           align: 'right',
         },
         content: (
-          <Button onClick={() => saveSchema(scenarioName)}>
+          <Button type="primary" onClick={() => saveSchema(scenarioName)}>
             保存到本地
           </Button>
         ),

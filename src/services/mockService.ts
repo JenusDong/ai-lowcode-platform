@@ -1,6 +1,6 @@
 import { material, project } from '@alilc/lowcode-engine';
 import { filterPackages } from '@alilc/lowcode-plugin-inject'
-import { Message, Dialog } from '@alifd/next';
+import { message, Modal } from 'antd';
 import { IPublicTypeProjectSchema, IPublicEnumTransformStage } from '@alilc/lowcode-types';
 import DefaultPageSchema from './defaultPageSchema.json';
 import DefaultI18nSchema from './defaultI18nSchema.json';
@@ -18,33 +18,21 @@ const generateProjectSchema = (pageSchema: any, i18nSchema: any): IPublicTypePro
 export const saveSchema = async (scenarioName: string = 'unknown') => {
   setProjectSchemaToLocalStorage(scenarioName);
   await setPackagesToLocalStorage(scenarioName);
-  Message.success('成功保存到本地');
+  message.success('成功保存到本地');
 };
 
 export const resetSchema = async (scenarioName: string = 'unknown') => {
-  try {
-    await new Promise<void>((resolve, reject) => {
-      Dialog.confirm({
-        content: '确定要重置吗？您所有的修改都将消失！',
-        onOk: () => {
-          resolve();
-        },
-        onCancel: () => {
-          reject()
-        },
-      })
-    })
-  } catch(err) {
-    return;
-  }
-  const defaultSchema = generateProjectSchema(DefaultPageSchema, DefaultI18nSchema);
-
-  project.importSchema(defaultSchema as any);
-  project.simulatorHost?.rerender();
-
-  setProjectSchemaToLocalStorage(scenarioName);
-  await setPackagesToLocalStorage(scenarioName);
-  Message.success('成功重置页面');
+  Modal.confirm({
+    content: '确定要重置吗？您所有的修改都将消失！',
+    onOk: async () => {
+      const defaultSchema = generateProjectSchema(DefaultPageSchema, DefaultI18nSchema);
+      project.importSchema(defaultSchema as any);
+      project.simulatorHost?.rerender();
+      setProjectSchemaToLocalStorage(scenarioName);
+      await setPackagesToLocalStorage(scenarioName);
+      message.success('成功重置页面');
+    },
+  });
 }
 
 const getLSName = (scenarioName: string, ns: string = 'projectSchema') => `${scenarioName}:${ns}`;

@@ -1,10 +1,9 @@
 import { IPublicModelPluginContext } from '@alilc/lowcode-types';
-import { Button } from '@alifd/next';
+import { Button } from 'antd';
 import {
   saveSchema,
 } from '../../services/mockService';
 
-// 保存功能示例
 const PreviewSamplePlugin = (ctx: IPublicModelPluginContext) => {
   return {
     async init() {
