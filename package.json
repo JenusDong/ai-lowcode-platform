@@ -1,0 +1,16 @@
+{
+  "name": "ai-lowcode-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI 驱动的低代码平台",
+  "scripts": {
+    "dev": "echo 'Coming soon'",
+    "build": "echo 'Coming soon'",
+    "lint": "echo 'Coming soon'",
+    "typecheck": "echo 'Coming soon'",
+    "test": "echo 'Coming soon'"
+  },
+  "keywords": ["lowcode", "react", "ai"],
+  "author": "",
+  "license": "MIT"
+}
