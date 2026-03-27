@@ -16,37 +16,46 @@
       ]
     },
     {
-      "title": "fusion组件库",
-      "package": "@alifd/next",
-      "version": "1.26.4",
+      "package": "iconfont-icons",
       "urls": [
-        "https://g.alicdn.com/code/lib/alifd__next/1.26.4/next.min.css",
-        "https://g.alicdn.com/code/lib/alifd__next/1.26.4/next-with-locales.min.js"
-      ],
-      "library": "Next"
+        "//at.alicdn.com/t/font_2369445_ukrtsovd92r.js"
+      ]
     },
     {
-      "title": "NextTable",
-      "package": "NextTable",
-      "version": "1.0.1",
+      "package": "@ant-design/icons",
+      "version": "4.7.0",
       "urls": [
-        "https://g.alicdn.com/fusion-platform/pro-table/1.0.1/next-table.js",
-        "https://g.alicdn.com/fusion-platform/pro-table/1.0.1/next-table.css"
+        "//g.alicdn.com/code/npm/@ali/ant-design-icons-cdn/4.5.0/index.umd.min.js"
       ],
-      "library": "NextTable"
+      "library": "icons"
     },
     {
-      "package": "@alilc/lowcode-materials",
-      "version": "1.0.7",
-      "library": "AlilcLowcodeMaterials",
+      "package": "antd",
+      "version": "4.23.0",
       "urls": [
-        "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/dist/AlilcLowcodeMaterials.js",
-        "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/dist/AlilcLowcodeMaterials.css"
+        "//g.alicdn.com/code/lib/antd/4.23.0/antd.min.js",
+        "//g.alicdn.com/code/lib/antd/4.23.0/antd.min.css"
+      ],
+      "library": "antd"
+    },
+    {
+      "package": "@alilc/antd-lowcode-materials",
+      "version": "1.1.1",
+      "library": "AntdLowcode",
+      "urls": [
+        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.js",
+        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.css"
       ],
       "editUrls": [
-        "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/build/lowcode/view.js",
-        "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/build/lowcode/view.css"
-      ]
+        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.js",
+        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.css"
+      ],
+      "advancedUrls": {
+        "default": [
+          "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.js",
+          "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.css"
+        ]
+      }
     },
     {
       "package": "@alifd/layout",
@@ -60,31 +69,18 @@
         "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.js",
         "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.css"
       ]
-    },
-    {
-      "package": "@alifd/fusion-ui",
-      "version": "2.0.2",
-      "library": "AlifdFusionUi",
-      "urls": [
-        "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/dist/AlifdFusionUi.js",
-        "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/dist/AlifdFusionUi.css"
-      ],
-      "editUrls": [
-        "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/build/lowcode/view.js",
-        "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/build/lowcode/view.css"
-      ]
     }
   ],
   "components": [
     {
-      "exportName": "AlilcLowcodeMaterialsMeta",
+      "exportName": "AlilcAntdLowcodeMaterialsMeta",
       "npm": {
-        "package": "@alilc/lowcode-materials"
+        "package": "@alilc/antd-lowcode-materials",
+        "version": "1.1.1"
       },
-      "url": "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/build/lowcode/meta.js",
+      "url": "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js",
       "urls": {
-        "default": "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/build/lowcode/meta.js",
-        "design": "https://alifd.alicdn.com/npm/@alilc/lowcode-materials@1.0.7/build/lowcode/meta.design.js"
+        "default": "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js"
       }
     },
     {
@@ -93,39 +89,17 @@
         "package": "@alifd/layout",
         "version": "2.4.1"
       },
-      "url": "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/meta.js",
-      "urls": {
-        "default": "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/meta.js"
-      }
-    },
-    {
-      "exportName": "AlifdFusionUiMeta",
-      "npm": {
-        "package": "@alifd/fusion-ui"
-      },
-      "url": "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/build/lowcode/meta.js",
-      "urls": {
-        "default": "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/build/lowcode/meta.js",
-        "design": "https://alifd.alicdn.com/npm/@alifd/fusion-ui@2.0.2/build/lowcode/meta.design.js"
-      }
+      "url": "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/meta.js"
     }
   ],
   "sort": {
     "groupList": [
       "精选组件",
-      "原子组件",
-      "低代码组件"
+      "原子组件"
     ],
     "categoryList": [
-      "基础元素",
-      "布局容器类",
-      "表格类",
-      "表单详情类",
-      "帮助类",
-      "对话框类",
-      "业务类",
       "通用",
-      "引导",
+      "导航",
       "信息输入",
       "信息展示",
       "信息反馈"
@@ -133,8 +107,7 @@
   },
   "groupList": [
     "精选组件",
-    "原子组件",
-    "低代码组件"
+    "原子组件"
   ],
   "ignoreComponents": {}
 }
