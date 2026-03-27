@@ -35,19 +35,86 @@
   - `human-judgement` TR-1.1.2: 浏览器显示完整编辑器界面 ✅
 - **Notes**: 参考 https://github.com/alibaba/lowcode-demo
 
-### [ ] 任务 1.2：定制化编辑器界面
+---
+
+## 第一阶段补充：物料库切换到 Ant Design（P0 - 2-3 天）
+
+> **重要**：当前项目使用的是 Fusion Design 物料，需要切换到 Ant Design 物料以满足：
+> - 管理后台统一样式（企业元素感）
+> - 导出代码为 Ant Design 组件
+
+### [x] 任务 A.1：研究 Ant Design 物料库配置
 - **Priority**: P0
 - **Depends On**: 1.1
 - **Description**: 
+  - 研究 LowCodeEngine 官方 antd 物料库配置
+  - 查找 antd-lowcode-materials 的 CDN 地址
+  - 确认出码插件支持 antd 代码生成
+- **Success Criteria**:
+  - 确定 antd 物料库的正确配置
+- **Test Requirements**:
+  - `human-judgement` TR-A.1.1: 配置文档清晰完整 ✅
+
+### [x] 任务 A.2：更新 assets.json 配置
+- **Priority**: P0
+- **Depends On**: A.1
+- **Description**: 
+  - 替换 Fusion 物料为 Ant Design 物料
+  - 更新 packages 配置（antd、moment 等）
+  - 更新 components 配置（antd 物料 meta）
+- **Success Criteria**:
+  - assets.json 配置正确的 antd 物料
+- **Test Requirements**:
+  - `programmatic` TR-A.2.1: JSON 格式正确 ✅
+
+### [x] 任务 A.3：更新 package.json 依赖
+- **Priority**: P0
+- **Depends On**: A.2
+- **Description**: 
+  - 移除 Fusion 相关依赖
+  - 添加 antd 相关依赖
+- **Success Criteria**:
+  - 依赖正确安装
+- **Test Requirements**:
+  - `programmatic` TR-A.3.1: `npm install --legacy-peer-deps` 成功 ✅
+
+### [ ] 任务 A.4：更新编辑器初始化插件
+- **Priority**: P0
+- **Depends On**: A.3
+- **Description**: 
+  - 更新 plugin-editor-init 中的物料加载
+  - 更新默认 schema 使用 antd 组件
+- **Success Criteria**:
+  - 编辑器正确加载 antd 物料
+- **Test Requirements**:
+  - `human-judgement` TR-A.4.1: 组件面板显示 antd 组件
+
+### [ ] 任务 A.5：验证出码功能
+- **Priority**: P0
+- **Depends On**: A.4
+- **Description**: 
+  - 测试出码插件生成 antd 代码
+  - 验证生成的代码可运行
+- **Success Criteria**:
+  - 出码生成正确的 antd React 代码
+- **Test Requirements**:
+  - `programmatic` TR-A.5.1: 生成的代码包含 antd 导入
+
+---
+
+### [ ] 任务 1.2：定制化编辑器界面
+- **Priority**: P0
+- **Depends On**: A.5
+- **Description**: 
   - 使用 skeleton API 定制编辑器布局
   - 添加自定义工具栏（数据源、AI Copilot 入口）
-  - 配置主题和品牌样式
+  - 配置主题和品牌样式（企业蓝色调）
   - 移除不需要的默认插件
 - **Success Criteria**:
   - 编辑器界面符合我们的品牌设计
   - 自定义区域正常显示
 - **Test Requirements**:
-  - `human-judgement` TR-1.2.1: 界面布局合理美观
+  - `human-judgement` TR-1.2.1: 界面布局合理美观，有企业感
   - `programmatic` TR-1.2.2: 所有自定义功能正常加载
 
 ---
