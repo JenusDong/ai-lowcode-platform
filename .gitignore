@@ -34,3 +34,4 @@ lerna-debug.log*
 # Cache
 .cache/
 .turbo/
+.gstack/

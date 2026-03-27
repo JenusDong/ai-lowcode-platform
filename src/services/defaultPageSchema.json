@@ -1,16 +1,10 @@
 {
   "componentName": "Page",
-  "id": "node_antd_page",
   "props": {
-    "ref": "outerView",
-    "style": {
-      "height": "100%",
-      "padding": "24px",
-      "backgroundColor": "#f0f2f5"
-    }
+    "ref": "outerView"
   },
-  "docId": "doc_antd_default",
-  "fileName": "/",
+  "docId": "doc_demo",
+  "fileName": "index",
   "dataSource": {
     "list": []
   },
@@ -18,300 +12,47 @@
   "css": "",
   "lifeCycles": {},
   "methods": {},
-  "hidden": false,
-  "title": "",
-  "isLocked": false,
-  "condition": true,
-  "conditionGroup": "",
   "children": [
     {
       "componentName": "Div",
-      "id": "node_header",
       "props": {
         "style": {
-          "marginBottom": "24px"
+          "padding": "20px"
         }
       },
-      "title": "头部区域",
-      "hidden": false,
-      "isLocked": false,
-      "condition": true,
-      "conditionGroup": "",
       "children": [
         {
-          "componentName": "Typography.Title",
-          "id": "node_title",
+          "componentName": "Typography.Text",
           "props": {
-            "level": 2,
-            "children": "AI 低代码平台",
-            "style": {
-              "margin": 0,
-              "color": "#1890ff"
-            }
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": ""
-        },
-        {
-          "componentName": "Typography.Paragraph",
-          "id": "node_subtitle",
-          "props": {
-            "children": "基于 LowCodeEngine 构建的 AI 驱动低代码平台",
-            "style": {
-              "color": "#666"
-            }
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": ""
+            "children": "AI 低代码平台"
+          }
         }
       ]
     },
     {
       "componentName": "Card",
-      "id": "node_card_main",
       "props": {
         "title": "快速开始",
-        "bordered": false,
         "style": {
-          "marginBottom": "24px"
+          "marginBottom": "16px"
         }
       },
-      "title": "主卡片",
-      "hidden": false,
-      "isLocked": false,
-      "condition": true,
-      "conditionGroup": "",
       "children": [
         {
-          "componentName": "Space",
-          "id": "node_space_buttons",
+          "componentName": "Button",
           "props": {
-            "size": "middle"
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": "",
-          "children": [
-            {
-              "componentName": "Button",
-              "id": "node_btn_primary",
-              "props": {
-                "type": "primary",
-                "children": "创建页面"
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": ""
+            "type": "primary",
+            "children": "创建页面"
+          }
+        },
+        {
+          "componentName": "Button",
+          "props": {
+            "style": {
+              "marginLeft": "8px"
             },
-            {
-              "componentName": "Button",
-              "id": "node_btn_default",
-              "props": {
-                "children": "导入模板"
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": ""
-            },
-            {
-              "componentName": "Button",
-              "id": "node_btn_dashed",
-              "props": {
-                "type": "dashed",
-                "children": "AI 生成"
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "componentName": "Row",
-      "id": "node_row_stats",
-      "props": {
-        "gutter": 16
-      },
-      "title": "统计行",
-      "hidden": false,
-      "isLocked": false,
-      "condition": true,
-      "conditionGroup": "",
-      "children": [
-        {
-          "componentName": "Col",
-          "id": "node_col_1",
-          "props": {
-            "span": 6
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": "",
-          "children": [
-            {
-              "componentName": "Card",
-              "id": "node_stat_card_1",
-              "props": {
-                "bordered": false
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": "",
-              "children": [
-                {
-                  "componentName": "Statistic",
-                  "id": "node_stat_1",
-                  "props": {
-                    "title": "总页面数",
-                    "value": 128,
-                    "valueStyle": {
-                      "color": "#3f8600"
-                    }
-                  },
-                  "hidden": false,
-                  "isLocked": false,
-                  "condition": true,
-                  "conditionGroup": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "componentName": "Col",
-          "id": "node_col_2",
-          "props": {
-            "span": 6
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": "",
-          "children": [
-            {
-              "componentName": "Card",
-              "id": "node_stat_card_2",
-              "props": {
-                "bordered": false
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": "",
-              "children": [
-                {
-                  "componentName": "Statistic",
-                  "id": "node_stat_2",
-                  "props": {
-                    "title": "今日访问",
-                    "value": 1024,
-                    "valueStyle": {
-                      "color": "#1890ff"
-                    }
-                  },
-                  "hidden": false,
-                  "isLocked": false,
-                  "condition": true,
-                  "conditionGroup": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "componentName": "Col",
-          "id": "node_col_3",
-          "props": {
-            "span": 6
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": "",
-          "children": [
-            {
-              "componentName": "Card",
-              "id": "node_stat_card_3",
-              "props": {
-                "bordered": false
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": "",
-              "children": [
-                {
-                  "componentName": "Statistic",
-                  "id": "node_stat_3",
-                  "props": {
-                    "title": "组件数量",
-                    "value": 56,
-                    "valueStyle": {
-                      "color": "#722ed1"
-                    }
-                  },
-                  "hidden": false,
-                  "isLocked": false,
-                  "condition": true,
-                  "conditionGroup": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "componentName": "Col",
-          "id": "node_col_4",
-          "props": {
-            "span": 6
-          },
-          "hidden": false,
-          "isLocked": false,
-          "condition": true,
-          "conditionGroup": "",
-          "children": [
-            {
-              "componentName": "Card",
-              "id": "node_stat_card_4",
-              "props": {
-                "bordered": false
-              },
-              "hidden": false,
-              "isLocked": false,
-              "condition": true,
-              "conditionGroup": "",
-              "children": [
-                {
-                  "componentName": "Statistic",
-                  "id": "node_stat_4",
-                  "props": {
-                    "title": "AI 生成次数",
-                    "value": 89,
-                    "suffix": "次",
-                    "valueStyle": {
-                      "color": "#cf1322"
-                    }
-                  },
-                  "hidden": false,
-                  "isLocked": false,
-                  "condition": true,
-                  "conditionGroup": ""
-                }
-              ]
-            }
-          ]
+            "children": "导入模板"
+          }
         }
       ]
     }
