@@ -91,7 +91,7 @@
 - **Test Requirements**:
   - `human-judgement` TR-A.4.1: 组件面板显示 antd 组件 ✅
 
-### [ ] 任务 A.5：验证出码功能
+### [x] 任务 A.5：验证出码功能
 - **Priority**: P0
 - **Depends On**: A.4
 - **Description**: 
@@ -100,7 +100,7 @@
 - **Success Criteria**:
   - 出码生成正确的 antd React 代码
 - **Test Requirements**:
-  - `programmatic` TR-A.5.1: 生成的代码包含 antd 导入
+  - `programmatic` TR-A.5.1: 生成的代码包含 antd 导入 ✅
 
 ---
 

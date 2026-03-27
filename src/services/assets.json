@@ -44,6 +44,13 @@
       "version": "4.24.15",
       "library": "antd",
       "urls": [
+        "https://g.alicdn.com/code/lib/antd/4.24.15/antd.min.js"
+      ],
+      "renderUrls": [
+        "https://g.alicdn.com/code/lib/antd/4.24.15/antd.min.js",
+        "https://g.alicdn.com/code/lib/antd/4.24.15/antd.min.css"
+      ],
+      "editUrls": [
         "https://g.alicdn.com/code/lib/antd/4.24.15/antd.min.js",
         "https://g.alicdn.com/code/lib/antd/4.24.15/antd.min.css"
       ]
