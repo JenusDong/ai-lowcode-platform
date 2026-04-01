@@ -1,0 +1,204 @@
+/**
+ * AI 低代码平台 - 主题配置
+ * 基于 DESIGN.md 设计系统
+ * 
+ * 字体：Noto Sans SC (思源黑体) + JetBrains Mono
+ * 主色：#1677FF (阿里蓝)
+ * 间距：4px 基础单位
+ */
+
+/* 引入 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ========== CSS 变量定义 ========== */
+:root {
+  /* 主色 */
+  --primary: #1677FF;
+  --primary-hover: #4096FF;
+  --primary-active: #0958D9;
+  
+  /* 语义色 */
+  --success: #52C41A;
+  --warning: #FAAD14;
+  --error: #FF4D4F;
+  --info: #1677FF;
+  
+  /* 中性色 */
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #F0F0F0;
+  --gray-300: #D9D9D9;
+  --gray-400: #BFBFBF;
+  --gray-500: #8C8C8C;
+  --gray-600: #595959;
+  --gray-700: #434343;
+  --gray-800: #262626;
+  --gray-900: #1F1F1F;
+  
+  /* 背景色 */
+  --bg-base: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-surface: #FAFAFA;
+  
+  /* 文字色 */
+  --text-primary: #262626;
+  --text-secondary: #595959;
+  --text-tertiary: #8C8C8C;
+  --text-disabled: #BFBFBF;
+  
+  /* 边框色 */
+  --border: #D9D9D9;
+  --border-hover: #1677FF;
+  
+  /* 间距系统（基于 4px） */
+  --spacing-2xs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+  
+  /* 字体 */
+  --font-display: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-code: 'JetBrains Mono', 'Courier New', Consolas, Monaco, monospace;
+  
+  /* 字号 */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 28px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 48px;
+  
+  /* 字重 */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* 行高 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+  
+  /* 动效时长 */
+  --duration-micro: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  
+  /* 动效缓动函数 */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Z-index 层级 */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+}
+
+/* ========== 深色模式 ========== */
+[data-theme="dark"] {
+  /* 主色（降低饱和度 15-20%） */
+  --primary: #3C89FF;
+  --primary-hover: #5A9FFF;
+  --primary-active: #1A6FFF;
+  
+  /* 语义色 */
+  --success: #73D13D;
+  --warning: #FFC53D;
+  --error: #FF7875;
+  
+  /* 中性色（反转） */
+  --gray-50: #1F1F1F;
+  --gray-100: #262626;
+  --gray-200: #2F2F2F;
+  --gray-300: #434343;
+  --gray-400: #595959;
+  --gray-500: #8C8C8C;
+  --gray-600: #BFBFBF;
+  --gray-700: #D9D9D9;
+  --gray-800: #F0F0F0;
+  --gray-900: #FAFAFA;
+  
+  /* 背景色 */
+  --bg-base: #141414;
+  --bg-elevated: #1F1F1F;
+  --bg-surface: #262626;
+  
+  /* 文字色 */
+  --text-primary: #F0F0F0;
+  --text-secondary: #BFBFBF;
+  --text-tertiary: #8C8C8C;
+  --text-disabled: #595959;
+  
+  /* 边框色 */
+  --border: #434343;
+  --border-hover: #3C89FF;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== 全局样式重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== 工具类 ========== */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-error { color: var(--error); }
+
+.bg-base { background-color: var(--bg-base); }
+.bg-elevated { background-color: var(--bg-elevated); }
+.bg-surface { background-color: var(--bg-surface); }
+
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-code { font-family: var(--font-code); }
+
+/* ========== 动效工具类 ========== */
+.transition-fast {
+  transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+.transition-normal {
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.transition-slow {
+  transition: all var(--duration-slow) var(--ease-in-out);
+}

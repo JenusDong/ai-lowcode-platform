@@ -4,7 +4,7 @@
       "package": "moment",
       "version": "2.24.0",
       "urls": [
-        "https://g.alicdn.com/mylib/moment/2.24.0/min/moment.min.js"
+        "https://unpkg.com/moment@2.24.0/min/moment.min.js"
       ],
       "library": "moment"
     },
@@ -12,20 +12,23 @@
       "package": "lodash",
       "library": "_",
       "urls": [
-        "https://g.alicdn.com/platform/c/lodash/4.6.1/lodash.min.js"
+        "https://unpkg.com/lodash@4.17.21/lodash.min.js"
       ]
     },
     {
-      "package": "iconfont-icons",
+      "package": "@alifd/next",
+      "version": "1.26.0",
       "urls": [
-        "//at.alicdn.com/t/font_2369445_ukrtsovd92r.js"
-      ]
+        "https://unpkg.com/@alifd/next@1.26.0/dist/next.min.js",
+        "https://unpkg.com/@alifd/next@1.26.0/dist/next.min.css"
+      ],
+      "library": "Next"
     },
     {
       "package": "@ant-design/icons",
       "version": "4.7.0",
       "urls": [
-        "//g.alicdn.com/code/npm/@ali/ant-design-icons-cdn/4.5.0/index.umd.min.js"
+        "https://unpkg.com/@ant-design/icons@4.7.0/dist/index.umd.min.js"
       ],
       "library": "icons"
     },
@@ -33,8 +36,8 @@
       "package": "antd",
       "version": "4.23.0",
       "urls": [
-        "//g.alicdn.com/code/lib/antd/4.23.0/antd.min.js",
-        "//g.alicdn.com/code/lib/antd/4.23.0/antd.min.css"
+        "https://unpkg.com/antd@4.23.0/dist/antd.min.js",
+        "https://unpkg.com/antd@4.23.0/dist/antd.min.css"
       ],
       "library": "antd"
     },
@@ -43,45 +46,74 @@
       "version": "1.1.1",
       "library": "AntdLowcode",
       "urls": [
-        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.js",
-        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.css"
+        "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.js",
+        "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.css"
       ],
       "editUrls": [
-        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.js",
-        "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.css"
-      ],
-      "advancedUrls": {
-        "default": [
-          "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.js",
-          "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/render/default/view.css"
-        ]
-      }
+        "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.js",
+        "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/view.css"
+      ]
     },
     {
       "package": "@alifd/layout",
       "version": "2.4.1",
       "library": "AlifdLayout",
       "urls": [
-        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/dist/AlifdLayout.js",
-        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/dist/AlifdLayout.css"
+        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.js",
+        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.css"
       ],
       "editUrls": [
-        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.js",
-        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.css"
+        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.js",
+        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.css"
+      ]
+    },
+    {
+      "package": "layout-components",
+      "version": "1.0.0",
+      "library": "LayoutComponents",
+      "urls": [
+        "/layout-components.umd.js"
+      ],
+      "editUrls": [
+        "/layout-components.umd.js"
+      ]
+    },
+    {
+      "package": "echarts",
+      "version": "5.4.3",
+      "library": "echarts",
+      "urls": [
+        "https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"
+      ]
+    },
+    {
+      "package": "echarts-component",
+      "version": "1.0.0",
+      "library": "EChartsComponent",
+      "urls": [
+        "/echarts-component.umd.js"
+      ],
+      "editUrls": [
+        "/echarts-component.umd.js"
       ]
     }
   ],
   "components": [
+    {
+      "exportName": "EChartsMeta",
+      "npm": {
+        "package": "echarts-component",
+        "version": "1.0.0"
+      },
+      "url": "/echarts-meta.js"
+    },
     {
       "exportName": "AlilcAntdLowcodeMaterialsMeta",
       "npm": {
         "package": "@alilc/antd-lowcode-materials",
         "version": "1.1.1"
       },
-      "url": "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js",
-      "urls": {
-        "default": "https://alifd.alicdn.com/npm/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js"
-      }
+      "url": "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js"
     },
     {
       "exportName": "AlifdLayoutMeta",
@@ -89,7 +121,15 @@
         "package": "@alifd/layout",
         "version": "2.4.1"
       },
-      "url": "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/meta.js"
+      "url": "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/meta.js"
+    },
+    {
+      "exportName": "LayoutComponentsMeta",
+      "npm": {
+        "package": "layout-components",
+        "version": "1.0.0"
+      },
+      "url": "/layout-components-meta.js"
     }
   ],
   "sort": {

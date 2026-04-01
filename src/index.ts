@@ -21,6 +21,8 @@ import LogoSamplePlugin from './plugins/plugin-logo-sample';
 import SimulatorLocalePlugin from './plugins/plugin-simulator-locale';
 import lowcodePlugin from './plugins/plugin-lowcode-component';
 import CustomToolbarPlugin from './plugins/plugin-custom-toolbar';
+import ThemeTogglePlugin from './plugins/plugin-theme-toggle';
+import EChartsPlugin from './plugins/plugin-echarts';
 import appHelper from './appHelper';
 import './global.scss';
 
@@ -101,6 +103,10 @@ async function registerPlugins() {
   await plugins.register(lowcodePlugin);
 
   await plugins.register(CustomToolbarPlugin);
+
+  await plugins.register(ThemeTogglePlugin);
+
+  await plugins.register(EChartsPlugin);
 };
 
 (async function main() {

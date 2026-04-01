@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 低代码平台 - 设计系统预览</title>
+    
+    <!-- Google Fonts: Noto Sans SC (思源黑体) + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1677FF;
+            --primary-hover: #4096FF;
+            --primary-active: #0958D9;
+            
+            --success: #52C41A;
+            --warning: #FAAD14;
+            --error: #FF4D4F;
+            --info: #1677FF;
+            
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #F0F0F0;
+            --gray-300: #D9D9D9;
+            --gray-400: #BFBFBF;
+            --gray-500: #8C8C8C;
+            --gray-600: #595959;
+            --gray-700: #434343;
+            --gray-800: #262626;
+            --gray-900: #1F1F1F;
+            
+            --bg-base: #FFFFFF;
+            --bg-elevated: #FFFFFF;
+            --bg-surface: #FAFAFA;
+            --text-primary: #262626;
+            --text-secondary: #595959;
+            --text-tertiary: #8C8C8C;
+            --border: #D9D9D9;
+            
+            --spacing-2xs: 2px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            
+            --font-display: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-code: 'JetBrains Mono', 'Courier New', monospace;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #3C89FF;
+            --primary-hover: #5A9FFF;
+            --primary-active: #1A6FFF;
+            
+            --success: #73D13D;
+            --warning: #FFC53D;
+            --error: #FF7875;
+            
+            --gray-50: #1F1F1F;
+            --gray-100: #262626;
+            --gray-200: #2F2F2F;
+            --gray-300: #434343;
+            --gray-400: #595959;
+            --gray-500: #8C8C8C;
+            --gray-600: #BFBFBF;
+            --gray-700: #D9D9D9;
+            --gray-800: #F0F0F0;
+            --gray-900: #FAFAFA;
+            
+            --bg-base: #141414;
+            --bg-elevated: #1F1F1F;
+            --bg-surface: #262626;
+            --text-primary: #F0F0F0;
+            --text-secondary: #BFBFBF;
+            --text-tertiary: #8C8C8C;
+            --border: #434343;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-xl);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-3xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .theme-toggle {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--gray-200);
+            border-color: var(--primary);
+        }
+        
+        [data-theme="dark"] .theme-toggle:hover {
+            background: var(--gray-300);
+        }
+        
+        .section {
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .font-specimen {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .font-name {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-code);
+        }
+        
+        .font-sample {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.02em;
+        }
+        
+        .font-body-sample {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .font-code-sample {
+            font-family: var(--font-code);
+            font-size: 14px;
+            background: var(--bg-surface);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .color-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        
+        .color-swatch {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-code);
+            font-size: 14px;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .color-info {
+            padding: var(--spacing-md);
+        }
+        
+        .color-name {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .color-usage {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .component-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+        }
+        
+        .component-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-surface);
+            border-color: var(--border);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+        }
+        
+        .btn-ghost:hover {
+            background: var(--bg-surface);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid;
+        }
+        
+        .alert-success {
+            background: rgba(82, 196, 26, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        
+        .alert-warning {
+            background: rgba(250, 173, 20, 0.1);
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        
+        .alert-error {
+            background: rgba(255, 77, 79, 0.1);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        
+        .alert-info {
+            background: rgba(22, 119, 255, 0.1);
+            border-color: var(--info);
+            color: var(--info);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: var(--spacing-md);
+            background: var(--bg-surface);
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .data-table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg-surface);
+        }
+        
+        .data-table .number {
+            font-family: var(--font-body);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .dashboard-mock {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .dashboard-header {
+            background: var(--bg-elevated);
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dashboard-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .dashboard-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--bg-elevated);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .stat-change {
+            font-size: 14px;
+            margin-top: var(--spacing-xs);
+        }
+        
+        .stat-change.positive {
+            color: var(--success);
+        }
+        
+        .stat-change.negative {
+            color: var(--error);
+        }
+        
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+        
+        .spacing-label {
+            font-family: var(--font-code);
+            font-size: 14px;
+            color: var(--text-tertiary);
+            min-width: 100px;
+        }
+        
+        .spacing-bar {
+            height: 24px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            opacity: 0.8;
+        }
+        
+        .spacing-value {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+            
+            .font-sample {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .color-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">AI 低代码平台</div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                🌙 切换深色模式
+            </button>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">字体系统</h2>
+            <p class="section-subtitle">思源黑体（Noto Sans SC）— 企业级中文排版方案，清晰易读，专业可靠</p>
+            
+            <div class="font-specimen">
+                <div class="font-name">Display / Hero — Noto Sans SC Bold</div>
+                <div class="font-sample">构建企业级应用</div>
+                <div class="font-body-sample">
+                    思源黑体是 Adobe 与 Google 联合开发的开源字体，专为屏幕阅读优化。其清晰的结构和均衡的字重分布，使其成为企业级产品的理想选择。支持简体中文、繁体中文、日文和韩文，确保跨地区的一致性体验。
+                </div>
+            </div>
+            
+            <div class="font-specimen">
+                <div class="font-name">Body Text — Noto Sans SC Regular</div>
+                <div class="font-body-sample" style="font-size: 16px; line-height: 1.8;">
+                    在企业级应用中，清晰的信息层级至关重要。我们使用字重（300/400/500/600/700）和字号（12/14/16/20/24/32）的组合来建立视觉层次。正文采用 16px 基准字号，确保长时间阅读的舒适度。行高设置为 1.6-1.8，在信息密度和可读性之间取得平衡。
+                </div>
+            </div>
+            
+            <div class="font-specimen">
+                <div class="font-name">Code / Data — JetBrains Mono</div>
+                <div class="font-code-sample">
+const config = {
+  theme: 'enterprise',
+  primaryColor: '#1677FF',
+  fontFamily: 'Noto Sans SC',
+  spacing: [2, 4, 8, 16, 24, 32, 48, 64]
+};
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">色彩系统</h2>
+            <p class="section-subtitle">平衡的色彩策略 — 主色用于品牌和关键操作，辅助色用于状态反馈，中性色构建界面层级</p>
+            
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1677FF;">#1677FF</div>
+                    <div class="color-info">
+                        <div class="color-name">主色 Primary</div>
+                        <div class="color-usage">品牌色、主要按钮、链接、焦点状态</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #52C41A;">#52C41A</div>
+                    <div class="color-info">
+                        <div class="color-name">成功 Success</div>
+                        <div class="color-usage">成功提示、正向指标、完成状态</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FAAD14;">#FAAD14</div>
+                    <div class="color-info">
+                        <div class="color-name">警告 Warning</div>
+                        <div class="color-usage">警告提示、注意事项、待处理状态</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #FF4D4F;">#FF4D4F</div>
+                    <div class="color-info">
+                        <div class="color-name">错误 Error</div>
+                        <div class="color-usage">错误提示、必填项、删除操作</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #262626;">#262626</div>
+                    <div class="color-info">
+                        <div class="color-name">文本主色</div>
+                        <div class="color-usage">标题、正文、重要信息</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #595959;">#595959</div>
+                    <div class="color-info">
+                        <div class="color-name">文本次色</div>
+                        <div class="color-usage">次要信息、描述文字、标签</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #8C8C8C;">#8C8C8C</div>
+                    <div class="color-info">
+                        <div class="color-name">文本辅助色</div>
+                        <div class="color-usage">占位符、禁用状态、辅助说明</div>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #F5F5F5; color: #262626;">#F5F5F5</div>
+                    <div class="color-info">
+                        <div class="color-name">背景色</div>
+                        <div class="color-usage">页面背景、卡片背景、分割区域</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">UI 组件</h2>
+            <p class="section-subtitle">基于设计系统构建的标准化组件，确保界面一致性</p>
+            
+            <div class="component-grid">
+                <div class="component-card">
+                    <div class="component-title">按钮 Buttons</div>
+                    <div class="button-group">
+                        <button class="btn btn-primary">主要按钮</button>
+                        <button class="btn btn-secondary">次要按钮</button>
+                        <button class="btn btn-ghost">幽灵按钮</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-primary" style="background: var(--success);">成功</button>
+                        <button class="btn btn-primary" style="background: var(--warning);">警告</button>
+                        <button class="btn btn-primary" style="background: var(--error);">错误</button>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-title">表单元素 Form Elements</div>
+                    <div class="form-group">
+                        <label class="form-label">用户名</label>
+                        <input type="text" class="form-input" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">邮箱地址</label>
+                        <input type="email" class="form-input" placeholder="example@company.com">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">提交</button>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-title">提示信息 Alerts</div>
+                    <div class="alert alert-success">
+                        ✓ 操作成功！数据已保存到服务器。
+                    </div>
+                    <div class="alert alert-warning">
+                        ⚠ 注意：该操作可能会影响其他用户。
+                    </div>
+                    <div class="alert alert-error">
+                        ✗ 错误：网络连接失败，请稍后重试。
+                    </div>
+                    <div class="alert alert-info">
+                        ℹ 提示：系统将在 5 分钟后自动保存。
+                    </div>
+                </div>
+                
+                <div class="component-card" style="grid-column: span 2;">
+                    <div class="component-title">数据表格 Data Table</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>负责人</th>
+                                <th class="number">进度</th>
+                                <th class="number">预算</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>企业门户系统</td>
+                                <td>张明</td>
+                                <td class="number">78%</td>
+                                <td class="number">¥128,000</td>
+                                <td><span style="color: var(--success);">进行中</span></td>
+                            </tr>
+                            <tr>
+                                <td>数据分析平台</td>
+                                <td>李华</td>
+                                <td class="number">100%</td>
+                                <td class="number">¥256,000</td>
+                                <td><span style="color: var(--primary);">已完成</span></td>
+                            </tr>
+                            <tr>
+                                <td>移动端应用</td>
+                                <td>王芳</td>
+                                <td class="number">45%</td>
+                                <td class="number">¥89,000</td>
+                                <td><span style="color: var(--warning);">待审核</span></td>
+                            </tr>
+                            <tr>
+                                <td>API 网关服务</td>
+                                <td>赵强</td>
+                                <td class="number">12%</td>
+                                <td class="number">¥64,000</td>
+                                <td><span style="color: var(--error);">已延期</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">真实场景模拟</h2>
+            <p class="section-subtitle">企业级管理后台的典型界面布局</p>
+            
+            <div class="dashboard-mock">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">数据概览</div>
+                    <div class="button-group">
+                        <button class="btn btn-secondary">导出报表</button>
+                        <button class="btn btn-primary">新建项目</button>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">总用户数</div>
+                            <div class="stat-value">12,847</div>
+                            <div class="stat-change positive">↑ 12.5% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">活跃项目</div>
+                            <div class="stat-value">384</div>
+                            <div class="stat-change positive">↑ 8.3% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">本月收入</div>
+                            <div class="stat-value">¥89.2K</div>
+                            <div class="stat-change positive">↑ 23.1% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">系统健康度</div>
+                            <div class="stat-value">98.7%</div>
+                            <div class="stat-change negative">↓ 0.3% 较上月</div>
+                        </div>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>最近活动</th>
+                                <th>用户</th>
+                                <th>操作</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>创建了新页面「用户管理」</td>
+                                <td>张明</td>
+                                <td>创建</td>
+                                <td>2 分钟前</td>
+                            </tr>
+                            <tr>
+                                <td>更新了数据源配置</td>
+                                <td>李华</td>
+                                <td>更新</td>
+                                <td>15 分钟前</td>
+                            </tr>
+                            <tr>
+                                <td>部署了生产环境</td>
+                                <td>王芳</td>
+                                <td>部署</td>
+                                <td>1 小时前</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">间距系统</h2>
+            <p class="section-subtitle">基于 4px 基础单位的间距阶梯，确保界面元素的对齐和一致性</p>
+            
+            <div class="spacing-demo">
+                <div class="spacing-item">
+                    <div class="spacing-label">2xs (2px)</div>
+                    <div class="spacing-bar" style="width: 2px;"></div>
+                    <div class="spacing-value">2px — 最小间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">xs (4px)</div>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <div class="spacing-value">4px — 紧凑间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">sm (8px)</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <div class="spacing-value">8px — 小间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">md (16px)</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <div class="spacing-value">16px — 标准间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">lg (24px)</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <div class="spacing-value">24px — 大间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">xl (32px)</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <div class="spacing-value">32px — 区块间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">2xl (48px)</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <div class="spacing-value">48px — 大区块间距</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">3xl (64px)</div>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <div class="spacing-value">64px — 页面边距</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                button.textContent = '🌙 切换深色模式';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                button.textContent = '☀️ 切换浅色模式';
+            }
+        }
+    </script>
+</body>
+</html>

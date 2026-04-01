@@ -1,0 +1,430 @@
+/**
+ * AI 低代码平台 - 深色模式样式覆盖
+ * 修复 LowCodeEngine 编辑器在深色模式下的文字颜色问题
+ */
+
+/* ========== 深色模式全局样式覆盖 ========== */
+[data-theme="dark"] {
+  /* 编辑器主容器 */
+  #lce-container,
+  #engine {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+  }
+  
+  /* 所有文字元素 */
+  * {
+    color: var(--text-primary);
+  }
+  
+  /* 标题 */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+  }
+  
+  /* 段落和文本 */
+  p, span, div {
+    color: var(--text-primary);
+  }
+  
+  /* 链接 */
+  a {
+    color: var(--primary);
+    
+    &:hover {
+      color: var(--primary-hover);
+    }
+  }
+  
+  /* 标签和标签文本 */
+  label {
+    color: var(--text-primary) !important;
+  }
+  
+  /* 输入框 */
+  input, textarea, select {
+    background-color: var(--bg-elevated) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border) !important;
+    
+    &::placeholder {
+      color: var(--text-tertiary) !important;
+    }
+    
+    &:focus {
+      border-color: var(--primary) !important;
+    }
+  }
+  
+  /* 按钮 */
+  button {
+    color: var(--text-primary) !important;
+    
+    &:not([class*="ant-"]) {
+      background-color: var(--bg-surface);
+      border-color: var(--border);
+      
+      &:hover {
+        background-color: var(--gray-200);
+        border-color: var(--primary);
+        color: var(--primary) !important;
+      }
+    }
+    
+    /* 确保所有按钮文字可见 */
+    * {
+      color: inherit !important;
+    }
+  }
+  
+  /* 按钮内的图标和文字 */
+  button span,
+  button div {
+    color: inherit !important;
+  }
+  
+  /* Ant Design 按钮样式覆盖 */
+  .ant-btn {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      background-color: var(--bg-surface) !important;
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+    }
+    
+    /* 文本按钮 */
+    &.ant-btn-text {
+      background-color: transparent !important;
+      color: var(--text-primary) !important;
+      
+      &:hover {
+        background-color: var(--bg-surface) !important;
+        color: var(--primary) !important;
+      }
+    }
+    
+    /* 按钮内的图标 */
+    .anticon {
+      color: inherit !important;
+    }
+  }
+  
+  /* 工具栏按钮 */
+  .toolbar-btn {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      background-color: var(--bg-surface) !important;
+      color: var(--primary) !important;
+    }
+  }
+  
+  /* Next UI 图标样式覆盖 */
+  .next-icon {
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
+  
+  /* 数字选择器图标 */
+  .next-number-picker-up-icon,
+  .next-number-picker-down-icon,
+  .next-icon-arrow-up,
+  .next-icon-arrow-down {
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
+  
+  /* Next UI 按钮 */
+  .next-btn {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      background-color: var(--bg-surface) !important;
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+      
+      .next-icon {
+        color: var(--primary) !important;
+      }
+    }
+    
+    .next-icon {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* Next UI 输入框 */
+  .next-input,
+  .next-number-picker-input {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+    
+    &::placeholder {
+      color: var(--text-tertiary) !important;
+    }
+    
+    &:focus {
+      border-color: var(--primary) !important;
+    }
+  }
+  
+  /* Next UI 输入框组 */
+  .next-input-group {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+  }
+  
+  .next-input-group-addon {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .next-input-group-text {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .next-before,
+  .next-after {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  /* 表格 */
+  table {
+    color: var(--text-primary);
+    
+    th {
+      background-color: var(--bg-surface) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border) !important;
+    }
+    
+    td {
+      color: var(--text-secondary) !important;
+      border-color: var(--border) !important;
+    }
+    
+    tr:hover {
+      background-color: var(--bg-surface) !important;
+    }
+  }
+  
+  /* 代码块 */
+  code, pre {
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border) !important;
+  }
+  
+  /* ========== LowCodeEngine 特定样式覆盖 ========== */
+  
+  /* 编辑器顶部工具栏 */
+  .lc-toolbar,
+  .lc-top-area,
+  .lc-top-area-left,
+  .lc-top-area-center,
+  .lc-top-area-right {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    
+    * {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* 工具栏项目 */
+  .engine-actionitem,
+  .engine-actionpane {
+    background-color: var(--bg-elevated) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  /* 左侧面板 */
+  .lc-left-area {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    
+    * {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* 右侧面板 */
+  .lc-right-area {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    
+    * {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* 中间画布区域 */
+  .lc-canvas {
+    background-color: var(--bg-base) !important;
+    
+    * {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* 组件面板 */
+  .lc-components-pane {
+    background-color: var(--bg-elevated) !important;
+    
+    .lc-component-item {
+      color: var(--text-primary) !important;
+      
+      &:hover {
+        background-color: var(--bg-surface) !important;
+      }
+    }
+  }
+  
+  /* 属性面板 */
+  .lc-settings-pane {
+    background-color: var(--bg-elevated) !important;
+    
+    .lc-field {
+      color: var(--text-primary) !important;
+      
+      .lc-field-label {
+        color: var(--text-secondary) !important;
+      }
+    }
+  }
+  
+  /* 树形面板 */
+  .lc-tree {
+    background-color: var(--bg-elevated) !important;
+    
+    .lc-tree-node {
+      color: var(--text-primary) !important;
+      
+      &:hover {
+        background-color: var(--bg-surface) !important;
+      }
+    }
+  }
+  
+  /* 模态框和对话框 */
+  .lc-dialog,
+  .lc-modal {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    
+    * {
+      color: var(--text-primary) !important;
+    }
+  }
+  
+  /* 下拉菜单 */
+  .lc-dropdown,
+  .lc-select-dropdown {
+    background-color: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+    
+    .lc-dropdown-item,
+    .lc-select-option {
+      color: var(--text-primary) !important;
+      
+      &:hover {
+        background-color: var(--bg-surface) !important;
+        color: var(--primary) !important;
+      }
+    }
+  }
+  
+  /* 工具提示 */
+  .lc-tooltip {
+    background-color: var(--gray-700) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  /* 标签页 */
+  .lc-tabs {
+    .lc-tabs-tab {
+      color: var(--text-secondary) !important;
+      
+      &.lc-tabs-tab-active {
+        color: var(--primary) !important;
+        border-color: var(--primary) !important;
+      }
+    }
+  }
+  
+  /* 折叠面板 */
+  .lc-collapse {
+    background-color: var(--bg-elevated) !important;
+    
+    .lc-collapse-header {
+      color: var(--text-primary) !important;
+      border-color: var(--border) !important;
+    }
+    
+    .lc-collapse-content {
+      background-color: var(--bg-surface) !important;
+      color: var(--text-secondary) !important;
+    }
+  }
+  
+  /* 图标 */
+  .lc-icon {
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
+  
+  /* 分割线 */
+  .lc-divider {
+    border-color: var(--border) !important;
+  }
+  
+  /* 滚动条 */
+  ::-webkit-scrollbar-track {
+    background: var(--gray-100);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-300);
+    
+    &:hover {
+      background: var(--gray-400);
+    }
+  }
+  
+  /* 选中文本 */
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  /* 占位符 */
+  ::placeholder {
+    color: var(--text-tertiary) !important;
+  }
+  
+  /* 禁用状态 */
+  [disabled] {
+    color: var(--text-disabled) !important;
+  }
+}

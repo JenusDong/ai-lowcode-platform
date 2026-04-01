@@ -14,7 +14,7 @@
   "methods": {},
   "children": [
     {
-      "componentName": "Div",
+      "componentName": "Block",
       "props": {
         "style": {
           "padding": "24px",

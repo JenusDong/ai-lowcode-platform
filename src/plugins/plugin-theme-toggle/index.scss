@@ -1,0 +1,62 @@
+/**
+ * 主题切换插件样式
+ * 基于 DESIGN.md 设计系统
+ */
+
+.theme-toggle-plugin {
+  display: flex;
+  align-items: center;
+  margin-left: var(--spacing-sm);
+  
+  .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-in-out);
+    
+    &:hover {
+      background: var(--gray-200);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    .theme-icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+    
+    .theme-text {
+      white-space: nowrap;
+    }
+  }
+}
+
+/* 深色模式下的按钮样式 */
+[data-theme="dark"] {
+  .theme-toggle-plugin {
+    .theme-toggle-btn {
+      background: var(--bg-elevated);
+      border-color: var(--border);
+      color: var(--text-primary);
+      
+      &:hover {
+        background: var(--gray-300);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+    }
+  }
+}
