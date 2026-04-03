@@ -1,0 +1,51 @@
+.mall-user-card {
+  .statistics-section {
+    padding: 16px;
+    background: linear-gradient(135deg, #e6f7ff 0%, #f0f5ff 100%);
+    border-radius: 4px;
+    margin-bottom: 16px;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1890ff;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: #8c8c8c;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .filter-section {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .action-section {
+    margin-bottom: 16px;
+  }
+
+  .user-name {
+    font-weight: 500;
+    color: #262626;
+  }
+
+  .user-username {
+    font-size: 12px;
+    color: #8c8c8c;
+  }
+
+  .ant-table {
+    .ant-tag {
+      margin: 0;
+    }
+  }
+}

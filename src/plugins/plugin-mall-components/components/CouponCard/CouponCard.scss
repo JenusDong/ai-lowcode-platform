@@ -1,0 +1,55 @@
+.mall-coupon-card {
+  .statistics-section {
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 16px;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1890ff;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: #8c8c8c;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .filter-section {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .action-section {
+    margin-bottom: 16px;
+  }
+
+  .coupon-name {
+    font-weight: 500;
+    color: #262626;
+  }
+
+  .ant-table {
+    .ant-tag {
+      margin: 0;
+    }
+  }
+
+  .ant-badge {
+    .ant-badge-count {
+      font-size: 12px;
+      min-width: 40px;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+}

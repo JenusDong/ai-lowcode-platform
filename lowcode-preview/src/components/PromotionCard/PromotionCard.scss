@@ -1,0 +1,71 @@
+.mall-promotion-card {
+  .statistics-section {
+    padding: 16px;
+    background: linear-gradient(135deg, #fff7e6 0%, #fffbe6 100%);
+    border-radius: 4px;
+    margin-bottom: 16px;
+
+    .ant-statistic-title {
+      font-size: 13px;
+      color: #8c8c8c;
+    }
+
+    .ant-statistic-content {
+      font-size: 28px;
+    }
+  }
+
+  .content-section {
+    display: flex;
+    gap: 16px;
+
+    .table-section {
+      flex: 1;
+    }
+
+    .timeline-section {
+      width: 300px;
+
+      .ant-card {
+        height: 100%;
+      }
+
+      .ant-timeline {
+        padding-top: 8px;
+      }
+
+      .ant-timeline-item-content {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .filter-section {
+    margin-bottom: 16px;
+  }
+
+  .action-section {
+    margin-bottom: 16px;
+  }
+
+  .promotion-title {
+    font-weight: 500;
+    color: #262626;
+  }
+
+  .ant-table {
+    .ant-tag {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .content-section {
+      flex-direction: column;
+
+      .timeline-section {
+        width: 100%;
+      }
+    }
+  }
+}

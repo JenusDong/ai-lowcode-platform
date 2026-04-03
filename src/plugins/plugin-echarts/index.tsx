@@ -1,4 +1,6 @@
+import React from 'react'
 import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { BarChartOutlined } from '@ant-design/icons';
 import JSONPathSetter from './setters/JSONPathSetter';
 
 const defaultOption = {
@@ -201,7 +203,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => {
                 },
               ],
             },
-            icon: 'https://img.alicdn.com/tfs/TB1p9Nqy.T1gK0jSZFrXXcNCXXa-200-200.png',
+            icon: React.createElement(BarChartOutlined),
             category: '信息展示',
             group: '精选组件',
             snippets: [

@@ -526,7 +526,48 @@ export class MockDataAdapter implements DataSourceAdapter {
 ### 任务 3：实现商品列表组件（3-4 天）
 
 #### 目标
-开发 ProductList 组件，支持列表展示、分页、搜索。
+开发 ProductList 组件，支持列表展示、分页、搜索，并提供细粒度的区域配置能力。
+
+#### 组件可配置区域设计 ⭐
+
+为了让组件更加灵活，适应不同的业务场景，我们将组件划分为多个可独立配置的区域：
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  筛选搜索区域（Filter Area）        [showFilter]         │
+│  - 搜索框、筛选条件、查询/重置按钮                        │
+└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│  操作区域（Action Area）           [showAction]          │
+│  - 添加按钮、批量操作、导入导出等                         │
+└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│  数据列表（Table Area）                                  │
+│  - 表格主体、选择列、操作列                               │
+│  ├─ 选择列      [showSelection]                          │
+│  ├─ 操作列      [showOperation]                          │
+│  └─ 状态列      [showStatus]                             │
+└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│  分页区域（Pagination Area）       [showPagination]      │
+│  - 分页器、页码跳转                                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### 可配置属性列表
+
+| 属性名 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| **showFilter** | boolean | true | 是否显示筛选搜索区域 |
+| **showAction** | boolean | true | 是否显示操作区域 |
+| **showSelection** | boolean | true | 是否显示选择列 |
+| **showOperation** | boolean | true | 是否显示操作列 |
+| **showStatus** | boolean | true | 是否显示状态列（上架/新品/推荐开关） |
+| **showPagination** | boolean | true | 是否显示分页区域 |
+| **filterFields** | array | [] | 筛选字段配置 |
+| **actionButtons** | array | [] | 操作按钮配置 |
+| **columns** | array | [] | 自定义列配置 |
+| **batchOperations** | array | [] | 批量操作配置 |
 
 #### 实施步骤
 
@@ -536,33 +577,74 @@ export class MockDataAdapter implements DataSourceAdapter {
 
 ```typescript
 import React, { useEffect, useState } from 'react'
-import { Table, Input, Pagination, Card, Space, Button, Switch, Tag } from 'antd'
-import { SearchOutlined, ReloadOutlined } from '@ant-design/icons'
+import { Table, Input, Pagination, Card, Space, Button, Switch, Tag, Dropdown, Menu } from 'antd'
+import { SearchOutlined, ReloadOutlined, PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons'
 import { DataSourceAdapterFactory } from '../../adapters/DataSourceAdapter'
 import type { PmsProduct, ProductQueryParam } from '../../types/product'
 import type { DataSourceConfig } from '../../adapters/DataSourceAdapter'
 import './styles.scss'
 
 interface ProductListProps {
+  // 数据源配置
   dataSource: DataSourceConfig
-  columns?: any[]
-  showSearch?: boolean
-  showPagination?: boolean
+  
+  // 区域显示控制
+  showFilter?: boolean           // 是否显示筛选搜索区域
+  showAction?: boolean           // 是否显示操作区域
+  showSelection?: boolean        // 是否显示选择列
+  showOperation?: boolean        // 是否显示操作列
+  showStatus?: boolean           // 是否显示状态列
+  showPagination?: boolean       // 是否显示分页区域
+  
+  // 自定义配置
+  filterFields?: Array<{        // 筛选字段配置
+    name: string
+    label: string
+    type: 'input' | 'select' | 'date'
+    options?: Array<{ label: string; value: any }>
+  }>
+  actionButtons?: Array<{       // 操作按钮配置
+    text: string
+    icon?: string
+    type?: 'primary' | 'default' | 'dashed' | 'link' | 'text'
+    onClick?: string            // 事件名称
+  }>
+  columns?: any[]               // 自定义列配置
+  batchOperations?: Array<{     // 批量操作配置
+    text: string
+    value: string
+    action?: string
+  }>
+  
+  // 事件回调
   onRowClick?: (record: PmsProduct) => void
   onSearch?: (keyword: string) => void
   onPageChange?: (page: number, pageSize: number) => void
+  onActionClick?: (action: string) => void
+  onBatchOperation?: (operation: string, selectedRows: PmsProduct[]) => void
+  
+  // 样式
   style?: React.CSSProperties
   className?: string
 }
 
 const ProductList: React.FC<ProductListProps> = ({
   dataSource,
-  columns,
-  showSearch = true,
+  showFilter = true,
+  showAction = true,
+  showSelection = true,
+  showOperation = true,
+  showStatus = true,
   showPagination = true,
+  filterFields = [],
+  actionButtons = [],
+  columns,
+  batchOperations = [],
   onRowClick,
   onSearch,
   onPageChange,
+  onActionClick,
+  onBatchOperation,
   style,
   className,
 }) => {
@@ -572,6 +654,9 @@ const ProductList: React.FC<ProductListProps> = ({
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [searchText, setSearchText] = useState('')
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [selectedRows, setSelectedRows] = useState<PmsProduct[]>([])
+  const [batchOperation, setBatchOperation] = useState<string>()
 
   const adapter = DataSourceAdapterFactory.create(dataSource)
 
@@ -617,6 +702,13 @@ const ProductList: React.FC<ProductListProps> = ({
     fetchData()
   }
 
+  const handleBatchOperation = () => {
+    if (batchOperation && selectedRows.length > 0) {
+      onBatchOperation?.(batchOperation, selectedRows)
+    }
+  }
+
+  // 默认列配置
   const defaultColumns = [
     {
       title: '商品图片',
@@ -647,7 +739,7 @@ const ProductList: React.FC<ProductListProps> = ({
         </div>
       ),
     },
-    {
+    ...(showStatus ? [{
       title: '标签',
       key: 'tags',
       width: 200,
@@ -655,28 +747,19 @@ const ProductList: React.FC<ProductListProps> = ({
         <Space direction="vertical" size="small">
           <div>
             上架：
-            <Switch
-              checked={record.publishStatus === 1}
-              size="small"
-            />
+            <Switch checked={record.publishStatus === 1} size="small" />
           </div>
           <div>
             新品：
-            <Switch
-              checked={record.newStatus === 1}
-              size="small"
-            />
+            <Switch checked={record.newStatus === 1} size="small" />
           </div>
           <div>
             推荐：
-            <Switch
-              checked={record.recommandStatus === 1}
-              size="small"
-            />
+            <Switch checked={record.recommandStatus === 1} size="small" />
           </div>
         </Space>
       ),
-    },
+    }] : []),
     {
       title: '库存',
       dataIndex: 'stock',
@@ -689,11 +772,36 @@ const ProductList: React.FC<ProductListProps> = ({
       key: 'sale',
       width: 80,
     },
+    ...(showOperation ? [{
+      title: '操作',
+      key: 'operation',
+      width: 150,
+      render: (_: any, record: PmsProduct) => (
+        <Space>
+          <Button type="link" size="small" onClick={() => onRowClick?.(record)}>
+            查看
+          </Button>
+          <Button type="link" size="small" onClick={() => onRowClick?.(record)}>
+            编辑
+          </Button>
+        </Space>
+      ),
+    }] : []),
   ]
+
+  // 行选择配置
+  const rowSelection = showSelection ? {
+    selectedRowKeys,
+    onChange: (selectedRowKeys: React.Key[], selectedRows: PmsProduct[]) => {
+      setSelectedRowKeys(selectedRowKeys)
+      setSelectedRows(selectedRows)
+    },
+  } : undefined
 
   return (
     <div className={`product-list ${className}`} style={style}>
-      {showSearch && (
+      {/* 筛选搜索区域 */}
+      {showFilter && (
         <Card style={{ marginBottom: 16 }}>
           <Space>
             <Input
@@ -715,12 +823,53 @@ const ProductList: React.FC<ProductListProps> = ({
         </Card>
       )}
 
+      {/* 操作区域 */}
+      {showAction && (
+        <Card style={{ marginBottom: 16 }}>
+          <Space>
+            {actionButtons.map((btn, index) => (
+              <Button
+                key={index}
+                type={btn.type || 'default'}
+                icon={btn.icon === 'plus' ? <PlusOutlined /> : btn.icon === 'download' ? <DownloadOutlined /> : <UploadOutlined />}
+                onClick={() => onActionClick?.(btn.onClick || '')}
+              >
+                {btn.text}
+              </Button>
+            ))}
+            
+            {/* 批量操作 */}
+            {batchOperations.length > 0 && showSelection && (
+              <>
+                <Select
+                  style={{ width: 200 }}
+                  placeholder="批量操作"
+                  value={batchOperation}
+                  onChange={setBatchOperation}
+                >
+                  {batchOperations.map(op => (
+                    <Select.Option key={op.value} value={op.value}>
+                      {op.text}
+                    </Select.Option>
+                  ))}
+                </Select>
+                <Button type="primary" onClick={handleBatchOperation}>
+                  确定
+                </Button>
+              </>
+            )}
+          </Space>
+        </Card>
+      )}
+
+      {/* 数据列表 */}
       <Card>
         <Table
           loading={loading}
           dataSource={data}
           columns={columns || defaultColumns}
           rowKey="id"
+          rowSelection={rowSelection}
           pagination={false}
           onRow={(record) => ({
             onClick: () => onRowClick?.(record),
@@ -728,6 +877,7 @@ const ProductList: React.FC<ProductListProps> = ({
           })}
         />
 
+        {/* 分页区域 */}
         {showPagination && (
           <div style={{ marginTop: 16, textAlign: 'right' }}>
             <Pagination

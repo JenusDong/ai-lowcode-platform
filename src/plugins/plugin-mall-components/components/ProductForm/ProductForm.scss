@@ -1,0 +1,23 @@
+.mall-product-form {
+  .ant-card-body {
+    padding: 24px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+
+  .ant-form-item-label {
+    label {
+      font-weight: 500;
+    }
+  }
+
+  .ant-input-number {
+    width: 100%;
+  }
+
+  .ant-select {
+    width: 100%;
+  }
+}

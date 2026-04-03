@@ -8,7 +8,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
-  width: 300px;
   
   .logo {
     display: block;
@@ -27,7 +26,6 @@
   
   .scenario-name {
     display: block;
-    margin-left: var(--spacing-lg);
     margin-right: var(--spacing-xs);
     font-size: var(--font-size-base);
     font-family: var(--font-body);

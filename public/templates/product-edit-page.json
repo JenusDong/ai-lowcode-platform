@@ -1,0 +1,22 @@
+{
+  "componentName": "Page",
+  "props": {
+    "title": "商品编辑"
+  },
+  "children": [
+    {
+      "componentName": "ProductForm",
+      "props": {
+        "initialValues": {
+          "name": "",
+          "productSn": "",
+          "price": 0,
+          "stock": 0,
+          "brandName": "",
+          "productCategoryName": "",
+          "description": ""
+        }
+      }
+    }
+  ]
+}

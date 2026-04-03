@@ -1,0 +1,77 @@
+.mall-role-card {
+  .statistics-section {
+    padding: 16px;
+    background: linear-gradient(135deg, #f0f5ff 0%, #f5f0ff 100%);
+    border-radius: 4px;
+    margin-bottom: 16px;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #722ed1;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: #8c8c8c;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .content-section {
+    display: flex;
+    gap: 16px;
+
+    .table-section {
+      flex: 1;
+    }
+
+    .permission-section {
+      width: 280px;
+
+      .ant-card {
+        height: 100%;
+      }
+
+      .ant-tree {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .filter-section {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .action-section {
+    margin-bottom: 16px;
+  }
+
+  .role-name {
+    font-weight: 500;
+    color: #262626;
+  }
+
+  .ant-table {
+    .ant-tag {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .content-section {
+      flex-direction: column;
+
+      .permission-section {
+        width: 100%;
+      }
+    }
+  }
+}

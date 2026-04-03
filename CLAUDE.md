@@ -134,6 +134,108 @@ npm run lint --fix
 
 ## 注意事项
 
+### ⚠️ 关键架构问题：UMD 文件必须与源代码保持同步（已发生多次！）
+
+**问题描述：**
+项目中存在两套组件实现代码：
+1. **TypeScript 源代码**：`src/plugins/plugin-mall-components/components/` 目录下的 `.tsx` 文件
+2. **UMD 打包文件**：`public/mall-components.umd.js` 和 `build/mall-components.umd.js`
+
+**根本原因：**
+- `public/mall-components.umd.js` 是手动维护的独立文件
+- `npm run build` 会将此文件复制到 `build/` 目录
+- **构建工具不会自动从 TypeScript 源代码编译生成 UMD 文件**
+- 当修改源代码后，如果忘记更新 UMD 文件，会导致运行时使用旧版本代码
+
+**典型症状：**
+- ❌ 画布中组件显示 "No Data"
+- ❌ Props 传递不正确（期望 `props.dataSource` 但实际传入的是分散的 props）
+- ❌ 新增的功能不生效
+- ❌ 控制台报错或数据为空
+
+**解决方案和检查清单：**
+
+#### ✅ 必要流程（每次修改组件后必须执行）
+
+1. **修改 TypeScript 源代码**
+   ```bash
+   # 编辑 src/plugins/plugin-mall-components/components/ProductList/ProductList.tsx
+   ```
+
+2. **同步更新 public/mall-components.umd.js**
+   - 将源代码中的逻辑转换成兼容的 JavaScript (ES5)
+   - 确保所有 props 解构、默认值、数据处理逻辑保持一致
+   - 特别注意：
+     - Props 接收方式（分散的 props vs 完整对象）
+     - 默认数据的定义和处理
+     - useEffect 的依赖项
+     - 数据适配器的调用方式
+
+3. **重新构建项目**
+   ```bash
+   npm run build
+   ```
+
+4. **验证文件一致性**
+   ```bash
+   # 检查 build 目录的文件是否已更新
+   ls -lh build/mall-components.umd.js
+   
+   # 对比关键代码段
+   grep "var ProductList = function" build/mall-components.umd.js
+   ```
+
+5. **浏览器测试**
+   - 刷新页面
+   - 打开开发者工具（F12）查看 Console 日志
+   - 验证功能是否正常工作
+
+#### 🔍 常见排查步骤
+
+当遇到组件异常时，按以下顺序排查：
+
+1. **检查 UMD 文件中的实现是否与源代码一致**
+   ```bash
+   # 查看 UMD 文件中的 ProductList 实现
+   sed -n '/var ProductList = function/,/^  };$/p' public/mall-components.umd.js
+   
+   # 对比源代码
+   cat src/plugins/plugin-mall-components/components/ProductList/ProductList.tsx | head -100
+   ```
+
+2. **检查 props 传递方式**
+   - Meta 配置传递的是分散的 props：`dataSourceType`, `mockData`, `api`, `method`
+   - UMD 文件应该接收这些分散的 props，而不是 `props.dataSource`
+
+3. **检查默认数据**
+   - 确保 UMD 文件中包含完整的默认 Mock 数据
+   - 即使没有传入 mockData，也应该有 fallback 数据
+
+4. **检查控制台日志**
+   - `[ProductList] 组件渲染，props:` - 查看 props 是否正确接收
+   - `[ProductList] 处理后的 mockData:` - 查看 mockData 是否正确处理
+   - `[MockDataAdapter] 最终返回数据:` - 查看返回的数据结构
+
+#### 📝 长期改进建议
+
+**方案 A：自动化构建流程（推荐）**
+```javascript
+// 在 build.plugin.js 中添加自定义插件
+// 自动从 TypeScript 源码编译生成 UMD 文件
+```
+
+**方案 B：统一代码维护**
+- 只维护 UMD 文件，删除或归档 TypeScript 源代码
+- 或只维护 TypeScript 源代码，配置 webpack 插件自动生成 UMD
+
+**方案 C：版本控制提醒**
+- 在 git hooks 中添加检查脚本
+- 如果修改了 .tsx 文件但未更新 .umd.js，阻止提交
+
+---
+
+### 其他注意事项
+
 1. **物料库配置**: 所有物料资源 URL 必须使用正确的 CDN 路径
 2. **React 版本**: 项目使用 React 16.14.0（与 LowCodeEngine 保持一致）
 3. **组件名称**: 使用 Block 而不是 Div（@alifd/layout 不导出 Div）

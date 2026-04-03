@@ -1,5 +1,6 @@
 import { init, plugins } from '@alilc/lowcode-engine';
 import { createFetchHandler } from '@alilc/lowcode-datasource-fetch-handler'
+import { message } from 'antd';
 import EditorInitPlugin from './plugins/plugin-editor-init';
 import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo';
 import ZhEnPlugin from '@alilc/lowcode-plugin-zh-en';
@@ -23,8 +24,15 @@ import lowcodePlugin from './plugins/plugin-lowcode-component';
 import CustomToolbarPlugin from './plugins/plugin-custom-toolbar';
 import ThemeTogglePlugin from './plugins/plugin-theme-toggle';
 import EChartsPlugin from './plugins/plugin-echarts';
+import MallComponentsPlugin from './plugins/plugin-mall-components';
 import appHelper from './appHelper';
 import './global.scss';
+
+message.config({
+  top: 100,
+  duration: 2,
+  maxCount: 3,
+});
 
 async function registerPlugins() {
   await plugins.register(InjectPlugin);
@@ -107,6 +115,8 @@ async function registerPlugins() {
   await plugins.register(ThemeTogglePlugin);
 
   await plugins.register(EChartsPlugin);
+
+  await plugins.register(MallComponentsPlugin);
 };
 
 (async function main() {

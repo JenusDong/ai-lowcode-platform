@@ -25,9 +25,9 @@ const Logo: React.FC<IProps> = (props): React.ReactElement => {
 
   return (
     <div className="lowcode-plugin-logo">
-      <a className="logo" target="blank" href={props.href || 'https://lowcode-engine.cn'} style={{ backgroundImage: `url(${props.logo})` }} />
+      {/* <a className="logo" target="blank" href={props.href || 'https://lowcode-engine.cn'} style={{ backgroundImage: `url(${props.logo})` }} /> */}
       <div className="scenario-name">{scenarioDisplayName}</div>
-      {
+      {/* {
       urls && urls.length > 0 && (
         <Dropdown
           menu={{ items: menuItems, onClick: onMenuClick }}
@@ -44,7 +44,7 @@ const Logo: React.FC<IProps> = (props): React.ReactElement => {
           />
         </Dropdown>
       )
-    }
+    } */}
     </div>
   );
 };

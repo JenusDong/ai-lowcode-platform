@@ -14,11 +14,15 @@ const generateProjectSchema = (pageSchema: any, i18nSchema: any): IPublicTypePro
   };
 }
 
-
 export const saveSchema = async (scenarioName: string = 'unknown') => {
-  setProjectSchemaToLocalStorage(scenarioName);
-  await setPackagesToLocalStorage(scenarioName);
-  message.success('成功保存到本地');
+  try {
+    message.info(scenarioName +', 保存到本地...');
+    setProjectSchemaToLocalStorage(scenarioName);
+    await setPackagesToLocalStorage(scenarioName);
+    message.success('成功保存到本地');
+  } catch (err) {
+    message.error('保存失败: ' + (err as Error).message);
+  }
 };
 
 export const resetSchema = async (scenarioName: string = 'unknown') => {
@@ -65,19 +69,31 @@ const setPackagesToLocalStorage = async (scenarioName: string) => {
     console.error('scenarioName is required!');
     return;
   }
-  const packages = await filterPackages(material.getAssets().packages);
+  const assets = material.getAssets();
+  const packages = await filterPackages(assets?.packages || []);
   window.localStorage.setItem(
     getLSName(scenarioName, 'packages'),
     JSON.stringify(packages),
   );
 }
 
-export const getPackagesFromLocalStorage = (scenarioName: string) => {
+export const getPackagesFromLocalStorage = (scenarioName: string): any[] => {
   if (!scenarioName) {
     console.error('scenarioName is required!');
-    return;
+    return [];
   }
-  return JSON.parse(window.localStorage.getItem(getLSName(scenarioName, 'packages')) || '{}');
+  const packagesStr = window.localStorage.getItem(getLSName(scenarioName, 'packages'));
+  if (!packagesStr) {
+    return [];
+  }
+  try {
+    const packages = JSON.parse(packagesStr);
+    console.log('load packages:', packages);
+    return Array.isArray(packages) ? packages : [];
+  } catch (e) {
+    console.error('Failed to parse packages:', e);
+    return [];
+  }
 }
 
 export const getProjectSchema = async (scenarioName: string = 'unknown') : Promise<IPublicTypeProjectSchema> => {

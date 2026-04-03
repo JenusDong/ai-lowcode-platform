@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductForm 组件测试</title>
+    <link rel="stylesheet" href="https://unpkg.com/antd@4.24.15/dist/antd.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1890ff;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: #262626;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>ProductForm 组件测试</h1>
+        
+        <div class="test-section">
+            <h2>1. 创建模式</h2>
+            <div id="create-mode"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. 编辑模式</h2>
+            <div id="edit-mode"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>3. 查看模式</h2>
+            <div id="view-mode"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/moment@2.24.0/min/moment.min.js"></script>
+    <script src="https://unpkg.com/antd@4.24.15/dist/antd.min.js"></script>
+    <script src="/mall-components.umd.js"></script>
+    
+    <script>
+        // 等待组件加载
+        window.addEventListener('load', function() {
+            console.log('MallComponents:', window.MallComponents);
+            console.log('ProductForm:', window.MallComponents ? window.MallComponents.ProductForm : 'undefined');
+            
+            if (!window.MallComponents || !window.MallComponents.ProductForm) {
+                console.error('ProductForm 组件未找到！');
+                alert('ProductForm 组件未找到！请检查 UMD 文件是否正确加载。');
+                return;
+            }
+            
+            const ProductForm = window.MallComponents.ProductForm;
+            
+            // 测试创建模式
+            ReactDOM.render(
+                React.createElement(ProductForm, {
+                    mode: 'create',
+                    initialValues: '{}',
+                    showBasicInfo: true,
+                    showPriceInfo: true,
+                    showStockInfo: true,
+                    showStatusInfo: true,
+                    showDescription: true,
+                    onSubmit: (values) => console.log('创建模式提交:', values),
+                    onCancel: () => console.log('创建模式取消')
+                }),
+                document.getElementById('create-mode')
+            );
+            
+            // 测试编辑模式
+            ReactDOM.render(
+                React.createElement(ProductForm, {
+                    mode: 'edit',
+                    initialValues: JSON.stringify({
+                        id: 1,
+                        name: '时尚运动鞋',
+                        productSn: 'PRODUCT001',
+                        price: 269,
+                        stock: 100,
+                        brandName: '时尚运动',
+                        productCategoryName: '鞋子',
+                        publishStatus: 1,
+                        newStatus: 1,
+                        recommandStatus: 1
+                    }),
+                    showBasicInfo: true,
+                    showPriceInfo: true,
+                    showStockInfo: true,
+                    showStatusInfo: true,
+                    showDescription: true,
+                    onSubmit: (values) => console.log('编辑模式提交:', values),
+                    onCancel: () => console.log('编辑模式取消')
+                }),
+                document.getElementById('edit-mode')
+            );
+            
+            // 测试查看模式
+            ReactDOM.render(
+                React.createElement(ProductForm, {
+                    mode: 'view',
+                    initialValues: JSON.stringify({
+                        id: 1,
+                        name: '时尚运动鞋',
+                        productSn: 'PRODUCT001',
+                        price: 269,
+                        stock: 100,
+                        brandName: '时尚运动',
+                        productCategoryName: '鞋子',
+                        publishStatus: 1,
+                        newStatus: 1,
+                        recommandStatus: 1,
+                        description: '这是一款时尚的运动鞋，适合日常穿着。'
+                    }),
+                    showBasicInfo: true,
+                    showPriceInfo: true,
+                    showStockInfo: true,
+                    showStatusInfo: true,
+                    showDescription: true,
+                    onCancel: () => console.log('查看模式关闭')
+                }),
+                document.getElementById('view-mode')
+            );
+        });
+    </script>
+</body>
+</html>

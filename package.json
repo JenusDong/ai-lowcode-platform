@@ -5,8 +5,10 @@
   "description": "AI 驱动的低代码平台 - 基于 Alibaba LowCodeEngine",
   "scripts": {
     "start": "build-scripts start --disable-reload --port 5556",
-    "dev": "build-scripts start --disable-reload --port 5556",
-    "build": "build-scripts build",
+    "dev": "npm run build:umd && concurrently \"npm run build:umd:watch\" \"npm run start\"",
+    "build": "npm run build:umd && build-scripts build",
+    "build:umd": "node scripts/build-umd.js",
+    "build:umd:watch": "node scripts/build-umd.js --watch",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "echo 'Tests coming soon'"
@@ -20,6 +22,7 @@
   "author": "JenusDong",
   "license": "MIT",
   "dependencies": {
+    "@alifd/layout": "^2.4.1",
     "@alilc/lowcode-datasource-fetch-handler": "^1.0.1",
     "@alilc/lowcode-plugin-code-editor": "^1.0.3",
     "@alilc/lowcode-plugin-code-generator": "^1.0.4",
@@ -58,6 +61,7 @@
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-moment-locales": "^0.1.0",
     "build-plugin-react-app": "^1.1.2",
+    "concurrently": "^9.2.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.33.0",
     "fs-extra": "^10.0.1",

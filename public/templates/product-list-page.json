@@ -1,0 +1,70 @@
+{
+  "componentName": "Page",
+  "props": {
+    "title": "商品列表"
+  },
+  "children": [
+    {
+      "componentName": "ProductList",
+      "props": {
+        "dataSourceType": "mock",
+        "mockData": {
+          "code": 200,
+          "message": "success",
+          "data": {
+            "pageNum": 1,
+            "pageSize": 10,
+            "total": 50,
+            "list": [
+              {
+                "id": 1,
+                "name": "时尚运动鞋",
+                "productSn": "PRODUCT001",
+                "price": 269,
+                "stock": 100,
+                "sale": 120,
+                "brandName": "时尚运动",
+                "pic": "https://via.placeholder.com/80",
+                "publishStatus": 1,
+                "newStatus": 1,
+                "recommandStatus": 1
+              },
+              {
+                "id": 2,
+                "name": "休闲T恤",
+                "productSn": "PRODUCT002",
+                "price": 99,
+                "stock": 200,
+                "sale": 80,
+                "brandName": "休闲服饰",
+                "pic": "https://via.placeholder.com/80",
+                "publishStatus": 1,
+                "newStatus": 0,
+                "recommandStatus": 1
+              },
+              {
+                "id": 3,
+                "name": "经典牛仔裤",
+                "productSn": "PRODUCT003",
+                "price": 199,
+                "stock": 150,
+                "sale": 60,
+                "brandName": "经典牛仔",
+                "pic": "https://via.placeholder.com/80",
+                "publishStatus": 1,
+                "newStatus": 1,
+                "recommandStatus": 0
+              }
+            ]
+          }
+        },
+        "showFilter": true,
+        "showAction": true,
+        "showSelection": true,
+        "showOperation": true,
+        "showStatus": true,
+        "showPagination": true
+      }
+    }
+  ]
+}
