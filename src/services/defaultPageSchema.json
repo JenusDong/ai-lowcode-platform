@@ -1,7 +1,10 @@
 {
   "componentName": "Page",
   "props": {
-    "ref": "outerView"
+    "ref": "outerView",
+    "style": {
+      "height": "100%"
+    }
   },
   "docId": "doc_antd",
   "fileName": "index",
@@ -14,112 +17,146 @@
   "methods": {},
   "children": [
     {
-      "componentName": "Block",
+      "componentName": "FDPage",
       "props": {
-        "style": {
-          "padding": "24px",
-          "backgroundColor": "#f0f2f5",
-          "minHeight": "100vh"
+        "contentProps": {
+          "style": {
+            "background": "rgba(240,242,245,1)"
+          }
         }
       },
       "children": [
         {
-          "componentName": "Typography.Title",
+          "componentName": "FDSection",
           "props": {
-            "level": 2,
-            "children": "AI 低代码平台",
             "style": {
-              "margin": "0 0 16px 0",
-              "color": "#1890ff"
-            }
-          }
-        },
-        {
-          "componentName": "Card",
-          "props": {
-            "title": "快速开始",
-            "bordered": false,
-            "style": {
-              "marginBottom": "16px"
+              "backgroundColor": "rgba(255,255,255,0)",
+              "minHeight": "100vh",
+              "padding": "24px"
             }
           },
           "children": [
             {
-              "componentName": "Space",
+              "componentName": "FDBlock",
               "props": {
-                "size": "middle"
+                "mode": "transparent",
+                "span": 12
               },
               "children": [
                 {
-                  "componentName": "Button",
+                  "componentName": "FDCell",
                   "props": {
-                    "type": "primary",
-                    "children": "创建页面"
-                  }
-                },
-                {
-                  "componentName": "Button",
-                  "props": {
-                    "children": "导入模板"
-                  }
-                },
-                {
-                  "componentName": "Button",
-                  "props": {
-                    "type": "dashed",
-                    "children": "AI 生成"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "componentName": "Card",
-          "props": {
-            "title": "数据统计",
-            "bordered": false
-          },
-          "children": [
-            {
-              "componentName": "Row",
-              "props": {
-                "gutter": 16
-              },
-              "children": [
-                {
-                  "componentName": "Col",
-                  "props": {
-                    "span": 6
+                    "align": "left",
+                    "verAlign": "top"
                   },
                   "children": [
                     {
-                      "componentName": "Statistic",
+                      "componentName": "Typography.Title",
                       "props": {
-                        "title": "总页面数",
-                        "value": 128,
-                        "valueStyle": {
-                          "color": "#3f8600"
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "componentName": "Col",
-                  "props": {
-                    "span": 6
-                  },
-                  "children": [
-                    {
-                      "componentName": "Statistic",
-                      "props": {
-                        "title": "今日访问",
-                        "value": 1024,
-                        "valueStyle": {
+                        "level": 2,
+                        "children": "AI 低代码平台",
+                        "style": {
+                          "margin": "0 0 16px 0",
                           "color": "#1890ff"
                         }
                       }
+                    },
+                    {
+                      "componentName": "Card",
+                      "props": {
+                        "title": "快速开始",
+                        "bordered": false,
+                        "style": {
+                          "marginBottom": "16px",
+                          "width": "100%"
+                        }
+                      },
+                      "children": [
+                        {
+                          "componentName": "Space",
+                          "props": {
+                            "size": "middle"
+                          },
+                          "children": [
+                            {
+                              "componentName": "Button",
+                              "props": {
+                                "type": "primary",
+                                "children": "创建页面"
+                              }
+                            },
+                            {
+                              "componentName": "Button",
+                              "props": {
+                                "children": "导入模板"
+                              }
+                            },
+                            {
+                              "componentName": "Button",
+                              "props": {
+                                "type": "dashed",
+                                "children": "AI 生成"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "componentName": "Card",
+                      "props": {
+                        "title": "数据统计",
+                        "bordered": false,
+                        "style": {
+                          "width": "100%"
+                        }
+                      },
+                      "children": [
+                        {
+                          "componentName": "Row",
+                          "props": {
+                            "gutter": 16
+                          },
+                          "children": [
+                            {
+                              "componentName": "Col",
+                              "props": {
+                                "span": 6
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "title": "总页面数",
+                                    "value": 128,
+                                    "valueStyle": {
+                                      "color": "#3f8600"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "componentName": "Col",
+                              "props": {
+                                "span": 6
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "title": "今日访问",
+                                    "value": 1024,
+                                    "valueStyle": {
+                                      "color": "#1890ff"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

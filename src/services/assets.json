@@ -55,16 +55,42 @@
       ]
     },
     {
+      "package": "@alilc/lowcode-materials",
+      "version": "1.0.7",
+      "library": "AlilcLowcodeMaterials",
+      "urls": [
+        "https://unpkg.com/@alilc/lowcode-materials@1.0.7/dist/AlilcLowcodeMaterials.js",
+        "https://unpkg.com/@alilc/lowcode-materials@1.0.7/dist/AlilcLowcodeMaterials.css"
+      ],
+      "editUrls": [
+        "https://unpkg.com/@alilc/lowcode-materials@1.0.7/build/lowcode/view.js",
+        "https://unpkg.com/@alilc/lowcode-materials@1.0.7/build/lowcode/view.css"
+      ]
+    },
+    {
       "package": "@alifd/layout",
       "version": "2.4.1",
       "library": "AlifdLayout",
       "urls": [
-        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.js",
-        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.css"
+        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/dist/AlifdLayout.js",
+        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/dist/AlifdLayout.css"
       ],
       "editUrls": [
-        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.js",
-        "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/view.css"
+        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.js",
+        "https://alifd.alicdn.com/npm/@alifd/layout@2.4.1/build/lowcode/view.css"
+      ]
+    },
+    {
+      "package": "@alifd/fusion-ui",
+      "version": "2.0.2",
+      "library": "AlifdFusionUi",
+      "urls": [
+        "https://unpkg.com/@alifd/fusion-ui@2.0.2/dist/AlifdFusionUi.js",
+        "https://unpkg.com/@alifd/fusion-ui@2.0.2/dist/AlifdFusionUi.css"
+      ],
+      "editUrls": [
+        "https://unpkg.com/@alifd/fusion-ui@2.0.2/build/lowcode/view.js",
+        "https://unpkg.com/@alifd/fusion-ui@2.0.2/build/lowcode/view.css"
       ]
     },
     {
@@ -96,6 +122,17 @@
       "editUrls": [
         "/echarts-component.umd.js"
       ]
+    },
+    {
+      "package": "mall-components",
+      "version": "1.0.0",
+      "library": "MallComponents",
+      "urls": [
+        "/mall-components.umd.js"
+      ],
+      "editUrls": [
+        "/mall-components.umd.js"
+      ]
     }
   ],
   "components": [
@@ -108,6 +145,14 @@
       "url": "/echarts-meta.js"
     },
     {
+      "exportName": "MallComponentsMeta",
+      "npm": {
+        "package": "mall-components",
+        "version": "1.0.0"
+      },
+      "url": "/mall-components-meta.js"
+    },
+    {
       "exportName": "AlilcAntdLowcodeMaterialsMeta",
       "npm": {
         "package": "@alilc/antd-lowcode-materials",
@@ -116,12 +161,28 @@
       "url": "https://unpkg.com/@alilc/antd-lowcode-materials@1.1.1/build/lowcode/meta.js"
     },
     {
+      "exportName": "AlilcLowcodeMaterialsMeta",
+      "npm": {
+        "package": "@alilc/lowcode-materials",
+        "version": "1.0.7"
+      },
+      "url": "https://unpkg.com/@alilc/lowcode-materials@1.0.7/build/lowcode/meta.js"
+    },
+    {
       "exportName": "AlifdLayoutMeta",
       "npm": {
         "package": "@alifd/layout",
         "version": "2.4.1"
       },
       "url": "https://unpkg.com/@alifd/layout@2.4.1/build/lowcode/meta.js"
+    },
+    {
+      "exportName": "AlifdFusionUiMeta",
+      "npm": {
+        "package": "@alifd/fusion-ui",
+        "version": "2.0.2"
+      },
+      "url": "https://unpkg.com/@alifd/fusion-ui@2.0.2/build/lowcode/meta.js"
     },
     {
       "exportName": "LayoutComponentsMeta",
