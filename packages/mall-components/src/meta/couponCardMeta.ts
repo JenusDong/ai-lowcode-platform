@@ -172,45 +172,13 @@ const couponCardMeta = {
               componentName: 'SelectSetter',
               props: {
                 options: [
-                  { label: 'REST API', value: 'rest' },
                   { label: 'Mock 数据', value: 'mock' },
-                  { label: '变量绑定', value: 'variable' },
+                  { label: '数据源绑定', value: 'variable' },
                 ],
               },
             },
             extraProps: {
               display: 'block',
-            },
-          },
-          {
-            name: 'api',
-            title: 'API 地址',
-            setter: 'StringSetter',
-            extraProps: {
-              display: 'block',
-              placeholder: '例如: /api/coupons',
-            },
-            condition: (target: any) => {
-              return target.getProps().getPropValue('dataSourceType') === 'rest'
-            },
-          },
-          {
-            name: 'method',
-            title: '请求方法',
-            setter: {
-              componentName: 'SelectSetter',
-              props: {
-                options: [
-                  { label: 'GET', value: 'GET' },
-                  { label: 'POST', value: 'POST' },
-                ],
-              },
-            },
-            extraProps: {
-              display: 'inline',
-            },
-            condition: (target: any) => {
-              return target.getProps().getPropValue('dataSourceType') === 'rest'
             },
           },
           {
@@ -219,7 +187,7 @@ const couponCardMeta = {
             setter: {
               componentName: 'TextAreaSetter',
               props: {
-                rows: 8,
+                rows: 10,
                 placeholder: '请输入 JSON 格式的 Mock 数据',
               },
             },
@@ -231,12 +199,19 @@ const couponCardMeta = {
             },
           },
           {
-            name: 'variableName',
-            title: '变量名称',
-            setter: 'StringSetter',
+            name: 'dataSource',
+            title: '绑定数据源',
+            setter: {
+              componentName: 'MixedSetter',
+              props: {
+                setters: [
+                  'JsonSetter',
+                  'VariableSetter',
+                ],
+              },
+            },
             extraProps: {
               display: 'block',
-              placeholder: '例如: state.couponList',
             },
             condition: (target: any) => {
               return target.getProps().getPropValue('dataSourceType') === 'variable'
@@ -303,21 +278,6 @@ const couponCardMeta = {
           showCreateButton: false,
           showFilter: false,
           showStatistics: false,
-        },
-      },
-    },
-    {
-      title: '优惠券管理（API模式）',
-      screenshot: '',
-      schema: {
-        componentName: 'CouponCard',
-        props: {
-          dataSourceType: 'rest',
-          api: '/api/coupons',
-          method: 'GET',
-          showCreateButton: true,
-          showFilter: true,
-          showStatistics: true,
         },
       },
     },

@@ -215,6 +215,64 @@ const orderFormMeta = {
         },
       },
     },
+    {
+      title: '只读订单表单',
+      schema: {
+        componentName: 'OrderForm',
+        props: {
+          mode: 'view',
+          initialValues: JSON.stringify(
+            {
+              ...defaultInitialValues,
+              status: 2,
+              deliveryTime: '2024-01-02 09:00:00',
+              orderItemList: [
+                {
+                  id: 1,
+                  productName: '时尚运动鞋',
+                  productSn: 'PRODUCT001',
+                  productBrand: '时尚运动',
+                  productPrice: 299,
+                  productQuantity: 2,
+                  productPic: 'https://img.yzcdn.cn/vant/cat.jpeg',
+                },
+                {
+                  id: 2,
+                  productName: '休闲T恤',
+                  productSn: 'PRODUCT002',
+                  productBrand: '休闲服饰',
+                  productPrice: 99,
+                  productQuantity: 1,
+                  productPic: 'https://img.yzcdn.cn/vant/cat.jpeg',
+                },
+              ],
+            },
+            null,
+            2
+          ),
+          showBasicInfo: true,
+          showReceiverInfo: true,
+          showMoneyInfo: true,
+          showOrderItems: true,
+          showStatusInfo: true,
+        },
+      },
+    },
+    {
+      title: '简洁订单表单',
+      schema: {
+        componentName: 'OrderForm',
+        props: {
+          mode: 'create',
+          initialValues: '{}',
+          showBasicInfo: true,
+          showReceiverInfo: true,
+          showMoneyInfo: false,
+          showOrderItems: false,
+          showStatusInfo: false,
+        },
+      },
+    },
   ],
 }
 

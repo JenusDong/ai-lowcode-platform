@@ -256,9 +256,8 @@ const orderListMeta = {
               componentName: 'SelectSetter',
               props: {
                 options: [
-                  { label: 'REST API', value: 'rest' },
                   { label: 'Mock 数据', value: 'mock' },
-                  { label: '变量绑定', value: 'variable' },
+                  { label: '数据源绑定', value: 'variable' },
                 ],
               },
             },
@@ -267,23 +266,15 @@ const orderListMeta = {
             },
           },
           {
-            name: 'api',
-            title: 'REST API 配置',
-            setter: {
-              componentName: 'RestApiTester',
-              props: {},
-            },
-            extraProps: {
-              display: 'block',
-            },
-            condition: (target: any) => {
-              return target.getProps().getPropValue('dataSourceType') === 'rest'
-            },
-          },
-          {
             name: 'mockData',
             title: 'Mock 数据',
-            setter: 'StringSetter',
+            setter: {
+              componentName: 'TextAreaSetter',
+              props: {
+                rows: 10,
+                placeholder: '请输入 JSON 格式的 Mock 数据',
+              },
+            },
             extraProps: {
               display: 'block',
             },
@@ -292,9 +283,17 @@ const orderListMeta = {
             },
           },
           {
-            name: 'variableName',
-            title: '变量名称',
-            setter: 'StringSetter',
+            name: 'dataSource',
+            title: '绑定数据源',
+            setter: {
+              componentName: 'MixedSetter',
+              props: {
+                setters: [
+                  'JsonSetter',
+                  'VariableSetter',
+                ],
+              },
+            },
             extraProps: {
               display: 'block',
             },
@@ -394,6 +393,44 @@ const orderListMeta = {
           showDatePicker: true,
           showActions: false,
           showBatchOperations: false,
+          showExport: false,
+          showPagination: true,
+          defaultPageSize: 10,
+        },
+      },
+    },
+    {
+      title: '纯搜索订单列表',
+      schema: {
+        componentName: 'OrderList',
+        props: {
+          dataSourceType: 'mock',
+          mockData: JSON.stringify(defaultMockData),
+          showFilter: true,
+          showStatusFilter: false,
+          showSearch: true,
+          showDatePicker: false,
+          showActions: false,
+          showBatchOperations: false,
+          showExport: false,
+          showPagination: true,
+          defaultPageSize: 10,
+        },
+      },
+    },
+    {
+      title: '待发货订单列表',
+      schema: {
+        componentName: 'OrderList',
+        props: {
+          dataSourceType: 'mock',
+          mockData: JSON.stringify(defaultMockData),
+          showFilter: true,
+          showStatusFilter: true,
+          showSearch: true,
+          showDatePicker: true,
+          showActions: true,
+          showBatchOperations: true,
           showExport: false,
           showPagination: true,
           defaultPageSize: 10,

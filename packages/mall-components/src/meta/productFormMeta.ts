@@ -201,6 +201,52 @@ const ProductFormMeta: IPublicTypeComponentMetadata = {
         },
       },
     },
+    {
+      title: '只读商品表单',
+      schema: {
+        componentName: 'ProductForm',
+        props: {
+          mode: 'view',
+          initialValues: JSON.stringify({
+            id: 1,
+            name: '时尚运动鞋',
+            productSn: 'PRODUCT001',
+            price: 269,
+            stock: 100,
+            sale: 120,
+            brandName: '时尚运动',
+            productCategoryName: '鞋子',
+            pic: 'https://img.yzcdn.cn/vant/cat.jpeg',
+            publishStatus: 1,
+            newStatus: 1,
+            recommandStatus: 1,
+            verifyStatus: 1,
+            description: '这是一款时尚的运动鞋，适合日常穿着。',
+            note: '热销商品',
+          }, null, 2),
+          showBasicInfo: true,
+          showPriceInfo: true,
+          showStockInfo: true,
+          showStatusInfo: true,
+          showDescription: true,
+        },
+      },
+    },
+    {
+      title: '简洁商品表单',
+      schema: {
+        componentName: 'ProductForm',
+        props: {
+          mode: 'create',
+          initialValues: '{}',
+          showBasicInfo: true,
+          showPriceInfo: true,
+          showStockInfo: false,
+          showStatusInfo: false,
+          showDescription: false,
+        },
+      },
+    },
   ],
 }
 

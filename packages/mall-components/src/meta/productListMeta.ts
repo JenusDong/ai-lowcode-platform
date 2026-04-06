@@ -199,9 +199,8 @@ export default {
               componentName: 'SelectSetter',
               props: {
                 options: [
-                  { label: 'REST API', value: 'rest' },
                   { label: 'Mock 数据', value: 'mock' },
-                  { label: '变量绑定', value: 'variable' },
+                  { label: '数据源绑定', value: 'variable' },
                 ],
               },
             },
@@ -210,23 +209,15 @@ export default {
             },
           },
           {
-            name: 'api',
-            title: 'REST API 配置',
-            setter: {
-              componentName: 'RestApiTester',
-              props: {},
-            },
-            extraProps: {
-              display: 'block',
-            },
-            condition: (target: any) => {
-              return target.getProps().getPropValue('dataSourceType') === 'rest'
-            },
-          },
-          {
             name: 'mockData',
             title: 'Mock 数据',
-            setter: 'StringSetter',
+            setter: {
+              componentName: 'TextAreaSetter',
+              props: {
+                rows: 10,
+                placeholder: '请输入 JSON 格式的 Mock 数据',
+              },
+            },
             extraProps: {
               display: 'block',
             },
@@ -235,9 +226,17 @@ export default {
             },
           },
           {
-            name: 'variableName',
-            title: '变量名称',
-            setter: 'StringSetter',
+            name: 'dataSource',
+            title: '绑定数据源',
+            setter: {
+              componentName: 'MixedSetter',
+              props: {
+                setters: [
+                  'JsonSetter',
+                  'VariableSetter',
+                ],
+              },
+            },
             extraProps: {
               display: 'block',
             },
@@ -411,6 +410,22 @@ export default {
           showSelection: false,
           showOperation: false,
           showStatus: true,
+          showPagination: true,
+        },
+      },
+    },
+    {
+      title: '纯搜索商品列表',
+      schema: {
+        componentName: 'ProductList',
+        props: {
+          dataSourceType: 'mock',
+          mockData: JSON.stringify(defaultMockData),
+          showFilter: true,
+          showAction: false,
+          showSelection: false,
+          showOperation: false,
+          showStatus: false,
           showPagination: true,
         },
       },

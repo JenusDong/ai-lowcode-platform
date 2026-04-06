@@ -1,8 +1,1169 @@
-var MallComponents=(()=>{var Gt=Object.create;var $e=Object.defineProperty;var jt=Object.getOwnPropertyDescriptor;var Kt=Object.getOwnPropertyNames;var Qt=Object.getPrototypeOf,Jt=Object.prototype.hasOwnProperty;var rt=(C,s)=>()=>(s||C((s={exports:{}}).exports,s),s.exports),Ht=(C,s)=>{for(var d in s)$e(C,d,{get:s[d],enumerable:!0})},yt=(C,s,d,y)=>{if(s&&typeof s=="object"||typeof s=="function")for(let E of Kt(s))!Jt.call(C,E)&&E!==d&&$e(C,E,{get:()=>s[E],enumerable:!(y=jt(s,E))||y.enumerable});return C};var K=(C,s,d)=>(d=C!=null?Gt(Qt(C)):{},yt(s||!C||!C.__esModule?$e(d,"default",{value:C,enumerable:!0}):d,C)),Wt=C=>yt($e({},"__esModule",{value:!0}),C);var Ee=rt((cr,vt)=>{vt.exports=Object.assign(window.React,{jsx:window.React.createElement,jsxs:window.React.createElement,Fragment:window.React.Fragment})});var Ae=rt((pr,St)=>{St.exports=window.antd});var Ye=rt((gr,Ct)=>{Ct.exports=window.icons});var mr={};Ht(mr,{CouponCard:()=>We,OrderForm:()=>He,OrderList:()=>Je,ProductForm:()=>it,ProductList:()=>at,PromotionCard:()=>Ze,RoleCard:()=>Re,UserCard:()=>Xe,default:()=>dr});var k=K(Ee()),M=K(Ae()),ke=K(Ye());var Ne=class{static create(s){if(!s)return console.warn("[DataSourceAdapterFactory] config is undefined, using mock adapter"),new qe({type:"mock",mockData:{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}});if(!s.type)return console.warn("[DataSourceAdapterFactory] config.type is undefined, using mock adapter"),new qe({type:"mock",mockData:s.mockData||{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}});switch(s.type){case"rest":return new ot(s);case"mock":return new qe(s);case"variable":return new nt(s);default:return console.warn(`[DataSourceAdapterFactory] Unsupported data source type: ${s.type}, using mock adapter`),new qe({type:"mock",mockData:{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}})}}},ot=class{constructor(s){this.config=s}async fetch(s){let d=this.buildUrl(s),y=await fetch(d,{method:this.config.method||"GET",headers:{"Content-Type":"application/json",...this.config.headers},body:this.config.method!=="GET"?JSON.stringify(s):void 0});if(!y.ok)throw new Error(`HTTP error! status: ${y.status}`);let E=await y.json();if(this.config.transform)try{E=new Function("data",this.config.transform)(E)}catch(Z){console.error("Transform function error:",Z)}return E}async submit(s){return(await fetch(this.config.api,{method:"POST",headers:{"Content-Type":"application/json",...this.config.headers},body:JSON.stringify(s)})).json()}async delete(s){return(await fetch(`${this.config.api}/${s}`,{method:"DELETE",headers:this.config.headers})).json()}async update(s,d){return(await fetch(`${this.config.api}/${s}`,{method:"PUT",headers:{"Content-Type":"application/json",...this.config.headers},body:JSON.stringify(d)})).json()}buildUrl(s){if(!s||this.config.method!=="GET")return this.config.api;let d=new URL(this.config.api,window.location.origin);return Object.keys(s).forEach(y=>{s[y]!==void 0&&s[y]!==null&&s[y]!==""&&d.searchParams.append(y,s[y])}),d.toString()}},qe=class{constructor(s){this.config=s}async fetch(s){console.log("[MockDataAdapter] fetch \u88AB\u8C03\u7528\uFF0Cconfig:",this.config,"params:",s),await new Promise(y=>setTimeout(y,300));let d=this.config.mockData;if(console.log("[MockDataAdapter] \u539F\u59CB mockData:",d,"\u7C7B\u578B:",typeof d),!d||d==="")console.log("[MockDataAdapter] mockData \u4E3A\u7A7A\uFF0C\u4F7F\u7528\u9ED8\u8BA4\u6570\u636E"),d={code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,name:"\u65F6\u5C1A\u8FD0\u52A8\u978B",productSn:"PRODUCT001",price:269,stock:100,sale:120,brandName:"\u65F6\u5C1A\u8FD0\u52A8",productCategoryName:"\u978B\u5B50",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:2,name:"\u4F11\u95F2T\u6064",productSn:"PRODUCT002",price:99,stock:200,sale:350,brandName:"\u4F11\u95F2\u670D\u9970",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:0,verifyStatus:1},{id:3,name:"\u53CC\u80A9\u80CC\u5305",productSn:"PRODUCT003",price:189,stock:80,sale:80,brandName:"\u65C5\u884C\u7BB1\u5305",productCategoryName:"\u914D\u9970",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:1,verifyStatus:1},{id:4,name:"\u8FD0\u52A8\u624B\u8868",productSn:"PRODUCT004",price:499,stock:50,sale:60,brandName:"\u667A\u80FD\u6570\u7801",productCategoryName:"\u6570\u7801",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:5,name:"\u725B\u4ED4\u88E4",productSn:"PRODUCT005",price:199,stock:150,sale:280,brandName:"\u65F6\u5C1A\u725B\u4ED4",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:0,verifyStatus:1}]}};else try{typeof d=="string"&&(d=JSON.parse(d)),console.log("[MockDataAdapter] JSON \u89E3\u6790\u540E\u7684\u6570\u636E:",d)}catch(y){console.error("[MockDataAdapter] JSON \u89E3\u6790\u5931\u8D25:",y),d={code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}}if(this.config.transform)try{d=new Function("data",this.config.transform)(d)}catch(y){console.error("Transform function error:",y)}if(console.log("[MockDataAdapter] \u6700\u7EC8\u8FD4\u56DE\u6570\u636E:",d),s?.pageNum&&s?.pageSize&&d?.data?.list){let y=(s.pageNum-1)*s.pageSize,E=y+s.pageSize;return{...d,data:{...d.data,list:d.data.list.slice(y,E)}}}return d}async submit(s){return await new Promise(d=>setTimeout(d,300)),{code:200,message:"success",data:s}}async delete(s){return await new Promise(d=>setTimeout(d,300)),{code:200,message:"success"}}async update(s,d){return await new Promise(y=>setTimeout(y,300)),{code:200,message:"success",data:d}}},nt=class{constructor(s){this.config=s}async fetch(s){let d=this.config.variableName;if(!d)throw new Error("Variable name is required for variable adapter");return{code:200,message:"success",data:window[d]}}async submit(s){let d=this.config.variableName;if(!d)throw new Error("Variable name is required for variable adapter");return window[d]=s,{code:200,message:"success",data:s}}async delete(s){return{code:200,message:"success"}}async update(s,d){return this.submit(d)}};var Zt=({dataSourceType:C="mock",api:s,method:d="GET",mockData:y,variableName:E,showFilter:Z=!0,showAction:se=!0,showSelection:oe=!0,showOperation:ce=!0,showStatus:pe=!0,showPagination:ge=!0,filterFields:Y=[],actionButtons:le=[],columns:be,batchOperations:ne=[],onRowClick:X,onSearch:ee,onPageChange:B,onActionClick:P,onBatchOperation:te,style:I,className:G})=>{let[Q,V]=k.default.useState(!1),[re,x]=k.default.useState([]),[q,_]=k.default.useState(0),[v,L]=k.default.useState(1),[F,R]=k.default.useState(10),[j,J]=k.default.useState(""),[ye,we]=k.default.useState([]),[fe,$]=k.default.useState([]),[ve,Se]=k.default.useState(),S=JSON.stringify({code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,name:"\u65F6\u5C1A\u8FD0\u52A8\u978B",productSn:"PRODUCT001",price:269,stock:100,sale:120,brandName:"\u65F6\u5C1A\u8FD0\u52A8",productCategoryName:"\u978B\u5B50",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:2,name:"\u4F11\u95F2T\u6064",productSn:"PRODUCT002",price:99,stock:200,sale:350,brandName:"\u4F11\u95F2\u670D\u9970",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:1,verifyStatus:1},{id:3,name:"\u53CC\u80A9\u80CC\u5305",productSn:"PRODUCT003",price:189,stock:80,sale:80,brandName:"\u65C5\u884C\u7BB1\u5305",productCategoryName:"\u914D\u9970",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:0,verifyStatus:1},{id:4,name:"\u8FD0\u52A8\u624B\u8868",productSn:"PRODUCT004",price:499,stock:50,sale:60,brandName:"\u667A\u80FD\u6570\u7801",productCategoryName:"\u6570\u7801",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:5,name:"\u725B\u4ED4\u88E4",productSn:"PRODUCT005",price:199,stock:150,sale:280,brandName:"\u65F6\u5C1A\u725B\u4ED4",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:0,verifyStatus:1}]}}),D=y;D||(D=S),console.log("[ProductList] \u5904\u7406\u540E\u7684 mockData:",D);let f={type:C,api:s||"",method:d,mockData:D,variableName:E||""};console.log("[ProductList] \u7EC4\u4EF6\u6E32\u67D3\uFF0Cprops:",{dataSourceType:C,api:s,method:d,mockData:y,variableName:E,showFilter:Z,showAction:se,showSelection:oe});let A=Ne.create(f);console.log("[ProductList] DataSourceAdapter \u521B\u5EFA\u5B8C\u6210:",A),k.default.useEffect(()=>{console.log("[ProductList] useEffect \u89E6\u53D1\uFF0C\u5F00\u59CB\u83B7\u53D6\u6570\u636E"),ae()},[v,F,C,s,d,y,E]);let ae=async()=>{console.log("[ProductList] fetchData \u5F00\u59CB\uFF0C\u53C2\u6570:",{currentPage:v,pageSize:F,searchText:j}),V(!0);try{let N={pageNum:v,pageSize:F,keyword:j||void 0};console.log("[ProductList] \u8C03\u7528 adapter.fetch\uFF0C\u53C2\u6570:",N);let H=await A.fetch(N);console.log("[ProductList] adapter.fetch \u8FD4\u56DE\u7ED3\u679C:",H),H.code===200&&(x(H.data.list),_(H.data.total),console.log("[ProductList] \u6570\u636E\u66F4\u65B0\u6210\u529F\uFF0C\u603B\u6570:",H.data.total))}catch(N){console.error("[ProductList] \u83B7\u53D6\u6570\u636E\u5931\u8D25:",N)}finally{V(!1)}},Oe=()=>{L(1),ae(),ee?.(j)},Te=(N,H)=>{L(N),R(H),B?.(N,H)},m=()=>{ve&&fe.length>0&&te?.(ve,fe)},r=[{title:"\u5546\u54C1\u56FE\u7247",dataIndex:"pic",key:"pic",width:100,render:N=>k.default.createElement("img",{src:N,alt:"\u5546\u54C1\u56FE\u7247",style:{width:60,height:60,objectFit:"cover"}})},{title:"\u5546\u54C1\u540D\u79F0",dataIndex:"name",key:"name",width:200},{title:"\u5546\u54C1\u7F16\u53F7",dataIndex:"productSn",key:"productSn",width:150},{title:"\u4EF7\u683C",dataIndex:"price",key:"price",width:100,render:N=>`\xA5${N.toFixed(2)}`},{title:"\u5E93\u5B58",dataIndex:"stock",key:"stock",width:80},{title:"\u9500\u91CF",dataIndex:"sale",key:"sale",width:80},{title:"\u54C1\u724C",dataIndex:"brandName",key:"brandName",width:100},{title:"\u5206\u7C7B",dataIndex:"productCategoryName",key:"productCategoryName",width:100},...pe?[{title:"\u72B6\u6001",dataIndex:"publishStatus",key:"publishStatus",width:100,render:N=>k.default.createElement(M.Switch,{checked:N===1,checkedChildren:"\u4E0A\u67B6",unCheckedChildren:"\u4E0B\u67B6"})}]:[],...ce?[{title:"\u64CD\u4F5C",key:"operation",width:150,render:(N,H)=>k.default.createElement(M.Space,{size:"small"},k.default.createElement(M.Button,{type:"link",size:"small",onClick:()=>X?.(H)},"\u67E5\u770B"),k.default.createElement(M.Button,{type:"link",size:"small"},"\u7F16\u8F91"),k.default.createElement(M.Button,{type:"link",size:"small",danger:!0},"\u5220\u9664"))}]:[]],O=oe?{selectedRowKeys:ye,onChange:(N,H)=>{we(N),$(H)}}:void 0,W=N=>{switch(N){case"plus":return k.default.createElement(ke.PlusOutlined,null);case"download":return k.default.createElement(ke.DownloadOutlined,null);case"upload":return k.default.createElement(ke.UploadOutlined,null);default:return null}};return k.default.createElement("div",{className:`mall-product-list ${G||""}`,style:I},Z&&k.default.createElement(M.Card,{className:"mall-product-list-filter",size:"small"},k.default.createElement(M.Space,null,k.default.createElement(M.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0\u6216\u7F16\u53F7",prefix:k.default.createElement(ke.SearchOutlined,null),value:j,onChange:N=>J(N.target.value),onPressEnter:Oe,style:{width:300}}),k.default.createElement(M.Button,{type:"primary",icon:k.default.createElement(ke.SearchOutlined,null),onClick:Oe},"\u641C\u7D22"),k.default.createElement(M.Button,{icon:k.default.createElement(ke.ReloadOutlined,null),onClick:()=>ae()},"\u5237\u65B0"))),se&&k.default.createElement(M.Card,{className:"mall-product-list-action",size:"small"},k.default.createElement(M.Space,null,le.map((N,H)=>k.default.createElement(M.Button,{key:H,type:N.type||"default",icon:W(N.icon),onClick:()=>P?.(N.onClick||"")},N.text)),oe&&ne.length>0&&k.default.createElement(k.default.Fragment,null,k.default.createElement(M.Select,{placeholder:"\u6279\u91CF\u64CD\u4F5C",value:ve,onChange:Se,style:{width:150}},ne.map((N,H)=>k.default.createElement(M.Select.Option,{key:H,value:N.value},N.text))),k.default.createElement(M.Button,{onClick:m},"\u6267\u884C")))),k.default.createElement("div",{className:"mall-product-list-table"},k.default.createElement(M.Table,{rowKey:"id",columns:be||r,dataSource:re,loading:Q,rowSelection:O,pagination:!1,scroll:{x:1200}})),ge&&k.default.createElement("div",{className:"pagination-wrapper"},k.default.createElement(M.Pagination,{current:v,pageSize:F,total:q,showSizeChanger:!0,showQuickJumper:!0,showTotal:N=>`\u5171 ${N} \u6761`,onChange:Te})))},xt=Zt;var at=xt;var i=K(Ee()),o=K(Ae());var Xt=({initialValues:C,mode:s="create",showBasicInfo:d=!0,showPriceInfo:y=!0,showStockInfo:E=!0,showStatusInfo:Z=!0,showDescription:se=!0,onSubmit:oe,onCancel:ce,style:pe,className:ge})=>{let[Y]=o.Form.useForm(),[le,be]=(0,i.useState)("basic");(0,i.useEffect)(()=>{if(C){let x=C;if(typeof C=="string")try{x=JSON.parse(C)}catch(q){console.error("Failed to parse initialValues:",q),x={}}Y.setFieldsValue(x)}},[C,Y]);let ne=async()=>{try{let x=await Y.validateFields();oe?.(x),o.message.success("\u63D0\u4EA4\u6210\u529F")}catch(x){console.error("Validation failed:",x),o.message.error("\u8BF7\u68C0\u67E5\u8868\u5355\u586B\u5199\u662F\u5426\u6B63\u786E")}},X=()=>{Y.resetFields(),ce?.()},ee=()=>{Y.resetFields()},B=()=>{if(typeof C=="string")try{return JSON.parse(C)}catch{return{}}return C||{}},P=s==="view",te=[i.default.createElement(o.Row,{gutter:16,key:"basic-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"name",label:"\u5546\u54C1\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0"}]},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"productSn",label:"\u5546\u54C1\u8D27\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u8D27\u53F7"}]},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u8D27\u53F7",disabled:P})))),i.default.createElement(o.Row,{gutter:16,key:"basic-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"brandName",label:"\u54C1\u724C\u540D\u79F0"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u54C1\u724C\u540D\u79F0",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"productCategoryName",label:"\u5546\u54C1\u5206\u7C7B"},i.default.createElement(o.Select,{placeholder:"\u8BF7\u9009\u62E9\u5546\u54C1\u5206\u7C7B",disabled:P},i.default.createElement(o.Select.Option,{value:"\u624B\u673A"},"\u624B\u673A"),i.default.createElement(o.Select.Option,{value:"\u7B14\u8BB0\u672C"},"\u7B14\u8BB0\u672C"),i.default.createElement(o.Select.Option,{value:"\u5E73\u677F"},"\u5E73\u677F"),i.default.createElement(o.Select.Option,{value:"\u8033\u673A"},"\u8033\u673A"),i.default.createElement(o.Select.Option,{value:"\u624B\u8868"},"\u624B\u8868"),i.default.createElement(o.Select.Option,{value:"\u8863\u670D"},"\u8863\u670D"),i.default.createElement(o.Select.Option,{value:"\u978B\u5B50"},"\u978B\u5B50"),i.default.createElement(o.Select.Option,{value:"\u914D\u9970"},"\u914D\u9970"),i.default.createElement(o.Select.Option,{value:"\u6570\u7801"},"\u6570\u7801"))))),i.default.createElement(o.Form.Item,{key:"pic",name:"pic",label:"\u5546\u54C1\u56FE\u7247"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u56FE\u7247 URL",disabled:P})),i.default.createElement(o.Row,{gutter:16,key:"basic-row-3"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"subTitle",label:"\u5546\u54C1\u526F\u6807\u9898"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u526F\u6807\u9898",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"keywords",label:"\u5546\u54C1\u5173\u952E\u8BCD"},i.default.createElement(o.Input,{placeholder:"\u591A\u4E2A\u5173\u952E\u8BCD\u7528\u9017\u53F7\u5206\u9694",disabled:P}))))],I=[i.default.createElement(o.Row,{gutter:16,key:"price-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"price",label:"\u5546\u54C1\u4EF7\u683C",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u4EF7\u683C"}]},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u4EF7\u683C",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"originalPrice",label:"\u539F\u4EF7"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u539F\u4EF7",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:P})))),i.default.createElement(o.Row,{gutter:16,key:"price-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"promotionPrice",label:"\u4FC3\u9500\u4EF7"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u4FC3\u9500\u4EF7",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"unit",label:"\u5546\u54C1\u5355\u4F4D"},i.default.createElement(o.Select,{placeholder:"\u8BF7\u9009\u62E9\u5546\u54C1\u5355\u4F4D",disabled:P},i.default.createElement(o.Select.Option,{value:"\u4EF6"},"\u4EF6"),i.default.createElement(o.Select.Option,{value:"\u53F0"},"\u53F0"),i.default.createElement(o.Select.Option,{value:"\u90E8"},"\u90E8"),i.default.createElement(o.Select.Option,{value:"\u5757"},"\u5757"),i.default.createElement(o.Select.Option,{value:"\u526F"},"\u526F")))))],G=[i.default.createElement(o.Row,{gutter:16,key:"stock-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"stock",label:"\u5546\u54C1\u5E93\u5B58",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u5E93\u5B58"}]},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u5E93\u5B58",style:{width:"100%"},min:0,disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"lowStock",label:"\u5E93\u5B58\u9884\u8B66\u503C"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5E93\u5B58\u9884\u8B66\u503C",style:{width:"100%"},min:0,disabled:P})))),i.default.createElement(o.Row,{gutter:16,key:"stock-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"weight",label:"\u5546\u54C1\u91CD\u91CF(kg)"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u91CD\u91CF",style:{width:"100%"},min:0,precision:2,disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"sort",label:"\u6392\u5E8F"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u6392\u5E8F",style:{width:"100%"},min:0,disabled:P}))))],Q=[i.default.createElement(o.Row,{gutter:16,key:"status-row-1"},i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"publishStatus",label:"\u4E0A\u67B6\u72B6\u6001",valuePropName:"checked",getValueFromEvent:x=>x?1:0,getValueProps:x=>({checked:x===1})},i.default.createElement(o.Switch,{checkedChildren:"\u4E0A\u67B6",unCheckedChildren:"\u4E0B\u67B6",disabled:P}))),i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"newStatus",label:"\u65B0\u54C1\u72B6\u6001",valuePropName:"checked",getValueFromEvent:x=>x?1:0,getValueProps:x=>({checked:x===1})},i.default.createElement(o.Switch,{checkedChildren:"\u662F",unCheckedChildren:"\u5426",disabled:P}))),i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"recommandStatus",label:"\u63A8\u8350\u72B6\u6001",valuePropName:"checked",getValueFromEvent:x=>x?1:0,getValueProps:x=>({checked:x===1})},i.default.createElement(o.Switch,{checkedChildren:"\u662F",unCheckedChildren:"\u5426",disabled:P})))),i.default.createElement(o.Row,{gutter:16,key:"status-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"verifyStatus",label:"\u5BA1\u6838\u72B6\u6001",valuePropName:"checked",getValueFromEvent:x=>x?1:0,getValueProps:x=>({checked:x===1})},i.default.createElement(o.Switch,{checkedChildren:"\u5DF2\u5BA1\u6838",unCheckedChildren:"\u672A\u5BA1\u6838",disabled:P}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"deleteStatus",label:"\u5220\u9664\u72B6\u6001",valuePropName:"checked",getValueFromEvent:x=>x?1:0,getValueProps:x=>({checked:x===1})},i.default.createElement(o.Switch,{checkedChildren:"\u5DF2\u5220\u9664",unCheckedChildren:"\u6B63\u5E38",disabled:P}))))],V=[i.default.createElement(o.Form.Item,{key:"description",name:"description",label:"\u5546\u54C1\u63CF\u8FF0"},i.default.createElement(o.Input.TextArea,{rows:4,placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u63CF\u8FF0",disabled:P})),i.default.createElement(o.Form.Item,{key:"note",name:"note",label:"\u5907\u6CE8"},i.default.createElement(o.Input.TextArea,{rows:2,placeholder:"\u8BF7\u8F93\u5165\u5907\u6CE8",disabled:P}))],re=[{key:"basic",label:"\u57FA\u672C\u4FE1\u606F",children:d?te:null},{key:"price",label:"\u4EF7\u683C\u4FE1\u606F",children:y?I:null},{key:"stock",label:"\u5E93\u5B58\u4FE1\u606F",children:E?G:null},{key:"status",label:"\u72B6\u6001\u4FE1\u606F",children:Z?Q:null},{key:"description",label:"\u63CF\u8FF0\u4FE1\u606F",children:se?V:null}];return i.default.createElement("div",{className:`mall-product-form ${ge||""}`,style:pe},i.default.createElement(o.Card,null,i.default.createElement(o.Form,{form:Y,layout:"vertical",initialValues:B(),disabled:P},i.default.createElement(o.Tabs,{activeKey:le,onChange:be,items:re}),i.default.createElement(o.Divider,null),i.default.createElement(o.Form.Item,null,i.default.createElement(o.Space,null,!P&&i.default.createElement(i.default.Fragment,null,i.default.createElement(o.Button,{type:"primary",onClick:ne},s==="create"?"\u521B\u5EFA":"\u4FDD\u5B58"),i.default.createElement(o.Button,{onClick:ee},"\u91CD\u7F6E")),i.default.createElement(o.Button,{onClick:X},P?"\u5173\u95ED":"\u53D6\u6D88"))))))},wt=Xt;var it=wt;var e=K(Ee()),a=K(Ae()),de=K(Ye());var U={PENDING_PAYMENT:0,PENDING_DELIVERY:1,DELIVERED:2,COMPLETED:3,CLOSED:4,INVALID:5},Ie={UNPAID:0,ALIPAY:1,WECHAT:2},Fe={PC:0,APP:1},Le={NORMAL:0,SECKILL:1},Ge=[{label:"\u5F85\u4ED8\u6B3E",value:U.PENDING_PAYMENT},{label:"\u5F85\u53D1\u8D27",value:U.PENDING_DELIVERY},{label:"\u5DF2\u53D1\u8D27",value:U.DELIVERED},{label:"\u5DF2\u5B8C\u6210",value:U.COMPLETED},{label:"\u5DF2\u5173\u95ED",value:U.CLOSED}],Tt=[{label:"\u672A\u652F\u4ED8",value:Ie.UNPAID},{label:"\u652F\u4ED8\u5B9D",value:Ie.ALIPAY},{label:"\u5FAE\u4FE1",value:Ie.WECHAT}],je=[{label:"PC\u8BA2\u5355",value:Fe.PC},{label:"APP\u8BA2\u5355",value:Fe.APP}],Ke=[{label:"\u6B63\u5E38\u8BA2\u5355",value:Le.NORMAL},{label:"\u79D2\u6740\u8BA2\u5355",value:Le.SECKILL}];var{RangePicker:Rt}=a.DatePicker,Qe={code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,orderSn:"202401010001",memberUsername:"user001",totalAmount:599,payAmount:569,freightAmount:0,discountAmount:30,payType:Ie.ALIPAY,sourceType:Fe.PC,status:U.PENDING_DELIVERY,orderType:Le.NORMAL,receiverName:"\u5F20\u4E09",receiverPhone:"13800138000",receiverProvince:"\u5317\u4EAC\u5E02",receiverCity:"\u5317\u4EAC\u5E02",receiverRegion:"\u671D\u9633\u533A",receiverDetailAddress:"\u67D0\u67D0\u8857\u9053\u67D0\u67D0\u5C0F\u533A1\u53F7\u697C",createTime:"2024-01-01 10:00:00",paymentTime:"2024-01-01 10:05:00",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:"\u6EE1\u51CF\u4F18\u60E0"},{id:2,orderSn:"202401010002",memberUsername:"user002",totalAmount:1299,payAmount:1299,freightAmount:0,discountAmount:0,payType:Ie.WECHAT,sourceType:Fe.APP,status:U.DELIVERED,orderType:Le.NORMAL,receiverName:"\u674E\u56DB",receiverPhone:"13900139000",receiverProvince:"\u4E0A\u6D77\u5E02",receiverCity:"\u4E0A\u6D77\u5E02",receiverRegion:"\u6D66\u4E1C\u65B0\u533A",receiverDetailAddress:"\u67D0\u67D0\u8DEF\u67D0\u67D0\u53F7",createTime:"2024-01-01 11:00:00",paymentTime:"2024-01-01 11:10:00",deliveryTime:"2024-01-02 09:00:00",receiveTime:"",commentTime:"",promotionInfo:""},{id:3,orderSn:"202401010003",memberUsername:"user003",totalAmount:299,payAmount:299,freightAmount:10,discountAmount:0,payType:Ie.ALIPAY,sourceType:Fe.PC,status:U.COMPLETED,orderType:Le.NORMAL,receiverName:"\u738B\u4E94",receiverPhone:"13700137000",receiverProvince:"\u5E7F\u4E1C\u7701",receiverCity:"\u6DF1\u5733\u5E02",receiverRegion:"\u5357\u5C71\u533A",receiverDetailAddress:"\u67D0\u67D0\u5927\u53A6A\u5EA7",createTime:"2024-01-01 12:00:00",paymentTime:"2024-01-01 12:05:00",deliveryTime:"2024-01-02 10:00:00",receiveTime:"2024-01-05 15:00:00",commentTime:"",promotionInfo:""},{id:4,orderSn:"202401010004",memberUsername:"user004",totalAmount:899,payAmount:0,freightAmount:0,discountAmount:0,payType:Ie.UNPAID,sourceType:Fe.APP,status:U.PENDING_PAYMENT,orderType:Le.SECKILL,receiverName:"\u8D75\u516D",receiverPhone:"13600136000",receiverProvince:"\u6D59\u6C5F\u7701",receiverCity:"\u676D\u5DDE\u5E02",receiverRegion:"\u897F\u6E56\u533A",receiverDetailAddress:"\u67D0\u67D0\u82B1\u56ED\u5C0F\u533A",createTime:"2024-01-01 13:00:00",paymentTime:"",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:"\u79D2\u6740\u6D3B\u52A8"},{id:5,orderSn:"202401010005",memberUsername:"user005",totalAmount:4599,payAmount:4599,freightAmount:0,discountAmount:0,payType:Ie.WECHAT,sourceType:Fe.PC,status:U.CLOSED,orderType:Le.NORMAL,receiverName:"\u5B59\u4E03",receiverPhone:"13500135000",receiverProvince:"\u6C5F\u82CF\u7701",receiverCity:"\u5357\u4EAC\u5E02",receiverRegion:"\u9F13\u697C\u533A",receiverDetailAddress:"\u67D0\u67D0\u5E7F\u573AB\u5EA7",createTime:"2024-01-01 14:00:00",paymentTime:"2024-01-01 14:10:00",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:""}]}},er=({dataSourceType:C="mock",api:s,method:d="GET",mockData:y,variableName:E,showFilter:Z=!0,showStatusFilter:se=!0,showSearch:oe=!0,showDatePicker:ce=!0,showActions:pe=!0,showBatchOperations:ge=!0,showExport:Y=!0,showPagination:le=!0,defaultPageSize:be=10,onRowClick:ne,onSearch:X,onPageChange:ee,onActionClick:B,onBatchOperation:P,style:te,className:I})=>{let[G,Q]=(0,e.useState)(!1),[V,re]=(0,e.useState)([]),[x,q]=(0,e.useState)(0),[_,v]=(0,e.useState)(1),[L,F]=(0,e.useState)(be),[R,j]=(0,e.useState)(""),[J,ye]=(0,e.useState)([]),[we,fe]=(0,e.useState)([]),[$,ve]=(0,e.useState)(),[Se,Ce]=(0,e.useState)(),[S,D]=(0,e.useState)(),[f,A]=(0,e.useState)(),[ae,Oe]=(0,e.useState)(),[Te,m]=(0,e.useState)(!1),[r,O]=(0,e.useState)(),[W,N]=(0,e.useState)(!1),[H,At]=(0,e.useState)(),[et,dt]=(0,e.useState)(""),[tt,mt]=(0,e.useState)(""),ut=(0,e.useMemo)(()=>({type:C,api:s,method:d,mockData:y?(()=>{try{return typeof y=="string"?JSON.parse(y):y}catch{return Qe}})():Qe,variableName:E}),[C,s,d,y,E]),ct=(0,e.useMemo)(()=>Ne.create(ut),[ut]);(0,e.useEffect)(()=>{Ue()},[_,L,ct]);let Ue=async()=>{Q(!0);try{let g={pageNum:_,pageSize:L,orderSn:R||void 0,status:Se,orderType:S,sourceType:f,createTime:ae?`${ae[0]?.format("YYYY-MM-DD")},${ae[1]?.format("YYYY-MM-DD")}`:void 0},z=await ct.fetch(g),xe=[],Be=0;z?.data?.list?(xe=z.data.list,Be=z.data.total||xe.length):Array.isArray(z?.data)?(xe=z.data,Be=xe.length):Array.isArray(z)&&(xe=z,Be=xe.length),re(xe),q(Be)}catch(g){console.error("Failed to fetch order list:",g),a.message.error("\u83B7\u53D6\u8BA2\u5355\u5217\u8868\u5931\u8D25"),re(Qe.data.list),q(Qe.data.total)}finally{Q(!1)}},pt=()=>{v(1),Ue(),X?.({orderSn:R||void 0,status:Se,orderType:S,sourceType:f,createTime:ae?`${ae[0]?.format("YYYY-MM-DD")},${ae[1]?.format("YYYY-MM-DD")}`:void 0})},Ft=()=>{j(""),Ce(void 0),D(void 0),A(void 0),Oe(void 0),v(1),Ue()},Lt=()=>{a.message.success("\u5BFC\u51FA\u529F\u80FD\u5F00\u53D1\u4E2D...")},Ut=()=>{Ue()},Bt=()=>{if(!$){a.message.warning("\u8BF7\u9009\u62E9\u6279\u91CF\u64CD\u4F5C\u7C7B\u578B");return}if(J.length===0){a.message.warning("\u8BF7\u9009\u62E9\u8981\u64CD\u4F5C\u7684\u8BA2\u5355");return}P?.($,J),a.message.success(`\u6279\u91CF${$}\u6210\u529F`),ye([]),fe([]),ve(void 0),Ue()},gt=g=>{O(g),m(!0),B?.("view",g)},bt=g=>{At(g),N(!0),B?.("deliver",g)},_t=g=>{a.Modal.confirm({title:"\u786E\u8BA4\u5173\u95ED\u8BA2\u5355",content:`\u786E\u5B9A\u8981\u5173\u95ED\u8BA2\u5355 ${g.orderSn} \u5417\uFF1F`,onOk:()=>{B?.("close",g),a.message.success("\u8BA2\u5355\u5DF2\u5173\u95ED"),Ue()}})},zt=g=>{a.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664\u8BA2\u5355",content:`\u786E\u5B9A\u8981\u5220\u9664\u8BA2\u5355 ${g.orderSn} \u5417\uFF1F`,onOk:()=>{B?.("delete",g),a.message.success("\u8BA2\u5355\u5DF2\u5220\u9664"),Ue()}})},Mt=()=>{if(!et||!tt){a.message.warning("\u8BF7\u586B\u5199\u7269\u6D41\u516C\u53F8\u548C\u7269\u6D41\u5355\u53F7");return}let g={orderId:H.id,deliveryCompany:et,deliverySn:tt};B?.("deliverSubmit",H),a.message.success("\u53D1\u8D27\u6210\u529F"),N(!1),dt(""),mt(""),Ue()},ft=g=>{let z={[U.PENDING_PAYMENT]:{color:"orange",text:"\u5F85\u4ED8\u6B3E"},[U.PENDING_DELIVERY]:{color:"blue",text:"\u5F85\u53D1\u8D27"},[U.DELIVERED]:{color:"cyan",text:"\u5DF2\u53D1\u8D27"},[U.COMPLETED]:{color:"green",text:"\u5DF2\u5B8C\u6210"},[U.CLOSED]:{color:"default",text:"\u5DF2\u5173\u95ED"},[U.INVALID]:{color:"red",text:"\u65E0\u6548\u8BA2\u5355"}},{color:xe,text:Be}=z[g]||{color:"default",text:"\u672A\u77E5"};return e.default.createElement(a.Tag,{color:xe},Be)},ht=g=>{let z={[Ie.UNPAID]:{color:"default",text:"\u672A\u652F\u4ED8"},[Ie.ALIPAY]:{color:"blue",text:"\u652F\u4ED8\u5B9D"},[Ie.WECHAT]:{color:"green",text:"\u5FAE\u4FE1"}},{color:xe,text:Be}=z[g]||{color:"default",text:"\u672A\u77E5"};return e.default.createElement(a.Tag,{color:xe},Be)},Yt=g=>g===Fe.APP?e.default.createElement(a.Tag,{color:"purple"},"APP"):e.default.createElement(a.Tag,{color:"geekblue"},"PC"),Vt=g=>g===Le.SECKILL?e.default.createElement(a.Tag,{color:"red"},"\u79D2\u6740"):e.default.createElement(a.Tag,null,"\u6B63\u5E38"),qt=[{title:"\u8BA2\u5355\u7F16\u53F7",dataIndex:"orderSn",key:"orderSn",width:180,fixed:"left",render:g=>e.default.createElement(a.Tooltip,{title:g},e.default.createElement("span",{className:"order-sn"},g))},{title:"\u7528\u6237\u8D26\u53F7",dataIndex:"memberUsername",key:"memberUsername",width:120},{title:"\u8BA2\u5355\u91D1\u989D",dataIndex:"totalAmount",key:"totalAmount",width:120,render:g=>e.default.createElement("span",{className:"order-amount"},"\xA5",g.toFixed(2))},{title:"\u5B9E\u4ED8\u91D1\u989D",dataIndex:"payAmount",key:"payAmount",width:120,render:g=>e.default.createElement("span",{className:"pay-amount"},"\xA5",g.toFixed(2))},{title:"\u652F\u4ED8\u65B9\u5F0F",dataIndex:"payType",key:"payType",width:100,render:g=>ht(g)},{title:"\u8BA2\u5355\u6765\u6E90",dataIndex:"sourceType",key:"sourceType",width:100,render:g=>Yt(g)},{title:"\u8BA2\u5355\u7C7B\u578B",dataIndex:"orderType",key:"orderType",width:100,render:g=>Vt(g)},{title:"\u8BA2\u5355\u72B6\u6001",dataIndex:"status",key:"status",width:100,render:g=>ft(g)},{title:"\u6536\u8D27\u4EBA",dataIndex:"receiverName",key:"receiverName",width:100},{title:"\u6536\u8D27\u7535\u8BDD",dataIndex:"receiverPhone",key:"receiverPhone",width:130},{title:"\u4E0B\u5355\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:180,sorter:!0},{title:"\u64CD\u4F5C",key:"action",width:200,fixed:"right",render:(g,z)=>{let xe=e.default.createElement(a.Menu,null,e.default.createElement(a.Menu.Item,{key:"view",icon:e.default.createElement(de.EyeOutlined,null),onClick:()=>gt(z)},"\u67E5\u770B\u8BE6\u60C5"),z.status===U.PENDING_DELIVERY&&e.default.createElement(a.Menu.Item,{key:"deliver",icon:e.default.createElement(de.CarOutlined,null),onClick:()=>bt(z)},"\u53D1\u8D27"),z.status!==U.CLOSED&&e.default.createElement(a.Menu.Item,{key:"close",icon:e.default.createElement(de.CloseCircleOutlined,null),onClick:()=>_t(z)},"\u5173\u95ED\u8BA2\u5355"),e.default.createElement(a.Menu.Divider,null),e.default.createElement(a.Menu.Item,{key:"delete",icon:e.default.createElement(de.DeleteOutlined,null),danger:!0,onClick:()=>zt(z)},"\u5220\u9664\u8BA2\u5355"));return e.default.createElement(a.Space,{size:"small"},e.default.createElement(a.Button,{type:"link",size:"small",onClick:()=>gt(z)},"\u8BE6\u60C5"),z.status===U.PENDING_DELIVERY&&e.default.createElement(a.Button,{type:"link",size:"small",onClick:()=>bt(z)},"\u53D1\u8D27"),e.default.createElement(a.Dropdown,{overlay:xe,trigger:["click"]},e.default.createElement(a.Button,{type:"link",size:"small",icon:e.default.createElement(de.MoreOutlined,null)})))}}],$t={selectedRowKeys:J,onChange:(g,z)=>{ye(g),fe(z)}};return e.default.createElement("div",{className:`mall-order-list ${I||""}`,style:te},e.default.createElement(a.Card,null,Z&&e.default.createElement("div",{className:"filter-section"},e.default.createElement(a.Row,{gutter:[16,16]},oe&&e.default.createElement(a.Col,{span:6},e.default.createElement(a.Input,{placeholder:"\u8BA2\u5355\u7F16\u53F7",value:R,onChange:g=>j(g.target.value),onPressEnter:pt,prefix:e.default.createElement(de.SearchOutlined,null)})),se&&e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u72B6\u6001",value:Se,onChange:Ce,style:{width:"100%"},allowClear:!0},Ge.map(g=>e.default.createElement(a.Select.Option,{key:g.value,value:g.value},g.label)))),e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u7C7B\u578B",value:S,onChange:D,style:{width:"100%"},allowClear:!0},Ke.map(g=>e.default.createElement(a.Select.Option,{key:g.value,value:g.value},g.label)))),e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u6765\u6E90",value:f,onChange:A,style:{width:"100%"},allowClear:!0},je.map(g=>e.default.createElement(a.Select.Option,{key:g.value,value:g.value},g.label)))),ce&&e.default.createElement(a.Col,{span:6},e.default.createElement(Rt,{value:ae,onChange:Oe,style:{width:"100%"}}))),e.default.createElement(a.Row,{gutter:[16,16],style:{marginTop:16}},e.default.createElement(a.Col,null,e.default.createElement(a.Space,null,e.default.createElement(a.Button,{type:"primary",onClick:pt},"\u67E5\u8BE2"),e.default.createElement(a.Button,{onClick:Ft},"\u91CD\u7F6E"))))),ge&&e.default.createElement("div",{className:"batch-operation-section"},e.default.createElement(a.Space,null,e.default.createElement(a.Select,{placeholder:"\u6279\u91CF\u64CD\u4F5C",value:$,onChange:ve,style:{width:150},allowClear:!0},e.default.createElement(a.Select.Option,{value:"deliver"},"\u6279\u91CF\u53D1\u8D27"),e.default.createElement(a.Select.Option,{value:"close"},"\u5173\u95ED\u8BA2\u5355"),e.default.createElement(a.Select.Option,{value:"delete"},"\u5220\u9664\u8BA2\u5355")),e.default.createElement(a.Button,{onClick:Bt},"\u786E\u5B9A")),J.length>0&&e.default.createElement("span",{className:"selected-info"},"\u5DF2\u9009\u62E9 ",e.default.createElement("strong",null,J.length)," \u9879")),pe&&e.default.createElement("div",{className:"action-section"},e.default.createElement(a.Space,null,e.default.createElement(a.Button,{icon:e.default.createElement(de.ReloadOutlined,null),onClick:Ut},"\u5237\u65B0"),Y&&e.default.createElement(a.Button,{icon:e.default.createElement(de.ExportOutlined,null),onClick:Lt},"\u5BFC\u51FA"))),e.default.createElement(a.Table,{columns:qt,dataSource:V,rowKey:"id",loading:G,pagination:le?{current:_,pageSize:L,total:x,showSizeChanger:!0,showQuickJumper:!0,showTotal:g=>`\u5171 ${g} \u6761`,onChange:(g,z)=>{v(g),F(z),ee?.(g,z)}}:!1,rowSelection:$t,scroll:{x:1500},onRow:g=>({onClick:()=>ne?.(g)})})),e.default.createElement(a.Modal,{title:"\u8BA2\u5355\u8BE6\u60C5",visible:Te,onCancel:()=>m(!1),footer:null,width:800},r&&e.default.createElement(a.Descriptions,{bordered:!0,column:2},e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u7F16\u53F7"},r.orderSn),e.default.createElement(a.Descriptions.Item,{label:"\u7528\u6237\u8D26\u53F7"},r.memberUsername),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u91D1\u989D"},"\xA5",r.totalAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u5B9E\u4ED8\u91D1\u989D"},"\xA5",r.payAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u8FD0\u8D39"},"\xA5",r.freightAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u4F18\u60E0\u91D1\u989D"},"\xA5",r.discountAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u652F\u4ED8\u65B9\u5F0F"},ht(r.payType)),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u72B6\u6001"},ft(r.status)),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u4EBA"},r.receiverName),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u7535\u8BDD"},r.receiverPhone),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u5730\u5740",span:2},r.receiverProvince,r.receiverCity,r.receiverRegion,r.receiverDetailAddress),e.default.createElement(a.Descriptions.Item,{label:"\u4E0B\u5355\u65F6\u95F4"},r.createTime),e.default.createElement(a.Descriptions.Item,{label:"\u652F\u4ED8\u65F6\u95F4"},r.paymentTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u53D1\u8D27\u65F6\u95F4"},r.deliveryTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u5B8C\u6210\u65F6\u95F4"},r.receiveTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u5907\u6CE8",span:2},r.note||"-"))),e.default.createElement(a.Modal,{title:"\u8BA2\u5355\u53D1\u8D27",visible:W,onOk:Mt,onCancel:()=>N(!1)},e.default.createElement(a.Form,{layout:"vertical"},e.default.createElement(a.Form.Item,{label:"\u7269\u6D41\u516C\u53F8",required:!0},e.default.createElement(a.Select,{value:et,onChange:dt,placeholder:"\u8BF7\u9009\u62E9\u7269\u6D41\u516C\u53F8"},e.default.createElement(a.Select.Option,{value:"\u987A\u4E30\u901F\u8FD0"},"\u987A\u4E30\u901F\u8FD0"),e.default.createElement(a.Select.Option,{value:"\u5706\u901A\u5FEB\u9012"},"\u5706\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u4E2D\u901A\u5FEB\u9012"},"\u4E2D\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u97F5\u8FBE\u5FEB\u9012"},"\u97F5\u8FBE\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u7533\u901A\u5FEB\u9012"},"\u7533\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u90AE\u653FEMS"},"\u90AE\u653FEMS"))),e.default.createElement(a.Form.Item,{label:"\u7269\u6D41\u5355\u53F7",required:!0},e.default.createElement(a.Input,{value:tt,onChange:g=>mt(g.target.value),placeholder:"\u8BF7\u8F93\u5165\u7269\u6D41\u5355\u53F7"})))))},Je=er;var n=K(Ee()),t=K(Ae());var{TextArea:It}=t.Input,tr=({initialValues:C,mode:s="create",showBasicInfo:d=!0,showReceiverInfo:y=!0,showMoneyInfo:E=!0,showOrderItems:Z=!0,showStatusInfo:se=!0,onSubmit:oe,onCancel:ce,style:pe,className:ge})=>{let[Y]=t.Form.useForm(),[le,be]=(0,n.useState)("basic"),[ne,X]=(0,n.useState)([]);(0,n.useEffect)(()=>{if(C){let v=C;if(typeof C=="string")try{v=JSON.parse(C)}catch(L){console.error("Failed to parse initialValues:",L),v={}}Y.setFieldsValue(v),v.orderItemList&&X(v.orderItemList)}},[C,Y]);let ee=async()=>{try{let v=await Y.validateFields();oe?.(v),t.message.success("\u63D0\u4EA4\u6210\u529F")}catch(v){console.error("Validation failed:",v),t.message.error("\u8BF7\u68C0\u67E5\u8868\u5355\u586B\u5199\u662F\u5426\u6B63\u786E")}},B=()=>{Y.resetFields(),ce?.()},P=()=>{Y.resetFields()},te=()=>{if(typeof C=="string")try{return JSON.parse(C)}catch{return{}}return C||{}},I=s==="view",G=v=>{let L={[U.PENDING_PAYMENT]:{color:"orange",text:"\u5F85\u4ED8\u6B3E"},[U.PENDING_DELIVERY]:{color:"blue",text:"\u5F85\u53D1\u8D27"},[U.DELIVERED]:{color:"cyan",text:"\u5DF2\u53D1\u8D27"},[U.COMPLETED]:{color:"green",text:"\u5DF2\u5B8C\u6210"},[U.CLOSED]:{color:"default",text:"\u5DF2\u5173\u95ED"},[U.INVALID]:{color:"red",text:"\u65E0\u6548\u8BA2\u5355"}},{color:F,text:R}=L[v]||{color:"default",text:"\u672A\u77E5"};return n.default.createElement(t.Tag,{color:F},R)},Q=[{title:"\u5546\u54C1\u56FE\u7247",dataIndex:"productPic",key:"productPic",width:80,render:v=>n.default.createElement("img",{src:v,alt:"\u5546\u54C1\u56FE\u7247",style:{width:50,height:50,objectFit:"cover"}})},{title:"\u5546\u54C1\u540D\u79F0",dataIndex:"productName",key:"productName",width:200},{title:"\u5546\u54C1\u8D27\u53F7",dataIndex:"productSn",key:"productSn",width:120},{title:"\u5546\u54C1\u54C1\u724C",dataIndex:"productBrand",key:"productBrand",width:100},{title:"\u9500\u552E\u4EF7\u683C",dataIndex:"productPrice",key:"productPrice",width:100,render:v=>`\xA5${v.toFixed(2)}`},{title:"\u8D2D\u4E70\u6570\u91CF",dataIndex:"productQuantity",key:"productQuantity",width:100},{title:"\u5C0F\u8BA1",key:"subtotal",width:100,render:(v,L)=>`\xA5${(L.productPrice*L.productQuantity).toFixed(2)}`}],V=[n.default.createElement(t.Row,{gutter:16,key:"basic-row-1"},n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"orderSn",label:"\u8BA2\u5355\u7F16\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u8BA2\u5355\u7F16\u53F7"}]},n.default.createElement(t.Input,{placeholder:"\u8BF7\u8F93\u5165\u8BA2\u5355\u7F16\u53F7",disabled:I}))),n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"memberUsername",label:"\u7528\u6237\u8D26\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u7528\u6237\u8D26\u53F7"}]},n.default.createElement(t.Input,{placeholder:"\u8BF7\u8F93\u5165\u7528\u6237\u8D26\u53F7",disabled:I})))),n.default.createElement(t.Row,{gutter:16,key:"basic-row-2"},n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"payType",label:"\u652F\u4ED8\u65B9\u5F0F",rules:[{required:!0}]},n.default.createElement(t.Select,{placeholder:"\u8BF7\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F",disabled:I},Tt.map(v=>n.default.createElement(t.Select.Option,{key:v.value,value:v.value},v.label))))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"sourceType",label:"\u8BA2\u5355\u6765\u6E90",rules:[{required:!0}]},n.default.createElement(t.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u6765\u6E90",disabled:I},je.map(v=>n.default.createElement(t.Select.Option,{key:v.value,value:v.value},v.label))))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"orderType",label:"\u8BA2\u5355\u7C7B\u578B",rules:[{required:!0}]},n.default.createElement(t.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u7C7B\u578B",disabled:I},Ke.map(v=>n.default.createElement(t.Select.Option,{key:v.value,value:v.value},v.label)))))),n.default.createElement(t.Row,{gutter:16,key:"basic-row-3"},n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"createTime",label:"\u4E0B\u5355\u65F6\u95F4"},n.default.createElement(t.Input,{placeholder:"\u4E0B\u5355\u65F6\u95F4",disabled:!0}))),n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"paymentTime",label:"\u652F\u4ED8\u65F6\u95F4"},n.default.createElement(t.Input,{placeholder:"\u652F\u4ED8\u65F6\u95F4",disabled:!0}))))],re=[n.default.createElement(t.Row,{gutter:16,key:"receiver-row-1"},n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"receiverName",label:"\u6536\u8D27\u4EBA\u59D3\u540D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u59D3\u540D"}]},n.default.createElement(t.Input,{placeholder:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u59D3\u540D",disabled:I}))),n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"receiverPhone",label:"\u6536\u8D27\u4EBA\u7535\u8BDD",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u7535\u8BDD"}]},n.default.createElement(t.Input,{placeholder:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u7535\u8BDD",disabled:I})))),n.default.createElement(t.Row,{gutter:16,key:"receiver-row-2"},n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"receiverProvince",label:"\u7701\u4EFD"},n.default.createElement(t.Input,{placeholder:"\u7701\u4EFD",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"receiverCity",label:"\u57CE\u5E02"},n.default.createElement(t.Input,{placeholder:"\u57CE\u5E02",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"receiverRegion",label:"\u533A"},n.default.createElement(t.Input,{placeholder:"\u533A",disabled:I})))),n.default.createElement(t.Form.Item,{key:"receiverDetailAddress",name:"receiverDetailAddress",label:"\u8BE6\u7EC6\u5730\u5740"},n.default.createElement(It,{rows:2,placeholder:"\u8BF7\u8F93\u5165\u8BE6\u7EC6\u5730\u5740",disabled:I})),n.default.createElement(t.Row,{gutter:16,key:"receiver-row-3"},n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"deliveryCompany",label:"\u7269\u6D41\u516C\u53F8"},n.default.createElement(t.Input,{placeholder:"\u7269\u6D41\u516C\u53F8",disabled:I}))),n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"deliverySn",label:"\u7269\u6D41\u5355\u53F7"},n.default.createElement(t.Input,{placeholder:"\u7269\u6D41\u5355\u53F7",disabled:I}))))],x=[n.default.createElement(t.Row,{gutter:16,key:"money-row-1"},n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"totalAmount",label:"\u8BA2\u5355\u603B\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u8BA2\u5355\u603B\u91D1\u989D"}]},n.default.createElement(t.InputNumber,{placeholder:"\u8BA2\u5355\u603B\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"payAmount",label:"\u5B9E\u4ED8\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5B9E\u4ED8\u91D1\u989D"}]},n.default.createElement(t.InputNumber,{placeholder:"\u5B9E\u4ED8\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"freightAmount",label:"\u8FD0\u8D39\u91D1\u989D"},n.default.createElement(t.InputNumber,{placeholder:"\u8FD0\u8D39\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I})))),n.default.createElement(t.Row,{gutter:16,key:"money-row-2"},n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"discountAmount",label:"\u6298\u6263\u91D1\u989D"},n.default.createElement(t.InputNumber,{placeholder:"\u6298\u6263\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"promotionAmount",label:"\u4FC3\u9500\u4F18\u60E0"},n.default.createElement(t.InputNumber,{placeholder:"\u4FC3\u9500\u4F18\u60E0",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I}))),n.default.createElement(t.Col,{span:8},n.default.createElement(t.Form.Item,{name:"couponAmount",label:"\u4F18\u60E0\u5238\u62B5\u6263"},n.default.createElement(t.InputNumber,{placeholder:"\u4F18\u60E0\u5238\u62B5\u6263",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:I}))))],q=[n.default.createElement(t.Row,{gutter:16,key:"status-row-1"},n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"status",label:"\u8BA2\u5355\u72B6\u6001",rules:[{required:!0}]},n.default.createElement(t.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u72B6\u6001",disabled:I},Ge.map(v=>n.default.createElement(t.Select.Option,{key:v.value,value:v.value},v.label))))),n.default.createElement(t.Col,{span:12},n.default.createElement(t.Form.Item,{name:"confirmStatus",label:"\u786E\u8BA4\u6536\u8D27\u72B6\u6001"},n.default.createElement(t.Select,{placeholder:"\u8BF7\u9009\u62E9\u786E\u8BA4\u6536\u8D27\u72B6\u6001",disabled:I},n.default.createElement(t.Select.Option,{value:0},"\u672A\u786E\u8BA4"),n.default.createElement(t.Select.Option,{value:1},"\u5DF2\u786E\u8BA4"))))),n.default.createElement(t.Form.Item,{key:"promotionInfo",name:"promotionInfo",label:"\u6D3B\u52A8\u4FE1\u606F"},n.default.createElement(t.Input,{placeholder:"\u6D3B\u52A8\u4FE1\u606F",disabled:I})),n.default.createElement(t.Form.Item,{key:"note",name:"note",label:"\u8BA2\u5355\u5907\u6CE8"},n.default.createElement(It,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u8BA2\u5355\u5907\u6CE8",disabled:I}))],_=[{key:"basic",label:"\u57FA\u672C\u4FE1\u606F",children:d?V:null},{key:"receiver",label:"\u6536\u8D27\u4FE1\u606F",children:y?re:null},{key:"money",label:"\u8D39\u7528\u4FE1\u606F",children:E?x:null},{key:"items",label:"\u5546\u54C1\u4FE1\u606F",children:Z?n.default.createElement(t.Table,{columns:Q,dataSource:ne,rowKey:"id",pagination:!1,scroll:{x:900}}):null},{key:"status",label:"\u72B6\u6001\u4FE1\u606F",children:se?q:null}];return n.default.createElement("div",{className:`mall-order-form ${ge||""}`,style:pe},n.default.createElement(t.Card,null,n.default.createElement(t.Form,{form:Y,layout:"vertical",initialValues:te(),disabled:I},n.default.createElement(t.Tabs,{activeKey:le,onChange:be,items:_}),n.default.createElement(t.Divider,null),n.default.createElement(t.Form.Item,null,n.default.createElement(t.Space,null,!I&&n.default.createElement(n.default.Fragment,null,n.default.createElement(t.Button,{type:"primary",onClick:ee},s==="create"?"\u521B\u5EFA":"\u4FDD\u5B58"),n.default.createElement(t.Button,{onClick:P},"\u91CD\u7F6E")),n.default.createElement(t.Button,{onClick:B},I?"\u5173\u95ED":"\u53D6\u6D88"))))))},He=tr;var l=K(Ee()),c=K(Ae()),_e=K(Ye());var De={FULL_REDUCTION:0,DISCOUNT:1},Pe={ALL:0,MOBILE:1,PC:2,APP:3},Ve={ALL:0,CATEGORY:1,PRODUCT:2},Pt=[{label:"\u6EE1\u51CF\u5238",value:De.FULL_REDUCTION},{label:"\u6298\u6263\u5238",value:De.DISCOUNT}],st=[{label:"\u5168\u5E73\u53F0",value:Pe.ALL},{label:"\u79FB\u52A8\u7AEF",value:Pe.MOBILE},{label:"PC\u7AEF",value:Pe.PC},{label:"APP\u7AEF",value:Pe.APP}],Zr=[{label:"\u5168\u573A\u901A\u7528",value:Ve.ALL},{label:"\u6307\u5B9A\u5206\u7C7B",value:Ve.CATEGORY},{label:"\u6307\u5B9A\u5546\u54C1",value:Ve.PRODUCT}],ie={ENABLED:1,DISABLED:0},Ot=[{label:"\u542F\u7528",value:ie.ENABLED},{label:"\u7981\u7528",value:ie.DISABLED}];var{RangePicker:rr}=c.DatePicker,kt={code:200,message:"success",data:{pageNum:1,pageSize:10,total:3,list:[{id:1,name:"\u65B0\u7528\u6237\u4E13\u4EAB\u5238",type:0,platform:0,count:1e3,amount:50,perLimit:1,minPoint:200,startTime:"2024-01-01",endTime:"2024-12-31",useType:0,note:"\u65B0\u7528\u6237\u9996\u5355\u6EE1200\u51CF50",publishCount:500,useCount:320,receiveCount:450,enableTime:"7",code:"NEWUSER50",memberLevel:0},{id:2,name:"\u9650\u65F6\u6298\u6263\u5238",type:1,platform:3,count:500,amount:8,perLimit:2,minPoint:100,startTime:"2024-01-15",endTime:"2024-02-15",useType:1,note:"APP\u4E13\u4EAB8\u6298\u5238",publishCount:300,useCount:180,receiveCount:280,enableTime:"3",code:"APPDISCOUNT",memberLevel:1},{id:3,name:"\u4F1A\u5458\u4E13\u4EAB\u5238",type:0,platform:0,count:200,amount:100,perLimit:1,minPoint:500,startTime:"2024-01-01",endTime:"2024-06-30",useType:2,note:"\u4F1A\u5458\u4E13\u4EAB\u6EE1500\u51CF100",publishCount:150,useCount:80,receiveCount:120,enableTime:"15",code:"VIP100",memberLevel:2}]}},or=({dataSourceType:C="mock",api:s,method:d="GET",mockData:y,variableName:E,showCreateButton:Z=!0,showFilter:se=!0,showStatistics:oe=!0,onCreateCoupon:ce,onEditCoupon:pe,onDeleteCoupon:ge,style:Y,className:le})=>{let[be,ne]=(0,l.useState)(!1),[X,ee]=(0,l.useState)([]),[B,P]=(0,l.useState)(0),[te,I]=(0,l.useState)(1),[G,Q]=(0,l.useState)(10),[V,re]=(0,l.useState)(""),[x,q]=(0,l.useState)(),[_,v]=(0,l.useState)(),[L,F]=(0,l.useState)(!1),[R,j]=(0,l.useState)(null),[J]=c.Form.useForm(),ye=[{id:1,name:"\u65B0\u7528\u6237\u4E13\u4EAB\u5238",type:De.FULL_REDUCTION,platform:Pe.ALL,count:1e3,amount:50,perLimit:1,minPoint:200,startTime:"2024-01-01",endTime:"2024-12-31",useType:Ve.ALL,note:"\u65B0\u7528\u6237\u9996\u5355\u6EE1200\u51CF50",publishCount:500,useCount:320,receiveCount:450,enableTime:"7",code:"NEWUSER50",memberLevel:0},{id:2,name:"\u9650\u65F6\u6298\u6263\u5238",type:De.DISCOUNT,platform:Pe.APP,count:500,amount:8,perLimit:2,minPoint:100,startTime:"2024-01-15",endTime:"2024-02-15",useType:Ve.CATEGORY,note:"APP\u4E13\u4EAB8\u6298\u5238",publishCount:300,useCount:180,receiveCount:280,enableTime:"3",code:"APPDISCOUNT",memberLevel:1},{id:3,name:"\u4F1A\u5458\u4E13\u4EAB\u5238",type:De.FULL_REDUCTION,platform:Pe.ALL,count:200,amount:100,perLimit:1,minPoint:500,startTime:"2024-01-01",endTime:"2024-06-30",useType:Ve.PRODUCT,note:"\u4F1A\u5458\u4E13\u4EAB\u6EE1500\u51CF100",publishCount:150,useCount:80,receiveCount:120,enableTime:"15",code:"VIP100",memberLevel:2}],we=(0,l.useMemo)(()=>({type:C,api:s,method:d,mockData:y?(()=>{try{return typeof y=="string"?JSON.parse(y):y}catch{return kt}})():kt,variableName:E}),[C,s,d,y,E]),fe=(0,l.useMemo)(()=>Ne.create(we),[we]);(0,l.useEffect)(()=>{$()},[te,G,fe]);let $=async()=>{ne(!0);try{let m=await fe.fetch({pageNum:te,pageSize:G,name:V,type:x,platform:_}),r=[],O=0;m?.data?.list?(r=m.data.list,O=m.data.total||r.length):Array.isArray(m?.data)?(r=m.data,O=r.length):Array.isArray(m)&&(r=m,O=r.length),(V||x!==void 0||_!==void 0)&&(r=r.filter(W=>!(V&&!W.name.toLowerCase().includes(V.toLowerCase())||x!==void 0&&W.type!==x||_!==void 0&&W.platform!==_)),O=r.length),ee(r),P(O)}catch(m){console.error("Failed to fetch coupon list:",m),c.message.error("\u83B7\u53D6\u4F18\u60E0\u5238\u5217\u8868\u5931\u8D25"),ee(ye),P(ye.length)}finally{ne(!1)}},ve=()=>{I(1),$()},Se=()=>{re(""),q(void 0),v(void 0),I(1),$()},Ce=()=>{j(null),J.resetFields(),F(!0)},S=m=>{j(m),J.setFieldsValue({...m,dateRange:[m.startTime,m.endTime]}),F(!0)},D=m=>{c.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u4F18\u60E0\u5238\u5417\uFF1F",onOk:()=>{ge?.(m),c.message.success("\u5220\u9664\u6210\u529F"),$()}})},f=async()=>{try{let m=await J.validateFields(),r={...m,startTime:m.dateRange?.[0],endTime:m.dateRange?.[1]};R?(pe?.(R.id,r),c.message.success("\u7F16\u8F91\u6210\u529F")):(ce?.(r),c.message.success("\u521B\u5EFA\u6210\u529F")),F(!1),$()}catch(m){console.error("Validation failed:",m)}},A=m=>{let r={[De.FULL_REDUCTION]:{color:"red",text:"\u6EE1\u51CF\u5238"},[De.DISCOUNT]:{color:"blue",text:"\u6298\u6263\u5238"}},{color:O,text:W}=r[m]||{color:"default",text:"\u672A\u77E5"};return l.default.createElement(c.Tag,{color:O},W)},ae=m=>{let r={[Pe.ALL]:{color:"green",text:"\u5168\u5E73\u53F0"},[Pe.MOBILE]:{color:"purple",text:"\u79FB\u52A8\u7AEF"},[Pe.PC]:{color:"geekblue",text:"PC\u7AEF"},[Pe.APP]:{color:"cyan",text:"APP"}},{color:O,text:W}=r[m]||{color:"default",text:"\u672A\u77E5"};return l.default.createElement(c.Tag,{color:O},W)},Oe=[{title:"\u4F18\u60E0\u5238\u540D\u79F0",dataIndex:"name",key:"name",width:150,render:m=>l.default.createElement(c.Tooltip,{title:m},l.default.createElement("span",{className:"coupon-name"},m))},{title:"\u7C7B\u578B",dataIndex:"type",key:"type",width:80,render:m=>A(m)},{title:"\u4F18\u60E0\u5185\u5BB9",key:"content",width:120,render:(m,r)=>l.default.createElement("span",null,r.type===De.FULL_REDUCTION?`\u6EE1${r.minPoint}\u51CF${r.amount}`:`${r.amount}\u6298`)},{title:"\u9002\u7528\u5E73\u53F0",dataIndex:"platform",key:"platform",width:80,render:m=>ae(m)},{title:"\u53D1\u884C\u91CF",dataIndex:"count",key:"count",width:80,render:m=>l.default.createElement(c.Badge,{count:m,showZero:!0,color:"blue"})},{title:"\u5DF2\u9886\u53D6",dataIndex:"receiveCount",key:"receiveCount",width:80},{title:"\u5DF2\u4F7F\u7528",dataIndex:"useCount",key:"useCount",width:80},{title:"\u6709\u6548\u671F",key:"validity",width:180,render:(m,r)=>l.default.createElement(c.Space,null,l.default.createElement(_e.ClockCircleOutlined,null),l.default.createElement("span",null,r.startTime," ~ ",r.endTime))},{title:"\u64CD\u4F5C",key:"action",width:150,render:(m,r)=>l.default.createElement(c.Space,null,l.default.createElement(c.Button,{type:"link",size:"small",icon:l.default.createElement(_e.EditOutlined,null),onClick:()=>S(r)},"\u7F16\u8F91"),l.default.createElement(c.Button,{type:"link",size:"small",danger:!0,icon:l.default.createElement(_e.DeleteOutlined,null),onClick:()=>D(r.id)},"\u5220\u9664"))}],Te={totalCoupons:X.length,activeCoupons:X.filter(m=>m.useCount>0).length,totalUsed:X.reduce((m,r)=>m+r.useCount,0),totalReceived:X.reduce((m,r)=>m+r.receiveCount,0)};return l.default.createElement("div",{className:`mall-coupon-card ${le||""}`,style:Y},l.default.createElement(c.Card,null,oe&&l.default.createElement("div",{className:"statistics-section"},l.default.createElement(c.Space,{size:"large"},l.default.createElement("div",{className:"stat-item"},l.default.createElement("div",{className:"stat-value"},Te.totalCoupons),l.default.createElement("div",{className:"stat-label"},"\u4F18\u60E0\u5238\u603B\u6570")),l.default.createElement(c.Divider,{type:"vertical",style:{height:40}}),l.default.createElement("div",{className:"stat-item"},l.default.createElement("div",{className:"stat-value"},Te.activeCoupons),l.default.createElement("div",{className:"stat-label"},"\u6D3B\u8DC3\u4F18\u60E0\u5238")),l.default.createElement(c.Divider,{type:"vertical",style:{height:40}}),l.default.createElement("div",{className:"stat-item"},l.default.createElement("div",{className:"stat-value"},Te.totalReceived),l.default.createElement("div",{className:"stat-label"},"\u5DF2\u9886\u53D6")),l.default.createElement(c.Divider,{type:"vertical",style:{height:40}}),l.default.createElement("div",{className:"stat-item"},l.default.createElement("div",{className:"stat-value"},Te.totalUsed),l.default.createElement("div",{className:"stat-label"},"\u5DF2\u4F7F\u7528")))),se&&l.default.createElement("div",{className:"filter-section"},l.default.createElement(c.Space,{wrap:!0},l.default.createElement(c.Input,{placeholder:"\u4F18\u60E0\u5238\u540D\u79F0",value:V,onChange:m=>re(m.target.value),style:{width:200}}),l.default.createElement(c.Select,{placeholder:"\u4F18\u60E0\u5238\u7C7B\u578B",value:x,onChange:q,style:{width:120},allowClear:!0},Pt.map(m=>l.default.createElement(c.Select.Option,{key:m.value,value:m.value},m.label))),l.default.createElement(c.Select,{placeholder:"\u9002\u7528\u5E73\u53F0",value:_,onChange:v,style:{width:120},allowClear:!0},st.map(m=>l.default.createElement(c.Select.Option,{key:m.value,value:m.value},m.label))),l.default.createElement(c.Button,{type:"primary",onClick:ve},"\u67E5\u8BE2"),l.default.createElement(c.Button,{onClick:Se},"\u91CD\u7F6E"))),Z&&l.default.createElement("div",{className:"action-section"},l.default.createElement(c.Button,{type:"primary",icon:l.default.createElement(_e.PlusOutlined,null),onClick:Ce},"\u521B\u5EFA\u4F18\u60E0\u5238")),l.default.createElement(c.Table,{columns:Oe,dataSource:X,rowKey:"id",loading:be,pagination:{current:te,pageSize:G,total:B,showSizeChanger:!0,showQuickJumper:!0,showTotal:m=>`\u5171 ${m} \u6761`,onChange:(m,r)=>{I(m),Q(r)}}})),l.default.createElement(c.Modal,{title:R?"\u7F16\u8F91\u4F18\u60E0\u5238":"\u521B\u5EFA\u4F18\u60E0\u5238",visible:L,onOk:f,onCancel:()=>F(!1),width:600},l.default.createElement(c.Form,{form:J,layout:"vertical"},l.default.createElement(c.Form.Item,{name:"name",label:"\u4F18\u60E0\u5238\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u4F18\u60E0\u5238\u540D\u79F0"}]},l.default.createElement(c.Input,{placeholder:"\u8BF7\u8F93\u5165\u4F18\u60E0\u5238\u540D\u79F0"})),l.default.createElement(c.Form.Item,{name:"type",label:"\u4F18\u60E0\u5238\u7C7B\u578B",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u4F18\u60E0\u5238\u7C7B\u578B"}]},l.default.createElement(c.Radio.Group,null,l.default.createElement(c.Radio,{value:De.FULL_REDUCTION},"\u6EE1\u51CF\u5238"),l.default.createElement(c.Radio,{value:De.DISCOUNT},"\u6298\u6263\u5238"))),l.default.createElement(c.Form.Item,{name:"amount",label:"\u4F18\u60E0\u989D\u5EA6",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u4F18\u60E0\u989D\u5EA6"}]},l.default.createElement(c.InputNumber,{placeholder:"\u6EE1\u51CF\u91D1\u989D\u6216\u6298\u6263",min:0,style:{width:"100%"}})),l.default.createElement(c.Form.Item,{name:"minPoint",label:"\u6700\u4F4E\u6D88\u8D39\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6700\u4F4E\u6D88\u8D39\u91D1\u989D"}]},l.default.createElement(c.InputNumber,{placeholder:"\u6700\u4F4E\u6D88\u8D39\u91D1\u989D",min:0,style:{width:"100%"}})),l.default.createElement(c.Form.Item,{name:"platform",label:"\u9002\u7528\u5E73\u53F0",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u9002\u7528\u5E73\u53F0"}]},l.default.createElement(c.Select,{placeholder:"\u8BF7\u9009\u62E9\u9002\u7528\u5E73\u53F0"},st.map(m=>l.default.createElement(c.Select.Option,{key:m.value,value:m.value},m.label)))),l.default.createElement(c.Form.Item,{name:"count",label:"\u53D1\u884C\u6570\u91CF",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u53D1\u884C\u6570\u91CF"}]},l.default.createElement(c.InputNumber,{placeholder:"\u53D1\u884C\u6570\u91CF",min:1,style:{width:"100%"}})),l.default.createElement(c.Form.Item,{name:"perLimit",label:"\u6BCF\u4EBA\u9650\u9886",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6BCF\u4EBA\u9650\u9886\u6570\u91CF"}]},l.default.createElement(c.InputNumber,{placeholder:"\u6BCF\u4EBA\u9650\u9886\u6570\u91CF",min:1,style:{width:"100%"}})),l.default.createElement(c.Form.Item,{name:"dateRange",label:"\u6709\u6548\u671F",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u6709\u6548\u671F"}]},l.default.createElement(rr,{style:{width:"100%"}})),l.default.createElement(c.Form.Item,{name:"note",label:"\u5907\u6CE8"},l.default.createElement(c.Input.TextArea,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u5907\u6CE8"})))))},We=or;var u=K(Ee()),h=K(Ae()),he=K(Ye());var{RangePicker:nr}=h.DatePicker,Dt={code:200,message:"success",data:{pageNum:1,pageSize:10,total:4,list:[{id:1,title:"\u53CC\u5341\u4E00\u5927\u4FC3",startDate:"2024-11-01",endDate:"2024-11-11",status:1,createTime:"2024-10-15 10:00:00"},{id:2,title:"618\u5E74\u4E2D\u5927\u4FC3",startDate:"2024-06-01",endDate:"2024-06-18",status:1,createTime:"2024-05-20 09:00:00"},{id:3,title:"\u65B0\u6625\u5B63\u4FC3\u9500",startDate:"2024-01-20",endDate:"2024-02-10",status:0,createTime:"2024-01-10 08:00:00"},{id:4,title:"\u4F1A\u5458\u65E5\u7279\u60E0",startDate:"2024-03-15",endDate:"2024-03-17",status:1,createTime:"2024-03-01 10:00:00"}]}},ar=({dataSourceType:C="mock",api:s,method:d="GET",mockData:y,variableName:E,showCreateButton:Z=!0,showFilter:se=!0,showStatistics:oe=!0,showTimeline:ce=!0,onCreatePromotion:pe,onEditPromotion:ge,onDeletePromotion:Y,onToggleStatus:le,style:be,className:ne})=>{let[X,ee]=(0,u.useState)(!1),[B,P]=(0,u.useState)([]),[te,I]=(0,u.useState)(0),[G,Q]=(0,u.useState)(1),[V,re]=(0,u.useState)(10),[x,q]=(0,u.useState)(""),[_,v]=(0,u.useState)(),[L,F]=(0,u.useState)(!1),[R,j]=(0,u.useState)(null),[J]=h.Form.useForm(),ye=[{id:1,title:"\u53CC\u5341\u4E00\u5927\u4FC3",startDate:"2024-11-01",endDate:"2024-11-11",status:ie.ENABLED,createTime:"2024-10-15 10:00:00"},{id:2,title:"618\u5E74\u4E2D\u5927\u4FC3",startDate:"2024-06-01",endDate:"2024-06-18",status:ie.ENABLED,createTime:"2024-05-20 09:00:00"},{id:3,title:"\u65B0\u6625\u5B63\u4FC3\u9500",startDate:"2024-01-20",endDate:"2024-02-10",status:ie.DISABLED,createTime:"2024-01-10 08:00:00"},{id:4,title:"\u4F1A\u5458\u65E5\u7279\u60E0",startDate:"2024-03-15",endDate:"2024-03-17",status:ie.ENABLED,createTime:"2024-03-01 10:00:00"}],we=(0,u.useMemo)(()=>({type:C,api:s,method:d,mockData:y?(()=>{try{return typeof y=="string"?JSON.parse(y):y}catch{return Dt}})():Dt,variableName:E}),[C,s,d,y,E]),fe=(0,u.useMemo)(()=>Ne.create(we),[we]);(0,u.useEffect)(()=>{$()},[G,V,fe]);let $=async()=>{ee(!0);try{let r=await fe.fetch({pageNum:G,pageSize:V,title:x,status:_}),O=[],W=0;r?.data?.list?(O=r.data.list,W=r.data.total||O.length):Array.isArray(r?.data)?(O=r.data,W=O.length):Array.isArray(r)&&(O=r,W=O.length),(x||_!==void 0)&&(O=O.filter(N=>!(x&&!N.title.toLowerCase().includes(x.toLowerCase())||_!==void 0&&N.status!==_)),W=O.length),P(O),I(W)}catch(r){console.error("Failed to fetch promotion list:",r),h.message.error("\u83B7\u53D6\u4FC3\u9500\u6D3B\u52A8\u5217\u8868\u5931\u8D25"),P(ye),I(ye.length)}finally{ee(!1)}},ve=()=>{Q(1),$()},Se=()=>{q(""),v(void 0),Q(1),$()},Ce=()=>{j(null),J.resetFields(),F(!0)},S=r=>{j(r),J.setFieldsValue({...r,dateRange:[r.startDate,r.endDate]}),F(!0)},D=r=>{h.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u4FC3\u9500\u6D3B\u52A8\u5417\uFF1F",onOk:()=>{Y?.(r),h.message.success("\u5220\u9664\u6210\u529F"),$()}})},f=r=>{let O=r.status===ie.ENABLED?ie.DISABLED:ie.ENABLED;le?.(r.id,O),h.message.success(O===ie.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),$()},A=async()=>{try{let r=await J.validateFields(),O={...r,startDate:r.dateRange?.[0],endDate:r.dateRange?.[1]};R?(ge?.(R.id,O),h.message.success("\u7F16\u8F91\u6210\u529F")):(pe?.(O),h.message.success("\u521B\u5EFA\u6210\u529F")),F(!1),$()}catch(r){console.error("Validation failed:",r)}},ae=r=>{let O={[ie.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528",icon:u.default.createElement(he.CheckCircleOutlined,null)},[ie.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528",icon:u.default.createElement(he.CloseCircleOutlined,null)}},{color:W,text:N,icon:H}=O[r]||{color:"default",text:"\u672A\u77E5",icon:null};return u.default.createElement(h.Tag,{color:W,icon:H},N)},Oe=[{title:"\u6D3B\u52A8\u540D\u79F0",dataIndex:"title",key:"title",width:200,render:r=>u.default.createElement(h.Tooltip,{title:r},u.default.createElement("span",{className:"promotion-title"},u.default.createElement(he.ThunderboltOutlined,{style:{color:"#faad14",marginRight:8}}),r))},{title:"\u6D3B\u52A8\u65F6\u95F4",key:"dateRange",width:220,render:(r,O)=>u.default.createElement(h.Space,null,u.default.createElement(he.ClockCircleOutlined,null),u.default.createElement("span",null,O.startDate," ~ ",O.endDate))},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:100,render:r=>ae(r)},{title:"\u521B\u5EFA\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:180},{title:"\u64CD\u4F5C",key:"action",width:200,render:(r,O)=>u.default.createElement(h.Space,null,u.default.createElement(h.Button,{type:"link",size:"small",icon:u.default.createElement(he.EditOutlined,null),onClick:()=>S(O)},"\u7F16\u8F91"),u.default.createElement(h.Button,{type:"link",size:"small",onClick:()=>f(O)},O.status===ie.ENABLED?"\u7981\u7528":"\u542F\u7528"),u.default.createElement(h.Button,{type:"link",size:"small",danger:!0,icon:u.default.createElement(he.DeleteOutlined,null),onClick:()=>D(O.id)},"\u5220\u9664"))}],Te={totalPromotions:B.length,activePromotions:B.filter(r=>r.status===ie.ENABLED).length,upcomingPromotions:B.filter(r=>{let O=new Date;return new Date(r.startDate)>O}).length},m=B.filter(r=>r.status===ie.ENABLED).slice(0,5).map(r=>({color:"green",children:u.default.createElement("div",null,u.default.createElement("div",{className:"timeline-title"},r.title),u.default.createElement("div",{className:"timeline-date"},r.startDate," ~ ",r.endDate))}));return u.default.createElement("div",{className:`mall-promotion-card ${ne||""}`,style:be},u.default.createElement(h.Card,null,oe&&u.default.createElement("div",{className:"statistics-section"},u.default.createElement(h.Row,{gutter:16},u.default.createElement(h.Col,{span:8},u.default.createElement(h.Statistic,{title:"\u4FC3\u9500\u6D3B\u52A8\u603B\u6570",value:Te.totalPromotions,prefix:u.default.createElement(he.ThunderboltOutlined,null)})),u.default.createElement(h.Col,{span:8},u.default.createElement(h.Statistic,{title:"\u8FDB\u884C\u4E2D\u7684\u6D3B\u52A8",value:Te.activePromotions,valueStyle:{color:"#3f8600"}})),u.default.createElement(h.Col,{span:8},u.default.createElement(h.Statistic,{title:"\u5373\u5C06\u5F00\u59CB",value:Te.upcomingPromotions,valueStyle:{color:"#faad14"}})))),se&&u.default.createElement("div",{className:"filter-section"},u.default.createElement(h.Space,{wrap:!0},u.default.createElement(h.Input,{placeholder:"\u6D3B\u52A8\u540D\u79F0",value:x,onChange:r=>q(r.target.value),style:{width:200}}),u.default.createElement(h.Select,{placeholder:"\u6D3B\u52A8\u72B6\u6001",value:_,onChange:v,style:{width:120},allowClear:!0},Ot.map(r=>u.default.createElement(h.Select.Option,{key:r.value,value:r.value},r.label))),u.default.createElement(h.Button,{type:"primary",onClick:ve},"\u67E5\u8BE2"),u.default.createElement(h.Button,{onClick:Se},"\u91CD\u7F6E"))),Z&&u.default.createElement("div",{className:"action-section"},u.default.createElement(h.Button,{type:"primary",icon:u.default.createElement(he.PlusOutlined,null),onClick:Ce},"\u521B\u5EFA\u4FC3\u9500\u6D3B\u52A8")),u.default.createElement("div",{className:"content-section"},u.default.createElement("div",{className:"table-section"},u.default.createElement(h.Table,{columns:Oe,dataSource:B,rowKey:"id",loading:X,pagination:{current:G,pageSize:V,total:te,showSizeChanger:!0,showQuickJumper:!0,showTotal:r=>`\u5171 ${r} \u6761`,onChange:(r,O)=>{Q(r),re(O)}}})),ce&&m.length>0&&u.default.createElement("div",{className:"timeline-section"},u.default.createElement(h.Card,{title:"\u6D3B\u52A8\u65F6\u95F4\u7EBF",size:"small"},u.default.createElement(h.Timeline,{items:m}))))),u.default.createElement(h.Modal,{title:R?"\u7F16\u8F91\u4FC3\u9500\u6D3B\u52A8":"\u521B\u5EFA\u4FC3\u9500\u6D3B\u52A8",visible:L,onOk:A,onCancel:()=>F(!1),width:500},u.default.createElement(h.Form,{form:J,layout:"vertical"},u.default.createElement(h.Form.Item,{name:"title",label:"\u6D3B\u52A8\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6D3B\u52A8\u540D\u79F0"}]},u.default.createElement(h.Input,{placeholder:"\u8BF7\u8F93\u5165\u6D3B\u52A8\u540D\u79F0"})),u.default.createElement(h.Form.Item,{name:"dateRange",label:"\u6D3B\u52A8\u65F6\u95F4",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u6D3B\u52A8\u65F6\u95F4"}]},u.default.createElement(nr,{style:{width:"100%"}})),u.default.createElement(h.Form.Item,{name:"status",label:"\u6D3B\u52A8\u72B6\u6001",initialValue:ie.ENABLED},u.default.createElement(h.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},Ze=ar;var p=K(Ee()),w=K(Ae()),ze=K(Ye());var me={DISABLED:0,ENABLED:1},ue={DISABLED:0,ENABLED:1},lt={DIRECTORY:0,MENU:1,BUTTON:2},Nt=[{label:"\u7981\u7528",value:me.DISABLED},{label:"\u542F\u7528",value:me.ENABLED}],Et=[{label:"\u7981\u7528",value:ue.DISABLED},{label:"\u542F\u7528",value:ue.ENABLED}],So=[{label:"\u76EE\u5F55",value:lt.DIRECTORY},{label:"\u83DC\u5355",value:lt.MENU},{label:"\u6309\u94AE",value:lt.BUTTON}];var ir=({dataSource:C,showCreateButton:s=!0,showFilter:d=!0,showStatistics:y=!0,onCreateUser:E,onEditUser:Z,onDeleteUser:se,onToggleStatus:oe,style:ce,className:pe})=>{let[ge,Y]=(0,p.useState)(!1),[le,be]=(0,p.useState)([]),[ne,X]=(0,p.useState)(0),[ee,B]=(0,p.useState)(1),[P,te]=(0,p.useState)(10),[I,G]=(0,p.useState)(""),[Q,V]=(0,p.useState)(),[re,x]=(0,p.useState)(!1),[q,_]=(0,p.useState)(null),[v]=w.Form.useForm(),L=[{id:1,username:"admin",nickName:"\u8D85\u7EA7\u7BA1\u7406\u5458",email:"admin@example.com",phone:"13800138000",status:me.ENABLED,createTime:"2024-01-01 10:00:00",loginTime:"2024-04-02 09:30:00",roleIds:[1],roleNames:["\u8D85\u7EA7\u7BA1\u7406\u5458"]},{id:2,username:"operator",nickName:"\u8FD0\u8425\u4EBA\u5458",email:"operator@example.com",phone:"13900139000",status:me.ENABLED,createTime:"2024-01-15 14:00:00",loginTime:"2024-04-01 16:20:00",roleIds:[2],roleNames:["\u8FD0\u8425"]},{id:3,username:"viewer",nickName:"\u8BBF\u5BA2\u7528\u6237",email:"viewer@example.com",phone:"13700137000",status:me.DISABLED,createTime:"2024-02-01 09:00:00",loginTime:"2024-03-15 10:00:00",roleIds:[3],roleNames:["\u8BBF\u5BA2"]}];(0,p.useEffect)(()=>{F()},[ee,P]);let F=async()=>{Y(!0);try{await new Promise(D=>setTimeout(D,500));let S=[...L];I&&(S=S.filter(D=>D.username.toLowerCase().includes(I.toLowerCase())||D.nickName?.toLowerCase().includes(I.toLowerCase()))),Q!==void 0&&(S=S.filter(D=>D.status===Q)),be(S),X(S.length)}catch(S){console.error("Failed to fetch user list:",S),w.message.error("\u83B7\u53D6\u7528\u6237\u5217\u8868\u5931\u8D25")}finally{Y(!1)}},R=()=>{B(1),F()},j=()=>{G(""),V(void 0),B(1),F()},J=()=>{_(null),v.resetFields(),x(!0)},ye=S=>{_(S),v.setFieldsValue(S),x(!0)},we=S=>{w.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u7528\u6237\u5417\uFF1F",onOk:()=>{se?.(S),w.message.success("\u5220\u9664\u6210\u529F"),F()}})},fe=S=>{let D=S.status===me.ENABLED?me.DISABLED:me.ENABLED;oe?.(S.id,D),w.message.success(D===me.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),F()},$=async()=>{try{let S=await v.validateFields();q?(Z?.(q.id,S),w.message.success("\u7F16\u8F91\u6210\u529F")):(E?.(S),w.message.success("\u521B\u5EFA\u6210\u529F")),x(!1),F()}catch(S){console.error("Validation failed:",S)}},ve=S=>{let D={[me.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528"},[me.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528"}},{color:f,text:A}=D[S]||{color:"default",text:"\u672A\u77E5"};return p.default.createElement(w.Tag,{color:f},A)},Se=[{title:"\u7528\u6237\u4FE1\u606F",key:"userInfo",width:200,render:(S,D)=>p.default.createElement(w.Space,null,p.default.createElement(w.Avatar,{icon:p.default.createElement(ze.UserOutlined,null),style:{backgroundColor:"#1890ff"}}),p.default.createElement("div",null,p.default.createElement("div",{className:"user-name"},D.nickName||D.username),p.default.createElement("div",{className:"user-username"},"@",D.username)))},{title:"\u90AE\u7BB1",dataIndex:"email",key:"email",width:180},{title:"\u624B\u673A\u53F7",dataIndex:"phone",key:"phone",width:130},{title:"\u89D2\u8272",dataIndex:"roleNames",key:"roleNames",width:150,render:S=>p.default.createElement(w.Space,{wrap:!0},S?.map((D,f)=>p.default.createElement(w.Tag,{key:f,color:"blue"},D)))},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:80,render:S=>ve(S)},{title:"\u6700\u540E\u767B\u5F55",dataIndex:"loginTime",key:"loginTime",width:160},{title:"\u64CD\u4F5C",key:"action",width:180,render:(S,D)=>p.default.createElement(w.Space,null,p.default.createElement(w.Button,{type:"link",size:"small",icon:p.default.createElement(ze.EditOutlined,null),onClick:()=>ye(D)},"\u7F16\u8F91"),p.default.createElement(w.Button,{type:"link",size:"small",onClick:()=>fe(D)},D.status===me.ENABLED?"\u7981\u7528":"\u542F\u7528"),p.default.createElement(w.Button,{type:"link",size:"small",danger:!0,icon:p.default.createElement(ze.DeleteOutlined,null),onClick:()=>we(D.id)},"\u5220\u9664"))}],Ce={totalUsers:L.length,activeUsers:L.filter(S=>S.status===me.ENABLED).length,disabledUsers:L.filter(S=>S.status===me.DISABLED).length};return p.default.createElement("div",{className:`mall-user-card ${pe||""}`,style:ce},p.default.createElement(w.Card,null,y&&p.default.createElement("div",{className:"statistics-section"},p.default.createElement(w.Space,{size:"large"},p.default.createElement("div",{className:"stat-item"},p.default.createElement("div",{className:"stat-value"},Ce.totalUsers),p.default.createElement("div",{className:"stat-label"},"\u7528\u6237\u603B\u6570")),p.default.createElement(w.Divider,{type:"vertical",style:{height:40}}),p.default.createElement("div",{className:"stat-item"},p.default.createElement("div",{className:"stat-value",style:{color:"#52c41a"}},Ce.activeUsers),p.default.createElement("div",{className:"stat-label"},"\u6D3B\u8DC3\u7528\u6237")),p.default.createElement(w.Divider,{type:"vertical",style:{height:40}}),p.default.createElement("div",{className:"stat-item"},p.default.createElement("div",{className:"stat-value",style:{color:"#8c8c8c"}},Ce.disabledUsers),p.default.createElement("div",{className:"stat-label"},"\u5DF2\u7981\u7528")))),d&&p.default.createElement("div",{className:"filter-section"},p.default.createElement(w.Space,{wrap:!0},p.default.createElement(w.Input,{placeholder:"\u7528\u6237\u540D/\u6635\u79F0",value:I,onChange:S=>G(S.target.value),style:{width:200}}),p.default.createElement(w.Select,{placeholder:"\u7528\u6237\u72B6\u6001",value:Q,onChange:V,style:{width:120},allowClear:!0},Nt.map(S=>p.default.createElement(w.Select.Option,{key:S.value,value:S.value},S.label))),p.default.createElement(w.Button,{type:"primary",onClick:R},"\u67E5\u8BE2"),p.default.createElement(w.Button,{onClick:j},"\u91CD\u7F6E"))),s&&p.default.createElement("div",{className:"action-section"},p.default.createElement(w.Button,{type:"primary",icon:p.default.createElement(ze.PlusOutlined,null),onClick:J},"\u521B\u5EFA\u7528\u6237")),p.default.createElement(w.Table,{columns:Se,dataSource:le,rowKey:"id",loading:ge,pagination:{current:ee,pageSize:P,total:ne,showSizeChanger:!0,showQuickJumper:!0,showTotal:S=>`\u5171 ${S} \u6761`,onChange:(S,D)=>{B(S),te(D)}}})),p.default.createElement(w.Modal,{title:q?"\u7F16\u8F91\u7528\u6237":"\u521B\u5EFA\u7528\u6237",visible:re,onOk:$,onCancel:()=>x(!1),width:500},p.default.createElement(w.Form,{form:v,layout:"vertical"},p.default.createElement(w.Form.Item,{name:"username",label:"\u7528\u6237\u540D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u7528\u6237\u540D"}]},p.default.createElement(w.Input,{placeholder:"\u8BF7\u8F93\u5165\u7528\u6237\u540D",disabled:!!q})),p.default.createElement(w.Form.Item,{name:"nickName",label:"\u6635\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6635\u79F0"}]},p.default.createElement(w.Input,{placeholder:"\u8BF7\u8F93\u5165\u6635\u79F0"})),p.default.createElement(w.Form.Item,{name:"email",label:"\u90AE\u7BB1",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u90AE\u7BB1"},{type:"email",message:"\u8BF7\u8F93\u5165\u6709\u6548\u7684\u90AE\u7BB1\u5730\u5740"}]},p.default.createElement(w.Input,{placeholder:"\u8BF7\u8F93\u5165\u90AE\u7BB1"})),p.default.createElement(w.Form.Item,{name:"phone",label:"\u624B\u673A\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u624B\u673A\u53F7"}]},p.default.createElement(w.Input,{placeholder:"\u8BF7\u8F93\u5165\u624B\u673A\u53F7"})),p.default.createElement(w.Form.Item,{name:"status",label:"\u72B6\u6001",initialValue:me.ENABLED},p.default.createElement(w.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},Xe=ir;var b=K(Ee()),T=K(Ae()),Me=K(Ye());var sr=({dataSource:C,showCreateButton:s=!0,showFilter:d=!0,showStatistics:y=!0,showPermissionTree:E=!0,onCreateRole:Z,onEditRole:se,onDeleteRole:oe,onToggleStatus:ce,style:pe,className:ge})=>{let[Y,le]=(0,b.useState)(!1),[be,ne]=(0,b.useState)([]),[X,ee]=(0,b.useState)(0),[B,P]=(0,b.useState)(1),[te,I]=(0,b.useState)(10),[G,Q]=(0,b.useState)(""),[V,re]=(0,b.useState)(),[x,q]=(0,b.useState)(!1),[_,v]=(0,b.useState)(null),[L]=T.Form.useForm(),F=[{id:1,name:"\u8D85\u7EA7\u7BA1\u7406\u5458",description:"\u62E5\u6709\u6240\u6709\u6743\u9650",adminCount:2,status:ue.ENABLED,sort:0,createTime:"2024-01-01 10:00:00"},{id:2,name:"\u8FD0\u8425",description:"\u8D1F\u8D23\u5546\u54C1\u548C\u8BA2\u5355\u7BA1\u7406",adminCount:5,status:ue.ENABLED,sort:1,createTime:"2024-01-15 14:00:00"},{id:3,name:"\u5BA2\u670D",description:"\u8D1F\u8D23\u8BA2\u5355\u5904\u7406\u548C\u5BA2\u6237\u670D\u52A1",adminCount:3,status:ue.ENABLED,sort:2,createTime:"2024-02-01 09:00:00"},{id:4,name:"\u8BBF\u5BA2",description:"\u53EA\u8BFB\u6743\u9650",adminCount:10,status:ue.DISABLED,sort:3,createTime:"2024-02-15 11:00:00"}],R=[{title:"\u5546\u54C1\u7BA1\u7406",key:"product",children:[{title:"\u5546\u54C1\u5217\u8868",key:"product:list"},{title:"\u6DFB\u52A0\u5546\u54C1",key:"product:create"},{title:"\u7F16\u8F91\u5546\u54C1",key:"product:edit"},{title:"\u5220\u9664\u5546\u54C1",key:"product:delete"}]},{title:"\u8BA2\u5355\u7BA1\u7406",key:"order",children:[{title:"\u8BA2\u5355\u5217\u8868",key:"order:list"},{title:"\u8BA2\u5355\u8BE6\u60C5",key:"order:detail"},{title:"\u53D1\u8D27",key:"order:deliver"},{title:"\u5173\u95ED\u8BA2\u5355",key:"order:close"}]},{title:"\u8425\u9500\u7BA1\u7406",key:"marketing",children:[{title:"\u4F18\u60E0\u5238\u7BA1\u7406",key:"marketing:coupon"},{title:"\u4FC3\u9500\u6D3B\u52A8",key:"marketing:promotion"}]},{title:"\u6743\u9650\u7BA1\u7406",key:"permission",children:[{title:"\u7528\u6237\u7BA1\u7406",key:"permission:user"},{title:"\u89D2\u8272\u7BA1\u7406",key:"permission:role"}]}];(0,b.useEffect)(()=>{j()},[B,te]);let j=async()=>{le(!0);try{await new Promise(A=>setTimeout(A,500));let f=[...F];G&&(f=f.filter(A=>A.name.toLowerCase().includes(G.toLowerCase())||A.description?.toLowerCase().includes(G.toLowerCase()))),V!==void 0&&(f=f.filter(A=>A.status===V)),ne(f),ee(f.length)}catch(f){console.error("Failed to fetch role list:",f),T.message.error("\u83B7\u53D6\u89D2\u8272\u5217\u8868\u5931\u8D25")}finally{le(!1)}},J=()=>{P(1),j()},ye=()=>{Q(""),re(void 0),P(1),j()},we=()=>{v(null),L.resetFields(),q(!0)},fe=f=>{v(f),L.setFieldsValue(f),q(!0)},$=f=>{T.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u89D2\u8272\u5417\uFF1F",onOk:()=>{oe?.(f),T.message.success("\u5220\u9664\u6210\u529F"),j()}})},ve=f=>{let A=f.status===ue.ENABLED?ue.DISABLED:ue.ENABLED;ce?.(f.id,A),T.message.success(A===ue.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),j()},Se=async()=>{try{let f=await L.validateFields();_?(se?.(_.id,f),T.message.success("\u7F16\u8F91\u6210\u529F")):(Z?.(f),T.message.success("\u521B\u5EFA\u6210\u529F")),q(!1),j()}catch(f){console.error("Validation failed:",f)}},Ce=f=>{let A={[ue.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528"},[ue.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528"}},{color:ae,text:Oe}=A[f]||{color:"default",text:"\u672A\u77E5"};return b.default.createElement(T.Tag,{color:ae},Oe)},S=[{title:"\u89D2\u8272\u540D\u79F0",dataIndex:"name",key:"name",width:150,render:f=>b.default.createElement(T.Space,null,b.default.createElement(Me.TeamOutlined,{style:{color:"#1890ff"}}),b.default.createElement("span",{className:"role-name"},f))},{title:"\u63CF\u8FF0",dataIndex:"description",key:"description",width:200},{title:"\u7528\u6237\u6570",dataIndex:"adminCount",key:"adminCount",width:80,render:f=>b.default.createElement(T.Tag,{color:"blue"},f," \u4EBA")},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:80,render:f=>Ce(f)},{title:"\u6392\u5E8F",dataIndex:"sort",key:"sort",width:60},{title:"\u521B\u5EFA\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:160},{title:"\u64CD\u4F5C",key:"action",width:180,render:(f,A)=>b.default.createElement(T.Space,null,b.default.createElement(T.Button,{type:"link",size:"small",icon:b.default.createElement(Me.EditOutlined,null),onClick:()=>fe(A)},"\u7F16\u8F91"),b.default.createElement(T.Button,{type:"link",size:"small",onClick:()=>ve(A)},A.status===ue.ENABLED?"\u7981\u7528":"\u542F\u7528"),b.default.createElement(T.Button,{type:"link",size:"small",danger:!0,icon:b.default.createElement(Me.DeleteOutlined,null),onClick:()=>$(A.id)},"\u5220\u9664"))}],D={totalRoles:F.length,activeRoles:F.filter(f=>f.status===ue.ENABLED).length,totalAdmins:F.reduce((f,A)=>f+A.adminCount,0)};return b.default.createElement("div",{className:`mall-role-card ${ge||""}`,style:pe},b.default.createElement(T.Card,null,y&&b.default.createElement("div",{className:"statistics-section"},b.default.createElement(T.Space,{size:"large"},b.default.createElement("div",{className:"stat-item"},b.default.createElement("div",{className:"stat-value"},D.totalRoles),b.default.createElement("div",{className:"stat-label"},"\u89D2\u8272\u603B\u6570")),b.default.createElement(T.Divider,{type:"vertical",style:{height:40}}),b.default.createElement("div",{className:"stat-item"},b.default.createElement("div",{className:"stat-value",style:{color:"#52c41a"}},D.activeRoles),b.default.createElement("div",{className:"stat-label"},"\u542F\u7528\u89D2\u8272")),b.default.createElement(T.Divider,{type:"vertical",style:{height:40}}),b.default.createElement("div",{className:"stat-item"},b.default.createElement("div",{className:"stat-value",style:{color:"#1890ff"}},D.totalAdmins),b.default.createElement("div",{className:"stat-label"},"\u7528\u6237\u603B\u6570")))),d&&b.default.createElement("div",{className:"filter-section"},b.default.createElement(T.Space,{wrap:!0},b.default.createElement(T.Input,{placeholder:"\u89D2\u8272\u540D\u79F0/\u63CF\u8FF0",value:G,onChange:f=>Q(f.target.value),style:{width:200}}),b.default.createElement(T.Select,{placeholder:"\u89D2\u8272\u72B6\u6001",value:V,onChange:re,style:{width:120},allowClear:!0},Et.map(f=>b.default.createElement(T.Select.Option,{key:f.value,value:f.value},f.label))),b.default.createElement(T.Button,{type:"primary",onClick:J},"\u67E5\u8BE2"),b.default.createElement(T.Button,{onClick:ye},"\u91CD\u7F6E"))),s&&b.default.createElement("div",{className:"action-section"},b.default.createElement(T.Button,{type:"primary",icon:b.default.createElement(Me.PlusOutlined,null),onClick:we},"\u521B\u5EFA\u89D2\u8272")),b.default.createElement("div",{className:"content-section"},b.default.createElement("div",{className:"table-section"},b.default.createElement(T.Table,{columns:S,dataSource:be,rowKey:"id",loading:Y,pagination:{current:B,pageSize:te,total:X,showSizeChanger:!0,showQuickJumper:!0,showTotal:f=>`\u5171 ${f} \u6761`,onChange:(f,A)=>{P(f),I(A)}}})),E&&b.default.createElement("div",{className:"permission-section"},b.default.createElement(T.Card,{title:"\u6743\u9650\u6811",size:"small"},b.default.createElement(T.Tree,{checkable:!0,defaultExpandedKeys:["product","order"],treeData:R}))))),b.default.createElement(T.Modal,{title:_?"\u7F16\u8F91\u89D2\u8272":"\u521B\u5EFA\u89D2\u8272",visible:x,onOk:Se,onCancel:()=>q(!1),width:500},b.default.createElement(T.Form,{form:L,layout:"vertical"},b.default.createElement(T.Form.Item,{name:"name",label:"\u89D2\u8272\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u89D2\u8272\u540D\u79F0"}]},b.default.createElement(T.Input,{placeholder:"\u8BF7\u8F93\u5165\u89D2\u8272\u540D\u79F0"})),b.default.createElement(T.Form.Item,{name:"description",label:"\u63CF\u8FF0"},b.default.createElement(T.Input.TextArea,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u89D2\u8272\u63CF\u8FF0"})),b.default.createElement(T.Form.Item,{name:"sort",label:"\u6392\u5E8F",initialValue:0},b.default.createElement(T.Input,{type:"number",placeholder:"\u6392\u5E8F\u503C"})),b.default.createElement(T.Form.Item,{name:"status",label:"\u72B6\u6001",initialValue:ue.ENABLED},b.default.createElement(T.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},Re=sr;var lr={ProductList:at,ProductForm:it,OrderList:Je,OrderForm:He,CouponCard:We,PromotionCard:Ze,UserCard:Xe,RoleCard:Re},dr=lr;return Wt(mr);})();
+
+// MallComponents - LowCode Component Library
+// Uses global React/AntD instances (shared with LowCode Engine)
+// No duplicate React instances!
+
+"use strict";
+var MallComponents = (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+  // src/shims/react.js
+  var require_react = __commonJS({
+    "src/shims/react.js"(exports, module) {
+      "use strict";
+      var React12 = typeof window !== "undefined" && window.React || {};
+      module.exports = React12;
+    }
+  });
+
+  // src/shims/antd.js
+  var require_antd = __commonJS({
+    "src/shims/antd.js"(exports, module) {
+      "use strict";
+      var antd = typeof window !== "undefined" && window.antd || {};
+      module.exports = antd;
+    }
+  });
+
+  // src/shims/icons.js
+  var require_icons = __commonJS({
+    "src/shims/icons.js"(exports, module) {
+      "use strict";
+      var icons = typeof window !== "undefined" && window.icons || {};
+      module.exports = icons;
+    }
+  });
+
+  // src/plugins/plugin-mall-components/entry-components.ts
+  var entry_components_exports = {};
+  __export(entry_components_exports, {
+    MallComponents: () => MallComponents,
+    default: () => entry_components_default
+  });
+
+  // src/plugins/plugin-mall-components/components/ProductList/ProductList.tsx
+  var import_react = __toESM(require_react());
+  var import_antd = __toESM(require_antd());
+
+  // src/plugins/plugin-mall-components/components/ProductList/ProductList.scss
+  var css = ".product-list-container{padding:16px;background:#fff;border-radius:4px}";
+  if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    style.setAttribute("data-source", "ProductList.scss");
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  // src/plugins/plugin-mall-components/components/ProductList/ProductList.tsx
+  var ProductList = ({
+    style,
+    className
+  }) => {
+    const columns2 = [
+      {
+        title: "商品名称",
+        dataIndex: "name",
+        key: "name"
+      },
+      {
+        title: "商品货号",
+        dataIndex: "productSn",
+        key: "productSn"
+      },
+      {
+        title: "价格",
+        dataIndex: "price",
+        key: "price",
+        render: (price) => `¥${price}`
+      },
+      {
+        title: "库存",
+        dataIndex: "stock",
+        key: "stock"
+      },
+      {
+        title: "状态",
+        dataIndex: "status",
+        key: "status",
+        render: (status) => /* @__PURE__ */ import_react.default.createElement(import_antd.Tag, { color: status === 1 ? "green" : "red" }, status === 1 ? "上架" : "下架")
+      },
+      {
+        title: "操作",
+        key: "action",
+        render: () => /* @__PURE__ */ import_react.default.createElement(import_antd.Space, { size: "middle" }, /* @__PURE__ */ import_react.default.createElement("a", null, "编辑"), /* @__PURE__ */ import_react.default.createElement("a", null, "删除"))
+      }
+    ];
+    const data = [
+      { key: "1", name: "示例商品1", productSn: "SN001", price: 99.99, stock: 100, status: 1 },
+      { key: "2", name: "示例商品2", productSn: "SN002", price: 199.99, stock: 50, status: 1 },
+      { key: "3", name: "示例商品3", productSn: "SN003", price: 299.99, stock: 0, status: 0 }
+    ];
+    return /* @__PURE__ */ import_react.default.createElement("div", { className: `mall-product-list ${className || ""}`, style }, /* @__PURE__ */ import_react.default.createElement(import_antd.Table, { columns: columns2, dataSource: data }));
+  };
+  var ProductList_default = ProductList;
+
+  // src/plugins/plugin-mall-components/components/ProductForm/ProductForm.tsx
+  var import_react2 = __toESM(require_react());
+  var import_antd2 = __toESM(require_antd());
+
+  // src/plugins/plugin-mall-components/components/ProductForm/ProductForm.scss
+  var css2 = ".product-form-container{padding:16px}";
+  if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    style.setAttribute("data-source", "ProductForm.scss");
+    style.textContent = css2;
+    document.head.appendChild(style);
+  }
+
+  // src/plugins/plugin-mall-components/components/ProductForm/ProductForm.tsx
+  var ProductForm = ({
+    showName = true,
+    showProductSn = true,
+    showBrandName = true,
+    showCategory = true,
+    showPrice = true,
+    showStock = true,
+    showDescription = true,
+    onSubmit,
+    onCancel,
+    style,
+    className
+  }) => {
+    const [form] = import_antd2.Form.useForm();
+    const handleSubmit = async () => {
+      try {
+        const values = await form.validateFields();
+        onSubmit?.(values);
+        import_antd2.message.success("提交成功");
+      } catch (error) {
+        console.error("Validation failed:", error);
+      }
+    };
+    return /* @__PURE__ */ import_react2.default.createElement("div", { className: `mall-product-form ${className || ""}`, style }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Card, null, /* @__PURE__ */ import_react2.default.createElement(
+      import_antd2.Form,
+      {
+        form,
+        layout: "vertical"
+      },
+      showName && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "name", label: "商品名称", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入商品名称" })),
+      showProductSn && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "productSn", label: "商品货号", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入商品货号" })),
+      showBrandName && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "brandName", label: "品牌名称" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入品牌名称" })),
+      showCategory && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "productCategoryName", label: "商品分类" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select, { placeholder: "请选择" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select.Option, { value: "手机" }, "手机"), /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select.Option, { value: "笔记本" }, "笔记本"))),
+      showPrice && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "price", label: "价格", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.InputNumber, { style: { width: "100%" }, min: 0, prefix: "¥" })),
+      showStock && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "stock", label: "库存", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.InputNumber, { style: { width: "100%" }, min: 0 })),
+      showDescription && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "description", label: "描述" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input.TextArea, { rows: 4 })),
+      /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, null, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Space, null, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Button, { type: "primary", onClick: handleSubmit }, "提交"), /* @__PURE__ */ import_react2.default.createElement(import_antd2.Button, { onClick: onCancel }, "取消")))
+    )));
+  };
+  var ProductForm_default = ProductForm;
+
+  // src/plugins/plugin-mall-components/components/OrderList/OrderList.tsx
+  var import_react3 = __toESM(require_react());
+  var import_antd3 = __toESM(require_antd());
+  var mockData = [
+    {
+      key: "1",
+      orderNo: "ORD-20240101-001",
+      customer: "张三",
+      amount: 299,
+      status: "paid",
+      createTime: "2024-01-01 10:30:00"
+    },
+    {
+      key: "2",
+      orderNo: "ORD-20240101-002",
+      customer: "李四",
+      amount: 599,
+      status: "shipped",
+      createTime: "2024-01-01 11:20:00"
+    },
+    {
+      key: "3",
+      orderNo: "ORD-20240101-003",
+      customer: "王五",
+      amount: 129,
+      status: "pending",
+      createTime: "2024-01-01 14:15:00"
+    }
+  ];
+  var columns = [
+    {
+      title: "订单号",
+      dataIndex: "orderNo",
+      key: "orderNo",
+      width: 180
+    },
+    {
+      title: "客户",
+      dataIndex: "customer",
+      key: "customer"
+    },
+    {
+      title: "金额 (¥)",
+      dataIndex: "amount",
+      key: "amount",
+      render: (amount) => /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "#f5222d", fontWeight: 500 } }, amount.toFixed(2))
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => {
+        const colorMap = {
+          pending: "orange",
+          paid: "blue",
+          shipped: "green",
+          completed: "default",
+          cancelled: "red"
+        };
+        const labelMap2 = {
+          pending: "待付款",
+          paid: "已付款",
+          shipped: "已发货",
+          completed: "已完成",
+          cancelled: "已取消"
+        };
+        return /* @__PURE__ */ import_react3.default.createElement(import_antd3.Tag, { color: colorMap[status] }, labelMap2[status]);
+      }
+    },
+    {
+      title: "创建时间",
+      dataIndex: "createTime",
+      key: "createTime"
+    }
+  ];
+  var OrderList = ({ status }) => {
+    const filteredData = status ? mockData.filter((item) => item.status === status) : mockData;
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "order-list" }, /* @__PURE__ */ import_react3.default.createElement("h3", { style: { marginBottom: 16 } }, "订单列表"), /* @__PURE__ */ import_react3.default.createElement(
+      import_antd3.Table,
+      {
+        dataSource: filteredData,
+        columns,
+        pagination: { pageSize: 10 },
+        size: "middle"
+      }
+    ));
+  };
+  var OrderList_default = OrderList;
+
+  // src/plugins/plugin-mall-components/components/MarketingManager/MarketingManager.tsx
+  var import_react4 = __toESM(require_react());
+  var import_antd4 = __toESM(require_antd());
+  var MarketingManager = ({ type = "coupon", showStats = true }) => {
+    const typeLabels = {
+      coupon: "优惠券管理",
+      promotion: "促销活动",
+      flash: "秒杀活动",
+      new: "新品推荐",
+      hot: "人气推荐"
+    };
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "marketing-manager" }, /* @__PURE__ */ import_react4.default.createElement("h3", { style: { marginBottom: 16 } }, typeLabels[type] || type), showStats && /* @__PURE__ */ import_react4.default.createElement(import_antd4.Row, { gutter: 16, style: { marginBottom: 24 } }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "活动总数", value: 12 }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "进行中", value: 5, valueStyle: { color: "#3f8600" } }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "已结束", value: 7 }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "参与人数", value: 1234, suffix: "人" })))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Space, { direction: "vertical", style: { width: "100%" }, size: "middle" }, [
+      { id: 1, name: "新年优惠券", status: "active", discount: 20, count: 500 },
+      { id: 2, name: "会员专享", status: "active", discount: 15, count: 1e3 },
+      { id: 3, name: "满减优惠", status: "expired", discount: 30, count: 200 },
+      { id: 4, name: "新人礼包", status: "pending", discount: 50, count: 800 }
+    ].map((item) => /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { key: item.id, size: "small", hoverable: true }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Row, { justify: "space-between", align: "middle" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Tag, { color: item.status === "active" ? "green" : item.status === "expired" ? "red" : "orange", style: { marginLeft: 8 } }, item.status === "active" ? "进行中" : item.status === "expired" ? "已过期" : "未开始")), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement("span", { style: { marginRight: 16 } }, "折扣：", item.discount, "%"), /* @__PURE__ */ import_react4.default.createElement("span", null, "剩余：", item.count, " 张")), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "link", size: "small" }, "编辑"), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "link", size: "small" }, "查看")))))), /* @__PURE__ */ import_react4.default.createElement("div", { style: { marginTop: 16, textAlign: "right" } }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "primary" }, "+ 创建新", typeLabels[type])));
+  };
+  var MarketingManager_default = MarketingManager;
+
+  // src/plugins/plugin-mall-components/setters/RestApiTester.tsx
+  var import_react5 = __toESM(require_react());
+  var import_antd5 = __toESM(require_antd());
+  var { TextArea } = import_antd5.Input;
+  var RestApiTester = ({ style, className }) => {
+    const [url, setUrl] = (0, import_react5.useState)("");
+    const [method, setMethod] = (0, import_react5.useState)("GET");
+    const [response, setResponse] = (0, import_react5.useState)("");
+    const [loading, setLoading] = (0, import_react5.useState)(false);
+    const handleExecute = async () => {
+      if (!url) return;
+      setLoading(true);
+      try {
+        const res = await fetch(url, { method });
+        const data = await res.json();
+        setResponse(JSON.stringify(data, null, 2));
+      } catch (err) {
+        setResponse(`Error: ${err}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    return /* @__PURE__ */ import_react5.default.createElement("div", { className: `rest-api-tester ${className || ""}`, style }, /* @__PURE__ */ import_react5.default.createElement(import_antd5.Card, { title: "REST API 测试" }, /* @__PURE__ */ import_react5.default.createElement(import_antd5.Space, { direction: "vertical", style: { width: "100%" }, size: "middle" }, /* @__PURE__ */ import_react5.default.createElement(
+      import_antd5.Input,
+      {
+        placeholder: "API 地址",
+        value: url,
+        onChange: (e) => setUrl(e.target.value)
+      }
+    ), /* @__PURE__ */ import_react5.default.createElement(
+      import_antd5.Select,
+      {
+        value: method,
+        onChange: setMethod,
+        options: [
+          { label: "GET", value: "GET" },
+          { label: "POST", value: "POST" },
+          { label: "PUT", value: "PUT" },
+          { label: "DELETE", value: "DELETE" }
+        ],
+        style: { width: 120 }
+      }
+    ), /* @__PURE__ */ import_react5.default.createElement(import_antd5.Button, { type: "primary", onClick: handleExecute, loading }, "执行"), /* @__PURE__ */ import_react5.default.createElement(
+      TextArea,
+      {
+        value: response,
+        readOnly: true,
+        rows: 10,
+        placeholder: "响应结果"
+      }
+    ))));
+  };
+  var RestApiTester_default = RestApiTester;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/AdminLayout.tsx
+  var import_react11 = __toESM(require_react());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Sidebar.tsx
+  var import_react6 = __toESM(require_react());
+  var import_antd6 = __toESM(require_antd());
+  var import_icons = __toESM(require_icons());
+  var { SubMenu } = import_antd6.Menu;
+  var defaultMenuItems = [
+    {
+      key: "dashboard",
+      label: "工作台",
+      icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.DashboardOutlined, null),
+      path: "/dashboard"
+    },
+    {
+      key: "permission",
+      label: "权限管理",
+      icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.SafetyCertificateOutlined, null),
+      children: [
+        {
+          key: "permission/users",
+          label: "用户管理",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.UserOutlined, null),
+          path: "/permission/users"
+        },
+        {
+          key: "permission/roles",
+          label: "角色管理",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.TeamOutlined, null),
+          path: "/permission/roles"
+        },
+        {
+          key: "permission/resources",
+          label: "资源管理",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.SettingOutlined, null),
+          path: "/permission/resources"
+        },
+        {
+          key: "permission/menus",
+          label: "菜单管理",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.FileTextOutlined, null),
+          path: "/permission/menus"
+        }
+      ]
+    },
+    {
+      key: "product",
+      label: "商品管理",
+      icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.ShoppingOutlined, null),
+      children: [
+        {
+          key: "product/list",
+          label: "商品列表",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.InboxOutlined, null),
+          path: "/product/list"
+        },
+        {
+          key: "product/add",
+          label: "添加商品",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.ShoppingOutlined, null),
+          path: "/product/add"
+        },
+        {
+          key: "product/category",
+          label: "商品分类",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.TagsOutlined, null),
+          path: "/product/category"
+        },
+        {
+          key: "product/brand",
+          label: "品牌管理",
+          path: "/product/brand"
+        },
+        {
+          key: "product/attribute",
+          label: "商品属性",
+          path: "/product/attribute"
+        }
+      ]
+    },
+    {
+      key: "order",
+      label: "订单管理",
+      icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.FileTextOutlined, null),
+      children: [
+        {
+          key: "order/list",
+          label: "订单列表",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.FileTextOutlined, null),
+          path: "/order/list"
+        },
+        {
+          key: "order/setting",
+          label: "订单设置",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.SettingOutlined, null),
+          path: "/order/setting"
+        },
+        {
+          key: "order/return",
+          label: "退货申请",
+          path: "/order/return"
+        },
+        {
+          key: "order/reason",
+          label: "退货原因",
+          path: "/order/reason"
+        }
+      ]
+    },
+    {
+      key: "marketing",
+      label: "营销管理",
+      icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.GiftOutlined, null),
+      children: [
+        {
+          key: "marketing/coupon",
+          label: "优惠券管理",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.GiftOutlined, null),
+          path: "/marketing/coupon"
+        },
+        {
+          key: "marketing/promotion",
+          label: "促销活动",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.DollarOutlined, null),
+          path: "/marketing/promotion"
+        },
+        {
+          key: "marketing/flash",
+          label: "秒杀活动",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.ThunderboltOutlined, null),
+          path: "/marketing/flash"
+        },
+        {
+          key: "marketing/new",
+          label: "新品推荐",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.FireOutlined, null),
+          path: "/marketing/new"
+        },
+        {
+          key: "marketing/hot",
+          label: "人气推荐",
+          icon: /* @__PURE__ */ import_react6.default.createElement(import_icons.FireOutlined, null),
+          path: "/marketing/hot"
+        },
+        {
+          key: "marketing/advertise",
+          label: "广告管理",
+          path: "/marketing/advertise"
+        },
+        {
+          key: "marketing/subject",
+          label: "专题管理",
+          path: "/marketing/subject"
+        },
+        {
+          key: "marketing/brand",
+          label: "品牌推荐",
+          path: "/marketing/brand"
+        }
+      ]
+    }
+  ];
+  var Sidebar = ({
+    collapsed,
+    selectedKey,
+    openKeys,
+    onMenuClick,
+    onOpenChange,
+    menuItems: customMenuItems
+  }) => {
+    const items = customMenuItems || defaultMenuItems;
+    const [internalOpenKeys, setInternalOpenKeys] = (0, import_react6.useState)(
+      items.filter((item) => item.children).map((item) => item.key)
+    );
+    const handleOpenChange = (keys) => {
+      const latestKey = keys[keys.length - 1];
+      if (latestKey && items.some((item) => item.key === latestKey)) {
+        setInternalOpenKeys(keys);
+        onOpenChange(keys);
+      } else {
+        setInternalOpenKeys(latestKey ? [latestKey] : []);
+        onOpenChange(latestKey ? [latestKey] : []);
+      }
+    };
+    const handleClick = ({ key }) => {
+      onMenuClick(key);
+    };
+    return /* @__PURE__ */ import_react6.default.createElement("div", { className: `sidebar-container ${collapsed ? "collapsed" : ""}` }, /* @__PURE__ */ import_react6.default.createElement("div", { className: "sidebar-logo" }, !collapsed && /* @__PURE__ */ import_react6.default.createElement("span", { className: "logo-text" }, "Mall Admin"), collapsed && /* @__PURE__ */ import_react6.default.createElement("span", { className: "logo-icon" }, "M")), /* @__PURE__ */ import_react6.default.createElement(
+      import_antd6.Menu,
+      {
+        mode: "inline",
+        theme: "dark",
+        inlineCollapsed: collapsed,
+        selectedKeys: [selectedKey],
+        defaultOpenKeys: internalOpenKeys,
+        openKeys: openKeys.length > 0 ? openKeys : internalOpenKeys,
+        onClick: handleClick,
+        onOpenChange: handleOpenChange,
+        items: items.map((item) => {
+          if (item.children && item.children.length > 0) {
+            return {
+              key: item.key,
+              icon: item.icon,
+              label: item.label,
+              children: item.children.map((child) => ({
+                key: child.key,
+                icon: child.icon,
+                label: child.label
+              }))
+            };
+          }
+          return {
+            key: item.key,
+            icon: item.icon,
+            label: item.label
+          };
+        })
+      }
+    ));
+  };
+  var Sidebar_default = Sidebar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Navbar.tsx
+  var import_react8 = __toESM(require_react());
+  var import_antd8 = __toESM(require_antd());
+  var import_icons2 = __toESM(require_icons());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Breadcrumb.tsx
+  var import_react7 = __toESM(require_react());
+  var import_antd7 = __toESM(require_antd());
+  var labelMap = {
+    dashboard: "工作台",
+    permission: "权限管理",
+    product: "商品管理",
+    order: "订单管理",
+    marketing: "营销管理",
+    users: "用户管理",
+    roles: "角色管理",
+    resources: "资源管理",
+    menus: "菜单管理",
+    list: "列表",
+    add: "添加",
+    category: "分类",
+    brand: "品牌",
+    attribute: "属性",
+    setting: "设置",
+    return: "退货",
+    reason: "原因",
+    coupon: "优惠券",
+    promotion: "促销",
+    flash: "秒杀",
+    new: "新品",
+    hot: "人气",
+    advertise: "广告",
+    subject: "专题"
+  };
+  var BreadcrumbNav = ({ items, onNavigate }) => {
+    const getLabel = (key) => {
+      const parts = key.split("/");
+      return parts.map((part) => labelMap[part] || part).join(" / ");
+    };
+    if (!items || items.length === 0) {
+      return null;
+    }
+    return /* @__PURE__ */ import_react7.default.createElement(import_antd7.Breadcrumb, null, items.map((item) => /* @__PURE__ */ import_react7.default.createElement(import_antd7.Breadcrumb.Item, { key: item.key }, /* @__PURE__ */ import_react7.default.createElement("a", { onClick: () => onNavigate(item.key) }, item.label || getLabel(item.key)))));
+  };
+  var Breadcrumb_default = BreadcrumbNav;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Navbar.tsx
+  var Navbar = ({ collapsed, onToggleCollapse, breadcrumbItems, onNavigate }) => {
+    const userMenuItems = [
+      {
+        key: "profile",
+        icon: /* @__PURE__ */ import_react8.default.createElement(import_icons2.UserOutlined, null),
+        label: "个人中心"
+      },
+      {
+        key: "settings",
+        icon: /* @__PURE__ */ import_react8.default.createElement(import_icons2.SettingOutlined, null),
+        label: "系统设置"
+      },
+      {
+        type: "divider"
+      },
+      {
+        key: "logout",
+        icon: /* @__PURE__ */ import_react8.default.createElement(import_icons2.LogoutOutlined, null),
+        label: "退出登录",
+        danger: true
+      }
+    ];
+    const handleUserMenuClick = ({ key }) => {
+      if (key === "logout") {
+        console.log("User logged out");
+      }
+    };
+    const menu = /* @__PURE__ */ import_react8.default.createElement(import_antd8.Menu, { items: userMenuItems, onClick: handleUserMenuClick });
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "navbar-container" }, /* @__PURE__ */ import_react8.default.createElement("div", { className: "navbar-left" }, /* @__PURE__ */ import_react8.default.createElement("button", { className: "hamburger-btn", onClick: onToggleCollapse }, collapsed ? /* @__PURE__ */ import_react8.default.createElement(import_icons2.MenuUnfoldOutlined, null) : /* @__PURE__ */ import_react8.default.createElement(import_icons2.MenuFoldOutlined, null)), /* @__PURE__ */ import_react8.default.createElement(Breadcrumb_default, { items: breadcrumbItems, onNavigate })), /* @__PURE__ */ import_react8.default.createElement("div", { className: "navbar-right" }, /* @__PURE__ */ import_react8.default.createElement(import_antd8.Dropdown, { overlay: menu, placement: "bottomRight" }, /* @__PURE__ */ import_react8.default.createElement("div", { className: "user-info" }, /* @__PURE__ */ import_react8.default.createElement(import_antd8.Avatar, { size: 32, icon: /* @__PURE__ */ import_react8.default.createElement(import_icons2.UserOutlined, null), className: "user-avatar" }), /* @__PURE__ */ import_react8.default.createElement(import_antd8.Space, { size: 4, className: "username" }, /* @__PURE__ */ import_react8.default.createElement("span", null, "管理员"))))));
+  };
+  var Navbar_default = Navbar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/MainContent.tsx
+  var import_react10 = __toESM(require_react());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/TabBar.tsx
+  var import_react9 = __toESM(require_react());
+  var import_antd9 = __toESM(require_antd());
+  var import_icons3 = __toESM(require_icons());
+  var TabBar = ({
+    tabs,
+    activeTabKey,
+    onTabClick,
+    onCloseTab,
+    onCloseOther,
+    onCloseAll,
+    closableTabs = true
+  }) => {
+    const [hoveredKey, setHoveredKey] = (0, import_react9.useState)(null);
+    const [contextMenuVisible, setContextMenuVisible] = (0, import_react9.useState)(false);
+    const [contextMenuKey, setContextMenuKey] = (0, import_react9.useState)("");
+    const [menuPosition, setMenuPosition] = (0, import_react9.useState)({ x: 0, y: 0 });
+    const scrollContainerRef = (0, import_react9.useRef)(null);
+    (0, import_react9.useEffect)(() => {
+      if (scrollContainerRef.current && activeTabKey) {
+        const activeElement = scrollContainerRef.current.querySelector(`[data-tab-key="${activeTabKey}"]`);
+        if (activeElement) {
+          activeElement.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
+      }
+    }, [activeTabKey]);
+    (0, import_react9.useEffect)(() => {
+      const handleClick = () => setContextMenuVisible(false);
+      if (contextMenuVisible) {
+        document.addEventListener("click", handleClick);
+        return () => document.removeEventListener("click", handleClick);
+      }
+    }, [contextMenuVisible]);
+    const handleContextMenu = (e, tabKey) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setContextMenuKey(tabKey);
+      setMenuPosition({ x: e.clientX, y: e.clientY });
+      setContextMenuVisible(true);
+    };
+    const handleMenuClick = (key) => {
+      setContextMenuVisible(false);
+      switch (key) {
+        case "close":
+          onCloseTab(contextMenuKey);
+          break;
+        case "closeOther":
+          onCloseOther(contextMenuKey);
+          break;
+        case "closeAll":
+          onCloseAll();
+          break;
+        case "refresh":
+          window.location.reload();
+          break;
+      }
+    };
+    if (!tabs || tabs.length === 0) {
+      return null;
+    }
+    const contextMenuItems = [
+      {
+        key: "refresh",
+        icon: /* @__PURE__ */ import_react9.default.createElement(import_icons3.ReloadOutlined, null),
+        label: "刷新当前页"
+      },
+      {
+        key: "close",
+        icon: /* @__PURE__ */ import_react9.default.createElement(import_icons3.CloseOutlined, null),
+        label: "关闭当前",
+        disabled: !closableTabs || tabs.find((t) => t.key === contextMenuKey)?.closable === false
+      },
+      {
+        type: "divider"
+      },
+      {
+        key: "closeOther",
+        icon: /* @__PURE__ */ import_react9.default.createElement(import_icons3.CloseCircleOutlined, null),
+        label: "关闭其他",
+        disabled: tabs.length <= 1
+      },
+      {
+        key: "closeAll",
+        icon: /* @__PURE__ */ import_react9.default.createElement(import_icons3.CloseCircleOutlined, null),
+        label: "关闭所有"
+      }
+    ];
+    const menu = /* @__PURE__ */ import_react9.default.createElement(import_antd9.Menu, { items: contextMenuItems, onClick: ({ key }) => handleMenuClick(key) });
+    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { className: "tab-bar-container" }, /* @__PURE__ */ import_react9.default.createElement("div", { className: "tab-bar-scroll", ref: scrollContainerRef }, tabs.map((tab) => /* @__PURE__ */ import_react9.default.createElement(
+      "div",
+      {
+        key: tab.key,
+        "data-tab-key": tab.key,
+        className: `tab-item ${activeTabKey === tab.key ? "active" : ""} ${hoveredKey === tab.key ? "hovered" : ""}`,
+        onClick: () => onTabClick(tab.key),
+        onMouseEnter: () => setHoveredKey(tab.key),
+        onMouseLeave: () => setHoveredKey(null),
+        onContextMenu: (e) => handleContextMenu(e, tab.key)
+      },
+      tab.icon && /* @__PURE__ */ import_react9.default.createElement("span", { className: "tab-icon" }, tab.icon),
+      /* @__PURE__ */ import_react9.default.createElement("span", { className: "tab-label" }, tab.label),
+      closableTabs && tab.closable && /* @__PURE__ */ import_react9.default.createElement(
+        "span",
+        {
+          className: `tab-close-btn ${hoveredKey === tab.key || activeTabKey === tab.key ? "visible" : ""}`,
+          onClick: (e) => {
+            e.stopPropagation();
+            onCloseTab(tab.key);
+          }
+        },
+        /* @__PURE__ */ import_react9.default.createElement(import_icons3.CloseOutlined, { style: { fontSize: 10 } })
+      )
+    ))), closableTabs && tabs.length > 1 && /* @__PURE__ */ import_react9.default.createElement("div", { className: "tab-actions" }, /* @__PURE__ */ import_react9.default.createElement(
+      "button",
+      {
+        className: "close-all-btn",
+        onClick: onCloseAll,
+        title: "关闭全部标签"
+      },
+      /* @__PURE__ */ import_react9.default.createElement(import_icons3.CloseCircleOutlined, null)
+    ))), contextMenuVisible && /* @__PURE__ */ import_react9.default.createElement(
+      "div",
+      {
+        style: {
+          position: "fixed",
+          left: menuPosition.x,
+          top: menuPosition.y,
+          zIndex: 1e3
+        }
+      },
+      /* @__PURE__ */ import_react9.default.createElement(
+        import_antd9.Dropdown,
+        {
+          overlay: menu,
+          visible: contextMenuVisible,
+          onVisibleChange: setContextMenuVisible,
+          trigger: ["click"]
+        },
+        /* @__PURE__ */ import_react9.default.createElement("div", { style: { width: 0, height: 0 } })
+      )
+    ));
+  };
+  var TabBar_default = TabBar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/MainContent.tsx
+  var MainContent = ({
+    children,
+    pageKey,
+    tabs,
+    activeTabKey,
+    onTabClick,
+    onCloseTab,
+    onCloseOther,
+    onCloseAll,
+    enableTabs = true,
+    closableTabs = true,
+    className = ""
+  }) => {
+    return /* @__PURE__ */ import_react10.default.createElement("main", { className: `main-content ${className}` }, enableTabs && tabs.length > 0 && /* @__PURE__ */ import_react10.default.createElement(
+      TabBar_default,
+      {
+        tabs,
+        activeTabKey,
+        onTabClick,
+        onCloseTab,
+        onCloseOther,
+        onCloseAll,
+        closableTabs
+      }
+    ), /* @__PURE__ */ import_react10.default.createElement("div", { className: "content-wrapper" }, /* @__PURE__ */ import_react10.default.createElement("div", { className: "page-container", key: pageKey }, children)));
+  };
+  var MainContent_default = MainContent;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/AdminLayout.scss
+  var css3 = '.admin-layout{display:flex;height:100vh;width:100%;overflow:hidden;background-color:#f0f2f5}.admin-layout .sidebar-container{width:256px;height:100vh;background:linear-gradient(180deg, #001529 0%, #002140 100%);transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);overflow-y:auto;overflow-x:hidden;flex-shrink:0;z-index:10;box-shadow:2px 0 8px rgba(0,0,0,.15)}.admin-layout .sidebar-container::-webkit-scrollbar{width:6px}.admin-layout .sidebar-container::-webkit-scrollbar-thumb{background:hsla(0,0%,100%,.2);border-radius:3px}.admin-layout .sidebar-container::-webkit-scrollbar-thumb:hover{background:hsla(0,0%,100%,.3)}.admin-layout .sidebar-container .sidebar-logo{height:64px;display:flex;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid hsla(0,0%,100%,.1);background:hsla(0,0%,100%,.02)}.admin-layout .sidebar-container .sidebar-logo .logo-text{color:#fff;font-size:20px;font-weight:600;white-space:nowrap;letter-spacing:1px}.admin-layout .sidebar-container .sidebar-logo .logo-icon{color:#fff;font-size:24px;font-weight:bold}.admin-layout .sidebar-container .ant-menu{border-right:none !important;background:rgba(0,0,0,0) !important}.admin-layout .sidebar-container .ant-menu .ant-menu-item{margin:0;border-radius:0;height:48px;line-height:48px;padding-left:24px !important;margin:0 0 4px 0}.admin-layout .sidebar-container .ant-menu .ant-menu-item:first-child{margin-top:8px}.admin-layout .sidebar-container .ant-menu .ant-menu-item:hover{background:hsla(0,0%,100%,.08) !important;color:#fff !important}.admin-layout .sidebar-container .ant-menu .ant-menu-item.ant-menu-item-selected{background:linear-gradient(90deg, #1890ff 0%, #096dd9 100%) !important;color:#fff !important;box-shadow:0 2px 8px rgba(24,144,255,.3)}.admin-layout .sidebar-container .ant-menu .ant-menu-item.ant-menu-item-selected::after{display:none}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-submenu-title{height:48px;line-height:48px;padding-left:24px !important;margin:0 0 4px 0}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-submenu-title:hover{background:hsla(0,0%,100%,.08) !important;color:#fff !important}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu.ant-menu-submenu-selected>.ant-menu-submenu-title{color:#1890ff !important}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-sub{background:rgba(0,0,0,.2) !important}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-sub .ant-menu-item{height:44px;line-height:44px;padding-left:48px !important}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-sub .ant-menu-item:hover{background:hsla(0,0%,100%,.05) !important}.admin-layout .sidebar-container .ant-menu .ant-menu-submenu .ant-menu-sub .ant-menu-item.ant-menu-item-selected{background:rgba(24,144,255,.15) !important;color:#1890ff !important;box-shadow:none}.admin-layout .sidebar-container.collapsed{width:80px}.admin-layout .sidebar-container.collapsed .ant-menu-inline-collapsed{width:80px}.admin-layout .sidebar-container.collapsed .sidebar-logo{padding:12px}.admin-layout .sidebar-container.collapsed .ant-menu-item{padding-left:0 !important;text-align:center}.admin-layout .layout-right{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}.admin-layout .layout-right .navbar-container{height:64px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:9;flex-shrink:0}.admin-layout .layout-right .navbar-container .navbar-left{display:flex;align-items:center;gap:16px}.admin-layout .layout-right .navbar-container .navbar-left .hamburger-btn{width:40px;height:40px;border:none;background:rgba(0,0,0,0);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:18px;color:rgba(0,0,0,.65);transition:all .3s}.admin-layout .layout-right .navbar-container .navbar-left .hamburger-btn:hover{background:rgba(24,144,255,.08);color:#1890ff}.admin-layout .layout-right .navbar-container .navbar-right .user-info{cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;transition:all .3s}.admin-layout .layout-right .navbar-container .navbar-right .user-info:hover{background:rgba(0,0,0,.04)}.admin-layout .layout-right .navbar-container .navbar-right .user-info .user-avatar{background:linear-gradient(135deg, #1890ff 0%, #096dd9 100%)}.admin-layout .layout-right .navbar-container .navbar-right .user-info .username{color:rgba(0,0,0,.85);font-size:14px;font-weight:500}.admin-layout .layout-right .main-content{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#f0f2f5}.admin-layout .layout-right .main-content .tab-bar-container{background:#fff;display:flex;align-items:center;border-bottom:1px solid #e8e8e8;padding:0 16px;height:44px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.04)}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll{flex:1;overflow-x:auto;overflow-y:hidden;white-space:nowrap;display:flex;align-items:center;gap:8px;scrollbar-width:thin}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll::-webkit-scrollbar{height:4px}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:2px}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;border-radius:4px 4px 0 0;position:relative;transition:all .25s cubic-bezier(0.4, 0, 0.2, 1);user-select:none;height:36px;font-size:13px;color:rgba(0,0,0,.65);background:rgba(0,0,0,0);border:1px solid rgba(0,0,0,0);border-bottom:none;margin-bottom:-1px}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item .tab-icon{display:flex;align-items:center;font-size:14px}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item .tab-label{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item .tab-close-btn{display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;opacity:0;transition:all .2s;margin-left:4px}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item .tab-close-btn.visible{opacity:1}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item .tab-close-btn:hover{background:rgba(0,0,0,.15);color:#fff}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item:hover{color:#1890ff;background:rgba(24,144,255,.06)}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item:hover .tab-close-btn{opacity:1}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item.active{color:#1890ff;background:#fff;border-color:#e8e8e8;font-weight:500}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item.active .tab-close-btn{opacity:1}.admin-layout .layout-right .main-content .tab-bar-container .tab-bar-scroll .tab-item.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg, #1890ff 0%, #096dd9 100%)}.admin-layout .layout-right .main-content .tab-bar-container .tab-actions{margin-left:8px;padding-left:12px;border-left:1px solid #e8e8e8}.admin-layout .layout-right .main-content .tab-bar-container .tab-actions .close-all-btn{width:32px;height:32px;border:none;background:rgba(0,0,0,0);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:8px;color:rgba(0,0,0,.45);transition:all .2s}.admin-layout .layout-right .main-content .tab-bar-container .tab-actions .close-all-btn:hover{background:rgba(255,77,79,.08);color:#ff4d4f}.admin-layout .layout-right .main-content .content-wrapper{flex:1;overflow:auto;background:#f0f2f5;padding:24px}.admin-layout .layout-right .main-content .content-wrapper .page-container{min-height:100%;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:fadeIn .3s ease-in-out}.admin-layout .mobile-overlay{display:none}.admin-layout.is-collapse .sidebar-container{width:80px}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width: 768px){.admin-layout .sidebar-container{position:fixed;left:0;top:0;z-index:1000;transform:translateX(-100%);transition:transform .3s}.admin-layout .sidebar-container.collapsed{transform:translateX(-100%);width:256px}.admin-layout .mobile-overlay{display:block;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;visibility:hidden;transition:all .3s}.admin-layout .mobile-overlay.visible{opacity:1;visibility:visible}.admin-layout:not(.is-collapse) .sidebar-container{transform:translateX(0)}.admin-layout:not(.is-collapse) .mobile-overlay.visible{opacity:1;visibility:visible}}';
+  if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    style.setAttribute("data-source", "AdminLayout.scss");
+    style.textContent = css3;
+    document.head.appendChild(style);
+  }
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/AdminLayout.tsx
+  var findMenuItem = (items, key) => {
+    for (const item of items) {
+      if (item.key === key) return item;
+      if (item.children) {
+        const found = findMenuItem(item.children, key);
+        if (found) return found;
+      }
+    }
+    return void 0;
+  };
+  var getLabelFromKey = (key) => {
+    const parts = key.split("/");
+    const labelMap2 = {
+      dashboard: "工作台",
+      permission: "权限管理",
+      product: "商品管理",
+      order: "订单管理",
+      marketing: "营销管理",
+      users: "用户管理",
+      roles: "角色管理",
+      resources: "资源管理",
+      menus: "菜单管理",
+      list: "列表",
+      add: "添加",
+      category: "分类",
+      brand: "品牌",
+      attribute: "属性",
+      setting: "设置",
+      return: "退货申请",
+      reason: "退货原因",
+      coupon: "优惠券管理",
+      promotion: "促销活动",
+      flash: "秒杀活动",
+      new: "新品推荐",
+      hot: "人气推荐",
+      advertise: "广告管理",
+      subject: "专题管理"
+    };
+    return labelMap2[parts[parts.length - 1]] || parts[parts.length - 1];
+  };
+  var AdminLayout = ({
+    defaultSelectedKey = "dashboard",
+    defaultOpenKeys,
+    collapsible = true,
+    enableTabs = true,
+    maxTabs = 10,
+    closableTabs = true,
+    logoText = "Mall Admin",
+    menuItems: customMenuItems,
+    style,
+    className,
+    children,
+    __designMode,
+    componentId
+  }) => {
+    const items = customMenuItems || defaultMenuItems;
+    const [collapsed, setCollapsed] = (0, import_react11.useState)(false);
+    const [selectedKey, setSelectedKey] = (0, import_react11.useState)(defaultSelectedKey);
+    const [openKeys, setOpenKeys] = (0, import_react11.useState)(defaultOpenKeys || []);
+    const [tabs, setTabs] = (0, import_react11.useState)(() => {
+      const initialItem = findMenuItem(items, defaultSelectedKey);
+      return [{
+        key: defaultSelectedKey,
+        label: initialItem?.label || getLabelFromKey(defaultSelectedKey),
+        icon: initialItem?.icon,
+        closable: false,
+        path: initialItem?.path || `/${defaultSelectedKey}`
+      }];
+    });
+    const [activeTabKey, setActiveTabKey] = (0, import_react11.useState)(defaultSelectedKey);
+    const slotChildren = (0, import_react11.useMemo)(() => {
+      const slots = [];
+      if (!children) return slots;
+      if (Array.isArray(children)) {
+        children.forEach((child) => {
+          if (child && child.props && child.props.slot) {
+            slots.push({
+              slot: child.props.slot,
+              children: child
+            });
+          }
+        });
+      }
+      if (!Array.isArray(children) && children && children.props?.slot) {
+        slots.push({
+          slot: children.props.slot,
+          children
+        });
+      }
+      return slots;
+    }, [children]);
+    const activeChild = (0, import_react11.useMemo)(() => {
+      let matchedSlot = slotChildren.find((s) => s.slot === selectedKey);
+      if (!matchedSlot && selectedKey.includes("/")) {
+        const parentKey = selectedKey.split("/")[0];
+        matchedSlot = slotChildren.find((s) => s.slot === parentKey || s.slot.startsWith(selectedKey));
+      }
+      if (matchedSlot) {
+        return matchedSlot.children;
+      }
+      if (children) {
+        return children;
+      }
+      return null;
+    }, [selectedKey, slotChildren, children]);
+    const handleToggleCollapse = (0, import_react11.useCallback)(() => {
+      if (collapsible) {
+        setCollapsed((prev) => !prev);
+      }
+    }, [collapsible]);
+    const handleMenuClick = (0, import_react11.useCallback)((key) => {
+      setSelectedKey(key);
+      const existingTab = tabs.find((tab) => tab.key === key);
+      if (!existingTab) {
+        const menuItem = findMenuItem(items, key);
+        const newTab = {
+          key,
+          label: menuItem?.label || getLabelFromKey(key),
+          icon: menuItem?.icon,
+          closable: key !== "dashboard",
+          path: menuItem?.path || `/${key}`
+        };
+        setTabs((prev) => {
+          if (prev.length >= maxTabs) {
+            const filtered = prev.filter((tab) => tab.closable);
+            if (filtered.length > 0) {
+              const toRemove = filtered[0].key;
+              return [...prev.filter((tab) => tab.key !== toRemove), newTab];
+            }
+          }
+          return [...prev, newTab];
+        });
+      }
+      setActiveTabKey(key);
+    }, [tabs, items, maxTabs]);
+    const handleOpenChange = (0, import_react11.useCallback)((keys) => {
+      setOpenKeys(keys);
+    }, []);
+    const handleNavigate = (0, import_react11.useCallback)((key) => {
+      setSelectedKey(key);
+      setActiveTabKey(key);
+    }, []);
+    const handleTabClick = (0, import_react11.useCallback)((key) => {
+      setSelectedKey(key);
+      setActiveTabKey(key);
+    }, []);
+    const removeChildBySlot = (0, import_react11.useCallback)((slotKey) => {
+      if (typeof window === "undefined") return;
+      try {
+        const engine = window.AliLowCodeEngine;
+        if (!engine || !engine.project) {
+          console.warn("[AdminLayout] LowCode engine not found");
+          return;
+        }
+        const documentModel = engine.project.currentDocument;
+        if (!documentModel) {
+          console.warn("[AdminLayout] Document model not found");
+          return;
+        }
+        let adminLayoutNode = null;
+        if (componentId && typeof documentModel.getNodeById === "function") {
+          adminLayoutNode = documentModel.getNodeById(componentId);
+        }
+        if (!adminLayoutNode) {
+          console.warn("[AdminLayout] AdminLayout node not found");
+          return;
+        }
+        const nodesMap = documentModel.nodesMap || {};
+        let removed = false;
+        Object.values(nodesMap).forEach((node) => {
+          if (node && node.props && node.props.slot === slotKey) {
+            try {
+              if (typeof documentModel.removeNode === "function") {
+                documentModel.removeNode(node);
+                removed = true;
+                console.log(`[AdminLayout] ✅ Removed child with slot: ${slotKey} via removeNode`);
+              }
+            } catch (err) {
+              console.error("[AdminLayout] Error removing node:", err);
+            }
+          }
+        });
+        if (!removed) {
+          const traverseAndRemove = (node) => {
+            if (!node) return false;
+            const childSlot = node.props?.slot || node.getPropValue?.("slot");
+            if (childSlot === slotKey) {
+              try {
+                if (typeof documentModel.removeNode === "function") {
+                  documentModel.removeNode(node);
+                  console.log(`[AdminLayout] ✅ Removed child with slot: ${slotKey} via traverse`);
+                  return true;
+                }
+              } catch (err) {
+                console.error("[AdminLayout] Error removing node:", err);
+              }
+            }
+            if (node.children && Array.isArray(node.children)) {
+              for (const child of node.children) {
+                if (traverseAndRemove(child)) {
+                  return true;
+                }
+              }
+            }
+            return false;
+          };
+          if (adminLayoutNode) {
+            traverseAndRemove(adminLayoutNode);
+          }
+        }
+      } catch (error) {
+        console.error("[AdminLayout] Failed to remove child:", error);
+      }
+    }, [componentId]);
+    const handleCloseTab = (0, import_react11.useCallback)((key) => {
+      if (key === "dashboard") return;
+      removeChildBySlot(key);
+      setTabs((prev) => prev.filter((tab) => tab.key !== key));
+      if (key === activeTabKey) {
+        const remainingTabs = tabs.filter((tab) => tab.key !== key);
+        if (remainingTabs.length > 0) {
+          const currentIndex = tabs.findIndex((tab) => tab.key === key);
+          const nextTab = remainingTabs[currentIndex] || remainingTabs[remainingTabs.length - 1];
+          setSelectedKey(nextTab.key);
+          setActiveTabKey(nextTab.key);
+        }
+      }
+    }, [tabs, activeTabKey, removeChildBySlot]);
+    const handleCloseOther = (0, import_react11.useCallback)((keepKey) => {
+      tabs.forEach((tab) => {
+        if (tab.key !== keepKey && tab.key !== "dashboard") {
+          removeChildBySlot(tab.key);
+        }
+      });
+      setTabs((prev) => prev.filter((tab) => tab.key === keepKey || tab.key === "dashboard"));
+      setSelectedKey(keepKey);
+      setActiveTabKey(keepKey);
+    }, [tabs, removeChildBySlot]);
+    const handleCloseAll = (0, import_react11.useCallback)(() => {
+      tabs.forEach((tab) => {
+        if (tab.key !== "dashboard") {
+          removeChildBySlot(tab.key);
+        }
+      });
+      const dashboardTab = tabs.find((tab) => tab.key === "dashboard");
+      if (dashboardTab) {
+        setTabs([dashboardTab]);
+        setSelectedKey("dashboard");
+        setActiveTabKey("dashboard");
+      }
+    }, [tabs, removeChildBySlot]);
+    const breadcrumbItems = (0, import_react11.useMemo)(() => {
+      if (selectedKey === "dashboard") return [];
+      const parts = selectedKey.split("/");
+      if (parts.length === 1) {
+        return [{ key: selectedKey, label: "", path: selectedKey }];
+      }
+      return [{ key: selectedKey, label: "", path: selectedKey }];
+    }, [selectedKey]);
+    const defaultContent = /* @__PURE__ */ import_react11.default.createElement("div", { style: { padding: 24 } }, /* @__PURE__ */ import_react11.default.createElement("h2", null, findMenuItem(items, selectedKey)?.label || getLabelFromKey(selectedKey)), /* @__PURE__ */ import_react11.default.createElement("p", null, "当前页面：", selectedKey), /* @__PURE__ */ import_react11.default.createElement("p", { style: { color: "#999", marginTop: 16 } }, "💡 提示：请在设计器中为此页面配置子组件，或拖拽组件到此区域"), /* @__PURE__ */ import_react11.default.createElement("div", { style: { marginTop: 16, padding: 12, background: "#f5f5f5", borderRadius: 4 } }, /* @__PURE__ */ import_react11.default.createElement("strong", null, "可用操作："), /* @__PURE__ */ import_react11.default.createElement("ul", { style: { margin: "8px 0 0 20px" } }, /* @__PURE__ */ import_react11.default.createElement("li", null, '在左侧面板找到"电商业务组件"'), /* @__PURE__ */ import_react11.default.createElement("li", null, '拖拽"商品列表"、"订单列表"等组件到此区域'), /* @__PURE__ */ import_react11.default.createElement("li", null, '配置组件的 slot 属性为 "', selectedKey, '"'))));
+    return /* @__PURE__ */ import_react11.default.createElement("div", { className: `admin-layout ${collapsed ? "is-collapse" : ""} ${className || ""}`, style }, /* @__PURE__ */ import_react11.default.createElement(
+      Sidebar_default,
+      {
+        collapsed,
+        selectedKey,
+        openKeys,
+        onMenuClick: handleMenuClick,
+        onOpenChange: handleOpenChange,
+        menuItems: items
+      }
+    ), /* @__PURE__ */ import_react11.default.createElement("div", { className: "layout-right" }, /* @__PURE__ */ import_react11.default.createElement(
+      Navbar_default,
+      {
+        collapsed,
+        onToggleCollapse: handleToggleCollapse,
+        breadcrumbItems,
+        onNavigate: handleNavigate
+      }
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      MainContent_default,
+      {
+        pageKey: selectedKey,
+        tabs,
+        activeTabKey,
+        onTabClick: handleTabClick,
+        onCloseTab: handleCloseTab,
+        onCloseOther: handleCloseOther,
+        onCloseAll: handleCloseAll,
+        enableTabs,
+        closableTabs,
+        className: collapsed ? "collapsed" : ""
+      },
+      activeChild || defaultContent
+    )), collapsible && /* @__PURE__ */ import_react11.default.createElement(
+      "div",
+      {
+        className: `mobile-overlay ${!collapsed ? "visible" : ""}`,
+        onClick: handleToggleCollapse
+      }
+    ));
+  };
+  var AdminLayout_default = AdminLayout;
+
+  // src/plugins/plugin-mall-components/entry-components.ts
+  var MallComponents = {
+    ProductList: ProductList_default,
+    ProductForm: ProductForm_default,
+    OrderList: OrderList_default,
+    MarketingManager: MarketingManager_default,
+    RestApiTester: RestApiTester_default,
+    AdminLayout: AdminLayout_default
+  };
+  var entry_components_default = MallComponents;
+  return __toCommonJS(entry_components_exports);
+})();
 
 MallComponents = MallComponents.default || MallComponents;
+
 if (typeof window !== 'undefined') {
   window.MallComponents = MallComponents;
   console.log('[MallComponents] Registered:', Object.keys(MallComponents));
+  
+  // 确保 @ant-design/icons 可用
+  if (!window.icons && typeof require !== 'undefined') {
+    try {
+      window.icons = require('@ant-design/icons');
+    } catch(e) {}
+  }
 }
 

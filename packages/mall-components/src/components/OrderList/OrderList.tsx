@@ -56,6 +56,7 @@ interface OrderListProps {
   method?: 'GET' | 'POST'
   mockData?: string
   variableName?: string
+  dataSource?: any
   showFilter?: boolean
   showStatusFilter?: boolean
   showSearch?: boolean
@@ -217,6 +218,7 @@ const OrderList: React.FC<OrderListProps> = ({
   method = 'GET',
   mockData,
   variableName,
+  dataSource,
   showFilter = true,
   showStatusFilter = true,
   showSearch = true,
@@ -266,7 +268,8 @@ const OrderList: React.FC<OrderListProps> = ({
       }
     })() : defaultMockDataObj,
     variableName,
-  }), [dataSourceType, api, method, mockData, variableName])
+    dataSource,
+  }), [dataSourceType, api, method, mockData, variableName, dataSource])
 
   const adapter = useMemo(() => {
     return DataSourceAdapterFactory.create(dataSourceConfig)

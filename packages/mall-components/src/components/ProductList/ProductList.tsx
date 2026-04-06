@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
 import { Table, Input, Pagination, Card, Space, Button, Switch, Select } from 'antd'
 import { SearchOutlined, ReloadOutlined, PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons'
 import { DataSourceAdapterFactory } from '../../adapters/DataSourceAdapter'
@@ -12,6 +12,7 @@ interface ProductListProps {
   method?: 'GET' | 'POST'
   mockData?: string | any
   variableName?: string
+  dataSource?: any
   
   showFilter?: boolean
   showAction?: boolean
@@ -55,6 +56,7 @@ const ProductList: React.FC<ProductListProps> = ({
   method = 'GET',
   mockData,
   variableName,
+  dataSource,
   showFilter = true,
   showAction = true,
   showSelection = true,
@@ -172,35 +174,43 @@ const ProductList: React.FC<ProductListProps> = ({
 
   const defaultMockData = JSON.stringify(defaultMockDataObj)
 
-  let actualMockData = mockData
-  if (!actualMockData) {
-    actualMockData = defaultMockData
-  }
-
-  console.log('[ProductList] 处理后的 mockData:', actualMockData)
-
-  const dataSource: DataSourceConfig = {
-    type: dataSourceType,
-    api: api || '',
-    method: method,
-    mockData: actualMockData,
-    variableName: variableName || '',
-  }
+  const dataSourceConfig: DataSourceConfig = useMemo(() => {
+    let actualMockData = mockData
+    if (!actualMockData) {
+      actualMockData = defaultMockData
+    }
+    
+    console.log('[ProductList] dataSourceConfig 重新计算:', { 
+      dataSourceType, 
+      mockData: typeof mockData === 'string' ? mockData.substring(0, 100) + '...' : mockData,
+      variableName,
+      dataSource: typeof dataSource === 'object' ? 'object' : dataSource
+    })
+    
+    return {
+      type: dataSourceType,
+      api: api || '',
+      method: method,
+      mockData: actualMockData,
+      variableName: variableName || '',
+      dataSource: dataSource,
+    }
+  }, [dataSourceType, api, method, mockData, variableName, dataSource])
 
   console.log('[ProductList] 组件渲染，props:', { 
-    dataSourceType, api, method, mockData, variableName,
+    dataSourceType, api, method, 
+    mockData: typeof mockData === 'string' ? mockData.substring(0, 100) + '...' : mockData, 
+    variableName,
+    dataSource: typeof dataSource === 'object' ? 'object' : dataSource,
     showFilter, showAction, showSelection 
   })
   
-  const adapter = DataSourceAdapterFactory.create(dataSource)
-  console.log('[ProductList] DataSourceAdapter 创建完成:', adapter)
+  const adapter = useMemo(() => {
+    console.log('[ProductList] adapter 重新创建, dataSourceType:', dataSourceType)
+    return DataSourceAdapterFactory.create(dataSourceConfig)
+  }, [dataSourceConfig])
 
-  React.useEffect(() => {
-    console.log('[ProductList] useEffect 触发，开始获取数据')
-    fetchData()
-  }, [currentPage, pageSize, dataSourceType, api, method, mockData, variableName])
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     console.log('[ProductList] fetchData 开始，参数:', { currentPage, pageSize, searchText })
     setLoading(true)
     try {
@@ -224,7 +234,12 @@ const ProductList: React.FC<ProductListProps> = ({
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, pageSize, searchText, adapter])
+
+  useEffect(() => {
+    console.log('[ProductList] useEffect 触发，开始获取数据, dataSourceType:', dataSourceType)
+    fetchData()
+  }, [fetchData, dataSourceType])
 
   const handleSearch = () => {
     setCurrentPage(1)

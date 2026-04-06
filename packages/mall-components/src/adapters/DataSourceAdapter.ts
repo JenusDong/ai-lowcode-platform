@@ -7,6 +7,7 @@ export type DataSourceConfig = {
   headers?: Record<string, string>
   mockData?: any
   variableName?: string
+  dataSource?: any
   transform?: string
 }
 
@@ -341,12 +342,86 @@ export class VariableAdapter implements DataSourceAdapter {
   }
 
   async fetch(params?: any): Promise<any> {
+    console.log('[VariableAdapter] fetch 被调用，config:', {
+      variableName: this.config.variableName,
+      dataSource: this.config.dataSource
+    })
+    
+    if (this.config.dataSource !== undefined && this.config.dataSource !== null) {
+      console.log('[VariableAdapter] 使用 dataSource:', this.config.dataSource)
+      let data = this.config.dataSource
+      
+      if (typeof data === 'string') {
+        try {
+          data = JSON.parse(data)
+        } catch (e) {
+          console.error('[VariableAdapter] dataSource JSON 解析失败:', e)
+        }
+      }
+      
+      if (data && typeof data === 'object') {
+        if (data.code === 200 && data.data) {
+          return data
+        }
+        if (data.list || Array.isArray(data)) {
+          return {
+            code: 200,
+            message: 'success',
+            data: {
+              pageNum: 1,
+              pageSize: 10,
+              total: Array.isArray(data) ? data.length : (data.total || 0),
+              list: Array.isArray(data) ? data : (data.list || []),
+            }
+          }
+        }
+        return { code: 200, message: 'success', data: data }
+      }
+      
+      return { 
+        code: 200, 
+        message: 'success', 
+        data: {
+          pageNum: 1,
+          pageSize: 10,
+          total: 0,
+          list: [],
+        }
+      }
+    }
+    
     const variableName = this.config.variableName
     if (!variableName) {
-      throw new Error('Variable name is required for variable adapter')
+      console.warn('[VariableAdapter] variableName 和 dataSource 都为空，返回空数据')
+      return { 
+        code: 200, 
+        message: 'success', 
+        data: {
+          pageNum: 1,
+          pageSize: 10,
+          total: 0,
+          list: [],
+        }
+      }
     }
 
     const value = (window as any)[variableName]
+    console.log('[VariableAdapter] 从 window 获取的值:', value)
+    
+    if (value === undefined || value === null) {
+      console.warn('[VariableAdapter] 变量不存在，返回空数据')
+      return { 
+        code: 200, 
+        message: 'success', 
+        data: {
+          pageNum: 1,
+          pageSize: 10,
+          total: 0,
+          list: [],
+        }
+      }
+    }
+    
     return { code: 200, message: 'success', data: value }
   }
 
