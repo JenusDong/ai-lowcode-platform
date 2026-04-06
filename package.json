@@ -4,6 +4,7 @@
   "private": true,
   "description": "AI 驱动的低代码平台 - 基于 Alibaba LowCodeEngine",
   "scripts": {
+    "postinstall": "node scripts/patch-codegen.js",
     "start": "build-scripts start --disable-reload --port 5556",
     "dev": "npm run build:umd && concurrently \"npm run build:umd:watch\" \"npm run start\"",
     "build": "npm run build:umd && build-scripts build",
@@ -23,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@alifd/layout": "^2.4.1",
+    "@alifd/pro-layout": "^1.0.1",
     "@alilc/lowcode-datasource-fetch-handler": "^1.0.1",
     "@alilc/lowcode-plugin-code-editor": "^1.0.3",
     "@alilc/lowcode-plugin-code-generator": "^1.0.4",
@@ -43,6 +45,8 @@
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
     "moment": "^2.29.3",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "uuid": "^8.3.2",
     "zustand": "^4.4.7"
   },
@@ -62,9 +66,11 @@
     "build-plugin-moment-locales": "^0.1.0",
     "build-plugin-react-app": "^1.1.2",
     "concurrently": "^9.2.1",
+    "esbuild": "^0.27.7",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.33.0",
     "fs-extra": "^10.0.1",
+    "sass": "^1.99.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^5.0.0"
   },

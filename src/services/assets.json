@@ -110,6 +110,9 @@
       "library": "echarts",
       "urls": [
         "https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"
+      ],
+      "editUrls": [
+        "https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"
       ]
     },
     {
@@ -133,16 +136,38 @@
       "editUrls": [
         "/mall-components.umd.js"
       ]
+    },
+    {
+      "package": "echarts-for-react",
+      "version": "3.0.2",
+      "library": "ReactECharts",
+      "urls": [
+        "/react-echarts-adapter.js"
+      ],
+      "editUrls": [
+        "/react-echarts-adapter.js"
+      ]
+    },
+    {
+      "package": "plugin-echarts",
+      "version": "1.0.0",
+      "library": "PluginEcharts",
+      "urls": [
+        "/plugin-echarts.umd.js"
+      ],
+      "editUrls": [
+        "/plugin-echarts.umd.js"
+      ]
     }
   ],
   "components": [
     {
-      "exportName": "EChartsMeta",
+      "exportName": "AlifdNextMeta",
       "npm": {
-        "package": "echarts-component",
-        "version": "1.0.0"
+        "package": "@alifd/next",
+        "version": "1.26.0"
       },
-      "url": "/echarts-meta.js"
+      "url": "/alifd-next-meta.js"
     },
     {
       "exportName": "MallComponentsMeta",
@@ -151,6 +176,14 @@
         "version": "1.0.0"
       },
       "url": "/mall-components-meta.js"
+    },
+    {
+      "exportName": "PluginEchartsMeta",
+      "npm": {
+        "package": "plugin-echarts",
+        "version": "1.0.0"
+      },
+      "url": "/plugin-echarts-meta.js"
     },
     {
       "exportName": "AlilcAntdLowcodeMaterialsMeta",
@@ -196,19 +229,33 @@
   "sort": {
     "groupList": [
       "精选组件",
-      "原子组件"
+      "原子组件",
+      "基础图表",
+      "高级图表",
+      "商品管理",
+      "订单管理",
+      "营销管理",
+      "权限管理"
     ],
     "categoryList": [
       "通用",
       "导航",
       "信息输入",
       "信息展示",
-      "信息反馈"
+      "信息反馈",
+      "电商业务",
+      "图表组件"
     ]
   },
   "groupList": [
     "精选组件",
-    "原子组件"
+    "原子组件",
+    "基础图表",
+    "高级图表",
+    "商品管理",
+    "订单管理",
+    "营销管理",
+    "权限管理"
   ],
   "ignoreComponents": {}
 }

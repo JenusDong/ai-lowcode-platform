@@ -59,7 +59,8 @@
         return this.props[prop] !== prevProps[prop];
       }.bind(this));
       
-      if (this.props.optionJson !== prevProps.optionJson ||
+      if (this.props.option !== prevProps.option ||
+          this.props.optionJson !== prevProps.optionJson ||
           this.props.theme !== prevProps.theme ||
           this.props.notMerge !== prevProps.notMerge ||
           this.props.lazyUpdate !== prevProps.lazyUpdate ||
@@ -85,7 +86,9 @@
       var props = this.props;
       var option = null;
       
-      if (props.optionJson && props.optionJson.trim()) {
+      if (props.option && typeof props.option === 'object') {
+        option = props.option;
+      } else if (props.optionJson && props.optionJson.trim()) {
         try {
           option = JSON.parse(props.optionJson);
         } catch (e) {
@@ -288,6 +291,12 @@
   
   var result = {
     ECharts: EChartsComponent,
+    EChartsPie: EChartsComponent,
+    EChartsLine: EChartsComponent,
+    EChartsBar: EChartsComponent,
+    EChartsScatter: EChartsComponent,
+    EChartsMix: EChartsComponent,
+    EChartsArea: EChartsComponent,
     'default': EChartsComponent
   };
   
@@ -301,7 +310,19 @@
       
       if (!win.SimulatorRenderer._components.ECharts) {
         win.SimulatorRenderer._components.ECharts = EChartsComponent;
-        console.log('[EChartsComponent] Registered ECharts to ' + source);
+        win.SimulatorRenderer._components.EChartsPie = EChartsComponent;
+        win.SimulatorRenderer._components.EChartsLine = EChartsComponent;
+        win.SimulatorRenderer._components.EChartsBar = EChartsComponent;
+        win.SimulatorRenderer._components.EChartsScatter = EChartsComponent;
+        win.SimulatorRenderer._components.EChartsMix = EChartsComponent;
+        win.SimulatorRenderer._components.EChartsArea = EChartsComponent;
+        console.log('[EChartsComponent] Registered all ECharts components to ' + source);
+        return true;
+      }
+      const missing = ['EChartsPie', 'EChartsLine', 'EChartsBar', 'EChartsScatter', 'EChartsMix', 'EChartsArea'].filter(n => !win.SimulatorRenderer._components[n]);
+      if (missing.length > 0) {
+        missing.forEach(n => { win.SimulatorRenderer._components[n] = EChartsComponent; });
+        console.log('[EChartsComponent] Registered missing: ' + missing.join(', ') + ' to ' + source);
         return true;
       }
       return false;

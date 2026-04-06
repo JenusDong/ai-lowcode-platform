@@ -13,11 +13,13 @@
     "@alilc/lowcode-plugin-inject": "^1.2.3",
     "@alilc/lowcode-react-renderer": "^1.3.4",
     "@alilc/lowcode-utils": "^1.1.5",
+    "@ant-design/icons": "^6.1.1",
     "antd": "^4.24.15",
     "axios": "^1.14.0",
     "moment": "^2.30.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

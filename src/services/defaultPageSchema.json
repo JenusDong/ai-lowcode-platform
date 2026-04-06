@@ -17,144 +17,136 @@
   "methods": {},
   "children": [
     {
-      "componentName": "FDPage",
+      "componentName": "FDSection",
       "props": {
-        "contentProps": {
-          "style": {
-            "background": "rgba(240,242,245,1)"
-          }
+        "style": {
+          "backgroundColor": "rgba(255,255,255,0)",
+          "minHeight": "100vh",
+          "padding": "24px",
+          "span": 12
         }
       },
       "children": [
         {
-          "componentName": "FDSection",
+          "componentName": "FDBlock",
           "props": {
-            "style": {
-              "backgroundColor": "rgba(255,255,255,0)",
-              "minHeight": "100vh",
-              "padding": "24px"
-            }
+            "align": "left",
+            "verAlign": "top"
           },
           "children": [
             {
-              "componentName": "FDBlock",
+              "componentName": "FDCell",
               "props": {
-                "mode": "transparent",
-                "span": 12
+                "style": {
+                  "marginBottom": "16px"
+                }
               },
               "children": [
                 {
-                  "componentName": "FDCell",
+                  "componentName": "FDP",
                   "props": {
-                    "align": "left",
-                    "verAlign": "top"
+                    "style": {
+                      "fontSize": "24px",
+                      "fontWeight": "600",
+                      "margin": "0",
+                      "color": "#1890ff",
+                      "lineHeight": "1.35"
+                    }
+                  },
+                  "children": "AI 低代码平台"
+                }
+              ]
+            },
+            {
+              "componentName": "Card",
+              "props": {
+                "title": "快速开始",
+                "bordered": false,
+                "style": {
+                  "marginBottom": "16px",
+                  "width": "100%"
+                }
+              },
+              "children": [
+                {
+                  "componentName": "Space",
+                  "props": {
+                    "size": "middle"
                   },
                   "children": [
                     {
-                      "componentName": "Typography.Title",
+                      "componentName": "Button",
                       "props": {
-                        "level": 2,
-                        "children": "AI 低代码平台",
-                        "style": {
-                          "margin": "0 0 16px 0",
-                          "color": "#1890ff"
-                        }
+                        "type": "primary",
+                        "children": "创建页面"
                       }
                     },
                     {
-                      "componentName": "Card",
+                      "componentName": "Button",
                       "props": {
-                        "title": "快速开始",
-                        "bordered": false,
-                        "style": {
-                          "marginBottom": "16px",
-                          "width": "100%"
-                        }
+                        "children": "导入模板"
+                      }
+                    },
+                    {
+                      "componentName": "Button",
+                      "props": {
+                        "type": "dashed",
+                        "children": "AI 生成"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "componentName": "Card",
+              "props": {
+                "title": "数据统计",
+                "bordered": false,
+                "style": {
+                  "width": "100%"
+                }
+              },
+              "children": [
+                {
+                  "componentName": "Row",
+                  "props": {
+                    "gutter": 16
+                  },
+                  "children": [
+                    {
+                      "componentName": "Col",
+                      "props": {
+                        "span": 6
                       },
                       "children": [
                         {
-                          "componentName": "Space",
+                          "componentName": "Statistic",
                           "props": {
-                            "size": "middle"
-                          },
-                          "children": [
-                            {
-                              "componentName": "Button",
-                              "props": {
-                                "type": "primary",
-                                "children": "创建页面"
-                              }
-                            },
-                            {
-                              "componentName": "Button",
-                              "props": {
-                                "children": "导入模板"
-                              }
-                            },
-                            {
-                              "componentName": "Button",
-                              "props": {
-                                "type": "dashed",
-                                "children": "AI 生成"
-                              }
+                            "title": "总页面数",
+                            "value": 128,
+                            "valueStyle": {
+                              "color": "#3f8600"
                             }
-                          ]
+                          }
                         }
                       ]
                     },
                     {
-                      "componentName": "Card",
+                      "componentName": "Col",
                       "props": {
-                        "title": "数据统计",
-                        "bordered": false,
-                        "style": {
-                          "width": "100%"
-                        }
+                        "span": 6
                       },
                       "children": [
                         {
-                          "componentName": "Row",
+                          "componentName": "Statistic",
                           "props": {
-                            "gutter": 16
-                          },
-                          "children": [
-                            {
-                              "componentName": "Col",
-                              "props": {
-                                "span": 6
-                              },
-                              "children": [
-                                {
-                                  "componentName": "Statistic",
-                                  "props": {
-                                    "title": "总页面数",
-                                    "value": 128,
-                                    "valueStyle": {
-                                      "color": "#3f8600"
-                                    }
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "componentName": "Col",
-                              "props": {
-                                "span": 6
-                              },
-                              "children": [
-                                {
-                                  "componentName": "Statistic",
-                                  "props": {
-                                    "title": "今日访问",
-                                    "value": 1024,
-                                    "valueStyle": {
-                                      "color": "#1890ff"
-                                    }
-                                  }
-                                }
-                              ]
+                            "title": "今日访问",
+                            "value": 1024,
+                            "valueStyle": {
+                              "color": "#1890ff"
                             }
-                          ]
+                          }
                         }
                       ]
                     }

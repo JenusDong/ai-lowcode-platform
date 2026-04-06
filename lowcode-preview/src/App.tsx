@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import ReactRenderer from '@alilc/lowcode-react-renderer'
 import { buildComponents } from '@alilc/lowcode-utils'
 import { customComponents, componentMeta } from './registerComponents'
+import { AdminLayout } from './components/AdminLayout'
 import './App.css'
 
 const sampleSchema = {
@@ -45,6 +46,7 @@ const getProjectSchema = () => {
 
 function App() {
   const [data, setData] = useState<any>({})
+  const [showAdminLayout, setShowAdminLayout] = useState(true)
 
   useEffect(() => {
     const init = async () => {
@@ -79,6 +81,10 @@ function App() {
         <p>正在初始化低代码渲染器</p>
       </div>
     )
+  }
+
+  if (showAdminLayout) {
+    return <AdminLayout />
   }
 
   return (

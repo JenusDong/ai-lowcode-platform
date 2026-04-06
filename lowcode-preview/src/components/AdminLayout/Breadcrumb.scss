@@ -1,0 +1,55 @@
+.admin-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 56px;
+
+  .ant-breadcrumb-link {
+    a {
+      color: #606266;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+
+  .breadcrumb-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    .anticon {
+      font-size: 14px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  .breadcrumb-current {
+    color: #303133;
+    font-weight: 500;
+
+    .anticon {
+      color: #303133;
+    }
+  }
+
+  .ant-breadcrumb-separator {
+    color: #c0c4cc;
+    margin: 0 6px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-breadcrumb {
+    font-size: 12px;
+
+    .breadcrumb-home span {
+      display: none;
+    }
+  }
+}

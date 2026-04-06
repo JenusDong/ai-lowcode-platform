@@ -23,8 +23,7 @@ import SimulatorLocalePlugin from './plugins/plugin-simulator-locale';
 import lowcodePlugin from './plugins/plugin-lowcode-component';
 import CustomToolbarPlugin from './plugins/plugin-custom-toolbar';
 import ThemeTogglePlugin from './plugins/plugin-theme-toggle';
-import EChartsPlugin from './plugins/plugin-echarts';
-import MallComponentsPlugin from './plugins/plugin-mall-components';
+
 import appHelper from './appHelper';
 import './global.scss';
 
@@ -113,10 +112,6 @@ async function registerPlugins() {
   await plugins.register(CustomToolbarPlugin);
 
   await plugins.register(ThemeTogglePlugin);
-
-  await plugins.register(EChartsPlugin);
-
-  await plugins.register(MallComponentsPlugin);
 };
 
 (async function main() {

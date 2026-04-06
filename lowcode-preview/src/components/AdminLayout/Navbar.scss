@@ -1,0 +1,98 @@
+.navbar-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 220px;
+  height: 56px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.04);
+  transition: left 0.28s ease;
+
+  &.collapsed {
+    left: 64px;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    overflow: hidden;
+
+    .hamburger-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-size: 18px;
+      color: #606266;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #f5f7fa;
+        color: #409eff;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f5f7fa;
+      }
+
+      .user-avatar {
+        background-color: #409eff !important;
+        flex-shrink: 0;
+      }
+
+      .username {
+        span {
+          font-size: 14px;
+          color: #303133;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    left: 0 !important;
+    padding: 0 12px;
+
+    .navbar-right .username {
+      display: none;
+    }
+  }
+}
