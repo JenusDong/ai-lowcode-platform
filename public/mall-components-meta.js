@@ -2473,7 +2473,7 @@ var __META_RAW__ = (() => {
   // src/meta/tabPaneMeta.ts
   var TabPaneMeta = {
     componentName: "TabPane",
-    title: "\u6807\u7B7E\u9875\u9762\u677F",
+    title: "\u9009\u9879\u5361\u9762\u677F",
     docUrl: "https://github.com/alibaba/lowcode-engine",
     screenshot: "",
     npm: {
@@ -2486,13 +2486,14 @@ var __META_RAW__ = (() => {
       {
         name: "tab",
         propType: "string",
-        description: "\u6807\u7B7E\u9875\u6807\u9898",
-        defaultValue: "\u6807\u7B7E\u9875"
+        description: "\u9009\u9879\u5361\u6807\u9898",
+        defaultValue: "\u65B0\u9009\u9879\u5361"
       },
       {
         name: "tabKey",
         propType: "string",
-        description: "\u6807\u7B7E\u9875\u552F\u4E00\u6807\u8BC6"
+        description: "\u9009\u9879\u5361\u552F\u4E00\u6807\u8BC6",
+        defaultValue: "tab1"
       }
     ],
     configure: {
@@ -2503,40 +2504,37 @@ var __META_RAW__ = (() => {
       },
       props: [
         {
-          name: "tab",
-          title: "\u6807\u7B7E\u6807\u9898",
-          setter: "InputSetter",
-          extraProps: { display: "block" }
-        },
-        {
-          name: "tabKey",
-          title: "\u6807\u7B7E\u6807\u8BC6",
-          setter: "InputSetter",
-          extraProps: { display: "block" }
+          type: "group",
+          title: "\u57FA\u7840\u914D\u7F6E",
+          display: "accordion",
+          items: [
+            {
+              name: "tab",
+              title: "\u9009\u9879\u5361\u6807\u9898",
+              setter: "InputSetter",
+              extraProps: { display: "block", placeholder: "\u4F8B\u5982\uFF1A\u5546\u54C1\u5217\u8868" }
+            },
+            {
+              name: "tabKey",
+              title: "\u9009\u9879\u5361\u6807\u8BC6",
+              setter: "InputSetter",
+              extraProps: { display: "block", placeholder: "\u4F8B\u5982\uFF1Aproduct" }
+            }
+          ]
         }
       ],
       component: {
         isContainer: true,
         nestingRule: {
           parentWhitelist: ["AdminLayout"]
-        }
+        },
+        disableBehaviors: ["remove"]
       }
     },
-    icon: "https://img.alicdn.com/tfs/TB1p9Nqy.T1gK0jSZFrXXcNCXXa-200-200.png",
-    category: "\u7535\u5546\u4E1A\u52A1\u7EC4\u4EF6",
+    icon: "",
+    category: "\u9690\u85CF\u7EC4\u4EF6",
     group: "\u5E03\u5C40\u5BB9\u5668",
-    snippets: [
-      {
-        title: "\u6807\u7B7E\u9875\u9762\u677F",
-        schema: {
-          componentName: "TabPane",
-          props: {
-            tab: "\u65B0\u6807\u7B7E\u9875",
-            tabKey: "new-tab"
-          }
-        }
-      }
-    ]
+    snippets: []
   };
   var tabPaneMeta_default = TabPaneMeta;
 

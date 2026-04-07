@@ -57,23 +57,13 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
       nestingRule: {
         parentWhitelist: ['AdminLayout'],
       },
+      disableBehaviors: ['remove'],
     },
   },
-  icon: 'https://img.alicdn.com/tfs/TB1p9Nqy.T1gK0jSZFrXXcNCXXa-200-200.png',
-  category: '电商业务组件',
+  icon: '',
+  category: '隐藏组件',
   group: '布局容器',
-  snippets: [
-    {
-      title: '选项卡面板',
-      schema: {
-        componentName: 'TabPane',
-        props: {
-          tab: '新选项卡',
-          tabKey: 'tab1',
-        },
-      },
-    },
-  ],
+  snippets: [],
 }
 
 export default TabPaneMeta

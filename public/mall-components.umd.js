@@ -1,6 +1,2820 @@
-var MallComponents=(()=>{var br=Object.create;var Ze=Object.defineProperty;var fr=Object.getOwnPropertyDescriptor;var hr=Object.getOwnPropertyNames;var yr=Object.getPrototypeOf,vr=Object.prototype.hasOwnProperty;var ht=(m,t)=>()=>(t||m((t={exports:{}}).exports,t),t.exports),xr=(m,t)=>{for(var s in t)Ze(m,s,{get:t[s],enumerable:!0})},Bt=(m,t,s,u)=>{if(t&&typeof t=="object"||typeof t=="function")for(let x of hr(t))!vr.call(m,x)&&x!==s&&Ze(m,x,{get:()=>t[x],enumerable:!(u=fr(t,x))||u.enumerable});return m};var _=(m,t,s)=>(s=m!=null?br(yr(m)):{},Bt(t||!m||!m.__esModule?Ze(s,"default",{value:m,enumerable:!0}):s,m)),Cr=m=>Bt(Ze({},"__esModule",{value:!0}),m);var ke=ht((qr,zt)=>{zt.exports=Object.assign(window.React,{jsx:window.React.createElement,jsxs:window.React.createElement,Fragment:window.React.Fragment})});var Ae=ht((Gr,_t)=>{_t.exports=window.antd});var ze=ht((Jr,Yt)=>{Yt.exports=window.icons});var $r={};xr($r,{AdminLayout:()=>pt,CouponCard:()=>at,OrderForm:()=>nt,OrderList:()=>ot,ProductForm:()=>Ct,ProductList:()=>xt,PromotionCard:()=>it,RoleCard:()=>lt,TabPane:()=>gt,UserCard:()=>st,default:()=>jr});var L=_(ke()),de=_(Ae()),Ue=_(ze());var _e=class{static create(t){if(!t)return console.warn("[DataSourceAdapterFactory] config is undefined, using mock adapter"),new We({type:"mock",mockData:{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}});if(!t.type)return console.warn("[DataSourceAdapterFactory] config.type is undefined, using mock adapter"),new We({type:"mock",mockData:t.mockData||{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}});switch(t.type){case"rest":return new yt(t);case"mock":return new We(t);case"variable":return new vt(t);default:return console.warn(`[DataSourceAdapterFactory] Unsupported data source type: ${t.type}, using mock adapter`),new We({type:"mock",mockData:{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}})}}},yt=class{constructor(t){this.config=t}async fetch(t){let s=this.buildUrl(t),u=await fetch(s,{method:this.config.method||"GET",headers:{"Content-Type":"application/json",...this.config.headers},body:this.config.method!=="GET"?JSON.stringify(t):void 0});if(!u.ok)throw new Error(`HTTP error! status: ${u.status}`);let x=await u.json();if(this.config.transform)try{x=new Function("data",this.config.transform)(x)}catch(M){console.error("Transform function error:",M)}return x}async submit(t){return(await fetch(this.config.api,{method:"POST",headers:{"Content-Type":"application/json",...this.config.headers},body:JSON.stringify(t)})).json()}async delete(t){return(await fetch(`${this.config.api}/${t}`,{method:"DELETE",headers:this.config.headers})).json()}async update(t,s){return(await fetch(`${this.config.api}/${t}`,{method:"PUT",headers:{"Content-Type":"application/json",...this.config.headers},body:JSON.stringify(s)})).json()}buildUrl(t){if(!t||this.config.method!=="GET")return this.config.api;let s=new URL(this.config.api,window.location.origin);return Object.keys(t).forEach(u=>{t[u]!==void 0&&t[u]!==null&&t[u]!==""&&s.searchParams.append(u,t[u])}),s.toString()}},We=class{constructor(t){this.config=t}async fetch(t){console.log("[MockDataAdapter] fetch \u88AB\u8C03\u7528\uFF0Cconfig:",this.config,"params:",t),await new Promise(u=>setTimeout(u,300));let s=this.config.mockData;if(console.log("[MockDataAdapter] \u539F\u59CB mockData:",s,"\u7C7B\u578B:",typeof s),!s||s==="")console.log("[MockDataAdapter] mockData \u4E3A\u7A7A\uFF0C\u4F7F\u7528\u9ED8\u8BA4\u6570\u636E"),s={code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,name:"\u65F6\u5C1A\u8FD0\u52A8\u978B",productSn:"PRODUCT001",price:269,stock:100,sale:120,brandName:"\u65F6\u5C1A\u8FD0\u52A8",productCategoryName:"\u978B\u5B50",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:2,name:"\u4F11\u95F2T\u6064",productSn:"PRODUCT002",price:99,stock:200,sale:350,brandName:"\u4F11\u95F2\u670D\u9970",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:0,verifyStatus:1},{id:3,name:"\u53CC\u80A9\u80CC\u5305",productSn:"PRODUCT003",price:189,stock:80,sale:80,brandName:"\u65C5\u884C\u7BB1\u5305",productCategoryName:"\u914D\u9970",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:1,verifyStatus:1},{id:4,name:"\u8FD0\u52A8\u624B\u8868",productSn:"PRODUCT004",price:499,stock:50,sale:60,brandName:"\u667A\u80FD\u6570\u7801",productCategoryName:"\u6570\u7801",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:5,name:"\u725B\u4ED4\u88E4",productSn:"PRODUCT005",price:199,stock:150,sale:280,brandName:"\u65F6\u5C1A\u725B\u4ED4",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:0,verifyStatus:1}]}};else try{typeof s=="string"&&(s=JSON.parse(s)),console.log("[MockDataAdapter] JSON \u89E3\u6790\u540E\u7684\u6570\u636E:",s)}catch(u){console.error("[MockDataAdapter] JSON \u89E3\u6790\u5931\u8D25:",u),s={code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}}if(this.config.transform)try{s=new Function("data",this.config.transform)(s)}catch(u){console.error("Transform function error:",u)}if(console.log("[MockDataAdapter] \u6700\u7EC8\u8FD4\u56DE\u6570\u636E:",s),t?.pageNum&&t?.pageSize&&s?.data?.list){let u=(t.pageNum-1)*t.pageSize,x=u+t.pageSize;return{...s,data:{...s.data,list:s.data.list.slice(u,x)}}}return s}async submit(t){return await new Promise(s=>setTimeout(s,300)),{code:200,message:"success",data:t}}async delete(t){return await new Promise(s=>setTimeout(s,300)),{code:200,message:"success"}}async update(t,s){return await new Promise(u=>setTimeout(u,300)),{code:200,message:"success",data:s}}},vt=class{constructor(t){this.config=t}async fetch(t){if(console.log("[VariableAdapter] fetch \u88AB\u8C03\u7528\uFF0Cconfig:",{variableName:this.config.variableName,dataSource:this.config.dataSource}),this.config.dataSource!==void 0&&this.config.dataSource!==null){console.log("[VariableAdapter] \u4F7F\u7528 dataSource:",this.config.dataSource);let x=this.config.dataSource;if(typeof x=="string")try{x=JSON.parse(x)}catch(M){console.error("[VariableAdapter] dataSource JSON \u89E3\u6790\u5931\u8D25:",M)}return x&&typeof x=="object"?x.code===200&&x.data?x:x.list||Array.isArray(x)?{code:200,message:"success",data:{pageNum:1,pageSize:10,total:Array.isArray(x)?x.length:x.total||0,list:Array.isArray(x)?x:x.list||[]}}:{code:200,message:"success",data:x}:{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}}let s=this.config.variableName;if(!s)return console.warn("[VariableAdapter] variableName \u548C dataSource \u90FD\u4E3A\u7A7A\uFF0C\u8FD4\u56DE\u7A7A\u6570\u636E"),{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}};let u=window[s];return console.log("[VariableAdapter] \u4ECE window \u83B7\u53D6\u7684\u503C:",u),u==null?(console.warn("[VariableAdapter] \u53D8\u91CF\u4E0D\u5B58\u5728\uFF0C\u8FD4\u56DE\u7A7A\u6570\u636E"),{code:200,message:"success",data:{pageNum:1,pageSize:10,total:0,list:[]}}):{code:200,message:"success",data:u}}async submit(t){let s=this.config.variableName;if(!s)throw new Error("Variable name is required for variable adapter");return window[s]=t,{code:200,message:"success",data:t}}async delete(t){return{code:200,message:"success"}}async update(t,s){return this.submit(s)}};var Sr=({dataSourceType:m="mock",api:t,method:s="GET",mockData:u,variableName:x,dataSource:M,showFilter:$=!0,showAction:X=!0,showSelection:Z=!0,showOperation:ne=!0,showStatus:R=!0,showPagination:T=!0,filterFields:z=[],actionButtons:ae=[],columns:me,batchOperations:ie=[],onRowClick:V,onSearch:J,onPageChange:D,onActionClick:pe,onBatchOperation:d,style:j,className:W})=>{let[K,ge]=L.default.useState(!1),[P,se]=L.default.useState([]),[ee,O]=L.default.useState(0),[Q,q]=L.default.useState(1),[te,be]=L.default.useState(10),[ue,xe]=L.default.useState(""),[we,Oe]=L.default.useState([]),[ce,h]=L.default.useState([]),[F,A]=L.default.useState(),k=JSON.stringify({code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,name:"\u65F6\u5C1A\u8FD0\u52A8\u978B",productSn:"PRODUCT001",price:269,stock:100,sale:120,brandName:"\u65F6\u5C1A\u8FD0\u52A8",productCategoryName:"\u978B\u5B50",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:2,name:"\u4F11\u95F2T\u6064",productSn:"PRODUCT002",price:99,stock:200,sale:350,brandName:"\u4F11\u95F2\u670D\u9970",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:1,verifyStatus:1},{id:3,name:"\u53CC\u80A9\u80CC\u5305",productSn:"PRODUCT003",price:189,stock:80,sale:80,brandName:"\u65C5\u884C\u7BB1\u5305",productCategoryName:"\u914D\u9970",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:0,verifyStatus:1},{id:4,name:"\u8FD0\u52A8\u624B\u8868",productSn:"PRODUCT004",price:499,stock:50,sale:60,brandName:"\u667A\u80FD\u6570\u7801",productCategoryName:"\u6570\u7801",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:1,recommandStatus:1,verifyStatus:1},{id:5,name:"\u725B\u4ED4\u88E4",productSn:"PRODUCT005",price:199,stock:150,sale:280,brandName:"\u65F6\u5C1A\u725B\u4ED4",productCategoryName:"\u8863\u670D",pic:"https://img.yzcdn.cn/vant/cat.jpeg",publishStatus:1,newStatus:0,recommandStatus:0,verifyStatus:1}]}}),g=(0,L.useMemo)(()=>{let B=u;return B||(B=k),console.log("[ProductList] dataSourceConfig \u91CD\u65B0\u8BA1\u7B97:",{dataSourceType:m,mockData:typeof u=="string"?u.substring(0,100)+"...":u,variableName:x,dataSource:typeof M=="object"?"object":M}),{type:m,api:t||"",method:s,mockData:B,variableName:x||"",dataSource:M}},[m,t,s,u,x,M]);console.log("[ProductList] \u7EC4\u4EF6\u6E32\u67D3\uFF0Cprops:",{dataSourceType:m,api:t,method:s,mockData:typeof u=="string"?u.substring(0,100)+"...":u,variableName:x,dataSource:typeof M=="object"?"object":M,showFilter:$,showAction:X,showSelection:Z});let U=(0,L.useMemo)(()=>(console.log("[ProductList] adapter \u91CD\u65B0\u521B\u5EFA, dataSourceType:",m),_e.create(g)),[g]),he=(0,L.useCallback)(async()=>{console.log("[ProductList] fetchData \u5F00\u59CB\uFF0C\u53C2\u6570:",{currentPage:Q,pageSize:te,searchText:ue}),ge(!0);try{let B={pageNum:Q,pageSize:te,keyword:ue||void 0};console.log("[ProductList] \u8C03\u7528 adapter.fetch\uFF0C\u53C2\u6570:",B);let fe=await U.fetch(B);console.log("[ProductList] adapter.fetch \u8FD4\u56DE\u7ED3\u679C:",fe),fe.code===200&&(se(fe.data.list),O(fe.data.total),console.log("[ProductList] \u6570\u636E\u66F4\u65B0\u6210\u529F\uFF0C\u603B\u6570:",fe.data.total))}catch(B){console.error("[ProductList] \u83B7\u53D6\u6570\u636E\u5931\u8D25:",B)}finally{ge(!1)}},[Q,te,ue,U]);(0,L.useEffect)(()=>{console.log("[ProductList] useEffect \u89E6\u53D1\uFF0C\u5F00\u59CB\u83B7\u53D6\u6570\u636E, dataSourceType:",m),he()},[he,m]);let ye=()=>{q(1),he(),J?.(ue)},Ne=(B,fe)=>{q(B),be(fe),D?.(B,fe)},b=()=>{F&&ce.length>0&&d?.(F,ce)},l=[{title:"\u5546\u54C1\u56FE\u7247",dataIndex:"pic",key:"pic",width:100,render:B=>L.default.createElement("img",{src:B,alt:"\u5546\u54C1\u56FE\u7247",style:{width:60,height:60,objectFit:"cover"}})},{title:"\u5546\u54C1\u540D\u79F0",dataIndex:"name",key:"name",width:200},{title:"\u5546\u54C1\u7F16\u53F7",dataIndex:"productSn",key:"productSn",width:150},{title:"\u4EF7\u683C",dataIndex:"price",key:"price",width:100,render:B=>`\xA5${B.toFixed(2)}`},{title:"\u5E93\u5B58",dataIndex:"stock",key:"stock",width:80},{title:"\u9500\u91CF",dataIndex:"sale",key:"sale",width:80},{title:"\u54C1\u724C",dataIndex:"brandName",key:"brandName",width:100},{title:"\u5206\u7C7B",dataIndex:"productCategoryName",key:"productCategoryName",width:100},...R?[{title:"\u72B6\u6001",dataIndex:"publishStatus",key:"publishStatus",width:100,render:B=>L.default.createElement(de.Switch,{checked:B===1,checkedChildren:"\u4E0A\u67B6",unCheckedChildren:"\u4E0B\u67B6"})}]:[],...ne?[{title:"\u64CD\u4F5C",key:"operation",width:150,render:(B,fe)=>L.default.createElement(de.Space,{size:"small"},L.default.createElement(de.Button,{type:"link",size:"small",onClick:()=>V?.(fe)},"\u67E5\u770B"),L.default.createElement(de.Button,{type:"link",size:"small"},"\u7F16\u8F91"),L.default.createElement(de.Button,{type:"link",size:"small",danger:!0},"\u5220\u9664"))}]:[]],w=Z?{selectedRowKeys:we,onChange:(B,fe)=>{Oe(B),h(fe)}}:void 0,ve=B=>{switch(B){case"plus":return L.default.createElement(Ue.PlusOutlined,null);case"download":return L.default.createElement(Ue.DownloadOutlined,null);case"upload":return L.default.createElement(Ue.UploadOutlined,null);default:return null}};return L.default.createElement("div",{className:`mall-product-list ${W||""}`,style:j},$&&L.default.createElement(de.Card,{className:"mall-product-list-filter",size:"small"},L.default.createElement(de.Space,null,L.default.createElement(de.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0\u6216\u7F16\u53F7",prefix:L.default.createElement(Ue.SearchOutlined,null),value:ue,onChange:B=>xe(B.target.value),onPressEnter:ye,style:{width:300}}),L.default.createElement(de.Button,{type:"primary",icon:L.default.createElement(Ue.SearchOutlined,null),onClick:ye},"\u641C\u7D22"),L.default.createElement(de.Button,{icon:L.default.createElement(Ue.ReloadOutlined,null),onClick:()=>he()},"\u5237\u65B0"))),X&&L.default.createElement(de.Card,{className:"mall-product-list-action",size:"small"},L.default.createElement(de.Space,null,ae.map((B,fe)=>L.default.createElement(de.Button,{key:fe,type:B.type||"default",icon:ve(B.icon),onClick:()=>pe?.(B.onClick||"")},B.text)),Z&&ie.length>0&&L.default.createElement(L.default.Fragment,null,L.default.createElement(de.Select,{placeholder:"\u6279\u91CF\u64CD\u4F5C",value:F,onChange:A,style:{width:150}},ie.map((B,fe)=>L.default.createElement(de.Select.Option,{key:fe,value:B.value},B.text))),L.default.createElement(de.Button,{onClick:b},"\u6267\u884C")))),L.default.createElement("div",{className:"mall-product-list-table"},L.default.createElement(de.Table,{rowKey:"id",columns:me||l,dataSource:P,loading:K,rowSelection:w,pagination:!1,scroll:{x:1200}})),T&&L.default.createElement("div",{className:"pagination-wrapper"},L.default.createElement(de.Pagination,{current:Q,pageSize:te,total:ee,showSizeChanger:!0,showQuickJumper:!0,showTotal:B=>`\u5171 ${B} \u6761`,onChange:Ne})))},Vt=Sr;var xt=Vt;var i=_(ke()),o=_(Ae());var wr=({initialValues:m,mode:t="create",showBasicInfo:s=!0,showPriceInfo:u=!0,showStockInfo:x=!0,showStatusInfo:M=!0,showDescription:$=!0,onSubmit:X,onCancel:Z,style:ne,className:R})=>{let[T]=o.Form.useForm(),[z,ae]=(0,i.useState)("basic");(0,i.useEffect)(()=>{if(m){let P=m;if(typeof m=="string")try{P=JSON.parse(m)}catch(se){console.error("Failed to parse initialValues:",se),P={}}T.setFieldsValue(P)}},[m,T]);let me=async()=>{try{let P=await T.validateFields();X?.(P),o.message.success("\u63D0\u4EA4\u6210\u529F")}catch(P){console.error("Validation failed:",P),o.message.error("\u8BF7\u68C0\u67E5\u8868\u5355\u586B\u5199\u662F\u5426\u6B63\u786E")}},ie=()=>{T.resetFields(),Z?.()},V=()=>{T.resetFields()},J=()=>{if(typeof m=="string")try{return JSON.parse(m)}catch{return{}}return m||{}},D=t==="view",pe=[i.default.createElement(o.Row,{gutter:16,key:"basic-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"name",label:"\u5546\u54C1\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0"}]},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u540D\u79F0",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"productSn",label:"\u5546\u54C1\u8D27\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u8D27\u53F7"}]},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u8D27\u53F7",disabled:D})))),i.default.createElement(o.Row,{gutter:16,key:"basic-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"brandName",label:"\u54C1\u724C\u540D\u79F0"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u54C1\u724C\u540D\u79F0",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"productCategoryName",label:"\u5546\u54C1\u5206\u7C7B"},i.default.createElement(o.Select,{placeholder:"\u8BF7\u9009\u62E9\u5546\u54C1\u5206\u7C7B",disabled:D},i.default.createElement(o.Select.Option,{value:"\u624B\u673A"},"\u624B\u673A"),i.default.createElement(o.Select.Option,{value:"\u7B14\u8BB0\u672C"},"\u7B14\u8BB0\u672C"),i.default.createElement(o.Select.Option,{value:"\u5E73\u677F"},"\u5E73\u677F"),i.default.createElement(o.Select.Option,{value:"\u8033\u673A"},"\u8033\u673A"),i.default.createElement(o.Select.Option,{value:"\u624B\u8868"},"\u624B\u8868"),i.default.createElement(o.Select.Option,{value:"\u8863\u670D"},"\u8863\u670D"),i.default.createElement(o.Select.Option,{value:"\u978B\u5B50"},"\u978B\u5B50"),i.default.createElement(o.Select.Option,{value:"\u914D\u9970"},"\u914D\u9970"),i.default.createElement(o.Select.Option,{value:"\u6570\u7801"},"\u6570\u7801"))))),i.default.createElement(o.Form.Item,{key:"pic",name:"pic",label:"\u5546\u54C1\u56FE\u7247"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u56FE\u7247 URL",disabled:D})),i.default.createElement(o.Row,{gutter:16,key:"basic-row-3"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"subTitle",label:"\u5546\u54C1\u526F\u6807\u9898"},i.default.createElement(o.Input,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u526F\u6807\u9898",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"keywords",label:"\u5546\u54C1\u5173\u952E\u8BCD"},i.default.createElement(o.Input,{placeholder:"\u591A\u4E2A\u5173\u952E\u8BCD\u7528\u9017\u53F7\u5206\u9694",disabled:D}))))],d=[i.default.createElement(o.Row,{gutter:16,key:"price-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"price",label:"\u5546\u54C1\u4EF7\u683C",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u4EF7\u683C"}]},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u4EF7\u683C",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"originalPrice",label:"\u539F\u4EF7"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u539F\u4EF7",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:D})))),i.default.createElement(o.Row,{gutter:16,key:"price-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"promotionPrice",label:"\u4FC3\u9500\u4EF7"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u4FC3\u9500\u4EF7",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"unit",label:"\u5546\u54C1\u5355\u4F4D"},i.default.createElement(o.Select,{placeholder:"\u8BF7\u9009\u62E9\u5546\u54C1\u5355\u4F4D",disabled:D},i.default.createElement(o.Select.Option,{value:"\u4EF6"},"\u4EF6"),i.default.createElement(o.Select.Option,{value:"\u53F0"},"\u53F0"),i.default.createElement(o.Select.Option,{value:"\u90E8"},"\u90E8"),i.default.createElement(o.Select.Option,{value:"\u5757"},"\u5757"),i.default.createElement(o.Select.Option,{value:"\u526F"},"\u526F")))))],j=[i.default.createElement(o.Row,{gutter:16,key:"stock-row-1"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"stock",label:"\u5546\u54C1\u5E93\u5B58",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5546\u54C1\u5E93\u5B58"}]},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u5E93\u5B58",style:{width:"100%"},min:0,disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"lowStock",label:"\u5E93\u5B58\u9884\u8B66\u503C"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5E93\u5B58\u9884\u8B66\u503C",style:{width:"100%"},min:0,disabled:D})))),i.default.createElement(o.Row,{gutter:16,key:"stock-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"weight",label:"\u5546\u54C1\u91CD\u91CF(kg)"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u91CD\u91CF",style:{width:"100%"},min:0,precision:2,disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"sort",label:"\u6392\u5E8F"},i.default.createElement(o.InputNumber,{placeholder:"\u8BF7\u8F93\u5165\u6392\u5E8F",style:{width:"100%"},min:0,disabled:D}))))],W=[i.default.createElement(o.Row,{gutter:16,key:"status-row-1"},i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"publishStatus",label:"\u4E0A\u67B6\u72B6\u6001",valuePropName:"checked",getValueFromEvent:P=>P?1:0,getValueProps:P=>({checked:P===1})},i.default.createElement(o.Switch,{checkedChildren:"\u4E0A\u67B6",unCheckedChildren:"\u4E0B\u67B6",disabled:D}))),i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"newStatus",label:"\u65B0\u54C1\u72B6\u6001",valuePropName:"checked",getValueFromEvent:P=>P?1:0,getValueProps:P=>({checked:P===1})},i.default.createElement(o.Switch,{checkedChildren:"\u662F",unCheckedChildren:"\u5426",disabled:D}))),i.default.createElement(o.Col,{span:8},i.default.createElement(o.Form.Item,{name:"recommandStatus",label:"\u63A8\u8350\u72B6\u6001",valuePropName:"checked",getValueFromEvent:P=>P?1:0,getValueProps:P=>({checked:P===1})},i.default.createElement(o.Switch,{checkedChildren:"\u662F",unCheckedChildren:"\u5426",disabled:D})))),i.default.createElement(o.Row,{gutter:16,key:"status-row-2"},i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"verifyStatus",label:"\u5BA1\u6838\u72B6\u6001",valuePropName:"checked",getValueFromEvent:P=>P?1:0,getValueProps:P=>({checked:P===1})},i.default.createElement(o.Switch,{checkedChildren:"\u5DF2\u5BA1\u6838",unCheckedChildren:"\u672A\u5BA1\u6838",disabled:D}))),i.default.createElement(o.Col,{span:12},i.default.createElement(o.Form.Item,{name:"deleteStatus",label:"\u5220\u9664\u72B6\u6001",valuePropName:"checked",getValueFromEvent:P=>P?1:0,getValueProps:P=>({checked:P===1})},i.default.createElement(o.Switch,{checkedChildren:"\u5DF2\u5220\u9664",unCheckedChildren:"\u6B63\u5E38",disabled:D}))))],K=[i.default.createElement(o.Form.Item,{key:"description",name:"description",label:"\u5546\u54C1\u63CF\u8FF0"},i.default.createElement(o.Input.TextArea,{rows:4,placeholder:"\u8BF7\u8F93\u5165\u5546\u54C1\u63CF\u8FF0",disabled:D})),i.default.createElement(o.Form.Item,{key:"note",name:"note",label:"\u5907\u6CE8"},i.default.createElement(o.Input.TextArea,{rows:2,placeholder:"\u8BF7\u8F93\u5165\u5907\u6CE8",disabled:D}))],ge=[{key:"basic",label:"\u57FA\u672C\u4FE1\u606F",children:s?pe:null},{key:"price",label:"\u4EF7\u683C\u4FE1\u606F",children:u?d:null},{key:"stock",label:"\u5E93\u5B58\u4FE1\u606F",children:x?j:null},{key:"status",label:"\u72B6\u6001\u4FE1\u606F",children:M?W:null},{key:"description",label:"\u63CF\u8FF0\u4FE1\u606F",children:$?K:null}];return i.default.createElement("div",{className:`mall-product-form ${R||""}`,style:ne},i.default.createElement(o.Card,null,i.default.createElement(o.Form,{form:T,layout:"vertical",initialValues:J(),disabled:D},i.default.createElement(o.Tabs,{activeKey:z,onChange:ae,items:ge}),i.default.createElement(o.Divider,null),i.default.createElement(o.Form.Item,null,i.default.createElement(o.Space,null,!D&&i.default.createElement(i.default.Fragment,null,i.default.createElement(o.Button,{type:"primary",onClick:me},t==="create"?"\u521B\u5EFA":"\u4FDD\u5B58"),i.default.createElement(o.Button,{onClick:V},"\u91CD\u7F6E")),i.default.createElement(o.Button,{onClick:ie},D?"\u5173\u95ED":"\u53D6\u6D88"))))))},jt=wr;var Ct=jt;var e=_(ke()),a=_(Ae()),Te=_(ze());var re={PENDING_PAYMENT:0,PENDING_DELIVERY:1,DELIVERED:2,COMPLETED:3,CLOSED:4,INVALID:5},Le={UNPAID:0,ALIPAY:1,WECHAT:2},Ye={PC:0,APP:1},Ve={NORMAL:0,SECKILL:1},Re=[{label:"\u5F85\u4ED8\u6B3E",value:re.PENDING_PAYMENT},{label:"\u5F85\u53D1\u8D27",value:re.PENDING_DELIVERY},{label:"\u5DF2\u53D1\u8D27",value:re.DELIVERED},{label:"\u5DF2\u5B8C\u6210",value:re.COMPLETED},{label:"\u5DF2\u5173\u95ED",value:re.CLOSED}],$t=[{label:"\u672A\u652F\u4ED8",value:Le.UNPAID},{label:"\u652F\u4ED8\u5B9D",value:Le.ALIPAY},{label:"\u5FAE\u4FE1",value:Le.WECHAT}],et=[{label:"PC\u8BA2\u5355",value:Ye.PC},{label:"APP\u8BA2\u5355",value:Ye.APP}],tt=[{label:"\u6B63\u5E38\u8BA2\u5355",value:Ve.NORMAL},{label:"\u79D2\u6740\u8BA2\u5355",value:Ve.SECKILL}];var{RangePicker:kr}=a.DatePicker,rt={code:200,message:"success",data:{pageNum:1,pageSize:10,total:50,list:[{id:1,orderSn:"202401010001",memberUsername:"user001",totalAmount:599,payAmount:569,freightAmount:0,discountAmount:30,payType:Le.ALIPAY,sourceType:Ye.PC,status:re.PENDING_DELIVERY,orderType:Ve.NORMAL,receiverName:"\u5F20\u4E09",receiverPhone:"13800138000",receiverProvince:"\u5317\u4EAC\u5E02",receiverCity:"\u5317\u4EAC\u5E02",receiverRegion:"\u671D\u9633\u533A",receiverDetailAddress:"\u67D0\u67D0\u8857\u9053\u67D0\u67D0\u5C0F\u533A1\u53F7\u697C",createTime:"2024-01-01 10:00:00",paymentTime:"2024-01-01 10:05:00",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:"\u6EE1\u51CF\u4F18\u60E0"},{id:2,orderSn:"202401010002",memberUsername:"user002",totalAmount:1299,payAmount:1299,freightAmount:0,discountAmount:0,payType:Le.WECHAT,sourceType:Ye.APP,status:re.DELIVERED,orderType:Ve.NORMAL,receiverName:"\u674E\u56DB",receiverPhone:"13900139000",receiverProvince:"\u4E0A\u6D77\u5E02",receiverCity:"\u4E0A\u6D77\u5E02",receiverRegion:"\u6D66\u4E1C\u65B0\u533A",receiverDetailAddress:"\u67D0\u67D0\u8DEF\u67D0\u67D0\u53F7",createTime:"2024-01-01 11:00:00",paymentTime:"2024-01-01 11:10:00",deliveryTime:"2024-01-02 09:00:00",receiveTime:"",commentTime:"",promotionInfo:""},{id:3,orderSn:"202401010003",memberUsername:"user003",totalAmount:299,payAmount:299,freightAmount:10,discountAmount:0,payType:Le.ALIPAY,sourceType:Ye.PC,status:re.COMPLETED,orderType:Ve.NORMAL,receiverName:"\u738B\u4E94",receiverPhone:"13700137000",receiverProvince:"\u5E7F\u4E1C\u7701",receiverCity:"\u6DF1\u5733\u5E02",receiverRegion:"\u5357\u5C71\u533A",receiverDetailAddress:"\u67D0\u67D0\u5927\u53A6A\u5EA7",createTime:"2024-01-01 12:00:00",paymentTime:"2024-01-01 12:05:00",deliveryTime:"2024-01-02 10:00:00",receiveTime:"2024-01-05 15:00:00",commentTime:"",promotionInfo:""},{id:4,orderSn:"202401010004",memberUsername:"user004",totalAmount:899,payAmount:0,freightAmount:0,discountAmount:0,payType:Le.UNPAID,sourceType:Ye.APP,status:re.PENDING_PAYMENT,orderType:Ve.SECKILL,receiverName:"\u8D75\u516D",receiverPhone:"13600136000",receiverProvince:"\u6D59\u6C5F\u7701",receiverCity:"\u676D\u5DDE\u5E02",receiverRegion:"\u897F\u6E56\u533A",receiverDetailAddress:"\u67D0\u67D0\u82B1\u56ED\u5C0F\u533A",createTime:"2024-01-01 13:00:00",paymentTime:"",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:"\u79D2\u6740\u6D3B\u52A8"},{id:5,orderSn:"202401010005",memberUsername:"user005",totalAmount:4599,payAmount:4599,freightAmount:0,discountAmount:0,payType:Le.WECHAT,sourceType:Ye.PC,status:re.CLOSED,orderType:Ve.NORMAL,receiverName:"\u5B59\u4E03",receiverPhone:"13500135000",receiverProvince:"\u6C5F\u82CF\u7701",receiverCity:"\u5357\u4EAC\u5E02",receiverRegion:"\u9F13\u697C\u533A",receiverDetailAddress:"\u67D0\u67D0\u5E7F\u573AB\u5EA7",createTime:"2024-01-01 14:00:00",paymentTime:"2024-01-01 14:10:00",deliveryTime:"",receiveTime:"",commentTime:"",promotionInfo:""}]}},Tr=({dataSourceType:m="mock",api:t,method:s="GET",mockData:u,variableName:x,dataSource:M,showFilter:$=!0,showStatusFilter:X=!0,showSearch:Z=!0,showDatePicker:ne=!0,showActions:R=!0,showBatchOperations:T=!0,showExport:z=!0,showPagination:ae=!0,defaultPageSize:me=10,onRowClick:ie,onSearch:V,onPageChange:J,onActionClick:D,onBatchOperation:pe,style:d,className:j})=>{let[W,K]=(0,e.useState)(!1),[ge,P]=(0,e.useState)([]),[se,ee]=(0,e.useState)(0),[O,Q]=(0,e.useState)(1),[q,te]=(0,e.useState)(me),[be,ue]=(0,e.useState)(""),[xe,we]=(0,e.useState)([]),[Oe,ce]=(0,e.useState)([]),[h,F]=(0,e.useState)(),[A,p]=(0,e.useState)(),[k,g]=(0,e.useState)(),[U,he]=(0,e.useState)(),[ye,Ne]=(0,e.useState)(),[b,l]=(0,e.useState)(!1),[w,ve]=(0,e.useState)(),[B,fe]=(0,e.useState)(!1),[It,or]=(0,e.useState)(),[bt,Ot]=(0,e.useState)(""),[ft,Nt]=(0,e.useState)(""),Dt=(0,e.useMemo)(()=>({type:m,api:t,method:s,mockData:u?(()=>{try{return typeof u=="string"?JSON.parse(u):u}catch{return rt}})():rt,variableName:x,dataSource:M}),[m,t,s,u,x,M]),Et=(0,e.useMemo)(()=>_e.create(Dt),[Dt]);(0,e.useEffect)(()=>{$e()},[O,q,Et]);let $e=async()=>{K(!0);try{let C={pageNum:O,pageSize:q,orderSn:be||void 0,status:A,orderType:k,sourceType:U,createTime:ye?`${ye[0]?.format("YYYY-MM-DD")},${ye[1]?.format("YYYY-MM-DD")}`:void 0},le=await Et.fetch(C),Ee=[],Ke=0;le?.data?.list?(Ee=le.data.list,Ke=le.data.total||Ee.length):Array.isArray(le?.data)?(Ee=le.data,Ke=Ee.length):Array.isArray(le)&&(Ee=le,Ke=Ee.length),P(Ee),ee(Ke)}catch(C){console.error("Failed to fetch order list:",C),a.message.error("\u83B7\u53D6\u8BA2\u5355\u5217\u8868\u5931\u8D25"),P(rt.data.list),ee(rt.data.total)}finally{K(!1)}},At=()=>{Q(1),$e(),V?.({orderSn:be||void 0,status:A,orderType:k,sourceType:U,createTime:ye?`${ye[0]?.format("YYYY-MM-DD")},${ye[1]?.format("YYYY-MM-DD")}`:void 0})},nr=()=>{ue(""),p(void 0),g(void 0),he(void 0),Ne(void 0),Q(1),$e()},ar=()=>{a.message.success("\u5BFC\u51FA\u529F\u80FD\u5F00\u53D1\u4E2D...")},ir=()=>{$e()},sr=()=>{if(!h){a.message.warning("\u8BF7\u9009\u62E9\u6279\u91CF\u64CD\u4F5C\u7C7B\u578B");return}if(xe.length===0){a.message.warning("\u8BF7\u9009\u62E9\u8981\u64CD\u4F5C\u7684\u8BA2\u5355");return}pe?.(h,xe),a.message.success(`\u6279\u91CF${h}\u6210\u529F`),we([]),ce([]),F(void 0),$e()},Lt=C=>{ve(C),l(!0),D?.("view",C)},Ft=C=>{or(C),fe(!0),D?.("deliver",C)},lr=C=>{a.Modal.confirm({title:"\u786E\u8BA4\u5173\u95ED\u8BA2\u5355",content:`\u786E\u5B9A\u8981\u5173\u95ED\u8BA2\u5355 ${C.orderSn} \u5417\uFF1F`,onOk:()=>{D?.("close",C),a.message.success("\u8BA2\u5355\u5DF2\u5173\u95ED"),$e()}})},dr=C=>{a.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664\u8BA2\u5355",content:`\u786E\u5B9A\u8981\u5220\u9664\u8BA2\u5355 ${C.orderSn} \u5417\uFF1F`,onOk:()=>{D?.("delete",C),a.message.success("\u8BA2\u5355\u5DF2\u5220\u9664"),$e()}})},mr=()=>{if(!bt||!ft){a.message.warning("\u8BF7\u586B\u5199\u7269\u6D41\u516C\u53F8\u548C\u7269\u6D41\u5355\u53F7");return}let C={orderId:It.id,deliveryCompany:bt,deliverySn:ft};D?.("deliverSubmit",It),a.message.success("\u53D1\u8D27\u6210\u529F"),fe(!1),Ot(""),Nt(""),$e()},Ut=C=>{let le={[re.PENDING_PAYMENT]:{color:"orange",text:"\u5F85\u4ED8\u6B3E"},[re.PENDING_DELIVERY]:{color:"blue",text:"\u5F85\u53D1\u8D27"},[re.DELIVERED]:{color:"cyan",text:"\u5DF2\u53D1\u8D27"},[re.COMPLETED]:{color:"green",text:"\u5DF2\u5B8C\u6210"},[re.CLOSED]:{color:"default",text:"\u5DF2\u5173\u95ED"},[re.INVALID]:{color:"red",text:"\u65E0\u6548\u8BA2\u5355"}},{color:Ee,text:Ke}=le[C]||{color:"default",text:"\u672A\u77E5"};return e.default.createElement(a.Tag,{color:Ee},Ke)},Mt=C=>{let le={[Le.UNPAID]:{color:"default",text:"\u672A\u652F\u4ED8"},[Le.ALIPAY]:{color:"blue",text:"\u652F\u4ED8\u5B9D"},[Le.WECHAT]:{color:"green",text:"\u5FAE\u4FE1"}},{color:Ee,text:Ke}=le[C]||{color:"default",text:"\u672A\u77E5"};return e.default.createElement(a.Tag,{color:Ee},Ke)},ur=C=>C===Ye.APP?e.default.createElement(a.Tag,{color:"purple"},"APP"):e.default.createElement(a.Tag,{color:"geekblue"},"PC"),cr=C=>C===Ve.SECKILL?e.default.createElement(a.Tag,{color:"red"},"\u79D2\u6740"):e.default.createElement(a.Tag,null,"\u6B63\u5E38"),pr=[{title:"\u8BA2\u5355\u7F16\u53F7",dataIndex:"orderSn",key:"orderSn",width:180,fixed:"left",render:C=>e.default.createElement(a.Tooltip,{title:C},e.default.createElement("span",{className:"order-sn"},C))},{title:"\u7528\u6237\u8D26\u53F7",dataIndex:"memberUsername",key:"memberUsername",width:120},{title:"\u8BA2\u5355\u91D1\u989D",dataIndex:"totalAmount",key:"totalAmount",width:120,render:C=>e.default.createElement("span",{className:"order-amount"},"\xA5",C.toFixed(2))},{title:"\u5B9E\u4ED8\u91D1\u989D",dataIndex:"payAmount",key:"payAmount",width:120,render:C=>e.default.createElement("span",{className:"pay-amount"},"\xA5",C.toFixed(2))},{title:"\u652F\u4ED8\u65B9\u5F0F",dataIndex:"payType",key:"payType",width:100,render:C=>Mt(C)},{title:"\u8BA2\u5355\u6765\u6E90",dataIndex:"sourceType",key:"sourceType",width:100,render:C=>ur(C)},{title:"\u8BA2\u5355\u7C7B\u578B",dataIndex:"orderType",key:"orderType",width:100,render:C=>cr(C)},{title:"\u8BA2\u5355\u72B6\u6001",dataIndex:"status",key:"status",width:100,render:C=>Ut(C)},{title:"\u6536\u8D27\u4EBA",dataIndex:"receiverName",key:"receiverName",width:100},{title:"\u6536\u8D27\u7535\u8BDD",dataIndex:"receiverPhone",key:"receiverPhone",width:130},{title:"\u4E0B\u5355\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:180,sorter:!0},{title:"\u64CD\u4F5C",key:"action",width:200,fixed:"right",render:(C,le)=>{let Ee=e.default.createElement(a.Menu,null,e.default.createElement(a.Menu.Item,{key:"view",icon:e.default.createElement(Te.EyeOutlined,null),onClick:()=>Lt(le)},"\u67E5\u770B\u8BE6\u60C5"),le.status===re.PENDING_DELIVERY&&e.default.createElement(a.Menu.Item,{key:"deliver",icon:e.default.createElement(Te.CarOutlined,null),onClick:()=>Ft(le)},"\u53D1\u8D27"),le.status!==re.CLOSED&&e.default.createElement(a.Menu.Item,{key:"close",icon:e.default.createElement(Te.CloseCircleOutlined,null),onClick:()=>lr(le)},"\u5173\u95ED\u8BA2\u5355"),e.default.createElement(a.Menu.Divider,null),e.default.createElement(a.Menu.Item,{key:"delete",icon:e.default.createElement(Te.DeleteOutlined,null),danger:!0,onClick:()=>dr(le)},"\u5220\u9664\u8BA2\u5355"));return e.default.createElement(a.Space,{size:"small"},e.default.createElement(a.Button,{type:"link",size:"small",onClick:()=>Lt(le)},"\u8BE6\u60C5"),le.status===re.PENDING_DELIVERY&&e.default.createElement(a.Button,{type:"link",size:"small",onClick:()=>Ft(le)},"\u53D1\u8D27"),e.default.createElement(a.Dropdown,{overlay:Ee,trigger:["click"]},e.default.createElement(a.Button,{type:"link",size:"small",icon:e.default.createElement(Te.MoreOutlined,null)})))}}],gr={selectedRowKeys:xe,onChange:(C,le)=>{we(C),ce(le)}};return e.default.createElement("div",{className:`mall-order-list ${j||""}`,style:d},e.default.createElement(a.Card,null,$&&e.default.createElement("div",{className:"filter-section"},e.default.createElement(a.Row,{gutter:[16,16]},Z&&e.default.createElement(a.Col,{span:6},e.default.createElement(a.Input,{placeholder:"\u8BA2\u5355\u7F16\u53F7",value:be,onChange:C=>ue(C.target.value),onPressEnter:At,prefix:e.default.createElement(Te.SearchOutlined,null)})),X&&e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u72B6\u6001",value:A,onChange:p,style:{width:"100%"},allowClear:!0},Re.map(C=>e.default.createElement(a.Select.Option,{key:C.value,value:C.value},C.label)))),e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u7C7B\u578B",value:k,onChange:g,style:{width:"100%"},allowClear:!0},tt.map(C=>e.default.createElement(a.Select.Option,{key:C.value,value:C.value},C.label)))),e.default.createElement(a.Col,{span:4},e.default.createElement(a.Select,{placeholder:"\u8BA2\u5355\u6765\u6E90",value:U,onChange:he,style:{width:"100%"},allowClear:!0},et.map(C=>e.default.createElement(a.Select.Option,{key:C.value,value:C.value},C.label)))),ne&&e.default.createElement(a.Col,{span:6},e.default.createElement(kr,{value:ye,onChange:Ne,style:{width:"100%"}}))),e.default.createElement(a.Row,{gutter:[16,16],style:{marginTop:16}},e.default.createElement(a.Col,null,e.default.createElement(a.Space,null,e.default.createElement(a.Button,{type:"primary",onClick:At},"\u67E5\u8BE2"),e.default.createElement(a.Button,{onClick:nr},"\u91CD\u7F6E"))))),T&&e.default.createElement("div",{className:"batch-operation-section"},e.default.createElement(a.Space,null,e.default.createElement(a.Select,{placeholder:"\u6279\u91CF\u64CD\u4F5C",value:h,onChange:F,style:{width:150},allowClear:!0},e.default.createElement(a.Select.Option,{value:"deliver"},"\u6279\u91CF\u53D1\u8D27"),e.default.createElement(a.Select.Option,{value:"close"},"\u5173\u95ED\u8BA2\u5355"),e.default.createElement(a.Select.Option,{value:"delete"},"\u5220\u9664\u8BA2\u5355")),e.default.createElement(a.Button,{onClick:sr},"\u786E\u5B9A")),xe.length>0&&e.default.createElement("span",{className:"selected-info"},"\u5DF2\u9009\u62E9 ",e.default.createElement("strong",null,xe.length)," \u9879")),R&&e.default.createElement("div",{className:"action-section"},e.default.createElement(a.Space,null,e.default.createElement(a.Button,{icon:e.default.createElement(Te.ReloadOutlined,null),onClick:ir},"\u5237\u65B0"),z&&e.default.createElement(a.Button,{icon:e.default.createElement(Te.ExportOutlined,null),onClick:ar},"\u5BFC\u51FA"))),e.default.createElement(a.Table,{columns:pr,dataSource:ge,rowKey:"id",loading:W,pagination:ae?{current:O,pageSize:q,total:se,showSizeChanger:!0,showQuickJumper:!0,showTotal:C=>`\u5171 ${C} \u6761`,onChange:(C,le)=>{Q(C),te(le),J?.(C,le)}}:!1,rowSelection:gr,scroll:{x:1500},onRow:C=>({onClick:()=>ie?.(C)})})),e.default.createElement(a.Modal,{title:"\u8BA2\u5355\u8BE6\u60C5",visible:b,onCancel:()=>l(!1),footer:null,width:800},w&&e.default.createElement(a.Descriptions,{bordered:!0,column:2},e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u7F16\u53F7"},w.orderSn),e.default.createElement(a.Descriptions.Item,{label:"\u7528\u6237\u8D26\u53F7"},w.memberUsername),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u91D1\u989D"},"\xA5",w.totalAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u5B9E\u4ED8\u91D1\u989D"},"\xA5",w.payAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u8FD0\u8D39"},"\xA5",w.freightAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u4F18\u60E0\u91D1\u989D"},"\xA5",w.discountAmount.toFixed(2)),e.default.createElement(a.Descriptions.Item,{label:"\u652F\u4ED8\u65B9\u5F0F"},Mt(w.payType)),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u72B6\u6001"},Ut(w.status)),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u4EBA"},w.receiverName),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u7535\u8BDD"},w.receiverPhone),e.default.createElement(a.Descriptions.Item,{label:"\u6536\u8D27\u5730\u5740",span:2},w.receiverProvince,w.receiverCity,w.receiverRegion,w.receiverDetailAddress),e.default.createElement(a.Descriptions.Item,{label:"\u4E0B\u5355\u65F6\u95F4"},w.createTime),e.default.createElement(a.Descriptions.Item,{label:"\u652F\u4ED8\u65F6\u95F4"},w.paymentTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u53D1\u8D27\u65F6\u95F4"},w.deliveryTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u5B8C\u6210\u65F6\u95F4"},w.receiveTime||"-"),e.default.createElement(a.Descriptions.Item,{label:"\u8BA2\u5355\u5907\u6CE8",span:2},w.note||"-"))),e.default.createElement(a.Modal,{title:"\u8BA2\u5355\u53D1\u8D27",visible:B,onOk:mr,onCancel:()=>fe(!1)},e.default.createElement(a.Form,{layout:"vertical"},e.default.createElement(a.Form.Item,{label:"\u7269\u6D41\u516C\u53F8",required:!0},e.default.createElement(a.Select,{value:bt,onChange:Ot,placeholder:"\u8BF7\u9009\u62E9\u7269\u6D41\u516C\u53F8"},e.default.createElement(a.Select.Option,{value:"\u987A\u4E30\u901F\u8FD0"},"\u987A\u4E30\u901F\u8FD0"),e.default.createElement(a.Select.Option,{value:"\u5706\u901A\u5FEB\u9012"},"\u5706\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u4E2D\u901A\u5FEB\u9012"},"\u4E2D\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u97F5\u8FBE\u5FEB\u9012"},"\u97F5\u8FBE\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u7533\u901A\u5FEB\u9012"},"\u7533\u901A\u5FEB\u9012"),e.default.createElement(a.Select.Option,{value:"\u90AE\u653FEMS"},"\u90AE\u653FEMS"))),e.default.createElement(a.Form.Item,{label:"\u7269\u6D41\u5355\u53F7",required:!0},e.default.createElement(a.Input,{value:ft,onChange:C=>Nt(C.target.value),placeholder:"\u8BF7\u8F93\u5165\u7269\u6D41\u5355\u53F7"})))))},ot=Tr;var n=_(ke()),r=_(Ae());var{TextArea:Kt}=r.Input,Pr=({initialValues:m,mode:t="create",showBasicInfo:s=!0,showReceiverInfo:u=!0,showMoneyInfo:x=!0,showOrderItems:M=!0,showStatusInfo:$=!0,onSubmit:X,onCancel:Z,style:ne,className:R})=>{let[T]=r.Form.useForm(),[z,ae]=(0,n.useState)("basic"),[me,ie]=(0,n.useState)([]);(0,n.useEffect)(()=>{if(m){let O=m;if(typeof m=="string")try{O=JSON.parse(m)}catch(Q){console.error("Failed to parse initialValues:",Q),O={}}T.setFieldsValue(O),O.orderItemList&&ie(O.orderItemList)}},[m,T]);let V=async()=>{try{let O=await T.validateFields();X?.(O),r.message.success("\u63D0\u4EA4\u6210\u529F")}catch(O){console.error("Validation failed:",O),r.message.error("\u8BF7\u68C0\u67E5\u8868\u5355\u586B\u5199\u662F\u5426\u6B63\u786E")}},J=()=>{T.resetFields(),Z?.()},D=()=>{T.resetFields()},pe=()=>{if(typeof m=="string")try{return JSON.parse(m)}catch{return{}}return m||{}},d=t==="view",j=O=>{let Q={[re.PENDING_PAYMENT]:{color:"orange",text:"\u5F85\u4ED8\u6B3E"},[re.PENDING_DELIVERY]:{color:"blue",text:"\u5F85\u53D1\u8D27"},[re.DELIVERED]:{color:"cyan",text:"\u5DF2\u53D1\u8D27"},[re.COMPLETED]:{color:"green",text:"\u5DF2\u5B8C\u6210"},[re.CLOSED]:{color:"default",text:"\u5DF2\u5173\u95ED"},[re.INVALID]:{color:"red",text:"\u65E0\u6548\u8BA2\u5355"}},{color:q,text:te}=Q[O]||{color:"default",text:"\u672A\u77E5"};return n.default.createElement(r.Tag,{color:q},te)},W=[{title:"\u5546\u54C1\u56FE\u7247",dataIndex:"productPic",key:"productPic",width:80,render:O=>n.default.createElement("img",{src:O,alt:"\u5546\u54C1\u56FE\u7247",style:{width:50,height:50,objectFit:"cover"}})},{title:"\u5546\u54C1\u540D\u79F0",dataIndex:"productName",key:"productName",width:200},{title:"\u5546\u54C1\u8D27\u53F7",dataIndex:"productSn",key:"productSn",width:120},{title:"\u5546\u54C1\u54C1\u724C",dataIndex:"productBrand",key:"productBrand",width:100},{title:"\u9500\u552E\u4EF7\u683C",dataIndex:"productPrice",key:"productPrice",width:100,render:O=>`\xA5${O.toFixed(2)}`},{title:"\u8D2D\u4E70\u6570\u91CF",dataIndex:"productQuantity",key:"productQuantity",width:100},{title:"\u5C0F\u8BA1",key:"subtotal",width:100,render:(O,Q)=>`\xA5${(Q.productPrice*Q.productQuantity).toFixed(2)}`}],K=[n.default.createElement(r.Row,{gutter:16,key:"basic-row-1"},n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"orderSn",label:"\u8BA2\u5355\u7F16\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u8BA2\u5355\u7F16\u53F7"}]},n.default.createElement(r.Input,{placeholder:"\u8BF7\u8F93\u5165\u8BA2\u5355\u7F16\u53F7",disabled:d}))),n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"memberUsername",label:"\u7528\u6237\u8D26\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u7528\u6237\u8D26\u53F7"}]},n.default.createElement(r.Input,{placeholder:"\u8BF7\u8F93\u5165\u7528\u6237\u8D26\u53F7",disabled:d})))),n.default.createElement(r.Row,{gutter:16,key:"basic-row-2"},n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"payType",label:"\u652F\u4ED8\u65B9\u5F0F",rules:[{required:!0}]},n.default.createElement(r.Select,{placeholder:"\u8BF7\u9009\u62E9\u652F\u4ED8\u65B9\u5F0F",disabled:d},$t.map(O=>n.default.createElement(r.Select.Option,{key:O.value,value:O.value},O.label))))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"sourceType",label:"\u8BA2\u5355\u6765\u6E90",rules:[{required:!0}]},n.default.createElement(r.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u6765\u6E90",disabled:d},et.map(O=>n.default.createElement(r.Select.Option,{key:O.value,value:O.value},O.label))))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"orderType",label:"\u8BA2\u5355\u7C7B\u578B",rules:[{required:!0}]},n.default.createElement(r.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u7C7B\u578B",disabled:d},tt.map(O=>n.default.createElement(r.Select.Option,{key:O.value,value:O.value},O.label)))))),n.default.createElement(r.Row,{gutter:16,key:"basic-row-3"},n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"createTime",label:"\u4E0B\u5355\u65F6\u95F4"},n.default.createElement(r.Input,{placeholder:"\u4E0B\u5355\u65F6\u95F4",disabled:!0}))),n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"paymentTime",label:"\u652F\u4ED8\u65F6\u95F4"},n.default.createElement(r.Input,{placeholder:"\u652F\u4ED8\u65F6\u95F4",disabled:!0}))))],ge=[n.default.createElement(r.Row,{gutter:16,key:"receiver-row-1"},n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"receiverName",label:"\u6536\u8D27\u4EBA\u59D3\u540D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u59D3\u540D"}]},n.default.createElement(r.Input,{placeholder:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u59D3\u540D",disabled:d}))),n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"receiverPhone",label:"\u6536\u8D27\u4EBA\u7535\u8BDD",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u7535\u8BDD"}]},n.default.createElement(r.Input,{placeholder:"\u8BF7\u8F93\u5165\u6536\u8D27\u4EBA\u7535\u8BDD",disabled:d})))),n.default.createElement(r.Row,{gutter:16,key:"receiver-row-2"},n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"receiverProvince",label:"\u7701\u4EFD"},n.default.createElement(r.Input,{placeholder:"\u7701\u4EFD",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"receiverCity",label:"\u57CE\u5E02"},n.default.createElement(r.Input,{placeholder:"\u57CE\u5E02",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"receiverRegion",label:"\u533A"},n.default.createElement(r.Input,{placeholder:"\u533A",disabled:d})))),n.default.createElement(r.Form.Item,{key:"receiverDetailAddress",name:"receiverDetailAddress",label:"\u8BE6\u7EC6\u5730\u5740"},n.default.createElement(Kt,{rows:2,placeholder:"\u8BF7\u8F93\u5165\u8BE6\u7EC6\u5730\u5740",disabled:d})),n.default.createElement(r.Row,{gutter:16,key:"receiver-row-3"},n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"deliveryCompany",label:"\u7269\u6D41\u516C\u53F8"},n.default.createElement(r.Input,{placeholder:"\u7269\u6D41\u516C\u53F8",disabled:d}))),n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"deliverySn",label:"\u7269\u6D41\u5355\u53F7"},n.default.createElement(r.Input,{placeholder:"\u7269\u6D41\u5355\u53F7",disabled:d}))))],P=[n.default.createElement(r.Row,{gutter:16,key:"money-row-1"},n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"totalAmount",label:"\u8BA2\u5355\u603B\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u8BA2\u5355\u603B\u91D1\u989D"}]},n.default.createElement(r.InputNumber,{placeholder:"\u8BA2\u5355\u603B\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"payAmount",label:"\u5B9E\u4ED8\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u5B9E\u4ED8\u91D1\u989D"}]},n.default.createElement(r.InputNumber,{placeholder:"\u5B9E\u4ED8\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"freightAmount",label:"\u8FD0\u8D39\u91D1\u989D"},n.default.createElement(r.InputNumber,{placeholder:"\u8FD0\u8D39\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d})))),n.default.createElement(r.Row,{gutter:16,key:"money-row-2"},n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"discountAmount",label:"\u6298\u6263\u91D1\u989D"},n.default.createElement(r.InputNumber,{placeholder:"\u6298\u6263\u91D1\u989D",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"promotionAmount",label:"\u4FC3\u9500\u4F18\u60E0"},n.default.createElement(r.InputNumber,{placeholder:"\u4FC3\u9500\u4F18\u60E0",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d}))),n.default.createElement(r.Col,{span:8},n.default.createElement(r.Form.Item,{name:"couponAmount",label:"\u4F18\u60E0\u5238\u62B5\u6263"},n.default.createElement(r.InputNumber,{placeholder:"\u4F18\u60E0\u5238\u62B5\u6263",style:{width:"100%"},min:0,precision:2,prefix:"\xA5",disabled:d}))))],se=[n.default.createElement(r.Row,{gutter:16,key:"status-row-1"},n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"status",label:"\u8BA2\u5355\u72B6\u6001",rules:[{required:!0}]},n.default.createElement(r.Select,{placeholder:"\u8BF7\u9009\u62E9\u8BA2\u5355\u72B6\u6001",disabled:d},Re.map(O=>n.default.createElement(r.Select.Option,{key:O.value,value:O.value},O.label))))),n.default.createElement(r.Col,{span:12},n.default.createElement(r.Form.Item,{name:"confirmStatus",label:"\u786E\u8BA4\u6536\u8D27\u72B6\u6001"},n.default.createElement(r.Select,{placeholder:"\u8BF7\u9009\u62E9\u786E\u8BA4\u6536\u8D27\u72B6\u6001",disabled:d},n.default.createElement(r.Select.Option,{value:0},"\u672A\u786E\u8BA4"),n.default.createElement(r.Select.Option,{value:1},"\u5DF2\u786E\u8BA4"))))),n.default.createElement(r.Form.Item,{key:"promotionInfo",name:"promotionInfo",label:"\u6D3B\u52A8\u4FE1\u606F"},n.default.createElement(r.Input,{placeholder:"\u6D3B\u52A8\u4FE1\u606F",disabled:d})),n.default.createElement(r.Form.Item,{key:"note",name:"note",label:"\u8BA2\u5355\u5907\u6CE8"},n.default.createElement(Kt,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u8BA2\u5355\u5907\u6CE8",disabled:d}))],ee=[{key:"basic",label:"\u57FA\u672C\u4FE1\u606F",children:s?K:null},{key:"receiver",label:"\u6536\u8D27\u4FE1\u606F",children:u?ge:null},{key:"money",label:"\u8D39\u7528\u4FE1\u606F",children:x?P:null},{key:"items",label:"\u5546\u54C1\u4FE1\u606F",children:M?n.default.createElement(r.Table,{columns:W,dataSource:me,rowKey:"id",pagination:!1,scroll:{x:900}}):null},{key:"status",label:"\u72B6\u6001\u4FE1\u606F",children:$?se:null}];return n.default.createElement("div",{className:`mall-order-form ${R||""}`,style:ne},n.default.createElement(r.Card,null,n.default.createElement(r.Form,{form:T,layout:"vertical",initialValues:pe(),disabled:d},n.default.createElement(r.Tabs,{activeKey:z,onChange:ae,items:ee}),n.default.createElement(r.Divider,null),n.default.createElement(r.Form.Item,null,n.default.createElement(r.Space,null,!d&&n.default.createElement(n.default.Fragment,null,n.default.createElement(r.Button,{type:"primary",onClick:V},t==="create"?"\u521B\u5EFA":"\u4FDD\u5B58"),n.default.createElement(r.Button,{onClick:D},"\u91CD\u7F6E")),n.default.createElement(r.Button,{onClick:J},d?"\u5173\u95ED":"\u53D6\u6D88"))))))},nt=Pr;var c=_(ke()),y=_(Ae()),qe=_(ze());var Me={FULL_REDUCTION:0,DISCOUNT:1},Fe={ALL:0,MOBILE:1,PC:2,APP:3},He={ALL:0,CATEGORY:1,PRODUCT:2},qt=[{label:"\u6EE1\u51CF\u5238",value:Me.FULL_REDUCTION},{label:"\u6298\u6263\u5238",value:Me.DISCOUNT}],St=[{label:"\u5168\u5E73\u53F0",value:Fe.ALL},{label:"\u79FB\u52A8\u7AEF",value:Fe.MOBILE},{label:"PC\u7AEF",value:Fe.PC},{label:"APP\u7AEF",value:Fe.APP}],Eo=[{label:"\u5168\u573A\u901A\u7528",value:He.ALL},{label:"\u6307\u5B9A\u5206\u7C7B",value:He.CATEGORY},{label:"\u6307\u5B9A\u5546\u54C1",value:He.PRODUCT}],Se={ENABLED:1,DISABLED:0},Gt=[{label:"\u542F\u7528",value:Se.ENABLED},{label:"\u7981\u7528",value:Se.DISABLED}];var{RangePicker:Ir}=y.DatePicker,Jt={code:200,message:"success",data:{pageNum:1,pageSize:10,total:3,list:[{id:1,name:"\u65B0\u7528\u6237\u4E13\u4EAB\u5238",type:0,platform:0,count:1e3,amount:50,perLimit:1,minPoint:200,startTime:"2024-01-01",endTime:"2024-12-31",useType:0,note:"\u65B0\u7528\u6237\u9996\u5355\u6EE1200\u51CF50",publishCount:500,useCount:320,receiveCount:450,enableTime:"7",code:"NEWUSER50",memberLevel:0},{id:2,name:"\u9650\u65F6\u6298\u6263\u5238",type:1,platform:3,count:500,amount:8,perLimit:2,minPoint:100,startTime:"2024-01-15",endTime:"2024-02-15",useType:1,note:"APP\u4E13\u4EAB8\u6298\u5238",publishCount:300,useCount:180,receiveCount:280,enableTime:"3",code:"APPDISCOUNT",memberLevel:1},{id:3,name:"\u4F1A\u5458\u4E13\u4EAB\u5238",type:0,platform:0,count:200,amount:100,perLimit:1,minPoint:500,startTime:"2024-01-01",endTime:"2024-06-30",useType:2,note:"\u4F1A\u5458\u4E13\u4EAB\u6EE1500\u51CF100",publishCount:150,useCount:80,receiveCount:120,enableTime:"15",code:"VIP100",memberLevel:2}]}},Or=({dataSourceType:m="mock",api:t,method:s="GET",mockData:u,variableName:x,showCreateButton:M=!0,showFilter:$=!0,showStatistics:X=!0,onCreateCoupon:Z,onEditCoupon:ne,onDeleteCoupon:R,style:T,className:z})=>{let[ae,me]=(0,c.useState)(!1),[ie,V]=(0,c.useState)([]),[J,D]=(0,c.useState)(0),[pe,d]=(0,c.useState)(1),[j,W]=(0,c.useState)(10),[K,ge]=(0,c.useState)(""),[P,se]=(0,c.useState)(),[ee,O]=(0,c.useState)(),[Q,q]=(0,c.useState)(!1),[te,be]=(0,c.useState)(null),[ue]=y.Form.useForm(),xe=[{id:1,name:"\u65B0\u7528\u6237\u4E13\u4EAB\u5238",type:Me.FULL_REDUCTION,platform:Fe.ALL,count:1e3,amount:50,perLimit:1,minPoint:200,startTime:"2024-01-01",endTime:"2024-12-31",useType:He.ALL,note:"\u65B0\u7528\u6237\u9996\u5355\u6EE1200\u51CF50",publishCount:500,useCount:320,receiveCount:450,enableTime:"7",code:"NEWUSER50",memberLevel:0},{id:2,name:"\u9650\u65F6\u6298\u6263\u5238",type:Me.DISCOUNT,platform:Fe.APP,count:500,amount:8,perLimit:2,minPoint:100,startTime:"2024-01-15",endTime:"2024-02-15",useType:He.CATEGORY,note:"APP\u4E13\u4EAB8\u6298\u5238",publishCount:300,useCount:180,receiveCount:280,enableTime:"3",code:"APPDISCOUNT",memberLevel:1},{id:3,name:"\u4F1A\u5458\u4E13\u4EAB\u5238",type:Me.FULL_REDUCTION,platform:Fe.ALL,count:200,amount:100,perLimit:1,minPoint:500,startTime:"2024-01-01",endTime:"2024-06-30",useType:He.PRODUCT,note:"\u4F1A\u5458\u4E13\u4EAB\u6EE1500\u51CF100",publishCount:150,useCount:80,receiveCount:120,enableTime:"15",code:"VIP100",memberLevel:2}],we=(0,c.useMemo)(()=>({type:m,api:t,method:s,mockData:u?(()=>{try{return typeof u=="string"?JSON.parse(u):u}catch{return Jt}})():Jt,variableName:x}),[m,t,s,u,x]),Oe=(0,c.useMemo)(()=>_e.create(we),[we]);(0,c.useEffect)(()=>{ce()},[pe,j,Oe]);let ce=async()=>{me(!0);try{let b=await Oe.fetch({pageNum:pe,pageSize:j,name:K,type:P,platform:ee}),l=[],w=0;b?.data?.list?(l=b.data.list,w=b.data.total||l.length):Array.isArray(b?.data)?(l=b.data,w=l.length):Array.isArray(b)&&(l=b,w=l.length),(K||P!==void 0||ee!==void 0)&&(l=l.filter(ve=>!(K&&!ve.name.toLowerCase().includes(K.toLowerCase())||P!==void 0&&ve.type!==P||ee!==void 0&&ve.platform!==ee)),w=l.length),V(l),D(w)}catch(b){console.error("Failed to fetch coupon list:",b),y.message.error("\u83B7\u53D6\u4F18\u60E0\u5238\u5217\u8868\u5931\u8D25"),V(xe),D(xe.length)}finally{me(!1)}},h=()=>{d(1),ce()},F=()=>{ge(""),se(void 0),O(void 0),d(1),ce()},A=()=>{be(null),ue.resetFields(),q(!0)},p=b=>{be(b),ue.setFieldsValue({...b,dateRange:[b.startTime,b.endTime]}),q(!0)},k=b=>{y.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u4F18\u60E0\u5238\u5417\uFF1F",onOk:()=>{R?.(b),y.message.success("\u5220\u9664\u6210\u529F"),ce()}})},g=async()=>{try{let b=await ue.validateFields(),l={...b,startTime:b.dateRange?.[0],endTime:b.dateRange?.[1]};te?(ne?.(te.id,l),y.message.success("\u7F16\u8F91\u6210\u529F")):(Z?.(l),y.message.success("\u521B\u5EFA\u6210\u529F")),q(!1),ce()}catch(b){console.error("Validation failed:",b)}},U=b=>{let l={[Me.FULL_REDUCTION]:{color:"red",text:"\u6EE1\u51CF\u5238"},[Me.DISCOUNT]:{color:"blue",text:"\u6298\u6263\u5238"}},{color:w,text:ve}=l[b]||{color:"default",text:"\u672A\u77E5"};return c.default.createElement(y.Tag,{color:w},ve)},he=b=>{let l={[Fe.ALL]:{color:"green",text:"\u5168\u5E73\u53F0"},[Fe.MOBILE]:{color:"purple",text:"\u79FB\u52A8\u7AEF"},[Fe.PC]:{color:"geekblue",text:"PC\u7AEF"},[Fe.APP]:{color:"cyan",text:"APP"}},{color:w,text:ve}=l[b]||{color:"default",text:"\u672A\u77E5"};return c.default.createElement(y.Tag,{color:w},ve)},ye=[{title:"\u4F18\u60E0\u5238\u540D\u79F0",dataIndex:"name",key:"name",width:150,render:b=>c.default.createElement(y.Tooltip,{title:b},c.default.createElement("span",{className:"coupon-name"},b))},{title:"\u7C7B\u578B",dataIndex:"type",key:"type",width:80,render:b=>U(b)},{title:"\u4F18\u60E0\u5185\u5BB9",key:"content",width:120,render:(b,l)=>c.default.createElement("span",null,l.type===Me.FULL_REDUCTION?`\u6EE1${l.minPoint}\u51CF${l.amount}`:`${l.amount}\u6298`)},{title:"\u9002\u7528\u5E73\u53F0",dataIndex:"platform",key:"platform",width:80,render:b=>he(b)},{title:"\u53D1\u884C\u91CF",dataIndex:"count",key:"count",width:80,render:b=>c.default.createElement(y.Badge,{count:b,showZero:!0,color:"blue"})},{title:"\u5DF2\u9886\u53D6",dataIndex:"receiveCount",key:"receiveCount",width:80},{title:"\u5DF2\u4F7F\u7528",dataIndex:"useCount",key:"useCount",width:80},{title:"\u6709\u6548\u671F",key:"validity",width:180,render:(b,l)=>c.default.createElement(y.Space,null,c.default.createElement(qe.ClockCircleOutlined,null),c.default.createElement("span",null,l.startTime," ~ ",l.endTime))},{title:"\u64CD\u4F5C",key:"action",width:150,render:(b,l)=>c.default.createElement(y.Space,null,c.default.createElement(y.Button,{type:"link",size:"small",icon:c.default.createElement(qe.EditOutlined,null),onClick:()=>p(l)},"\u7F16\u8F91"),c.default.createElement(y.Button,{type:"link",size:"small",danger:!0,icon:c.default.createElement(qe.DeleteOutlined,null),onClick:()=>k(l.id)},"\u5220\u9664"))}],Ne={totalCoupons:ie.length,activeCoupons:ie.filter(b=>b.useCount>0).length,totalUsed:ie.reduce((b,l)=>b+l.useCount,0),totalReceived:ie.reduce((b,l)=>b+l.receiveCount,0)};return c.default.createElement("div",{className:`mall-coupon-card ${z||""}`,style:T},c.default.createElement(y.Card,null,X&&c.default.createElement("div",{className:"statistics-section"},c.default.createElement(y.Space,{size:"large"},c.default.createElement("div",{className:"stat-item"},c.default.createElement("div",{className:"stat-value"},Ne.totalCoupons),c.default.createElement("div",{className:"stat-label"},"\u4F18\u60E0\u5238\u603B\u6570")),c.default.createElement(y.Divider,{type:"vertical",style:{height:40}}),c.default.createElement("div",{className:"stat-item"},c.default.createElement("div",{className:"stat-value"},Ne.activeCoupons),c.default.createElement("div",{className:"stat-label"},"\u6D3B\u8DC3\u4F18\u60E0\u5238")),c.default.createElement(y.Divider,{type:"vertical",style:{height:40}}),c.default.createElement("div",{className:"stat-item"},c.default.createElement("div",{className:"stat-value"},Ne.totalReceived),c.default.createElement("div",{className:"stat-label"},"\u5DF2\u9886\u53D6")),c.default.createElement(y.Divider,{type:"vertical",style:{height:40}}),c.default.createElement("div",{className:"stat-item"},c.default.createElement("div",{className:"stat-value"},Ne.totalUsed),c.default.createElement("div",{className:"stat-label"},"\u5DF2\u4F7F\u7528")))),$&&c.default.createElement("div",{className:"filter-section"},c.default.createElement(y.Space,{wrap:!0},c.default.createElement(y.Input,{placeholder:"\u4F18\u60E0\u5238\u540D\u79F0",value:K,onChange:b=>ge(b.target.value),style:{width:200}}),c.default.createElement(y.Select,{placeholder:"\u4F18\u60E0\u5238\u7C7B\u578B",value:P,onChange:se,style:{width:120},allowClear:!0},qt.map(b=>c.default.createElement(y.Select.Option,{key:b.value,value:b.value},b.label))),c.default.createElement(y.Select,{placeholder:"\u9002\u7528\u5E73\u53F0",value:ee,onChange:O,style:{width:120},allowClear:!0},St.map(b=>c.default.createElement(y.Select.Option,{key:b.value,value:b.value},b.label))),c.default.createElement(y.Button,{type:"primary",onClick:h},"\u67E5\u8BE2"),c.default.createElement(y.Button,{onClick:F},"\u91CD\u7F6E"))),M&&c.default.createElement("div",{className:"action-section"},c.default.createElement(y.Button,{type:"primary",icon:c.default.createElement(qe.PlusOutlined,null),onClick:A},"\u521B\u5EFA\u4F18\u60E0\u5238")),c.default.createElement(y.Table,{columns:ye,dataSource:ie,rowKey:"id",loading:ae,pagination:{current:pe,pageSize:j,total:J,showSizeChanger:!0,showQuickJumper:!0,showTotal:b=>`\u5171 ${b} \u6761`,onChange:(b,l)=>{d(b),W(l)}}})),c.default.createElement(y.Modal,{title:te?"\u7F16\u8F91\u4F18\u60E0\u5238":"\u521B\u5EFA\u4F18\u60E0\u5238",visible:Q,onOk:g,onCancel:()=>q(!1),width:600},c.default.createElement(y.Form,{form:ue,layout:"vertical"},c.default.createElement(y.Form.Item,{name:"name",label:"\u4F18\u60E0\u5238\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u4F18\u60E0\u5238\u540D\u79F0"}]},c.default.createElement(y.Input,{placeholder:"\u8BF7\u8F93\u5165\u4F18\u60E0\u5238\u540D\u79F0"})),c.default.createElement(y.Form.Item,{name:"type",label:"\u4F18\u60E0\u5238\u7C7B\u578B",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u4F18\u60E0\u5238\u7C7B\u578B"}]},c.default.createElement(y.Radio.Group,null,c.default.createElement(y.Radio,{value:Me.FULL_REDUCTION},"\u6EE1\u51CF\u5238"),c.default.createElement(y.Radio,{value:Me.DISCOUNT},"\u6298\u6263\u5238"))),c.default.createElement(y.Form.Item,{name:"amount",label:"\u4F18\u60E0\u989D\u5EA6",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u4F18\u60E0\u989D\u5EA6"}]},c.default.createElement(y.InputNumber,{placeholder:"\u6EE1\u51CF\u91D1\u989D\u6216\u6298\u6263",min:0,style:{width:"100%"}})),c.default.createElement(y.Form.Item,{name:"minPoint",label:"\u6700\u4F4E\u6D88\u8D39\u91D1\u989D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6700\u4F4E\u6D88\u8D39\u91D1\u989D"}]},c.default.createElement(y.InputNumber,{placeholder:"\u6700\u4F4E\u6D88\u8D39\u91D1\u989D",min:0,style:{width:"100%"}})),c.default.createElement(y.Form.Item,{name:"platform",label:"\u9002\u7528\u5E73\u53F0",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u9002\u7528\u5E73\u53F0"}]},c.default.createElement(y.Select,{placeholder:"\u8BF7\u9009\u62E9\u9002\u7528\u5E73\u53F0"},St.map(b=>c.default.createElement(y.Select.Option,{key:b.value,value:b.value},b.label)))),c.default.createElement(y.Form.Item,{name:"count",label:"\u53D1\u884C\u6570\u91CF",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u53D1\u884C\u6570\u91CF"}]},c.default.createElement(y.InputNumber,{placeholder:"\u53D1\u884C\u6570\u91CF",min:1,style:{width:"100%"}})),c.default.createElement(y.Form.Item,{name:"perLimit",label:"\u6BCF\u4EBA\u9650\u9886",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6BCF\u4EBA\u9650\u9886\u6570\u91CF"}]},c.default.createElement(y.InputNumber,{placeholder:"\u6BCF\u4EBA\u9650\u9886\u6570\u91CF",min:1,style:{width:"100%"}})),c.default.createElement(y.Form.Item,{name:"dateRange",label:"\u6709\u6548\u671F",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u6709\u6548\u671F"}]},c.default.createElement(Ir,{style:{width:"100%"}})),c.default.createElement(y.Form.Item,{name:"note",label:"\u5907\u6CE8"},c.default.createElement(y.Input.TextArea,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u5907\u6CE8"})))))},at=Or;var f=_(ke()),I=_(Ae()),De=_(ze());var{RangePicker:Nr}=I.DatePicker,Qt={code:200,message:"success",data:{pageNum:1,pageSize:10,total:4,list:[{id:1,title:"\u53CC\u5341\u4E00\u5927\u4FC3",startDate:"2024-11-01",endDate:"2024-11-11",status:1,createTime:"2024-10-15 10:00:00"},{id:2,title:"618\u5E74\u4E2D\u5927\u4FC3",startDate:"2024-06-01",endDate:"2024-06-18",status:1,createTime:"2024-05-20 09:00:00"},{id:3,title:"\u65B0\u6625\u5B63\u4FC3\u9500",startDate:"2024-01-20",endDate:"2024-02-10",status:0,createTime:"2024-01-10 08:00:00"},{id:4,title:"\u4F1A\u5458\u65E5\u7279\u60E0",startDate:"2024-03-15",endDate:"2024-03-17",status:1,createTime:"2024-03-01 10:00:00"}]}},Dr=({dataSourceType:m="mock",api:t,method:s="GET",mockData:u,variableName:x,showCreateButton:M=!0,showFilter:$=!0,showStatistics:X=!0,showTimeline:Z=!0,onCreatePromotion:ne,onEditPromotion:R,onDeletePromotion:T,onToggleStatus:z,style:ae,className:me})=>{let[ie,V]=(0,f.useState)(!1),[J,D]=(0,f.useState)([]),[pe,d]=(0,f.useState)(0),[j,W]=(0,f.useState)(1),[K,ge]=(0,f.useState)(10),[P,se]=(0,f.useState)(""),[ee,O]=(0,f.useState)(),[Q,q]=(0,f.useState)(!1),[te,be]=(0,f.useState)(null),[ue]=I.Form.useForm(),xe=[{id:1,title:"\u53CC\u5341\u4E00\u5927\u4FC3",startDate:"2024-11-01",endDate:"2024-11-11",status:Se.ENABLED,createTime:"2024-10-15 10:00:00"},{id:2,title:"618\u5E74\u4E2D\u5927\u4FC3",startDate:"2024-06-01",endDate:"2024-06-18",status:Se.ENABLED,createTime:"2024-05-20 09:00:00"},{id:3,title:"\u65B0\u6625\u5B63\u4FC3\u9500",startDate:"2024-01-20",endDate:"2024-02-10",status:Se.DISABLED,createTime:"2024-01-10 08:00:00"},{id:4,title:"\u4F1A\u5458\u65E5\u7279\u60E0",startDate:"2024-03-15",endDate:"2024-03-17",status:Se.ENABLED,createTime:"2024-03-01 10:00:00"}],we=(0,f.useMemo)(()=>({type:m,api:t,method:s,mockData:u?(()=>{try{return typeof u=="string"?JSON.parse(u):u}catch{return Qt}})():Qt,variableName:x}),[m,t,s,u,x]),Oe=(0,f.useMemo)(()=>_e.create(we),[we]);(0,f.useEffect)(()=>{ce()},[j,K,Oe]);let ce=async()=>{V(!0);try{let l=await Oe.fetch({pageNum:j,pageSize:K,title:P,status:ee}),w=[],ve=0;l?.data?.list?(w=l.data.list,ve=l.data.total||w.length):Array.isArray(l?.data)?(w=l.data,ve=w.length):Array.isArray(l)&&(w=l,ve=w.length),(P||ee!==void 0)&&(w=w.filter(B=>!(P&&!B.title.toLowerCase().includes(P.toLowerCase())||ee!==void 0&&B.status!==ee)),ve=w.length),D(w),d(ve)}catch(l){console.error("Failed to fetch promotion list:",l),I.message.error("\u83B7\u53D6\u4FC3\u9500\u6D3B\u52A8\u5217\u8868\u5931\u8D25"),D(xe),d(xe.length)}finally{V(!1)}},h=()=>{W(1),ce()},F=()=>{se(""),O(void 0),W(1),ce()},A=()=>{be(null),ue.resetFields(),q(!0)},p=l=>{be(l),ue.setFieldsValue({...l,dateRange:[l.startDate,l.endDate]}),q(!0)},k=l=>{I.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u4FC3\u9500\u6D3B\u52A8\u5417\uFF1F",onOk:()=>{T?.(l),I.message.success("\u5220\u9664\u6210\u529F"),ce()}})},g=l=>{let w=l.status===Se.ENABLED?Se.DISABLED:Se.ENABLED;z?.(l.id,w),I.message.success(w===Se.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),ce()},U=async()=>{try{let l=await ue.validateFields(),w={...l,startDate:l.dateRange?.[0],endDate:l.dateRange?.[1]};te?(R?.(te.id,w),I.message.success("\u7F16\u8F91\u6210\u529F")):(ne?.(w),I.message.success("\u521B\u5EFA\u6210\u529F")),q(!1),ce()}catch(l){console.error("Validation failed:",l)}},he=l=>{let w={[Se.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528",icon:f.default.createElement(De.CheckCircleOutlined,null)},[Se.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528",icon:f.default.createElement(De.CloseCircleOutlined,null)}},{color:ve,text:B,icon:fe}=w[l]||{color:"default",text:"\u672A\u77E5",icon:null};return f.default.createElement(I.Tag,{color:ve,icon:fe},B)},ye=[{title:"\u6D3B\u52A8\u540D\u79F0",dataIndex:"title",key:"title",width:200,render:l=>f.default.createElement(I.Tooltip,{title:l},f.default.createElement("span",{className:"promotion-title"},f.default.createElement(De.ThunderboltOutlined,{style:{color:"#faad14",marginRight:8}}),l))},{title:"\u6D3B\u52A8\u65F6\u95F4",key:"dateRange",width:220,render:(l,w)=>f.default.createElement(I.Space,null,f.default.createElement(De.ClockCircleOutlined,null),f.default.createElement("span",null,w.startDate," ~ ",w.endDate))},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:100,render:l=>he(l)},{title:"\u521B\u5EFA\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:180},{title:"\u64CD\u4F5C",key:"action",width:200,render:(l,w)=>f.default.createElement(I.Space,null,f.default.createElement(I.Button,{type:"link",size:"small",icon:f.default.createElement(De.EditOutlined,null),onClick:()=>p(w)},"\u7F16\u8F91"),f.default.createElement(I.Button,{type:"link",size:"small",onClick:()=>g(w)},w.status===Se.ENABLED?"\u7981\u7528":"\u542F\u7528"),f.default.createElement(I.Button,{type:"link",size:"small",danger:!0,icon:f.default.createElement(De.DeleteOutlined,null),onClick:()=>k(w.id)},"\u5220\u9664"))}],Ne={totalPromotions:J.length,activePromotions:J.filter(l=>l.status===Se.ENABLED).length,upcomingPromotions:J.filter(l=>{let w=new Date;return new Date(l.startDate)>w}).length},b=J.filter(l=>l.status===Se.ENABLED).slice(0,5).map(l=>({color:"green",children:f.default.createElement("div",null,f.default.createElement("div",{className:"timeline-title"},l.title),f.default.createElement("div",{className:"timeline-date"},l.startDate," ~ ",l.endDate))}));return f.default.createElement("div",{className:`mall-promotion-card ${me||""}`,style:ae},f.default.createElement(I.Card,null,X&&f.default.createElement("div",{className:"statistics-section"},f.default.createElement(I.Row,{gutter:16},f.default.createElement(I.Col,{span:8},f.default.createElement(I.Statistic,{title:"\u4FC3\u9500\u6D3B\u52A8\u603B\u6570",value:Ne.totalPromotions,prefix:f.default.createElement(De.ThunderboltOutlined,null)})),f.default.createElement(I.Col,{span:8},f.default.createElement(I.Statistic,{title:"\u8FDB\u884C\u4E2D\u7684\u6D3B\u52A8",value:Ne.activePromotions,valueStyle:{color:"#3f8600"}})),f.default.createElement(I.Col,{span:8},f.default.createElement(I.Statistic,{title:"\u5373\u5C06\u5F00\u59CB",value:Ne.upcomingPromotions,valueStyle:{color:"#faad14"}})))),$&&f.default.createElement("div",{className:"filter-section"},f.default.createElement(I.Space,{wrap:!0},f.default.createElement(I.Input,{placeholder:"\u6D3B\u52A8\u540D\u79F0",value:P,onChange:l=>se(l.target.value),style:{width:200}}),f.default.createElement(I.Select,{placeholder:"\u6D3B\u52A8\u72B6\u6001",value:ee,onChange:O,style:{width:120},allowClear:!0},Gt.map(l=>f.default.createElement(I.Select.Option,{key:l.value,value:l.value},l.label))),f.default.createElement(I.Button,{type:"primary",onClick:h},"\u67E5\u8BE2"),f.default.createElement(I.Button,{onClick:F},"\u91CD\u7F6E"))),M&&f.default.createElement("div",{className:"action-section"},f.default.createElement(I.Button,{type:"primary",icon:f.default.createElement(De.PlusOutlined,null),onClick:A},"\u521B\u5EFA\u4FC3\u9500\u6D3B\u52A8")),f.default.createElement("div",{className:"content-section"},f.default.createElement("div",{className:"table-section"},f.default.createElement(I.Table,{columns:ye,dataSource:J,rowKey:"id",loading:ie,pagination:{current:j,pageSize:K,total:pe,showSizeChanger:!0,showQuickJumper:!0,showTotal:l=>`\u5171 ${l} \u6761`,onChange:(l,w)=>{W(l),ge(w)}}})),Z&&b.length>0&&f.default.createElement("div",{className:"timeline-section"},f.default.createElement(I.Card,{title:"\u6D3B\u52A8\u65F6\u95F4\u7EBF",size:"small"},f.default.createElement(I.Timeline,{items:b}))))),f.default.createElement(I.Modal,{title:te?"\u7F16\u8F91\u4FC3\u9500\u6D3B\u52A8":"\u521B\u5EFA\u4FC3\u9500\u6D3B\u52A8",visible:Q,onOk:U,onCancel:()=>q(!1),width:500},f.default.createElement(I.Form,{form:ue,layout:"vertical"},f.default.createElement(I.Form.Item,{name:"title",label:"\u6D3B\u52A8\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6D3B\u52A8\u540D\u79F0"}]},f.default.createElement(I.Input,{placeholder:"\u8BF7\u8F93\u5165\u6D3B\u52A8\u540D\u79F0"})),f.default.createElement(I.Form.Item,{name:"dateRange",label:"\u6D3B\u52A8\u65F6\u95F4",rules:[{required:!0,message:"\u8BF7\u9009\u62E9\u6D3B\u52A8\u65F6\u95F4"}]},f.default.createElement(Nr,{style:{width:"100%"}})),f.default.createElement(I.Form.Item,{name:"status",label:"\u6D3B\u52A8\u72B6\u6001",initialValue:Se.ENABLED},f.default.createElement(I.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},it=Dr;var v=_(ke()),N=_(Ae()),Ge=_(ze());var Pe={DISABLED:0,ENABLED:1},Ie={DISABLED:0,ENABLED:1},wt={DIRECTORY:0,MENU:1,BUTTON:2},Ht=[{label:"\u7981\u7528",value:Pe.DISABLED},{label:"\u542F\u7528",value:Pe.ENABLED}],Wt=[{label:"\u7981\u7528",value:Ie.DISABLED},{label:"\u542F\u7528",value:Ie.ENABLED}],Ro=[{label:"\u76EE\u5F55",value:wt.DIRECTORY},{label:"\u83DC\u5355",value:wt.MENU},{label:"\u6309\u94AE",value:wt.BUTTON}];var Er=({dataSource:m,showCreateButton:t=!0,showFilter:s=!0,showStatistics:u=!0,onCreateUser:x,onEditUser:M,onDeleteUser:$,onToggleStatus:X,style:Z,className:ne})=>{let[R,T]=(0,v.useState)(!1),[z,ae]=(0,v.useState)([]),[me,ie]=(0,v.useState)(0),[V,J]=(0,v.useState)(1),[D,pe]=(0,v.useState)(10),[d,j]=(0,v.useState)(""),[W,K]=(0,v.useState)(),[ge,P]=(0,v.useState)(!1),[se,ee]=(0,v.useState)(null),[O]=N.Form.useForm(),Q=[{id:1,username:"admin",nickName:"\u8D85\u7EA7\u7BA1\u7406\u5458",email:"admin@example.com",phone:"13800138000",status:Pe.ENABLED,createTime:"2024-01-01 10:00:00",loginTime:"2024-04-02 09:30:00",roleIds:[1],roleNames:["\u8D85\u7EA7\u7BA1\u7406\u5458"]},{id:2,username:"operator",nickName:"\u8FD0\u8425\u4EBA\u5458",email:"operator@example.com",phone:"13900139000",status:Pe.ENABLED,createTime:"2024-01-15 14:00:00",loginTime:"2024-04-01 16:20:00",roleIds:[2],roleNames:["\u8FD0\u8425"]},{id:3,username:"viewer",nickName:"\u8BBF\u5BA2\u7528\u6237",email:"viewer@example.com",phone:"13700137000",status:Pe.DISABLED,createTime:"2024-02-01 09:00:00",loginTime:"2024-03-15 10:00:00",roleIds:[3],roleNames:["\u8BBF\u5BA2"]}];(0,v.useEffect)(()=>{q()},[V,D]);let q=async()=>{T(!0);try{await new Promise(k=>setTimeout(k,500));let p=[...Q];d&&(p=p.filter(k=>k.username.toLowerCase().includes(d.toLowerCase())||k.nickName?.toLowerCase().includes(d.toLowerCase()))),W!==void 0&&(p=p.filter(k=>k.status===W)),ae(p),ie(p.length)}catch(p){console.error("Failed to fetch user list:",p),N.message.error("\u83B7\u53D6\u7528\u6237\u5217\u8868\u5931\u8D25")}finally{T(!1)}},te=()=>{J(1),q()},be=()=>{j(""),K(void 0),J(1),q()},ue=()=>{ee(null),O.resetFields(),P(!0)},xe=p=>{ee(p),O.setFieldsValue(p),P(!0)},we=p=>{N.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u7528\u6237\u5417\uFF1F",onOk:()=>{$?.(p),N.message.success("\u5220\u9664\u6210\u529F"),q()}})},Oe=p=>{let k=p.status===Pe.ENABLED?Pe.DISABLED:Pe.ENABLED;X?.(p.id,k),N.message.success(k===Pe.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),q()},ce=async()=>{try{let p=await O.validateFields();se?(M?.(se.id,p),N.message.success("\u7F16\u8F91\u6210\u529F")):(x?.(p),N.message.success("\u521B\u5EFA\u6210\u529F")),P(!1),q()}catch(p){console.error("Validation failed:",p)}},h=p=>{let k={[Pe.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528"},[Pe.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528"}},{color:g,text:U}=k[p]||{color:"default",text:"\u672A\u77E5"};return v.default.createElement(N.Tag,{color:g},U)},F=[{title:"\u7528\u6237\u4FE1\u606F",key:"userInfo",width:200,render:(p,k)=>v.default.createElement(N.Space,null,v.default.createElement(N.Avatar,{icon:v.default.createElement(Ge.UserOutlined,null),style:{backgroundColor:"#1890ff"}}),v.default.createElement("div",null,v.default.createElement("div",{className:"user-name"},k.nickName||k.username),v.default.createElement("div",{className:"user-username"},"@",k.username)))},{title:"\u90AE\u7BB1",dataIndex:"email",key:"email",width:180},{title:"\u624B\u673A\u53F7",dataIndex:"phone",key:"phone",width:130},{title:"\u89D2\u8272",dataIndex:"roleNames",key:"roleNames",width:150,render:p=>v.default.createElement(N.Space,{wrap:!0},p?.map((k,g)=>v.default.createElement(N.Tag,{key:g,color:"blue"},k)))},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:80,render:p=>h(p)},{title:"\u6700\u540E\u767B\u5F55",dataIndex:"loginTime",key:"loginTime",width:160},{title:"\u64CD\u4F5C",key:"action",width:180,render:(p,k)=>v.default.createElement(N.Space,null,v.default.createElement(N.Button,{type:"link",size:"small",icon:v.default.createElement(Ge.EditOutlined,null),onClick:()=>xe(k)},"\u7F16\u8F91"),v.default.createElement(N.Button,{type:"link",size:"small",onClick:()=>Oe(k)},k.status===Pe.ENABLED?"\u7981\u7528":"\u542F\u7528"),v.default.createElement(N.Button,{type:"link",size:"small",danger:!0,icon:v.default.createElement(Ge.DeleteOutlined,null),onClick:()=>we(k.id)},"\u5220\u9664"))}],A={totalUsers:Q.length,activeUsers:Q.filter(p=>p.status===Pe.ENABLED).length,disabledUsers:Q.filter(p=>p.status===Pe.DISABLED).length};return v.default.createElement("div",{className:`mall-user-card ${ne||""}`,style:Z},v.default.createElement(N.Card,null,u&&v.default.createElement("div",{className:"statistics-section"},v.default.createElement(N.Space,{size:"large"},v.default.createElement("div",{className:"stat-item"},v.default.createElement("div",{className:"stat-value"},A.totalUsers),v.default.createElement("div",{className:"stat-label"},"\u7528\u6237\u603B\u6570")),v.default.createElement(N.Divider,{type:"vertical",style:{height:40}}),v.default.createElement("div",{className:"stat-item"},v.default.createElement("div",{className:"stat-value",style:{color:"#52c41a"}},A.activeUsers),v.default.createElement("div",{className:"stat-label"},"\u6D3B\u8DC3\u7528\u6237")),v.default.createElement(N.Divider,{type:"vertical",style:{height:40}}),v.default.createElement("div",{className:"stat-item"},v.default.createElement("div",{className:"stat-value",style:{color:"#8c8c8c"}},A.disabledUsers),v.default.createElement("div",{className:"stat-label"},"\u5DF2\u7981\u7528")))),s&&v.default.createElement("div",{className:"filter-section"},v.default.createElement(N.Space,{wrap:!0},v.default.createElement(N.Input,{placeholder:"\u7528\u6237\u540D/\u6635\u79F0",value:d,onChange:p=>j(p.target.value),style:{width:200}}),v.default.createElement(N.Select,{placeholder:"\u7528\u6237\u72B6\u6001",value:W,onChange:K,style:{width:120},allowClear:!0},Ht.map(p=>v.default.createElement(N.Select.Option,{key:p.value,value:p.value},p.label))),v.default.createElement(N.Button,{type:"primary",onClick:te},"\u67E5\u8BE2"),v.default.createElement(N.Button,{onClick:be},"\u91CD\u7F6E"))),t&&v.default.createElement("div",{className:"action-section"},v.default.createElement(N.Button,{type:"primary",icon:v.default.createElement(Ge.PlusOutlined,null),onClick:ue},"\u521B\u5EFA\u7528\u6237")),v.default.createElement(N.Table,{columns:F,dataSource:z,rowKey:"id",loading:R,pagination:{current:V,pageSize:D,total:me,showSizeChanger:!0,showQuickJumper:!0,showTotal:p=>`\u5171 ${p} \u6761`,onChange:(p,k)=>{J(p),pe(k)}}})),v.default.createElement(N.Modal,{title:se?"\u7F16\u8F91\u7528\u6237":"\u521B\u5EFA\u7528\u6237",visible:ge,onOk:ce,onCancel:()=>P(!1),width:500},v.default.createElement(N.Form,{form:O,layout:"vertical"},v.default.createElement(N.Form.Item,{name:"username",label:"\u7528\u6237\u540D",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u7528\u6237\u540D"}]},v.default.createElement(N.Input,{placeholder:"\u8BF7\u8F93\u5165\u7528\u6237\u540D",disabled:!!se})),v.default.createElement(N.Form.Item,{name:"nickName",label:"\u6635\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u6635\u79F0"}]},v.default.createElement(N.Input,{placeholder:"\u8BF7\u8F93\u5165\u6635\u79F0"})),v.default.createElement(N.Form.Item,{name:"email",label:"\u90AE\u7BB1",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u90AE\u7BB1"},{type:"email",message:"\u8BF7\u8F93\u5165\u6709\u6548\u7684\u90AE\u7BB1\u5730\u5740"}]},v.default.createElement(N.Input,{placeholder:"\u8BF7\u8F93\u5165\u90AE\u7BB1"})),v.default.createElement(N.Form.Item,{name:"phone",label:"\u624B\u673A\u53F7",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u624B\u673A\u53F7"}]},v.default.createElement(N.Input,{placeholder:"\u8BF7\u8F93\u5165\u624B\u673A\u53F7"})),v.default.createElement(N.Form.Item,{name:"status",label:"\u72B6\u6001",initialValue:Pe.ENABLED},v.default.createElement(N.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},st=Er;var S=_(ke()),E=_(Ae()),Je=_(ze());var Ar=({dataSource:m,showCreateButton:t=!0,showFilter:s=!0,showStatistics:u=!0,showPermissionTree:x=!0,onCreateRole:M,onEditRole:$,onDeleteRole:X,onToggleStatus:Z,style:ne,className:R})=>{let[T,z]=(0,S.useState)(!1),[ae,me]=(0,S.useState)([]),[ie,V]=(0,S.useState)(0),[J,D]=(0,S.useState)(1),[pe,d]=(0,S.useState)(10),[j,W]=(0,S.useState)(""),[K,ge]=(0,S.useState)(),[P,se]=(0,S.useState)(!1),[ee,O]=(0,S.useState)(null),[Q]=E.Form.useForm(),q=[{id:1,name:"\u8D85\u7EA7\u7BA1\u7406\u5458",description:"\u62E5\u6709\u6240\u6709\u6743\u9650",adminCount:2,status:Ie.ENABLED,sort:0,createTime:"2024-01-01 10:00:00"},{id:2,name:"\u8FD0\u8425",description:"\u8D1F\u8D23\u5546\u54C1\u548C\u8BA2\u5355\u7BA1\u7406",adminCount:5,status:Ie.ENABLED,sort:1,createTime:"2024-01-15 14:00:00"},{id:3,name:"\u5BA2\u670D",description:"\u8D1F\u8D23\u8BA2\u5355\u5904\u7406\u548C\u5BA2\u6237\u670D\u52A1",adminCount:3,status:Ie.ENABLED,sort:2,createTime:"2024-02-01 09:00:00"},{id:4,name:"\u8BBF\u5BA2",description:"\u53EA\u8BFB\u6743\u9650",adminCount:10,status:Ie.DISABLED,sort:3,createTime:"2024-02-15 11:00:00"}],te=[{title:"\u5546\u54C1\u7BA1\u7406",key:"product",children:[{title:"\u5546\u54C1\u5217\u8868",key:"product:list"},{title:"\u6DFB\u52A0\u5546\u54C1",key:"product:create"},{title:"\u7F16\u8F91\u5546\u54C1",key:"product:edit"},{title:"\u5220\u9664\u5546\u54C1",key:"product:delete"}]},{title:"\u8BA2\u5355\u7BA1\u7406",key:"order",children:[{title:"\u8BA2\u5355\u5217\u8868",key:"order:list"},{title:"\u8BA2\u5355\u8BE6\u60C5",key:"order:detail"},{title:"\u53D1\u8D27",key:"order:deliver"},{title:"\u5173\u95ED\u8BA2\u5355",key:"order:close"}]},{title:"\u8425\u9500\u7BA1\u7406",key:"marketing",children:[{title:"\u4F18\u60E0\u5238\u7BA1\u7406",key:"marketing:coupon"},{title:"\u4FC3\u9500\u6D3B\u52A8",key:"marketing:promotion"}]},{title:"\u6743\u9650\u7BA1\u7406",key:"permission",children:[{title:"\u7528\u6237\u7BA1\u7406",key:"permission:user"},{title:"\u89D2\u8272\u7BA1\u7406",key:"permission:role"}]}];(0,S.useEffect)(()=>{be()},[J,pe]);let be=async()=>{z(!0);try{await new Promise(U=>setTimeout(U,500));let g=[...q];j&&(g=g.filter(U=>U.name.toLowerCase().includes(j.toLowerCase())||U.description?.toLowerCase().includes(j.toLowerCase()))),K!==void 0&&(g=g.filter(U=>U.status===K)),me(g),V(g.length)}catch(g){console.error("Failed to fetch role list:",g),E.message.error("\u83B7\u53D6\u89D2\u8272\u5217\u8868\u5931\u8D25")}finally{z(!1)}},ue=()=>{D(1),be()},xe=()=>{W(""),ge(void 0),D(1),be()},we=()=>{O(null),Q.resetFields(),se(!0)},Oe=g=>{O(g),Q.setFieldsValue(g),se(!0)},ce=g=>{E.Modal.confirm({title:"\u786E\u8BA4\u5220\u9664",content:"\u786E\u5B9A\u8981\u5220\u9664\u8BE5\u89D2\u8272\u5417\uFF1F",onOk:()=>{X?.(g),E.message.success("\u5220\u9664\u6210\u529F"),be()}})},h=g=>{let U=g.status===Ie.ENABLED?Ie.DISABLED:Ie.ENABLED;Z?.(g.id,U),E.message.success(U===Ie.ENABLED?"\u5DF2\u542F\u7528":"\u5DF2\u7981\u7528"),be()},F=async()=>{try{let g=await Q.validateFields();ee?($?.(ee.id,g),E.message.success("\u7F16\u8F91\u6210\u529F")):(M?.(g),E.message.success("\u521B\u5EFA\u6210\u529F")),se(!1),be()}catch(g){console.error("Validation failed:",g)}},A=g=>{let U={[Ie.ENABLED]:{color:"success",text:"\u5DF2\u542F\u7528"},[Ie.DISABLED]:{color:"default",text:"\u5DF2\u7981\u7528"}},{color:he,text:ye}=U[g]||{color:"default",text:"\u672A\u77E5"};return S.default.createElement(E.Tag,{color:he},ye)},p=[{title:"\u89D2\u8272\u540D\u79F0",dataIndex:"name",key:"name",width:150,render:g=>S.default.createElement(E.Space,null,S.default.createElement(Je.TeamOutlined,{style:{color:"#1890ff"}}),S.default.createElement("span",{className:"role-name"},g))},{title:"\u63CF\u8FF0",dataIndex:"description",key:"description",width:200},{title:"\u7528\u6237\u6570",dataIndex:"adminCount",key:"adminCount",width:80,render:g=>S.default.createElement(E.Tag,{color:"blue"},g," \u4EBA")},{title:"\u72B6\u6001",dataIndex:"status",key:"status",width:80,render:g=>A(g)},{title:"\u6392\u5E8F",dataIndex:"sort",key:"sort",width:60},{title:"\u521B\u5EFA\u65F6\u95F4",dataIndex:"createTime",key:"createTime",width:160},{title:"\u64CD\u4F5C",key:"action",width:180,render:(g,U)=>S.default.createElement(E.Space,null,S.default.createElement(E.Button,{type:"link",size:"small",icon:S.default.createElement(Je.EditOutlined,null),onClick:()=>Oe(U)},"\u7F16\u8F91"),S.default.createElement(E.Button,{type:"link",size:"small",onClick:()=>h(U)},U.status===Ie.ENABLED?"\u7981\u7528":"\u542F\u7528"),S.default.createElement(E.Button,{type:"link",size:"small",danger:!0,icon:S.default.createElement(Je.DeleteOutlined,null),onClick:()=>ce(U.id)},"\u5220\u9664"))}],k={totalRoles:q.length,activeRoles:q.filter(g=>g.status===Ie.ENABLED).length,totalAdmins:q.reduce((g,U)=>g+U.adminCount,0)};return S.default.createElement("div",{className:`mall-role-card ${R||""}`,style:ne},S.default.createElement(E.Card,null,u&&S.default.createElement("div",{className:"statistics-section"},S.default.createElement(E.Space,{size:"large"},S.default.createElement("div",{className:"stat-item"},S.default.createElement("div",{className:"stat-value"},k.totalRoles),S.default.createElement("div",{className:"stat-label"},"\u89D2\u8272\u603B\u6570")),S.default.createElement(E.Divider,{type:"vertical",style:{height:40}}),S.default.createElement("div",{className:"stat-item"},S.default.createElement("div",{className:"stat-value",style:{color:"#52c41a"}},k.activeRoles),S.default.createElement("div",{className:"stat-label"},"\u542F\u7528\u89D2\u8272")),S.default.createElement(E.Divider,{type:"vertical",style:{height:40}}),S.default.createElement("div",{className:"stat-item"},S.default.createElement("div",{className:"stat-value",style:{color:"#1890ff"}},k.totalAdmins),S.default.createElement("div",{className:"stat-label"},"\u7528\u6237\u603B\u6570")))),s&&S.default.createElement("div",{className:"filter-section"},S.default.createElement(E.Space,{wrap:!0},S.default.createElement(E.Input,{placeholder:"\u89D2\u8272\u540D\u79F0/\u63CF\u8FF0",value:j,onChange:g=>W(g.target.value),style:{width:200}}),S.default.createElement(E.Select,{placeholder:"\u89D2\u8272\u72B6\u6001",value:K,onChange:ge,style:{width:120},allowClear:!0},Wt.map(g=>S.default.createElement(E.Select.Option,{key:g.value,value:g.value},g.label))),S.default.createElement(E.Button,{type:"primary",onClick:ue},"\u67E5\u8BE2"),S.default.createElement(E.Button,{onClick:xe},"\u91CD\u7F6E"))),t&&S.default.createElement("div",{className:"action-section"},S.default.createElement(E.Button,{type:"primary",icon:S.default.createElement(Je.PlusOutlined,null),onClick:we},"\u521B\u5EFA\u89D2\u8272")),S.default.createElement("div",{className:"content-section"},S.default.createElement("div",{className:"table-section"},S.default.createElement(E.Table,{columns:p,dataSource:ae,rowKey:"id",loading:T,pagination:{current:J,pageSize:pe,total:ie,showSizeChanger:!0,showQuickJumper:!0,showTotal:g=>`\u5171 ${g} \u6761`,onChange:(g,U)=>{D(g),d(U)}}})),x&&S.default.createElement("div",{className:"permission-section"},S.default.createElement(E.Card,{title:"\u6743\u9650\u6811",size:"small"},S.default.createElement(E.Tree,{checkable:!0,defaultExpandedKeys:["product","order"],treeData:te}))))),S.default.createElement(E.Modal,{title:ee?"\u7F16\u8F91\u89D2\u8272":"\u521B\u5EFA\u89D2\u8272",visible:P,onOk:F,onCancel:()=>se(!1),width:500},S.default.createElement(E.Form,{form:Q,layout:"vertical"},S.default.createElement(E.Form.Item,{name:"name",label:"\u89D2\u8272\u540D\u79F0",rules:[{required:!0,message:"\u8BF7\u8F93\u5165\u89D2\u8272\u540D\u79F0"}]},S.default.createElement(E.Input,{placeholder:"\u8BF7\u8F93\u5165\u89D2\u8272\u540D\u79F0"})),S.default.createElement(E.Form.Item,{name:"description",label:"\u63CF\u8FF0"},S.default.createElement(E.Input.TextArea,{rows:3,placeholder:"\u8BF7\u8F93\u5165\u89D2\u8272\u63CF\u8FF0"})),S.default.createElement(E.Form.Item,{name:"sort",label:"\u6392\u5E8F",initialValue:0},S.default.createElement(E.Input,{type:"number",placeholder:"\u6392\u5E8F\u503C"})),S.default.createElement(E.Form.Item,{name:"status",label:"\u72B6\u6001",initialValue:Ie.ENABLED},S.default.createElement(E.Switch,{checkedChildren:"\u542F\u7528",unCheckedChildren:"\u7981\u7528",defaultChecked:!0})))))},lt=Ar;var Y=_(ke());var oe=_(ke()),kt=_(Ae()),G=_(ze()),{SubMenu:fn}=kt.Menu,Tt=[{key:"dashboard",label:"\u5DE5\u4F5C\u53F0",icon:oe.default.createElement(G.DashboardOutlined,null),path:"/dashboard"},{key:"permission",label:"\u6743\u9650\u7BA1\u7406",icon:oe.default.createElement(G.SafetyCertificateOutlined,null),children:[{key:"permission/users",label:"\u7528\u6237\u7BA1\u7406",icon:oe.default.createElement(G.UserOutlined,null),path:"/permission/users"},{key:"permission/roles",label:"\u89D2\u8272\u7BA1\u7406",icon:oe.default.createElement(G.TeamOutlined,null),path:"/permission/roles"},{key:"permission/resources",label:"\u8D44\u6E90\u7BA1\u7406",icon:oe.default.createElement(G.SettingOutlined,null),path:"/permission/resources"},{key:"permission/menus",label:"\u83DC\u5355\u7BA1\u7406",icon:oe.default.createElement(G.FileTextOutlined,null),path:"/permission/menus"}]},{key:"product",label:"\u5546\u54C1\u7BA1\u7406",icon:oe.default.createElement(G.ShoppingOutlined,null),children:[{key:"product/list",label:"\u5546\u54C1\u5217\u8868",icon:oe.default.createElement(G.InboxOutlined,null),path:"/product/list"},{key:"product/add",label:"\u6DFB\u52A0\u5546\u54C1",icon:oe.default.createElement(G.ShoppingOutlined,null),path:"/product/add"},{key:"product/category",label:"\u5546\u54C1\u5206\u7C7B",icon:oe.default.createElement(G.TagsOutlined,null),path:"/product/category"},{key:"product/brand",label:"\u54C1\u724C\u7BA1\u7406",path:"/product/brand"},{key:"product/attribute",label:"\u5546\u54C1\u5C5E\u6027",path:"/product/attribute"}]},{key:"order",label:"\u8BA2\u5355\u7BA1\u7406",icon:oe.default.createElement(G.FileTextOutlined,null),children:[{key:"order/list",label:"\u8BA2\u5355\u5217\u8868",icon:oe.default.createElement(G.FileTextOutlined,null),path:"/order/list"},{key:"order/setting",label:"\u8BA2\u5355\u8BBE\u7F6E",icon:oe.default.createElement(G.SettingOutlined,null),path:"/order/setting"},{key:"order/return",label:"\u9000\u8D27\u7533\u8BF7",path:"/order/return"},{key:"order/reason",label:"\u9000\u8D27\u539F\u56E0",path:"/order/reason"}]},{key:"marketing",label:"\u8425\u9500\u7BA1\u7406",icon:oe.default.createElement(G.GiftOutlined,null),children:[{key:"marketing/coupon",label:"\u4F18\u60E0\u5238\u7BA1\u7406",icon:oe.default.createElement(G.GiftOutlined,null),path:"/marketing/coupon"},{key:"marketing/promotion",label:"\u4FC3\u9500\u6D3B\u52A8",icon:oe.default.createElement(G.DollarOutlined,null),path:"/marketing/promotion"},{key:"marketing/flash",label:"\u79D2\u6740\u6D3B\u52A8",icon:oe.default.createElement(G.ThunderboltOutlined,null),path:"/marketing/flash"},{key:"marketing/new",label:"\u65B0\u54C1\u63A8\u8350",icon:oe.default.createElement(G.FireOutlined,null),path:"/marketing/new"},{key:"marketing/hot",label:"\u4EBA\u6C14\u63A8\u8350",icon:oe.default.createElement(G.FireOutlined,null),path:"/marketing/hot"},{key:"marketing/advertise",label:"\u5E7F\u544A\u7BA1\u7406",path:"/marketing/advertise"},{key:"marketing/subject",label:"\u4E13\u9898\u7BA1\u7406",path:"/marketing/subject"},{key:"marketing/brand",label:"\u54C1\u724C\u63A8\u8350",path:"/marketing/brand"}]}],Lr=({collapsed:m,selectedKey:t,openKeys:s,onMenuClick:u,onOpenChange:x,menuItems:M})=>{let $=M||Tt,[X,Z]=(0,oe.useState)($.filter(T=>T.children).map(T=>T.key)),ne=T=>{let z=T[T.length-1];z&&$.some(ae=>ae.key===z)?(Z(T),x(T)):(Z(z?[z]:[]),x(z?[z]:[]))},R=({key:T})=>{u(T)};return oe.default.createElement("div",{className:`sidebar-container ${m?"collapsed":""}`},oe.default.createElement("div",{className:"sidebar-logo"},!m&&oe.default.createElement("span",{className:"logo-text"},"Mall Admin"),m&&oe.default.createElement("span",{className:"logo-icon"},"M")),oe.default.createElement(kt.Menu,{mode:"inline",theme:"dark",inlineCollapsed:m,selectedKeys:[t],defaultOpenKeys:X,openKeys:s.length>0?s:X,onClick:R,onOpenChange:ne,items:$.map(T=>T.children&&T.children.length>0?{key:T.key,icon:T.icon,label:T.label,children:T.children.map(z=>({key:z.key,icon:z.icon,label:z.label}))}:{key:T.key,icon:T.icon,label:T.label})}))},Xt=Lr;var Ce=_(ke()),Qe=_(Ae()),Be=_(ze());var dt=_(ke()),Pt=_(Ae()),Fr={dashboard:"\u5DE5\u4F5C\u53F0",permission:"\u6743\u9650\u7BA1\u7406",product:"\u5546\u54C1\u7BA1\u7406",order:"\u8BA2\u5355\u7BA1\u7406",marketing:"\u8425\u9500\u7BA1\u7406",users:"\u7528\u6237\u7BA1\u7406",roles:"\u89D2\u8272\u7BA1\u7406",resources:"\u8D44\u6E90\u7BA1\u7406",menus:"\u83DC\u5355\u7BA1\u7406",list:"\u5217\u8868",add:"\u6DFB\u52A0",category:"\u5206\u7C7B",brand:"\u54C1\u724C",attribute:"\u5C5E\u6027",setting:"\u8BBE\u7F6E",return:"\u9000\u8D27",reason:"\u539F\u56E0",coupon:"\u4F18\u60E0\u5238",promotion:"\u4FC3\u9500",flash:"\u79D2\u6740",new:"\u65B0\u54C1",hot:"\u4EBA\u6C14",advertise:"\u5E7F\u544A",subject:"\u4E13\u9898"},Ur=({items:m,onNavigate:t})=>{let s=u=>u.split("/").map(M=>Fr[M]||M).join(" / ");return!m||m.length===0?null:dt.default.createElement(Pt.Breadcrumb,null,m.map(u=>dt.default.createElement(Pt.Breadcrumb.Item,{key:u.key},dt.default.createElement("a",{onClick:()=>t(u.key)},u.label||s(u.key)))))},Zt=Ur;var Mr=({collapsed:m,onToggleCollapse:t,breadcrumbItems:s,onNavigate:u})=>Ce.default.createElement("div",{className:"navbar-container"},Ce.default.createElement("div",{className:"navbar-left"},Ce.default.createElement("button",{className:"hamburger-btn",onClick:t},m?Ce.default.createElement(Be.MenuUnfoldOutlined,null):Ce.default.createElement(Be.MenuFoldOutlined,null)),Ce.default.createElement(Zt,{items:s,onNavigate:u})),Ce.default.createElement("div",{className:"navbar-right"},Ce.default.createElement(Qe.Dropdown,{overlay:Ce.default.createElement(Qe.Menu,{items:[{key:"profile",icon:Ce.default.createElement(Be.UserOutlined,null),label:"\u4E2A\u4EBA\u4E2D\u5FC3"},{key:"settings",icon:Ce.default.createElement(Be.SettingOutlined,null),label:"\u7CFB\u7EDF\u8BBE\u7F6E"},{type:"divider"},{key:"logout",icon:Ce.default.createElement(Be.LogoutOutlined,null),label:"\u9000\u51FA\u767B\u5F55",danger:!0}],onClick:({key:X})=>{X==="logout"&&console.log("User logged out")}}),placement:"bottomRight"},Ce.default.createElement("div",{className:"user-info"},Ce.default.createElement(Qe.Avatar,{size:32,icon:Ce.default.createElement(Be.UserOutlined,null),className:"user-avatar"}),Ce.default.createElement(Qe.Space,{size:4,className:"username"},Ce.default.createElement("span",null,"\u7BA1\u7406\u5458")))))),Rt=Mr;var Xe=_(ke());var H=_(ke()),mt=_(Ae()),je=_(ze()),Br=({tabs:m,activeTabKey:t,onTabClick:s,onCloseTab:u,onCloseOther:x,onCloseAll:M,closableTabs:$=!0})=>{let[X,Z]=(0,H.useState)(null),[ne,R]=(0,H.useState)(!1),[T,z]=(0,H.useState)(""),[ae,me]=(0,H.useState)({x:0,y:0}),ie=(0,H.useRef)(null);(0,H.useEffect)(()=>{if(ie.current&&t){let d=ie.current.querySelector(`[data-tab-key="${t}"]`);d&&d.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"})}},[t]),(0,H.useEffect)(()=>{let d=()=>R(!1);if(ne)return document.addEventListener("click",d),()=>document.removeEventListener("click",d)},[ne]);let V=(d,j)=>{d.preventDefault(),d.stopPropagation(),z(j),me({x:d.clientX,y:d.clientY}),R(!0)},J=d=>{switch(R(!1),d){case"close":u(T);break;case"closeOther":x(T);break;case"closeAll":M();break;case"refresh":window.location.reload();break}};if(!m||m.length===0)return null;let D=[{key:"refresh",icon:H.default.createElement(je.ReloadOutlined,null),label:"\u5237\u65B0\u5F53\u524D\u9875"},{key:"close",icon:H.default.createElement(je.CloseOutlined,null),label:"\u5173\u95ED\u5F53\u524D",disabled:!$||m.find(d=>d.key===T)?.closable===!1},{type:"divider"},{key:"closeOther",icon:H.default.createElement(je.CloseCircleOutlined,null),label:"\u5173\u95ED\u5176\u4ED6",disabled:m.length<=1},{key:"closeAll",icon:H.default.createElement(je.CloseCircleOutlined,null),label:"\u5173\u95ED\u6240\u6709"}],pe=H.default.createElement(mt.Menu,{items:D,onClick:({key:d})=>J(d)});return H.default.createElement(H.default.Fragment,null,H.default.createElement("div",{className:"tab-bar-container"},H.default.createElement("div",{className:"tab-bar-scroll",ref:ie},m.map(d=>H.default.createElement("div",{key:d.key,"data-tab-key":d.key,className:`tab-item ${t===d.key?"active":""} ${X===d.key?"hovered":""}`,onClick:()=>s(d.key),onMouseEnter:()=>Z(d.key),onMouseLeave:()=>Z(null),onContextMenu:j=>V(j,d.key)},d.icon&&H.default.createElement("span",{className:"tab-icon"},d.icon),H.default.createElement("span",{className:"tab-label"},d.label),$&&d.closable&&H.default.createElement("span",{className:`tab-close-btn ${X===d.key||t===d.key?"visible":""}`,onClick:j=>{j.stopPropagation(),u(d.key)}},H.default.createElement(je.CloseOutlined,{style:{fontSize:10}}))))),$&&m.length>1&&H.default.createElement("div",{className:"tab-actions"},H.default.createElement("button",{className:"close-all-btn",onClick:M,title:"\u5173\u95ED\u5168\u90E8\u6807\u7B7E"},H.default.createElement(je.CloseCircleOutlined,null)))),ne&&H.default.createElement("div",{style:{position:"fixed",left:ae.x,top:ae.y,zIndex:1e3}},H.default.createElement(mt.Dropdown,{overlay:pe,visible:ne,onVisibleChange:R,trigger:["click"]},H.default.createElement("div",{style:{width:0,height:0}}))))},er=Br;var zr=({children:m,pageKey:t,tabs:s,activeTabKey:u,onTabClick:x,onCloseTab:M,onCloseOther:$,onCloseAll:X,enableTabs:Z=!0,closableTabs:ne=!0,className:R=""})=>Xe.default.createElement("main",{className:`main-content ${R}`},Z&&s.length>0&&Xe.default.createElement(er,{tabs:s,activeTabKey:u,onTabClick:x,onCloseTab:M,onCloseOther:$,onCloseAll:X,closableTabs:ne}),Xe.default.createElement("div",{className:"content-wrapper"},Xe.default.createElement("div",{className:"page-container",key:t},m))),tr=zr;var ct=(m,t)=>{for(let s of m){if(s.key===t)return s;if(s.children){let u=ct(s.children,t);if(u)return u}}},ut=m=>{let t=m.split("/");return{dashboard:"\u5DE5\u4F5C\u53F0",permission:"\u6743\u9650\u7BA1\u7406",product:"\u5546\u54C1\u7BA1\u7406",order:"\u8BA2\u5355\u7BA1\u7406",marketing:"\u8425\u9500\u7BA1\u7406",users:"\u7528\u6237\u7BA1\u7406",roles:"\u89D2\u8272\u7BA1\u7406",resources:"\u8D44\u6E90\u7BA1\u7406",menus:"\u83DC\u5355\u7BA1\u7406",list:"\u5217\u8868",add:"\u6DFB\u52A0",category:"\u5206\u7C7B",brand:"\u54C1\u724C",attribute:"\u5C5E\u6027",setting:"\u8BBE\u7F6E",return:"\u9000\u8D27\u7533\u8BF7",reason:"\u9000\u8D27\u539F\u56E0",coupon:"\u4F18\u60E0\u5238\u7BA1\u7406",promotion:"\u4FC3\u9500\u6D3B\u52A8",flash:"\u79D2\u6740\u6D3B\u52A8",new:"\u65B0\u54C1\u63A8\u8350",hot:"\u4EBA\u6C14\u63A8\u8350",advertise:"\u5E7F\u544A\u7BA1\u7406",subject:"\u4E13\u9898\u7BA1\u7406"}[t[t.length-1]]||t[t.length-1]},_r=({defaultSelectedKey:m="dashboard",defaultOpenKeys:t,collapsible:s=!0,enableTabs:u=!0,maxTabs:x=10,closableTabs:M=!0,logoText:$="Mall Admin",menuItems:X,style:Z,className:ne,children:R,__designMode:T,componentId:z})=>{let ae=X||Tt,[me,ie]=(0,Y.useState)(!1),[V,J]=(0,Y.useState)(m),[D,pe]=(0,Y.useState)(t||[]),[d,j]=(0,Y.useState)(()=>{let h=ct(ae,m);return[{key:m,label:h?.label||ut(m),icon:h?.icon,closable:!1,path:h?.path||`/${m}`}]}),[W,K]=(0,Y.useState)(m),ge=(0,Y.useRef)(W);ge.current=W,(0,Y.useEffect)(()=>{if(!(T!=="design"||!z))try{let h=window.AliLowCodeEngine;if(!h?.project?.currentDocument)return;let A=h.project.currentDocument.getNodeById(z);A?.children&&(Array.isArray(A.children)?A.children:A.children.toArray?A.children.toArray():[]).forEach(k=>{k.componentName==="TabPane"&&k.setPropValue("activeTabKey",W)})}catch{}},[W,z,T]);let P=(0,Y.useCallback)(()=>{s&&ie(h=>!h)},[s]),se=(0,Y.useCallback)((h,F)=>{if(typeof window>"u")return!1;try{let A=window.AliLowCodeEngine;if(!A||!A.project)return console.warn("[AdminLayout] LowCode engine not found"),!1;let p=A.project.currentDocument;if(!p)return console.warn("[AdminLayout] Document model not found"),!1;let k=z?p.getNodeById(z):null;if(!k)return console.warn("[AdminLayout] AdminLayout node not found, componentId:",z),!1;if(k.children){let he=(Array.isArray(k.children)?k.children:k.children.toArray?k.children.toArray():[]).find(ye=>{let Ne=ye.props?.tabKey||ye.getPropValue?.("tabKey");return ye.componentName==="TabPane"&&Ne===h});if(he)return console.log(`[AdminLayout] \u2139\uFE0F TabPane with key="${h}" already exists`),he.setPropValue("activeTabKey",ge.current),!0}console.log("[AdminLayout] \u{1F50D} Creating TabPane for:",h);let g=p.createNode({componentName:"TabPane",props:{tab:F,tabKey:h,activeTabKey:ge.current}});if(!g)return console.error("[AdminLayout] Failed to create TabPane node"),!1;try{return typeof p.insertNode=="function"?(p.insertNode(k,g),console.log(`[AdminLayout] \u2705 Created TabPane with key="${h}" via insertNode()`),!0):(console.error("[AdminLayout] No valid insertion method found"),!1)}catch(U){return console.error("[AdminLayout] \u274C Insertion error:",U),!1}}catch(A){return console.error("[AdminLayout] \u274C Failed to create TabPane:",A),!1}},[z]),ee=(0,Y.useCallback)(h=>{if(J(h),!d.find(A=>A.key===h)){let A=ct(ae,h),p={key:h,label:A?.label||ut(h),icon:A?.icon,closable:h!=="dashboard",path:A?.path||`/${h}`};j(k=>{if(k.length>=x){let g=k.filter(U=>U.closable);if(g.length>0){let U=g[0].key;return[...k.filter(he=>he.key!==U),p]}}return[...k,p]}),T==="design"&&setTimeout(()=>{se(h,A?.label||ut(h))},0)}K(h)},[d,ae,x,T,se]),O=(0,Y.useCallback)(h=>{pe(h)},[]),Q=(0,Y.useCallback)(h=>{J(h),K(h)},[]),q=(0,Y.useCallback)(h=>{J(h),K(h)},[]),te=(0,Y.useCallback)(h=>{if(!(typeof window>"u"))try{let F=window.AliLowCodeEngine;if(!F||!F.project){console.warn("[AdminLayout] LowCode engine not found");return}let A=F.project.currentDocument;if(!A){console.warn("[AdminLayout] Document model not found");return}let p=z?A.getNodeById(z):null;if(!p){console.warn("[AdminLayout] AdminLayout node not found");return}if(p.children){let k=Array.isArray(p.children)?p.children:p.children.toArray?p.children.toArray():[];for(let g of k){let U=g.props?.tabKey||g.getPropValue?.("tabKey");if(g.componentName==="TabPane"&&U===h){try{A.removeNode(g),console.log(`[AdminLayout] \u2705 Removed TabPane with tabKey: ${h}`)}catch(he){console.error("[AdminLayout] Error removing TabPane:",he)}break}}}}catch(F){console.error("[AdminLayout] Failed to remove TabPane:",F)}},[z]),be=(0,Y.useCallback)(h=>{if(h!=="dashboard"&&(te(h),j(F=>F.filter(A=>A.key!==h)),h===W)){let F=d.filter(A=>A.key!==h);if(F.length>0){let A=d.findIndex(k=>k.key===h),p=F[A]||F[F.length-1];J(p.key),K(p.key)}}},[d,W,te]),ue=(0,Y.useCallback)(h=>{d.forEach(F=>{F.key!==h&&F.key!=="dashboard"&&te(F.key)}),j(F=>F.filter(A=>A.key===h||A.key==="dashboard")),J(h),K(h)},[d,te]),xe=(0,Y.useCallback)(()=>{d.forEach(F=>{F.key!=="dashboard"&&te(F.key)});let h=d.find(F=>F.key==="dashboard");h&&(j([h]),J("dashboard"),K("dashboard"))},[d,te]),we=(0,Y.useMemo)(()=>V==="dashboard"?[]:V.split("/").length===1?[{key:V,label:"",path:V}]:[{key:V,label:"",path:V}],[V]),Oe=Y.default.createElement("div",{style:{padding:24}},Y.default.createElement("h2",null,ct(ae,V)?.label||ut(V)),Y.default.createElement("p",null,"\u5F53\u524D\u9875\u9762\uFF1A",V),Y.default.createElement("p",{style:{color:"#999",marginTop:16}},"\u{1F4A1} \u63D0\u793A\uFF1A\u70B9\u51FB\u4FA7\u8FB9\u680F\u83DC\u5355\u4F1A\u81EA\u52A8\u521B\u5EFA TabPane\uFF0C\u7136\u540E\u53EF\u62D6\u62FD\u7EC4\u4EF6\u5230\u5BF9\u5E94\u7684\u9762\u677F\u4E2D")),ce=R||Oe;return Y.default.createElement("div",{className:`admin-layout ${me?"is-collapse":""} ${ne||""}`,style:Z,"data-active-tab":W},Y.default.createElement(Xt,{collapsed:me,selectedKey:V,openKeys:D,onMenuClick:ee,onOpenChange:O,menuItems:ae}),Y.default.createElement("div",{className:"layout-right"},Y.default.createElement(Rt,{collapsed:me,onToggleCollapse:P,breadcrumbItems:we,onNavigate:Q}),Y.default.createElement(tr,{pageKey:V,tabs:d,activeTabKey:W,onTabClick:q,onCloseTab:be,onCloseOther:ue,onCloseAll:xe,enableTabs:u,closableTabs:M,className:me?"collapsed":""},ce)),s&&Y.default.createElement("div",{className:`mobile-overlay ${me?"":"visible"}`,onClick:P}))},pt=_r;var rr=_(ke()),Yr=({tab:m,tabKey:t,activeTabKey:s,children:u,className:x,style:M})=>{let $=s===t;return rr.default.createElement("div",{className:`tab-pane ${$?"tab-pane--active":""} ${x||""}`,style:{...M,display:$?void 0:"none"},"data-tab-key":t,"data-active":$?"true":"false"},u)},gt=Yr;var Vr={ProductList:xt,ProductForm:Ct,OrderList:ot,OrderForm:nt,CouponCard:at,PromotionCard:it,UserCard:st,RoleCard:lt,AdminLayout:pt,TabPane:gt},jr=Vr;return Cr($r);})();
+"use strict";
+var MallComponents = (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+  // src/shims/react.js
+  var require_react = __commonJS({
+    "src/shims/react.js"(exports, module) {
+      "use strict";
+      var React34 = typeof window !== "undefined" && window.React || {};
+      module.exports = React34;
+    }
+  });
+
+  // src/shims/antd.js
+  var require_antd = __commonJS({
+    "src/shims/antd.js"(exports, module) {
+      "use strict";
+      var antd = typeof window !== "undefined" && window.antd || {};
+      module.exports = antd;
+    }
+  });
+
+  // node_modules/classnames/index.js
+  var require_classnames = __commonJS({
+    "node_modules/classnames/index.js"(exports, module) {
+      (function() {
+        "use strict";
+        var hasOwn = {}.hasOwnProperty;
+        function classNames2() {
+          var classes = "";
+          for (var i = 0; i < arguments.length; i++) {
+            var arg = arguments[i];
+            if (arg) {
+              classes = appendClass(classes, parseValue(arg));
+            }
+          }
+          return classes;
+        }
+        function parseValue(arg) {
+          if (typeof arg === "string" || typeof arg === "number") {
+            return arg;
+          }
+          if (typeof arg !== "object") {
+            return "";
+          }
+          if (Array.isArray(arg)) {
+            return classNames2.apply(null, arg);
+          }
+          if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes("[native code]")) {
+            return arg.toString();
+          }
+          var classes = "";
+          for (var key in arg) {
+            if (hasOwn.call(arg, key) && arg[key]) {
+              classes = appendClass(classes, key);
+            }
+          }
+          return classes;
+        }
+        function appendClass(value, newClass) {
+          if (!newClass) {
+            return value;
+          }
+          if (value) {
+            return value + " " + newClass;
+          }
+          return value + newClass;
+        }
+        if (typeof module !== "undefined" && module.exports) {
+          classNames2.default = classNames2;
+          module.exports = classNames2;
+        } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
+          define("classnames", [], function() {
+            return classNames2;
+          });
+        } else {
+          window.classNames = classNames2;
+        }
+      })();
+    }
+  });
+
+  // src/plugins/plugin-mall-components/entry-components.ts
+  var entry_components_exports = {};
+  __export(entry_components_exports, {
+    MallComponents: () => MallComponents,
+    default: () => entry_components_default
+  });
+
+  // src/plugins/plugin-mall-components/components/ProductList/ProductList.tsx
+  var import_react = __toESM(require_react());
+  var import_antd = __toESM(require_antd());
+  var ProductList = ({
+    style,
+    className
+  }) => {
+    const columns2 = [
+      {
+        title: "商品名称",
+        dataIndex: "name",
+        key: "name"
+      },
+      {
+        title: "商品货号",
+        dataIndex: "productSn",
+        key: "productSn"
+      },
+      {
+        title: "价格",
+        dataIndex: "price",
+        key: "price",
+        render: (price) => `¥${price}`
+      },
+      {
+        title: "库存",
+        dataIndex: "stock",
+        key: "stock"
+      },
+      {
+        title: "状态",
+        dataIndex: "status",
+        key: "status",
+        render: (status) => /* @__PURE__ */ import_react.default.createElement(import_antd.Tag, { color: status === 1 ? "green" : "red" }, status === 1 ? "上架" : "下架")
+      },
+      {
+        title: "操作",
+        key: "action",
+        render: () => /* @__PURE__ */ import_react.default.createElement(import_antd.Space, { size: "middle" }, /* @__PURE__ */ import_react.default.createElement("a", null, "编辑"), /* @__PURE__ */ import_react.default.createElement("a", null, "删除"))
+      }
+    ];
+    const data = [
+      { key: "1", name: "示例商品1", productSn: "SN001", price: 99.99, stock: 100, status: 1 },
+      { key: "2", name: "示例商品2", productSn: "SN002", price: 199.99, stock: 50, status: 1 },
+      { key: "3", name: "示例商品3", productSn: "SN003", price: 299.99, stock: 0, status: 0 }
+    ];
+    return /* @__PURE__ */ import_react.default.createElement("div", { className: `mall-product-list ${className || ""}`, style }, /* @__PURE__ */ import_react.default.createElement(import_antd.Table, { columns: columns2, dataSource: data }));
+  };
+  var ProductList_default = ProductList;
+
+  // src/plugins/plugin-mall-components/components/ProductForm/ProductForm.tsx
+  var import_react2 = __toESM(require_react());
+  var import_antd2 = __toESM(require_antd());
+  var ProductForm = ({
+    showName = true,
+    showProductSn = true,
+    showBrandName = true,
+    showCategory = true,
+    showPrice = true,
+    showStock = true,
+    showDescription = true,
+    onSubmit,
+    onCancel,
+    style,
+    className
+  }) => {
+    const [form] = import_antd2.Form.useForm();
+    const handleSubmit = async () => {
+      try {
+        const values = await form.validateFields();
+        onSubmit?.(values);
+        import_antd2.message.success("提交成功");
+      } catch (error) {
+        console.error("Validation failed:", error);
+      }
+    };
+    return /* @__PURE__ */ import_react2.default.createElement("div", { className: `mall-product-form ${className || ""}`, style }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Card, null, /* @__PURE__ */ import_react2.default.createElement(
+      import_antd2.Form,
+      {
+        form,
+        layout: "vertical"
+      },
+      showName && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "name", label: "商品名称", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入商品名称" })),
+      showProductSn && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "productSn", label: "商品货号", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入商品货号" })),
+      showBrandName && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "brandName", label: "品牌名称" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input, { placeholder: "请输入品牌名称" })),
+      showCategory && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "productCategoryName", label: "商品分类" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select, { placeholder: "请选择" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select.Option, { value: "手机" }, "手机"), /* @__PURE__ */ import_react2.default.createElement(import_antd2.Select.Option, { value: "笔记本" }, "笔记本"))),
+      showPrice && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "price", label: "价格", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.InputNumber, { style: { width: "100%" }, min: 0, prefix: "¥" })),
+      showStock && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "stock", label: "库存", rules: [{ required: true }] }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.InputNumber, { style: { width: "100%" }, min: 0 })),
+      showDescription && /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, { name: "description", label: "描述" }, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Input.TextArea, { rows: 4 })),
+      /* @__PURE__ */ import_react2.default.createElement(import_antd2.Form.Item, null, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Space, null, /* @__PURE__ */ import_react2.default.createElement(import_antd2.Button, { type: "primary", onClick: handleSubmit }, "提交"), /* @__PURE__ */ import_react2.default.createElement(import_antd2.Button, { onClick: onCancel }, "取消")))
+    )));
+  };
+  var ProductForm_default = ProductForm;
+
+  // src/plugins/plugin-mall-components/components/OrderList/OrderList.tsx
+  var import_react3 = __toESM(require_react());
+  var import_antd3 = __toESM(require_antd());
+  var mockData = [
+    {
+      key: "1",
+      orderNo: "ORD-20240101-001",
+      customer: "张三",
+      amount: 299,
+      status: "paid",
+      createTime: "2024-01-01 10:30:00"
+    },
+    {
+      key: "2",
+      orderNo: "ORD-20240101-002",
+      customer: "李四",
+      amount: 599,
+      status: "shipped",
+      createTime: "2024-01-01 11:20:00"
+    },
+    {
+      key: "3",
+      orderNo: "ORD-20240101-003",
+      customer: "王五",
+      amount: 129,
+      status: "pending",
+      createTime: "2024-01-01 14:15:00"
+    }
+  ];
+  var columns = [
+    {
+      title: "订单号",
+      dataIndex: "orderNo",
+      key: "orderNo",
+      width: 180
+    },
+    {
+      title: "客户",
+      dataIndex: "customer",
+      key: "customer"
+    },
+    {
+      title: "金额 (¥)",
+      dataIndex: "amount",
+      key: "amount",
+      render: (amount) => /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "#f5222d", fontWeight: 500 } }, amount.toFixed(2))
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => {
+        const colorMap = {
+          pending: "orange",
+          paid: "blue",
+          shipped: "green",
+          completed: "default",
+          cancelled: "red"
+        };
+        const labelMap2 = {
+          pending: "待付款",
+          paid: "已付款",
+          shipped: "已发货",
+          completed: "已完成",
+          cancelled: "已取消"
+        };
+        return /* @__PURE__ */ import_react3.default.createElement(import_antd3.Tag, { color: colorMap[status] }, labelMap2[status]);
+      }
+    },
+    {
+      title: "创建时间",
+      dataIndex: "createTime",
+      key: "createTime"
+    }
+  ];
+  var OrderList = ({ status }) => {
+    const filteredData = status ? mockData.filter((item) => item.status === status) : mockData;
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "order-list" }, /* @__PURE__ */ import_react3.default.createElement("h3", { style: { marginBottom: 16 } }, "订单列表"), /* @__PURE__ */ import_react3.default.createElement(
+      import_antd3.Table,
+      {
+        dataSource: filteredData,
+        columns,
+        pagination: { pageSize: 10 },
+        size: "middle"
+      }
+    ));
+  };
+  var OrderList_default = OrderList;
+
+  // src/plugins/plugin-mall-components/components/MarketingManager/MarketingManager.tsx
+  var import_react4 = __toESM(require_react());
+  var import_antd4 = __toESM(require_antd());
+  var MarketingManager = ({ type = "coupon", showStats = true }) => {
+    const typeLabels = {
+      coupon: "优惠券管理",
+      promotion: "促销活动",
+      flash: "秒杀活动",
+      new: "新品推荐",
+      hot: "人气推荐"
+    };
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "marketing-manager" }, /* @__PURE__ */ import_react4.default.createElement("h3", { style: { marginBottom: 16 } }, typeLabels[type] || type), showStats && /* @__PURE__ */ import_react4.default.createElement(import_antd4.Row, { gutter: 16, style: { marginBottom: 24 } }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "活动总数", value: 12 }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "进行中", value: 5, valueStyle: { color: "#3f8600" } }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "已结束", value: 7 }))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, { span: 6 }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { size: "small" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Statistic, { title: "参与人数", value: 1234, suffix: "人" })))), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Space, { direction: "vertical", style: { width: "100%" }, size: "middle" }, [
+      { id: 1, name: "新年优惠券", status: "active", discount: 20, count: 500 },
+      { id: 2, name: "会员专享", status: "active", discount: 15, count: 1e3 },
+      { id: 3, name: "满减优惠", status: "expired", discount: 30, count: 200 },
+      { id: 4, name: "新人礼包", status: "pending", discount: 50, count: 800 }
+    ].map((item) => /* @__PURE__ */ import_react4.default.createElement(import_antd4.Card, { key: item.id, size: "small", hoverable: true }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Row, { justify: "space-between", align: "middle" }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Tag, { color: item.status === "active" ? "green" : item.status === "expired" ? "red" : "orange", style: { marginLeft: 8 } }, item.status === "active" ? "进行中" : item.status === "expired" ? "已过期" : "未开始")), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement("span", { style: { marginRight: 16 } }, "折扣：", item.discount, "%"), /* @__PURE__ */ import_react4.default.createElement("span", null, "剩余：", item.count, " 张")), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Col, null, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "link", size: "small" }, "编辑"), /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "link", size: "small" }, "查看")))))), /* @__PURE__ */ import_react4.default.createElement("div", { style: { marginTop: 16, textAlign: "right" } }, /* @__PURE__ */ import_react4.default.createElement(import_antd4.Button, { type: "primary" }, "+ 创建新", typeLabels[type])));
+  };
+  var MarketingManager_default = MarketingManager;
+
+  // src/plugins/plugin-mall-components/setters/RestApiTester.tsx
+  var import_react5 = __toESM(require_react());
+  var import_antd5 = __toESM(require_antd());
+  var { TextArea } = import_antd5.Input;
+  var RestApiTester = ({ style, className }) => {
+    const [url, setUrl] = (0, import_react5.useState)("");
+    const [method, setMethod] = (0, import_react5.useState)("GET");
+    const [response, setResponse] = (0, import_react5.useState)("");
+    const [loading, setLoading] = (0, import_react5.useState)(false);
+    const handleExecute = async () => {
+      if (!url) return;
+      setLoading(true);
+      try {
+        const res = await fetch(url, { method });
+        const data = await res.json();
+        setResponse(JSON.stringify(data, null, 2));
+      } catch (err) {
+        setResponse(`Error: ${err}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    return /* @__PURE__ */ import_react5.default.createElement("div", { className: `rest-api-tester ${className || ""}`, style }, /* @__PURE__ */ import_react5.default.createElement(import_antd5.Card, { title: "REST API 测试" }, /* @__PURE__ */ import_react5.default.createElement(import_antd5.Space, { direction: "vertical", style: { width: "100%" }, size: "middle" }, /* @__PURE__ */ import_react5.default.createElement(
+      import_antd5.Input,
+      {
+        placeholder: "API 地址",
+        value: url,
+        onChange: (e) => setUrl(e.target.value)
+      }
+    ), /* @__PURE__ */ import_react5.default.createElement(
+      import_antd5.Select,
+      {
+        value: method,
+        onChange: setMethod,
+        options: [
+          { label: "GET", value: "GET" },
+          { label: "POST", value: "POST" },
+          { label: "PUT", value: "PUT" },
+          { label: "DELETE", value: "DELETE" }
+        ],
+        style: { width: 120 }
+      }
+    ), /* @__PURE__ */ import_react5.default.createElement(import_antd5.Button, { type: "primary", onClick: handleExecute, loading }, "执行"), /* @__PURE__ */ import_react5.default.createElement(
+      TextArea,
+      {
+        value: response,
+        readOnly: true,
+        rows: 10,
+        placeholder: "响应结果"
+      }
+    ))));
+  };
+  var RestApiTester_default = RestApiTester;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/AdminLayout.tsx
+  var import_react13 = __toESM(require_react());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Sidebar.tsx
+  var import_react8 = __toESM(require_react());
+  var import_antd6 = __toESM(require_antd());
+
+  // node_modules/@ant-design/icons/es/components/Context.js
+  var import_react6 = __toESM(require_react());
+  var IconContext = /* @__PURE__ */ (0, import_react6.createContext)({});
+  var Context_default = IconContext;
+
+  // node_modules/@babel/runtime/helpers/esm/typeof.js
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+      return typeof o2;
+    } : function(o2) {
+      return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+    }, _typeof(o);
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+  function toPrimitive(t, r) {
+    if ("object" != _typeof(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != _typeof(i)) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+  function toPropertyKey(t) {
+    var i = toPrimitive(t, "string");
+    return "symbol" == _typeof(i) ? i : i + "";
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/defineProperty.js
+  function _defineProperty(e, r, t) {
+    return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    }) : e[r] = t, e;
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/objectSpread2.js
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function(r2) {
+        return Object.getOwnPropertyDescriptor(e, r2).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), true).forEach(function(r2) {
+        _defineProperty(e, r2, t[r2]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r2) {
+        Object.defineProperty(e, r2, Object.getOwnPropertyDescriptor(t, r2));
+      });
+    }
+    return e;
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+  function _iterableToArrayLimit(r, l) {
+    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (null != t) {
+      var e, n, i, u, a = [], f = true, o = false;
+      try {
+        if (i = (t = t.call(r)).next, 0 === l) {
+          if (Object(t) !== t) return;
+          f = false;
+        } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = true) ;
+      } catch (r2) {
+        o = true, n = r2;
+      } finally {
+        try {
+          if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+        } finally {
+          if (o) throw n;
+        }
+      }
+      return a;
+    }
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    }
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+  function _slicedToArray(r, e) {
+    return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+  function _objectWithoutPropertiesLoose(r, e) {
+    if (null == r) return {};
+    var t = {};
+    for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+      if (-1 !== e.indexOf(n)) continue;
+      t[n] = r[n];
+    }
+    return t;
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js
+  function _objectWithoutProperties(e, t) {
+    if (null == e) return {};
+    var o, r, i = _objectWithoutPropertiesLoose(e, t);
+    if (Object.getOwnPropertySymbols) {
+      var n = Object.getOwnPropertySymbols(e);
+      for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+    }
+    return i;
+  }
+
+  // node_modules/@ant-design/icons/es/components/AntdIcon.js
+  var React7 = __toESM(require_react());
+  var import_classnames = __toESM(require_classnames());
+
+  // node_modules/@ctrl/tinycolor/dist/module/util.js
+  function bound01(n, max) {
+    if (isOnePointZero(n)) {
+      n = "100%";
+    }
+    var isPercent = isPercentage(n);
+    n = max === 360 ? n : Math.min(max, Math.max(0, parseFloat(n)));
+    if (isPercent) {
+      n = parseInt(String(n * max), 10) / 100;
+    }
+    if (Math.abs(n - max) < 1e-6) {
+      return 1;
+    }
+    if (max === 360) {
+      n = (n < 0 ? n % max + max : n % max) / parseFloat(String(max));
+    } else {
+      n = n % max / parseFloat(String(max));
+    }
+    return n;
+  }
+  function isOnePointZero(n) {
+    return typeof n === "string" && n.indexOf(".") !== -1 && parseFloat(n) === 1;
+  }
+  function isPercentage(n) {
+    return typeof n === "string" && n.indexOf("%") !== -1;
+  }
+  function boundAlpha(a) {
+    a = parseFloat(a);
+    if (isNaN(a) || a < 0 || a > 1) {
+      a = 1;
+    }
+    return a;
+  }
+  function convertToPercentage(n) {
+    if (n <= 1) {
+      return "".concat(Number(n) * 100, "%");
+    }
+    return n;
+  }
+  function pad2(c) {
+    return c.length === 1 ? "0" + c : String(c);
+  }
+
+  // node_modules/@ctrl/tinycolor/dist/module/conversion.js
+  function rgbToRgb(r, g, b) {
+    return {
+      r: bound01(r, 255) * 255,
+      g: bound01(g, 255) * 255,
+      b: bound01(b, 255) * 255
+    };
+  }
+  function hue2rgb(p, q, t) {
+    if (t < 0) {
+      t += 1;
+    }
+    if (t > 1) {
+      t -= 1;
+    }
+    if (t < 1 / 6) {
+      return p + (q - p) * (6 * t);
+    }
+    if (t < 1 / 2) {
+      return q;
+    }
+    if (t < 2 / 3) {
+      return p + (q - p) * (2 / 3 - t) * 6;
+    }
+    return p;
+  }
+  function hslToRgb(h, s, l) {
+    var r;
+    var g;
+    var b;
+    h = bound01(h, 360);
+    s = bound01(s, 100);
+    l = bound01(l, 100);
+    if (s === 0) {
+      g = l;
+      b = l;
+      r = l;
+    } else {
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return { r: r * 255, g: g * 255, b: b * 255 };
+  }
+  function rgbToHsv(r, g, b) {
+    r = bound01(r, 255);
+    g = bound01(g, 255);
+    b = bound01(b, 255);
+    var max = Math.max(r, g, b);
+    var min = Math.min(r, g, b);
+    var h = 0;
+    var v = max;
+    var d = max - min;
+    var s = max === 0 ? 0 : d / max;
+    if (max === min) {
+      h = 0;
+    } else {
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+        default:
+          break;
+      }
+      h /= 6;
+    }
+    return { h, s, v };
+  }
+  function hsvToRgb(h, s, v) {
+    h = bound01(h, 360) * 6;
+    s = bound01(s, 100);
+    v = bound01(v, 100);
+    var i = Math.floor(h);
+    var f = h - i;
+    var p = v * (1 - s);
+    var q = v * (1 - f * s);
+    var t = v * (1 - (1 - f) * s);
+    var mod = i % 6;
+    var r = [v, q, p, p, t, v][mod];
+    var g = [t, v, v, q, p, p][mod];
+    var b = [p, p, t, v, v, q][mod];
+    return { r: r * 255, g: g * 255, b: b * 255 };
+  }
+  function rgbToHex(r, g, b, allow3Char) {
+    var hex = [
+      pad2(Math.round(r).toString(16)),
+      pad2(Math.round(g).toString(16)),
+      pad2(Math.round(b).toString(16))
+    ];
+    if (allow3Char && hex[0].startsWith(hex[0].charAt(1)) && hex[1].startsWith(hex[1].charAt(1)) && hex[2].startsWith(hex[2].charAt(1))) {
+      return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
+    }
+    return hex.join("");
+  }
+  function convertHexToDecimal(h) {
+    return parseIntFromHex(h) / 255;
+  }
+  function parseIntFromHex(val) {
+    return parseInt(val, 16);
+  }
+
+  // node_modules/@ctrl/tinycolor/dist/module/css-color-names.js
+  var names = {
+    aliceblue: "#f0f8ff",
+    antiquewhite: "#faebd7",
+    aqua: "#00ffff",
+    aquamarine: "#7fffd4",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    bisque: "#ffe4c4",
+    black: "#000000",
+    blanchedalmond: "#ffebcd",
+    blue: "#0000ff",
+    blueviolet: "#8a2be2",
+    brown: "#a52a2a",
+    burlywood: "#deb887",
+    cadetblue: "#5f9ea0",
+    chartreuse: "#7fff00",
+    chocolate: "#d2691e",
+    coral: "#ff7f50",
+    cornflowerblue: "#6495ed",
+    cornsilk: "#fff8dc",
+    crimson: "#dc143c",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkgoldenrod: "#b8860b",
+    darkgray: "#a9a9a9",
+    darkgreen: "#006400",
+    darkgrey: "#a9a9a9",
+    darkkhaki: "#bdb76b",
+    darkmagenta: "#8b008b",
+    darkolivegreen: "#556b2f",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkseagreen: "#8fbc8f",
+    darkslateblue: "#483d8b",
+    darkslategray: "#2f4f4f",
+    darkslategrey: "#2f4f4f",
+    darkturquoise: "#00ced1",
+    darkviolet: "#9400d3",
+    deeppink: "#ff1493",
+    deepskyblue: "#00bfff",
+    dimgray: "#696969",
+    dimgrey: "#696969",
+    dodgerblue: "#1e90ff",
+    firebrick: "#b22222",
+    floralwhite: "#fffaf0",
+    forestgreen: "#228b22",
+    fuchsia: "#ff00ff",
+    gainsboro: "#dcdcdc",
+    ghostwhite: "#f8f8ff",
+    goldenrod: "#daa520",
+    gold: "#ffd700",
+    gray: "#808080",
+    green: "#008000",
+    greenyellow: "#adff2f",
+    grey: "#808080",
+    honeydew: "#f0fff0",
+    hotpink: "#ff69b4",
+    indianred: "#cd5c5c",
+    indigo: "#4b0082",
+    ivory: "#fffff0",
+    khaki: "#f0e68c",
+    lavenderblush: "#fff0f5",
+    lavender: "#e6e6fa",
+    lawngreen: "#7cfc00",
+    lemonchiffon: "#fffacd",
+    lightblue: "#add8e6",
+    lightcoral: "#f08080",
+    lightcyan: "#e0ffff",
+    lightgoldenrodyellow: "#fafad2",
+    lightgray: "#d3d3d3",
+    lightgreen: "#90ee90",
+    lightgrey: "#d3d3d3",
+    lightpink: "#ffb6c1",
+    lightsalmon: "#ffa07a",
+    lightseagreen: "#20b2aa",
+    lightskyblue: "#87cefa",
+    lightslategray: "#778899",
+    lightslategrey: "#778899",
+    lightsteelblue: "#b0c4de",
+    lightyellow: "#ffffe0",
+    lime: "#00ff00",
+    limegreen: "#32cd32",
+    linen: "#faf0e6",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    mediumaquamarine: "#66cdaa",
+    mediumblue: "#0000cd",
+    mediumorchid: "#ba55d3",
+    mediumpurple: "#9370db",
+    mediumseagreen: "#3cb371",
+    mediumslateblue: "#7b68ee",
+    mediumspringgreen: "#00fa9a",
+    mediumturquoise: "#48d1cc",
+    mediumvioletred: "#c71585",
+    midnightblue: "#191970",
+    mintcream: "#f5fffa",
+    mistyrose: "#ffe4e1",
+    moccasin: "#ffe4b5",
+    navajowhite: "#ffdead",
+    navy: "#000080",
+    oldlace: "#fdf5e6",
+    olive: "#808000",
+    olivedrab: "#6b8e23",
+    orange: "#ffa500",
+    orangered: "#ff4500",
+    orchid: "#da70d6",
+    palegoldenrod: "#eee8aa",
+    palegreen: "#98fb98",
+    paleturquoise: "#afeeee",
+    palevioletred: "#db7093",
+    papayawhip: "#ffefd5",
+    peachpuff: "#ffdab9",
+    peru: "#cd853f",
+    pink: "#ffc0cb",
+    plum: "#dda0dd",
+    powderblue: "#b0e0e6",
+    purple: "#800080",
+    rebeccapurple: "#663399",
+    red: "#ff0000",
+    rosybrown: "#bc8f8f",
+    royalblue: "#4169e1",
+    saddlebrown: "#8b4513",
+    salmon: "#fa8072",
+    sandybrown: "#f4a460",
+    seagreen: "#2e8b57",
+    seashell: "#fff5ee",
+    sienna: "#a0522d",
+    silver: "#c0c0c0",
+    skyblue: "#87ceeb",
+    slateblue: "#6a5acd",
+    slategray: "#708090",
+    slategrey: "#708090",
+    snow: "#fffafa",
+    springgreen: "#00ff7f",
+    steelblue: "#4682b4",
+    tan: "#d2b48c",
+    teal: "#008080",
+    thistle: "#d8bfd8",
+    tomato: "#ff6347",
+    turquoise: "#40e0d0",
+    violet: "#ee82ee",
+    wheat: "#f5deb3",
+    white: "#ffffff",
+    whitesmoke: "#f5f5f5",
+    yellow: "#ffff00",
+    yellowgreen: "#9acd32"
+  };
+
+  // node_modules/@ctrl/tinycolor/dist/module/format-input.js
+  function inputToRGB(color) {
+    var rgb = { r: 0, g: 0, b: 0 };
+    var a = 1;
+    var s = null;
+    var v = null;
+    var l = null;
+    var ok = false;
+    var format = false;
+    if (typeof color === "string") {
+      color = stringInputToObject(color);
+    }
+    if (typeof color === "object") {
+      if (isValidCSSUnit(color.r) && isValidCSSUnit(color.g) && isValidCSSUnit(color.b)) {
+        rgb = rgbToRgb(color.r, color.g, color.b);
+        ok = true;
+        format = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
+      } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
+        s = convertToPercentage(color.s);
+        v = convertToPercentage(color.v);
+        rgb = hsvToRgb(color.h, s, v);
+        ok = true;
+        format = "hsv";
+      } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
+        s = convertToPercentage(color.s);
+        l = convertToPercentage(color.l);
+        rgb = hslToRgb(color.h, s, l);
+        ok = true;
+        format = "hsl";
+      }
+      if (Object.prototype.hasOwnProperty.call(color, "a")) {
+        a = color.a;
+      }
+    }
+    a = boundAlpha(a);
+    return {
+      ok,
+      format: color.format || format,
+      r: Math.min(255, Math.max(rgb.r, 0)),
+      g: Math.min(255, Math.max(rgb.g, 0)),
+      b: Math.min(255, Math.max(rgb.b, 0)),
+      a
+    };
+  }
+  var CSS_INTEGER = "[-\\+]?\\d+%?";
+  var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
+  var CSS_UNIT = "(?:".concat(CSS_NUMBER, ")|(?:").concat(CSS_INTEGER, ")");
+  var PERMISSIVE_MATCH3 = "[\\s|\\(]+(".concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")\\s*\\)?");
+  var PERMISSIVE_MATCH4 = "[\\s|\\(]+(".concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")\\s*\\)?");
+  var matchers = {
+    CSS_UNIT: new RegExp(CSS_UNIT),
+    rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
+    rgba: new RegExp("rgba" + PERMISSIVE_MATCH4),
+    hsl: new RegExp("hsl" + PERMISSIVE_MATCH3),
+    hsla: new RegExp("hsla" + PERMISSIVE_MATCH4),
+    hsv: new RegExp("hsv" + PERMISSIVE_MATCH3),
+    hsva: new RegExp("hsva" + PERMISSIVE_MATCH4),
+    hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+    hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
+    hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+  };
+  function stringInputToObject(color) {
+    color = color.trim().toLowerCase();
+    if (color.length === 0) {
+      return false;
+    }
+    var named = false;
+    if (names[color]) {
+      color = names[color];
+      named = true;
+    } else if (color === "transparent") {
+      return { r: 0, g: 0, b: 0, a: 0, format: "name" };
+    }
+    var match = matchers.rgb.exec(color);
+    if (match) {
+      return { r: match[1], g: match[2], b: match[3] };
+    }
+    match = matchers.rgba.exec(color);
+    if (match) {
+      return { r: match[1], g: match[2], b: match[3], a: match[4] };
+    }
+    match = matchers.hsl.exec(color);
+    if (match) {
+      return { h: match[1], s: match[2], l: match[3] };
+    }
+    match = matchers.hsla.exec(color);
+    if (match) {
+      return { h: match[1], s: match[2], l: match[3], a: match[4] };
+    }
+    match = matchers.hsv.exec(color);
+    if (match) {
+      return { h: match[1], s: match[2], v: match[3] };
+    }
+    match = matchers.hsva.exec(color);
+    if (match) {
+      return { h: match[1], s: match[2], v: match[3], a: match[4] };
+    }
+    match = matchers.hex8.exec(color);
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1]),
+        g: parseIntFromHex(match[2]),
+        b: parseIntFromHex(match[3]),
+        a: convertHexToDecimal(match[4]),
+        format: named ? "name" : "hex8"
+      };
+    }
+    match = matchers.hex6.exec(color);
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1]),
+        g: parseIntFromHex(match[2]),
+        b: parseIntFromHex(match[3]),
+        format: named ? "name" : "hex"
+      };
+    }
+    match = matchers.hex4.exec(color);
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1] + match[1]),
+        g: parseIntFromHex(match[2] + match[2]),
+        b: parseIntFromHex(match[3] + match[3]),
+        a: convertHexToDecimal(match[4] + match[4]),
+        format: named ? "name" : "hex8"
+      };
+    }
+    match = matchers.hex3.exec(color);
+    if (match) {
+      return {
+        r: parseIntFromHex(match[1] + match[1]),
+        g: parseIntFromHex(match[2] + match[2]),
+        b: parseIntFromHex(match[3] + match[3]),
+        format: named ? "name" : "hex"
+      };
+    }
+    return false;
+  }
+  function isValidCSSUnit(color) {
+    return Boolean(matchers.CSS_UNIT.exec(String(color)));
+  }
+
+  // node_modules/@ant-design/colors/dist/index.esm.js
+  var hueStep = 2;
+  var saturationStep = 0.16;
+  var saturationStep2 = 0.05;
+  var brightnessStep1 = 0.05;
+  var brightnessStep2 = 0.15;
+  var lightColorCount = 5;
+  var darkColorCount = 4;
+  var darkColorMap = [{
+    index: 7,
+    opacity: 0.15
+  }, {
+    index: 6,
+    opacity: 0.25
+  }, {
+    index: 5,
+    opacity: 0.3
+  }, {
+    index: 5,
+    opacity: 0.45
+  }, {
+    index: 5,
+    opacity: 0.65
+  }, {
+    index: 5,
+    opacity: 0.85
+  }, {
+    index: 4,
+    opacity: 0.9
+  }, {
+    index: 3,
+    opacity: 0.95
+  }, {
+    index: 2,
+    opacity: 0.97
+  }, {
+    index: 1,
+    opacity: 0.98
+  }];
+  function toHsv(_ref) {
+    var r = _ref.r, g = _ref.g, b = _ref.b;
+    var hsv = rgbToHsv(r, g, b);
+    return {
+      h: hsv.h * 360,
+      s: hsv.s,
+      v: hsv.v
+    };
+  }
+  function toHex(_ref2) {
+    var r = _ref2.r, g = _ref2.g, b = _ref2.b;
+    return "#".concat(rgbToHex(r, g, b, false));
+  }
+  function mix(rgb1, rgb2, amount) {
+    var p = amount / 100;
+    var rgb = {
+      r: (rgb2.r - rgb1.r) * p + rgb1.r,
+      g: (rgb2.g - rgb1.g) * p + rgb1.g,
+      b: (rgb2.b - rgb1.b) * p + rgb1.b
+    };
+    return rgb;
+  }
+  function getHue(hsv, i, light) {
+    var hue;
+    if (Math.round(hsv.h) >= 60 && Math.round(hsv.h) <= 240) {
+      hue = light ? Math.round(hsv.h) - hueStep * i : Math.round(hsv.h) + hueStep * i;
+    } else {
+      hue = light ? Math.round(hsv.h) + hueStep * i : Math.round(hsv.h) - hueStep * i;
+    }
+    if (hue < 0) {
+      hue += 360;
+    } else if (hue >= 360) {
+      hue -= 360;
+    }
+    return hue;
+  }
+  function getSaturation(hsv, i, light) {
+    if (hsv.h === 0 && hsv.s === 0) {
+      return hsv.s;
+    }
+    var saturation;
+    if (light) {
+      saturation = hsv.s - saturationStep * i;
+    } else if (i === darkColorCount) {
+      saturation = hsv.s + saturationStep;
+    } else {
+      saturation = hsv.s + saturationStep2 * i;
+    }
+    if (saturation > 1) {
+      saturation = 1;
+    }
+    if (light && i === lightColorCount && saturation > 0.1) {
+      saturation = 0.1;
+    }
+    if (saturation < 0.06) {
+      saturation = 0.06;
+    }
+    return Number(saturation.toFixed(2));
+  }
+  function getValue(hsv, i, light) {
+    var value;
+    if (light) {
+      value = hsv.v + brightnessStep1 * i;
+    } else {
+      value = hsv.v - brightnessStep2 * i;
+    }
+    if (value > 1) {
+      value = 1;
+    }
+    return Number(value.toFixed(2));
+  }
+  function generate(color) {
+    var opts = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    var patterns = [];
+    var pColor = inputToRGB(color);
+    for (var i = lightColorCount; i > 0; i -= 1) {
+      var hsv = toHsv(pColor);
+      var colorString = toHex(inputToRGB({
+        h: getHue(hsv, i, true),
+        s: getSaturation(hsv, i, true),
+        v: getValue(hsv, i, true)
+      }));
+      patterns.push(colorString);
+    }
+    patterns.push(toHex(pColor));
+    for (var _i = 1; _i <= darkColorCount; _i += 1) {
+      var _hsv = toHsv(pColor);
+      var _colorString = toHex(inputToRGB({
+        h: getHue(_hsv, _i),
+        s: getSaturation(_hsv, _i),
+        v: getValue(_hsv, _i)
+      }));
+      patterns.push(_colorString);
+    }
+    if (opts.theme === "dark") {
+      return darkColorMap.map(function(_ref3) {
+        var index = _ref3.index, opacity = _ref3.opacity;
+        var darkColorString = toHex(mix(inputToRGB(opts.backgroundColor || "#141414"), inputToRGB(patterns[index]), opacity * 100));
+        return darkColorString;
+      });
+    }
+    return patterns;
+  }
+  var presetPrimaryColors = {
+    red: "#F5222D",
+    volcano: "#FA541C",
+    orange: "#FA8C16",
+    gold: "#FAAD14",
+    yellow: "#FADB14",
+    lime: "#A0D911",
+    green: "#52C41A",
+    cyan: "#13C2C2",
+    blue: "#1890FF",
+    geekblue: "#2F54EB",
+    purple: "#722ED1",
+    magenta: "#EB2F96",
+    grey: "#666666"
+  };
+  var presetPalettes = {};
+  var presetDarkPalettes = {};
+  Object.keys(presetPrimaryColors).forEach(function(key) {
+    presetPalettes[key] = generate(presetPrimaryColors[key]);
+    presetPalettes[key].primary = presetPalettes[key][5];
+    presetDarkPalettes[key] = generate(presetPrimaryColors[key], {
+      theme: "dark",
+      backgroundColor: "#141414"
+    });
+    presetDarkPalettes[key].primary = presetDarkPalettes[key][5];
+  });
+  var red = presetPalettes.red;
+  var volcano = presetPalettes.volcano;
+  var gold = presetPalettes.gold;
+  var orange = presetPalettes.orange;
+  var yellow = presetPalettes.yellow;
+  var lime = presetPalettes.lime;
+  var green = presetPalettes.green;
+  var cyan = presetPalettes.cyan;
+  var blue = presetPalettes.blue;
+  var geekblue = presetPalettes.geekblue;
+  var purple = presetPalettes.purple;
+  var magenta = presetPalettes.magenta;
+  var grey = presetPalettes.grey;
+
+  // node_modules/@ant-design/icons/es/utils.js
+  var import_react7 = __toESM(require_react());
+
+  // node_modules/rc-util/es/warning.js
+  var warned = {};
+  var preWarningFns = [];
+  var preMessage = function preMessage2(fn) {
+    preWarningFns.push(fn);
+  };
+  function warning(valid, message2) {
+    if (false) {
+      var finalMessage = preWarningFns.reduce(function(msg, preMessageFn) {
+        return preMessageFn(msg !== null && msg !== void 0 ? msg : "", "warning");
+      }, message2);
+      if (finalMessage) {
+        console.error("Warning: ".concat(finalMessage));
+      }
+    }
+  }
+  function note(valid, message2) {
+    if (false) {
+      var finalMessage = preWarningFns.reduce(function(msg, preMessageFn) {
+        return preMessageFn(msg !== null && msg !== void 0 ? msg : "", "note");
+      }, message2);
+      if (finalMessage) {
+        console.warn("Note: ".concat(finalMessage));
+      }
+    }
+  }
+  function resetWarned() {
+    warned = {};
+  }
+  function call(method, valid, message2) {
+    if (!valid && !warned[message2]) {
+      method(false, message2);
+      warned[message2] = true;
+    }
+  }
+  function warningOnce(valid, message2) {
+    call(warning, valid, message2);
+  }
+  function noteOnce(valid, message2) {
+    call(note, valid, message2);
+  }
+  warningOnce.preMessage = preMessage;
+  warningOnce.resetWarned = resetWarned;
+  warningOnce.noteOnce = noteOnce;
+  var warning_default = warningOnce;
+
+  // node_modules/rc-util/es/Dom/canUseDom.js
+  function canUseDom() {
+    return !!(typeof window !== "undefined" && window.document && window.document.createElement);
+  }
+
+  // node_modules/rc-util/es/Dom/contains.js
+  function contains(root, n) {
+    if (!root) {
+      return false;
+    }
+    if (root.contains) {
+      return root.contains(n);
+    }
+    var node = n;
+    while (node) {
+      if (node === root) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
+
+  // node_modules/rc-util/es/Dom/dynamicCSS.js
+  var APPEND_ORDER = "data-rc-order";
+  var APPEND_PRIORITY = "data-rc-priority";
+  var MARK_KEY = "rc-util-key";
+  var containerCache = /* @__PURE__ */ new Map();
+  function getMark() {
+    var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, mark = _ref.mark;
+    if (mark) {
+      return mark.startsWith("data-") ? mark : "data-".concat(mark);
+    }
+    return MARK_KEY;
+  }
+  function getContainer(option) {
+    if (option.attachTo) {
+      return option.attachTo;
+    }
+    var head = document.querySelector("head");
+    return head || document.body;
+  }
+  function getOrder(prepend) {
+    if (prepend === "queue") {
+      return "prependQueue";
+    }
+    return prepend ? "prepend" : "append";
+  }
+  function findStyles(container) {
+    return Array.from((containerCache.get(container) || container).children).filter(function(node) {
+      return node.tagName === "STYLE";
+    });
+  }
+  function injectCSS(css) {
+    var option = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    if (!canUseDom()) {
+      return null;
+    }
+    var csp = option.csp, prepend = option.prepend, _option$priority = option.priority, priority = _option$priority === void 0 ? 0 : _option$priority;
+    var mergedOrder = getOrder(prepend);
+    var isPrependQueue = mergedOrder === "prependQueue";
+    var styleNode = document.createElement("style");
+    styleNode.setAttribute(APPEND_ORDER, mergedOrder);
+    if (isPrependQueue && priority) {
+      styleNode.setAttribute(APPEND_PRIORITY, "".concat(priority));
+    }
+    if (csp !== null && csp !== void 0 && csp.nonce) {
+      styleNode.nonce = csp === null || csp === void 0 ? void 0 : csp.nonce;
+    }
+    styleNode.innerHTML = css;
+    var container = getContainer(option);
+    var firstChild = container.firstChild;
+    if (prepend) {
+      if (isPrependQueue) {
+        var existStyle = (option.styles || findStyles(container)).filter(function(node) {
+          if (!["prepend", "prependQueue"].includes(node.getAttribute(APPEND_ORDER))) {
+            return false;
+          }
+          var nodePriority = Number(node.getAttribute(APPEND_PRIORITY) || 0);
+          return priority >= nodePriority;
+        });
+        if (existStyle.length) {
+          container.insertBefore(styleNode, existStyle[existStyle.length - 1].nextSibling);
+          return styleNode;
+        }
+      }
+      container.insertBefore(styleNode, firstChild);
+    } else {
+      container.appendChild(styleNode);
+    }
+    return styleNode;
+  }
+  function findExistNode(key) {
+    var option = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    var container = getContainer(option);
+    return (option.styles || findStyles(container)).find(function(node) {
+      return node.getAttribute(getMark(option)) === key;
+    });
+  }
+  function syncRealContainer(container, option) {
+    var cachedRealContainer = containerCache.get(container);
+    if (!cachedRealContainer || !contains(document, cachedRealContainer)) {
+      var placeholderStyle = injectCSS("", option);
+      var parentNode = placeholderStyle.parentNode;
+      containerCache.set(container, parentNode);
+      container.removeChild(placeholderStyle);
+    }
+  }
+  function updateCSS(css, key) {
+    var originOption = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    var container = getContainer(originOption);
+    var styles = findStyles(container);
+    var option = _objectSpread2(_objectSpread2({}, originOption), {}, {
+      styles
+    });
+    syncRealContainer(container, option);
+    var existNode = findExistNode(key, option);
+    if (existNode) {
+      var _option$csp, _option$csp2;
+      if ((_option$csp = option.csp) !== null && _option$csp !== void 0 && _option$csp.nonce && existNode.nonce !== ((_option$csp2 = option.csp) === null || _option$csp2 === void 0 ? void 0 : _option$csp2.nonce)) {
+        var _option$csp3;
+        existNode.nonce = (_option$csp3 = option.csp) === null || _option$csp3 === void 0 ? void 0 : _option$csp3.nonce;
+      }
+      if (existNode.innerHTML !== css) {
+        existNode.innerHTML = css;
+      }
+      return existNode;
+    }
+    var newNode = injectCSS(css, option);
+    newNode.setAttribute(getMark(option), key);
+    return newNode;
+  }
+
+  // node_modules/@ant-design/icons/es/utils.js
+  function warning2(valid, message2) {
+    warning_default(valid, "[@ant-design/icons] ".concat(message2));
+  }
+  function isIconDefinition(target) {
+    return _typeof(target) === "object" && typeof target.name === "string" && typeof target.theme === "string" && (_typeof(target.icon) === "object" || typeof target.icon === "function");
+  }
+  function normalizeAttrs() {
+    var attrs = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    return Object.keys(attrs).reduce(function(acc, key) {
+      var val = attrs[key];
+      switch (key) {
+        case "class":
+          acc.className = val;
+          delete acc.class;
+          break;
+        default:
+          acc[key] = val;
+      }
+      return acc;
+    }, {});
+  }
+  function generate2(node, key, rootProps) {
+    if (!rootProps) {
+      return /* @__PURE__ */ import_react7.default.createElement(node.tag, _objectSpread2({
+        key
+      }, normalizeAttrs(node.attrs)), (node.children || []).map(function(child, index) {
+        return generate2(child, "".concat(key, "-").concat(node.tag, "-").concat(index));
+      }));
+    }
+    return /* @__PURE__ */ import_react7.default.createElement(node.tag, _objectSpread2(_objectSpread2({
+      key
+    }, normalizeAttrs(node.attrs)), rootProps), (node.children || []).map(function(child, index) {
+      return generate2(child, "".concat(key, "-").concat(node.tag, "-").concat(index));
+    }));
+  }
+  function getSecondaryColor(primaryColor) {
+    return generate(primaryColor)[0];
+  }
+  function normalizeTwoToneColors(twoToneColor) {
+    if (!twoToneColor) {
+      return [];
+    }
+    return Array.isArray(twoToneColor) ? twoToneColor : [twoToneColor];
+  }
+  var iconStyles = "\n.anticon {\n  display: inline-block;\n  color: inherit;\n  font-style: normal;\n  line-height: 0;\n  text-align: center;\n  text-transform: none;\n  vertical-align: -0.125em;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.anticon > * {\n  line-height: 1;\n}\n\n.anticon svg {\n  display: inline-block;\n}\n\n.anticon::before {\n  display: none;\n}\n\n.anticon .anticon-icon {\n  display: block;\n}\n\n.anticon[tabindex] {\n  cursor: pointer;\n}\n\n.anticon-spin::before,\n.anticon-spin {\n  display: inline-block;\n  -webkit-animation: loadingCircle 1s infinite linear;\n  animation: loadingCircle 1s infinite linear;\n}\n\n@-webkit-keyframes loadingCircle {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes loadingCircle {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n";
+  var useInsertStyles = function useInsertStyles2() {
+    var styleStr = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : iconStyles;
+    var _useContext = (0, import_react7.useContext)(Context_default), csp = _useContext.csp;
+    (0, import_react7.useEffect)(function() {
+      updateCSS(styleStr, "@ant-design-icons", {
+        prepend: true,
+        csp
+      });
+    }, []);
+  };
+
+  // node_modules/@ant-design/icons/es/components/IconBase.js
+  var _excluded = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
+  var twoToneColorPalette = {
+    primaryColor: "#333",
+    secondaryColor: "#E6E6E6",
+    calculated: false
+  };
+  function setTwoToneColors(_ref) {
+    var primaryColor = _ref.primaryColor, secondaryColor = _ref.secondaryColor;
+    twoToneColorPalette.primaryColor = primaryColor;
+    twoToneColorPalette.secondaryColor = secondaryColor || getSecondaryColor(primaryColor);
+    twoToneColorPalette.calculated = !!secondaryColor;
+  }
+  function getTwoToneColors() {
+    return _objectSpread2({}, twoToneColorPalette);
+  }
+  var IconBase = function IconBase2(props) {
+    var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = _objectWithoutProperties(props, _excluded);
+    var colors = twoToneColorPalette;
+    if (primaryColor) {
+      colors = {
+        primaryColor,
+        secondaryColor: secondaryColor || getSecondaryColor(primaryColor)
+      };
+    }
+    useInsertStyles();
+    warning2(isIconDefinition(icon), "icon should be icon definiton, but got ".concat(icon));
+    if (!isIconDefinition(icon)) {
+      return null;
+    }
+    var target = icon;
+    if (target && typeof target.icon === "function") {
+      target = _objectSpread2(_objectSpread2({}, target), {}, {
+        icon: target.icon(colors.primaryColor, colors.secondaryColor)
+      });
+    }
+    return generate2(target.icon, "svg-".concat(target.name), _objectSpread2({
+      className,
+      onClick,
+      style,
+      "data-icon": target.name,
+      width: "1em",
+      height: "1em",
+      fill: "currentColor",
+      "aria-hidden": "true"
+    }, restProps));
+  };
+  IconBase.displayName = "IconReact";
+  IconBase.getTwoToneColors = getTwoToneColors;
+  IconBase.setTwoToneColors = setTwoToneColors;
+  var IconBase_default = IconBase;
+
+  // node_modules/@ant-design/icons/es/components/twoTonePrimaryColor.js
+  function setTwoToneColor(twoToneColor) {
+    var _normalizeTwoToneColo = normalizeTwoToneColors(twoToneColor), _normalizeTwoToneColo2 = _slicedToArray(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
+    return IconBase_default.setTwoToneColors({
+      primaryColor,
+      secondaryColor
+    });
+  }
+  function getTwoToneColor() {
+    var colors = IconBase_default.getTwoToneColors();
+    if (!colors.calculated) {
+      return colors.primaryColor;
+    }
+    return [colors.primaryColor, colors.secondaryColor];
+  }
+
+  // node_modules/@ant-design/icons/es/components/AntdIcon.js
+  var _excluded2 = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
+  setTwoToneColor("#1890ff");
+  var Icon = /* @__PURE__ */ React7.forwardRef(function(props, ref) {
+    var _classNames;
+    var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = _objectWithoutProperties(props, _excluded2);
+    var _React$useContext = React7.useContext(Context_default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre, rootClassName = _React$useContext.rootClassName;
+    var classString = (0, import_classnames.default)(rootClassName, prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), _defineProperty(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === "loading"), _classNames), className);
+    var iconTabIndex = tabIndex;
+    if (iconTabIndex === void 0 && onClick) {
+      iconTabIndex = -1;
+    }
+    var svgStyle = rotate ? {
+      msTransform: "rotate(".concat(rotate, "deg)"),
+      transform: "rotate(".concat(rotate, "deg)")
+    } : void 0;
+    var _normalizeTwoToneColo = normalizeTwoToneColors(twoToneColor), _normalizeTwoToneColo2 = _slicedToArray(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
+    return /* @__PURE__ */ React7.createElement("span", _objectSpread2(_objectSpread2({
+      role: "img",
+      "aria-label": icon.name
+    }, restProps), {}, {
+      ref,
+      tabIndex: iconTabIndex,
+      onClick,
+      className: classString
+    }), /* @__PURE__ */ React7.createElement(IconBase_default, {
+      icon,
+      primaryColor,
+      secondaryColor,
+      style: svgStyle
+    }));
+  });
+  Icon.displayName = "AntdIcon";
+  Icon.getTwoToneColor = getTwoToneColor;
+  Icon.setTwoToneColor = setTwoToneColor;
+  var AntdIcon_default = Icon;
+
+  // node_modules/@ant-design/icons/es/icons/CloseCircleOutlined.js
+  var React8 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/CloseCircleOutlined.js
+  var CloseCircleOutlined = { "icon": { "tag": "svg", "attrs": { "fill-rule": "evenodd", "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm128.01 198.83c.03 0 .05.01.09.06l45.02 45.01a.2.2 0 01.05.09.12.12 0 010 .07c0 .02-.01.04-.05.08L557.25 512l127.87 127.86a.27.27 0 01.05.06v.02a.12.12 0 010 .07c0 .03-.01.05-.05.09l-45.02 45.02a.2.2 0 01-.09.05.12.12 0 01-.07 0c-.02 0-.04-.01-.08-.05L512 557.25 384.14 685.12c-.04.04-.06.05-.08.05a.12.12 0 01-.07 0c-.03 0-.05-.01-.09-.05l-45.02-45.02a.2.2 0 01-.05-.09.12.12 0 010-.07c0-.02.01-.04.06-.08L466.75 512 338.88 384.14a.27.27 0 01-.05-.06l-.01-.02a.12.12 0 010-.07c0-.03.01-.05.05-.09l45.02-45.02a.2.2 0 01.09-.05.12.12 0 01.07 0c.02 0 .04.01.08.06L512 466.75l127.86-127.86c.04-.05.06-.06.08-.06a.12.12 0 01.07 0z" } }] }, "name": "close-circle", "theme": "outlined" };
+  var CloseCircleOutlined_default = CloseCircleOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/CloseCircleOutlined.js
+  var CloseCircleOutlined2 = function CloseCircleOutlined3(props, ref) {
+    return /* @__PURE__ */ React8.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: CloseCircleOutlined_default
+    }));
+  };
+  CloseCircleOutlined2.displayName = "CloseCircleOutlined";
+  var CloseCircleOutlined_default2 = /* @__PURE__ */ React8.forwardRef(CloseCircleOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/CloseOutlined.js
+  var React9 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/CloseOutlined.js
+  var CloseOutlined = { "icon": { "tag": "svg", "attrs": { "fill-rule": "evenodd", "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z" } }] }, "name": "close", "theme": "outlined" };
+  var CloseOutlined_default = CloseOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/CloseOutlined.js
+  var CloseOutlined2 = function CloseOutlined3(props, ref) {
+    return /* @__PURE__ */ React9.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: CloseOutlined_default
+    }));
+  };
+  CloseOutlined2.displayName = "CloseOutlined";
+  var CloseOutlined_default2 = /* @__PURE__ */ React9.forwardRef(CloseOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
+  var React10 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/DashboardOutlined.js
+  var DashboardOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M924.8 385.6a446.7 446.7 0 00-96-142.4 446.7 446.7 0 00-142.4-96C631.1 123.8 572.5 112 512 112s-119.1 11.8-174.4 35.2a446.7 446.7 0 00-142.4 96 446.7 446.7 0 00-96 142.4C75.8 440.9 64 499.5 64 560c0 132.7 58.3 257.7 159.9 343.1l1.7 1.4c5.8 4.8 13.1 7.5 20.6 7.5h531.7c7.5 0 14.8-2.7 20.6-7.5l1.7-1.4C901.7 817.7 960 692.7 960 560c0-60.5-11.9-119.1-35.2-174.4zM761.4 836H262.6A371.12 371.12 0 01140 560c0-99.4 38.7-192.8 109-263 70.3-70.3 163.7-109 263-109 99.4 0 192.8 38.7 263 109 70.3 70.3 109 163.7 109 263 0 105.6-44.5 205.5-122.6 276zM623.5 421.5a8.03 8.03 0 00-11.3 0L527.7 506c-18.7-5-39.4-.2-54.1 14.5a55.95 55.95 0 000 79.2 55.95 55.95 0 0079.2 0 55.87 55.87 0 0014.5-54.1l84.5-84.5c3.1-3.1 3.1-8.2 0-11.3l-28.3-28.3zM490 320h44c4.4 0 8-3.6 8-8v-80c0-4.4-3.6-8-8-8h-44c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8zm260 218v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8h-80c-4.4 0-8 3.6-8 8zm12.7-197.2l-31.1-31.1a8.03 8.03 0 00-11.3 0l-56.6 56.6a8.03 8.03 0 000 11.3l31.1 31.1c3.1 3.1 8.2 3.1 11.3 0l56.6-56.6c3.1-3.1 3.1-8.2 0-11.3zm-458.6-31.1a8.03 8.03 0 00-11.3 0l-31.1 31.1a8.03 8.03 0 000 11.3l56.6 56.6c3.1 3.1 8.2 3.1 11.3 0l31.1-31.1c3.1-3.1 3.1-8.2 0-11.3l-56.6-56.6zM262 530h-80c-4.4 0-8 3.6-8 8v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8z" } }] }, "name": "dashboard", "theme": "outlined" };
+  var DashboardOutlined_default = DashboardOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
+  var DashboardOutlined2 = function DashboardOutlined3(props, ref) {
+    return /* @__PURE__ */ React10.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: DashboardOutlined_default
+    }));
+  };
+  DashboardOutlined2.displayName = "DashboardOutlined";
+  var DashboardOutlined_default2 = /* @__PURE__ */ React10.forwardRef(DashboardOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/DollarOutlined.js
+  var React11 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/DollarOutlined.js
+  var DollarOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm47.7-395.2l-25.4-5.9V348.6c38 5.2 61.5 29 65.5 58.2.5 4 3.9 6.9 7.9 6.9h44.9c4.7 0 8.4-4.1 8-8.8-6.1-62.3-57.4-102.3-125.9-109.2V263c0-4.4-3.6-8-8-8h-28.1c-4.4 0-8 3.6-8 8v33c-70.8 6.9-126.2 46-126.2 119 0 67.6 49.8 100.2 102.1 112.7l24.7 6.3v142.7c-44.2-5.9-69-29.5-74.1-61.3-.6-3.8-4-6.6-7.9-6.6H363c-4.7 0-8.4 4-8 8.7 4.5 55 46.2 105.6 135.2 112.1V761c0 4.4 3.6 8 8 8h28.4c4.4 0 8-3.6 8-8.1l-.2-31.7c78.3-6.9 134.3-48.8 134.3-124-.1-69.4-44.2-100.4-109-116.4zm-68.6-16.2c-5.6-1.6-10.3-3.1-15-5-33.8-12.2-49.5-31.9-49.5-57.3 0-36.3 27.5-57 64.5-61.7v124zM534.3 677V543.3c3.1.9 5.9 1.6 8.8 2.2 47.3 14.4 63.2 34.4 63.2 65.1 0 39.1-29.4 62.6-72 66.4z" } }] }, "name": "dollar", "theme": "outlined" };
+  var DollarOutlined_default = DollarOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/DollarOutlined.js
+  var DollarOutlined2 = function DollarOutlined3(props, ref) {
+    return /* @__PURE__ */ React11.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: DollarOutlined_default
+    }));
+  };
+  DollarOutlined2.displayName = "DollarOutlined";
+  var DollarOutlined_default2 = /* @__PURE__ */ React11.forwardRef(DollarOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/FileTextOutlined.js
+  var React12 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/FileTextOutlined.js
+  var FileTextOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z" } }] }, "name": "file-text", "theme": "outlined" };
+  var FileTextOutlined_default = FileTextOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/FileTextOutlined.js
+  var FileTextOutlined2 = function FileTextOutlined3(props, ref) {
+    return /* @__PURE__ */ React12.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: FileTextOutlined_default
+    }));
+  };
+  FileTextOutlined2.displayName = "FileTextOutlined";
+  var FileTextOutlined_default2 = /* @__PURE__ */ React12.forwardRef(FileTextOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/FireOutlined.js
+  var React13 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/FireOutlined.js
+  var FireOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M834.1 469.2A347.49 347.49 0 00751.2 354l-29.1-26.7a8.09 8.09 0 00-13 3.3l-13 37.3c-8.1 23.4-23 47.3-44.1 70.8-1.4 1.5-3 1.9-4.1 2-1.1.1-2.8-.1-4.3-1.5-1.4-1.2-2.1-3-2-4.8 3.7-60.2-14.3-128.1-53.7-202C555.3 171 510 123.1 453.4 89.7l-41.3-24.3c-5.4-3.2-12.3 1-12 7.3l2.2 48c1.5 32.8-2.3 61.8-11.3 85.9-11 29.5-26.8 56.9-47 81.5a295.64 295.64 0 01-47.5 46.1 352.6 352.6 0 00-100.3 121.5A347.75 347.75 0 00160 610c0 47.2 9.3 92.9 27.7 136a349.4 349.4 0 0075.5 110.9c32.4 32 70 57.2 111.9 74.7C418.5 949.8 464.5 959 512 959s93.5-9.2 136.9-27.3A348.6 348.6 0 00760.8 857c32.4-32 57.8-69.4 75.5-110.9a344.2 344.2 0 0027.7-136c0-48.8-10-96.2-29.9-140.9zM713 808.5c-53.7 53.2-125 82.4-201 82.4s-147.3-29.2-201-82.4c-53.5-53.1-83-123.5-83-198.4 0-43.5 9.8-85.2 29.1-124 18.8-37.9 46.8-71.8 80.8-97.9a349.6 349.6 0 0058.6-56.8c25-30.5 44.6-64.5 58.2-101a240 240 0 0012.1-46.5c24.1 22.2 44.3 49 61.2 80.4 33.4 62.6 48.8 118.3 45.8 165.7a74.01 74.01 0 0024.4 59.8 73.36 73.36 0 0053.4 18.8c19.7-1 37.8-9.7 51-24.4 13.3-14.9 24.8-30.1 34.4-45.6 14 17.9 25.7 37.4 35 58.4 15.9 35.8 24 73.9 24 113.1 0 74.9-29.5 145.4-83 198.4z" } }] }, "name": "fire", "theme": "outlined" };
+  var FireOutlined_default = FireOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/FireOutlined.js
+  var FireOutlined2 = function FireOutlined3(props, ref) {
+    return /* @__PURE__ */ React13.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: FireOutlined_default
+    }));
+  };
+  FireOutlined2.displayName = "FireOutlined";
+  var FireOutlined_default2 = /* @__PURE__ */ React13.forwardRef(FireOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/GiftOutlined.js
+  var React14 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/GiftOutlined.js
+  var GiftOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 310H732.4c13.6-21.4 21.6-46.8 21.6-74 0-76.1-61.9-138-138-138-41.4 0-78.7 18.4-104 47.4-25.3-29-62.6-47.4-104-47.4-76.1 0-138 61.9-138 138 0 27.2 7.9 52.6 21.6 74H144c-17.7 0-32 14.3-32 32v200c0 4.4 3.6 8 8 8h40v344c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V550h40c4.4 0 8-3.6 8-8V342c0-17.7-14.3-32-32-32zm-334-74c0-38.6 31.4-70 70-70s70 31.4 70 70-31.4 70-70 70h-70v-70zm-138-70c38.6 0 70 31.4 70 70v70h-70c-38.6 0-70-31.4-70-70s31.4-70 70-70zM180 482V378h298v104H180zm48 68h250v308H228V550zm568 308H546V550h250v308zm48-376H546V378h298v104z" } }] }, "name": "gift", "theme": "outlined" };
+  var GiftOutlined_default = GiftOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/GiftOutlined.js
+  var GiftOutlined2 = function GiftOutlined3(props, ref) {
+    return /* @__PURE__ */ React14.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: GiftOutlined_default
+    }));
+  };
+  GiftOutlined2.displayName = "GiftOutlined";
+  var GiftOutlined_default2 = /* @__PURE__ */ React14.forwardRef(GiftOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/InboxOutlined.js
+  var React15 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/InboxOutlined.js
+  var InboxOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "0 0 1024 1024", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M885.2 446.3l-.2-.8-112.2-285.1c-5-16.1-19.9-27.2-36.8-27.2H281.2c-17 0-32.1 11.3-36.9 27.6L139.4 443l-.3.7-.2.8c-1.3 4.9-1.7 9.9-1 14.8-.1 1.6-.2 3.2-.2 4.8V830a60.9 60.9 0 0060.8 60.8h627.2c33.5 0 60.8-27.3 60.9-60.8V464.1c0-1.3 0-2.6-.1-3.7.4-4.9 0-9.6-1.3-14.1zm-295.8-43l-.3 15.7c-.8 44.9-31.8 75.1-77.1 75.1-22.1 0-41.1-7.1-54.8-20.6S436 441.2 435.6 419l-.3-15.7H229.5L309 210h399.2l81.7 193.3H589.4zm-375 76.8h157.3c24.3 57.1 76 90.8 140.4 90.8 33.7 0 65-9.4 90.3-27.2 22.2-15.6 39.5-37.4 50.7-63.6h156.5V814H214.4V480.1z" } }] }, "name": "inbox", "theme": "outlined" };
+  var InboxOutlined_default = InboxOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/InboxOutlined.js
+  var InboxOutlined2 = function InboxOutlined3(props, ref) {
+    return /* @__PURE__ */ React15.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: InboxOutlined_default
+    }));
+  };
+  InboxOutlined2.displayName = "InboxOutlined";
+  var InboxOutlined_default2 = /* @__PURE__ */ React15.forwardRef(InboxOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  var React16 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/LogoutOutlined.js
+  var LogoutOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 01-112.7 75.9A352.8 352.8 0 01512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 01-112.7-75.9 353.28 353.28 0 01-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 000-12.6z" } }] }, "name": "logout", "theme": "outlined" };
+  var LogoutOutlined_default = LogoutOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  var LogoutOutlined2 = function LogoutOutlined3(props, ref) {
+    return /* @__PURE__ */ React16.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: LogoutOutlined_default
+    }));
+  };
+  LogoutOutlined2.displayName = "LogoutOutlined";
+  var LogoutOutlined_default2 = /* @__PURE__ */ React16.forwardRef(LogoutOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/MenuFoldOutlined.js
+  var React17 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/MenuFoldOutlined.js
+  var MenuFoldOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z" } }] }, "name": "menu-fold", "theme": "outlined" };
+  var MenuFoldOutlined_default = MenuFoldOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/MenuFoldOutlined.js
+  var MenuFoldOutlined2 = function MenuFoldOutlined3(props, ref) {
+    return /* @__PURE__ */ React17.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: MenuFoldOutlined_default
+    }));
+  };
+  MenuFoldOutlined2.displayName = "MenuFoldOutlined";
+  var MenuFoldOutlined_default2 = /* @__PURE__ */ React17.forwardRef(MenuFoldOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/MenuUnfoldOutlined.js
+  var React18 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/MenuUnfoldOutlined.js
+  var MenuUnfoldOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 000-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0014.4 7z" } }] }, "name": "menu-unfold", "theme": "outlined" };
+  var MenuUnfoldOutlined_default = MenuUnfoldOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/MenuUnfoldOutlined.js
+  var MenuUnfoldOutlined2 = function MenuUnfoldOutlined3(props, ref) {
+    return /* @__PURE__ */ React18.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: MenuUnfoldOutlined_default
+    }));
+  };
+  MenuUnfoldOutlined2.displayName = "MenuUnfoldOutlined";
+  var MenuUnfoldOutlined_default2 = /* @__PURE__ */ React18.forwardRef(MenuUnfoldOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  var React19 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/ReloadOutlined.js
+  var ReloadOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z" } }] }, "name": "reload", "theme": "outlined" };
+  var ReloadOutlined_default = ReloadOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/ReloadOutlined.js
+  var ReloadOutlined2 = function ReloadOutlined3(props, ref) {
+    return /* @__PURE__ */ React19.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: ReloadOutlined_default
+    }));
+  };
+  ReloadOutlined2.displayName = "ReloadOutlined";
+  var ReloadOutlined_default2 = /* @__PURE__ */ React19.forwardRef(ReloadOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
+  var React20 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/SafetyCertificateOutlined.js
+  var SafetyCertificateOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z" } }] }, "name": "safety-certificate", "theme": "outlined" };
+  var SafetyCertificateOutlined_default = SafetyCertificateOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
+  var SafetyCertificateOutlined2 = function SafetyCertificateOutlined3(props, ref) {
+    return /* @__PURE__ */ React20.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: SafetyCertificateOutlined_default
+    }));
+  };
+  SafetyCertificateOutlined2.displayName = "SafetyCertificateOutlined";
+  var SafetyCertificateOutlined_default2 = /* @__PURE__ */ React20.forwardRef(SafetyCertificateOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/SettingOutlined.js
+  var React21 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/SettingOutlined.js
+  var SettingOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 009.3-35.2l-.9-2.6a443.74 443.74 0 00-79.7-137.9l-1.8-2.1a32.12 32.12 0 00-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 00-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 00-25.8 25.7l-15.8 85.4a351.86 351.86 0 00-99 57.4l-81.9-29.1a32 32 0 00-35.1 9.5l-1.8 2.1a446.02 446.02 0 00-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1 0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 00-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0035.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0025.8 25.7l2.7.5a449.4 449.4 0 00159 0l2.7-.5a32.05 32.05 0 0025.8-25.7l15.7-85a350 350 0 0099.7-57.6l81.3 28.9a32 32 0 0035.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35zM788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1 74.7 63.9a370.03 370.03 0 01-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3-17.9 97a377.5 377.5 0 01-85 0l-17.9-97.2-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5 0-15.3 1.2-30.6 3.7-45.5l6.5-40-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2 31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3 17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97 38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8 92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426l6.5 39.9zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 01624 502c0 29.9-11.7 58-32.8 79.2z" } }] }, "name": "setting", "theme": "outlined" };
+  var SettingOutlined_default = SettingOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/SettingOutlined.js
+  var SettingOutlined2 = function SettingOutlined3(props, ref) {
+    return /* @__PURE__ */ React21.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: SettingOutlined_default
+    }));
+  };
+  SettingOutlined2.displayName = "SettingOutlined";
+  var SettingOutlined_default2 = /* @__PURE__ */ React21.forwardRef(SettingOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/ShoppingOutlined.js
+  var React22 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/ShoppingOutlined.js
+  var ShoppingOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M832 312H696v-16c0-101.6-82.4-184-184-184s-184 82.4-184 184v16H192c-17.7 0-32 14.3-32 32v536c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V344c0-17.7-14.3-32-32-32zm-432-16c0-61.9 50.1-112 112-112s112 50.1 112 112v16H400v-16zm392 544H232V384h96v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h224v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h96v456z" } }] }, "name": "shopping", "theme": "outlined" };
+  var ShoppingOutlined_default = ShoppingOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/ShoppingOutlined.js
+  var ShoppingOutlined2 = function ShoppingOutlined3(props, ref) {
+    return /* @__PURE__ */ React22.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: ShoppingOutlined_default
+    }));
+  };
+  ShoppingOutlined2.displayName = "ShoppingOutlined";
+  var ShoppingOutlined_default2 = /* @__PURE__ */ React22.forwardRef(ShoppingOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/TagsOutlined.js
+  var React23 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/TagsOutlined.js
+  var TagsOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M483.2 790.3L861.4 412c1.7-1.7 2.5-4 2.3-6.3l-25.5-301.4c-.7-7.8-6.8-13.9-14.6-14.6L522.2 64.3c-2.3-.2-4.7.6-6.3 2.3L137.7 444.8a8.03 8.03 0 000 11.3l334.2 334.2c3.1 3.2 8.2 3.2 11.3 0zm62.6-651.7l224.6 19 19 224.6L477.5 694 233.9 450.5l311.9-311.9zm60.16 186.23a48 48 0 1067.88-67.89 48 48 0 10-67.88 67.89zM889.7 539.8l-39.6-39.5a8.03 8.03 0 00-11.3 0l-362 361.3-237.6-237a8.03 8.03 0 00-11.3 0l-39.6 39.5a8.03 8.03 0 000 11.3l243.2 242.8 39.6 39.5c3.1 3.1 8.2 3.1 11.3 0l407.3-406.6c3.1-3.1 3.1-8.2 0-11.3z" } }] }, "name": "tags", "theme": "outlined" };
+  var TagsOutlined_default = TagsOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/TagsOutlined.js
+  var TagsOutlined2 = function TagsOutlined3(props, ref) {
+    return /* @__PURE__ */ React23.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: TagsOutlined_default
+    }));
+  };
+  TagsOutlined2.displayName = "TagsOutlined";
+  var TagsOutlined_default2 = /* @__PURE__ */ React23.forwardRef(TagsOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/TeamOutlined.js
+  var React24 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/TeamOutlined.js
+  var TeamOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M824.2 699.9a301.55 301.55 0 00-86.4-60.4C783.1 602.8 812 546.8 812 484c0-110.8-92.4-201.7-203.2-200-109.1 1.7-197 90.6-197 200 0 62.8 29 118.8 74.2 155.5a300.95 300.95 0 00-86.4 60.4C345 754.6 314 826.8 312 903.8a8 8 0 008 8.2h56c4.3 0 7.9-3.4 8-7.7 1.9-58 25.4-112.3 66.7-153.5A226.62 226.62 0 01612 684c60.9 0 118.2 23.7 161.3 66.8C814.5 792 838 846.3 840 904.3c.1 4.3 3.7 7.7 8 7.7h56a8 8 0 008-8.2c-2-77-33-149.2-87.8-203.9zM612 612c-34.2 0-66.4-13.3-90.5-37.5a126.86 126.86 0 01-37.5-91.8c.3-32.8 13.4-64.5 36.3-88 24-24.6 56.1-38.3 90.4-38.7 33.9-.3 66.8 12.9 91 36.6 24.8 24.3 38.4 56.8 38.4 91.4 0 34.2-13.3 66.3-37.5 90.5A127.3 127.3 0 01612 612zM361.5 510.4c-.9-8.7-1.4-17.5-1.4-26.4 0-15.9 1.5-31.4 4.3-46.5.7-3.6-1.2-7.3-4.5-8.8-13.6-6.1-26.1-14.5-36.9-25.1a127.54 127.54 0 01-38.7-95.4c.9-32.1 13.8-62.6 36.3-85.6 24.7-25.3 57.9-39.1 93.2-38.7 31.9.3 62.7 12.6 86 34.4 7.9 7.4 14.7 15.6 20.4 24.4 2 3.1 5.9 4.4 9.3 3.2 17.6-6.1 36.2-10.4 55.3-12.4 5.6-.6 8.8-6.6 6.3-11.6-32.5-64.3-98.9-108.7-175.7-109.9-110.9-1.7-203.3 89.2-203.3 199.9 0 62.8 28.9 118.8 74.2 155.5-31.8 14.7-61.1 35-86.5 60.4-54.8 54.7-85.8 126.9-87.8 204a8 8 0 008 8.2h56.1c4.3 0 7.9-3.4 8-7.7 1.9-58 25.4-112.3 66.7-153.5 29.4-29.4 65.4-49.8 104.7-59.7 3.9-1 6.5-4.7 6-8.7z" } }] }, "name": "team", "theme": "outlined" };
+  var TeamOutlined_default = TeamOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/TeamOutlined.js
+  var TeamOutlined2 = function TeamOutlined3(props, ref) {
+    return /* @__PURE__ */ React24.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: TeamOutlined_default
+    }));
+  };
+  TeamOutlined2.displayName = "TeamOutlined";
+  var TeamOutlined_default2 = /* @__PURE__ */ React24.forwardRef(TeamOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/ThunderboltOutlined.js
+  var React25 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/ThunderboltOutlined.js
+  var ThunderboltOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M848 359.3H627.7L825.8 109c4.1-5.3.4-13-6.3-13H436c-2.8 0-5.5 1.5-6.9 4L170 547.5c-3.1 5.3.7 12 6.9 12h174.4l-89.4 357.6c-1.9 7.8 7.5 13.3 13.3 7.7L853.5 373c5.2-4.9 1.7-13.7-5.5-13.7zM378.2 732.5l60.3-241H281.1l189.6-327.4h224.6L487 427.4h211L378.2 732.5z" } }] }, "name": "thunderbolt", "theme": "outlined" };
+  var ThunderboltOutlined_default = ThunderboltOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/ThunderboltOutlined.js
+  var ThunderboltOutlined2 = function ThunderboltOutlined3(props, ref) {
+    return /* @__PURE__ */ React25.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: ThunderboltOutlined_default
+    }));
+  };
+  ThunderboltOutlined2.displayName = "ThunderboltOutlined";
+  var ThunderboltOutlined_default2 = /* @__PURE__ */ React25.forwardRef(ThunderboltOutlined2);
+
+  // node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  var React26 = __toESM(require_react());
+
+  // node_modules/@ant-design/icons-svg/es/asn/UserOutlined.js
+  var UserOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" } }] }, "name": "user", "theme": "outlined" };
+  var UserOutlined_default = UserOutlined;
+
+  // node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  var UserOutlined2 = function UserOutlined3(props, ref) {
+    return /* @__PURE__ */ React26.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: UserOutlined_default
+    }));
+  };
+  UserOutlined2.displayName = "UserOutlined";
+  var UserOutlined_default2 = /* @__PURE__ */ React26.forwardRef(UserOutlined2);
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Sidebar.tsx
+  var { SubMenu } = import_antd6.Menu;
+  var defaultMenuItems = [
+    {
+      key: "dashboard",
+      label: "工作台",
+      icon: /* @__PURE__ */ import_react8.default.createElement(DashboardOutlined_default2, null),
+      path: "/dashboard"
+    },
+    {
+      key: "permission",
+      label: "权限管理",
+      icon: /* @__PURE__ */ import_react8.default.createElement(SafetyCertificateOutlined_default2, null),
+      children: [
+        {
+          key: "permission/users",
+          label: "用户管理",
+          icon: /* @__PURE__ */ import_react8.default.createElement(UserOutlined_default2, null),
+          path: "/permission/users"
+        },
+        {
+          key: "permission/roles",
+          label: "角色管理",
+          icon: /* @__PURE__ */ import_react8.default.createElement(TeamOutlined_default2, null),
+          path: "/permission/roles"
+        },
+        {
+          key: "permission/resources",
+          label: "资源管理",
+          icon: /* @__PURE__ */ import_react8.default.createElement(SettingOutlined_default2, null),
+          path: "/permission/resources"
+        },
+        {
+          key: "permission/menus",
+          label: "菜单管理",
+          icon: /* @__PURE__ */ import_react8.default.createElement(FileTextOutlined_default2, null),
+          path: "/permission/menus"
+        }
+      ]
+    },
+    {
+      key: "product",
+      label: "商品管理",
+      icon: /* @__PURE__ */ import_react8.default.createElement(ShoppingOutlined_default2, null),
+      children: [
+        {
+          key: "product/list",
+          label: "商品列表",
+          icon: /* @__PURE__ */ import_react8.default.createElement(InboxOutlined_default2, null),
+          path: "/product/list"
+        },
+        {
+          key: "product/add",
+          label: "添加商品",
+          icon: /* @__PURE__ */ import_react8.default.createElement(ShoppingOutlined_default2, null),
+          path: "/product/add"
+        },
+        {
+          key: "product/category",
+          label: "商品分类",
+          icon: /* @__PURE__ */ import_react8.default.createElement(TagsOutlined_default2, null),
+          path: "/product/category"
+        },
+        {
+          key: "product/brand",
+          label: "品牌管理",
+          path: "/product/brand"
+        },
+        {
+          key: "product/attribute",
+          label: "商品属性",
+          path: "/product/attribute"
+        }
+      ]
+    },
+    {
+      key: "order",
+      label: "订单管理",
+      icon: /* @__PURE__ */ import_react8.default.createElement(FileTextOutlined_default2, null),
+      children: [
+        {
+          key: "order/list",
+          label: "订单列表",
+          icon: /* @__PURE__ */ import_react8.default.createElement(FileTextOutlined_default2, null),
+          path: "/order/list"
+        },
+        {
+          key: "order/setting",
+          label: "订单设置",
+          icon: /* @__PURE__ */ import_react8.default.createElement(SettingOutlined_default2, null),
+          path: "/order/setting"
+        },
+        {
+          key: "order/return",
+          label: "退货申请",
+          path: "/order/return"
+        },
+        {
+          key: "order/reason",
+          label: "退货原因",
+          path: "/order/reason"
+        }
+      ]
+    },
+    {
+      key: "marketing",
+      label: "营销管理",
+      icon: /* @__PURE__ */ import_react8.default.createElement(GiftOutlined_default2, null),
+      children: [
+        {
+          key: "marketing/coupon",
+          label: "优惠券管理",
+          icon: /* @__PURE__ */ import_react8.default.createElement(GiftOutlined_default2, null),
+          path: "/marketing/coupon"
+        },
+        {
+          key: "marketing/promotion",
+          label: "促销活动",
+          icon: /* @__PURE__ */ import_react8.default.createElement(DollarOutlined_default2, null),
+          path: "/marketing/promotion"
+        },
+        {
+          key: "marketing/flash",
+          label: "秒杀活动",
+          icon: /* @__PURE__ */ import_react8.default.createElement(ThunderboltOutlined_default2, null),
+          path: "/marketing/flash"
+        },
+        {
+          key: "marketing/new",
+          label: "新品推荐",
+          icon: /* @__PURE__ */ import_react8.default.createElement(FireOutlined_default2, null),
+          path: "/marketing/new"
+        },
+        {
+          key: "marketing/hot",
+          label: "人气推荐",
+          icon: /* @__PURE__ */ import_react8.default.createElement(FireOutlined_default2, null),
+          path: "/marketing/hot"
+        },
+        {
+          key: "marketing/advertise",
+          label: "广告管理",
+          path: "/marketing/advertise"
+        },
+        {
+          key: "marketing/subject",
+          label: "专题管理",
+          path: "/marketing/subject"
+        },
+        {
+          key: "marketing/brand",
+          label: "品牌推荐",
+          path: "/marketing/brand"
+        }
+      ]
+    }
+  ];
+  var Sidebar = ({
+    collapsed,
+    selectedKey,
+    openKeys,
+    onMenuClick,
+    onOpenChange,
+    menuItems: customMenuItems
+  }) => {
+    const items = customMenuItems || defaultMenuItems;
+    const [internalOpenKeys, setInternalOpenKeys] = (0, import_react8.useState)(
+      items.filter((item) => item.children).map((item) => item.key)
+    );
+    const handleOpenChange = (keys) => {
+      const latestKey = keys[keys.length - 1];
+      if (latestKey && items.some((item) => item.key === latestKey)) {
+        setInternalOpenKeys(keys);
+        onOpenChange(keys);
+      } else {
+        setInternalOpenKeys(latestKey ? [latestKey] : []);
+        onOpenChange(latestKey ? [latestKey] : []);
+      }
+    };
+    const handleClick = ({ key }) => {
+      onMenuClick(key);
+    };
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: `sidebar-container ${collapsed ? "collapsed" : ""}` }, /* @__PURE__ */ import_react8.default.createElement("div", { className: "sidebar-logo" }, !collapsed && /* @__PURE__ */ import_react8.default.createElement("span", { className: "logo-text" }, "Mall Admin"), collapsed && /* @__PURE__ */ import_react8.default.createElement("span", { className: "logo-icon" }, "M")), /* @__PURE__ */ import_react8.default.createElement(
+      import_antd6.Menu,
+      {
+        mode: "inline",
+        theme: "dark",
+        inlineCollapsed: collapsed,
+        selectedKeys: [selectedKey],
+        defaultOpenKeys: internalOpenKeys,
+        openKeys: openKeys.length > 0 ? openKeys : internalOpenKeys,
+        onClick: handleClick,
+        onOpenChange: handleOpenChange,
+        items: items.map((item) => {
+          if (item.children && item.children.length > 0) {
+            return {
+              key: item.key,
+              icon: item.icon,
+              label: item.label,
+              children: item.children.map((child) => ({
+                key: child.key,
+                icon: child.icon,
+                label: child.label
+              }))
+            };
+          }
+          return {
+            key: item.key,
+            icon: item.icon,
+            label: item.label
+          };
+        })
+      }
+    ));
+  };
+  var Sidebar_default = Sidebar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Navbar.tsx
+  var import_react10 = __toESM(require_react());
+  var import_antd8 = __toESM(require_antd());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Breadcrumb.tsx
+  var import_react9 = __toESM(require_react());
+  var import_antd7 = __toESM(require_antd());
+  var labelMap = {
+    dashboard: "工作台",
+    permission: "权限管理",
+    product: "商品管理",
+    order: "订单管理",
+    marketing: "营销管理",
+    users: "用户管理",
+    roles: "角色管理",
+    resources: "资源管理",
+    menus: "菜单管理",
+    list: "列表",
+    add: "添加",
+    category: "分类",
+    brand: "品牌",
+    attribute: "属性",
+    setting: "设置",
+    return: "退货",
+    reason: "原因",
+    coupon: "优惠券",
+    promotion: "促销",
+    flash: "秒杀",
+    new: "新品",
+    hot: "人气",
+    advertise: "广告",
+    subject: "专题"
+  };
+  var BreadcrumbNav = ({ items, onNavigate }) => {
+    const getLabel = (key) => {
+      const parts = key.split("/");
+      return parts.map((part) => labelMap[part] || part).join(" / ");
+    };
+    if (!items || items.length === 0) {
+      return null;
+    }
+    return /* @__PURE__ */ import_react9.default.createElement(import_antd7.Breadcrumb, null, items.map((item) => /* @__PURE__ */ import_react9.default.createElement(import_antd7.Breadcrumb.Item, { key: item.key }, /* @__PURE__ */ import_react9.default.createElement("a", { onClick: () => onNavigate(item.key) }, item.label || getLabel(item.key)))));
+  };
+  var Breadcrumb_default = BreadcrumbNav;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/Navbar.tsx
+  var Navbar = ({ collapsed, onToggleCollapse, breadcrumbItems, onNavigate }) => {
+    const userMenuItems = [
+      {
+        key: "profile",
+        icon: /* @__PURE__ */ import_react10.default.createElement(UserOutlined_default2, null),
+        label: "个人中心"
+      },
+      {
+        key: "settings",
+        icon: /* @__PURE__ */ import_react10.default.createElement(SettingOutlined_default2, null),
+        label: "系统设置"
+      },
+      {
+        type: "divider"
+      },
+      {
+        key: "logout",
+        icon: /* @__PURE__ */ import_react10.default.createElement(LogoutOutlined_default2, null),
+        label: "退出登录",
+        danger: true
+      }
+    ];
+    const handleUserMenuClick = ({ key }) => {
+      if (key === "logout") {
+        console.log("User logged out");
+      }
+    };
+    const menu = /* @__PURE__ */ import_react10.default.createElement(import_antd8.Menu, { items: userMenuItems, onClick: handleUserMenuClick });
+    return /* @__PURE__ */ import_react10.default.createElement("div", { className: "navbar-container" }, /* @__PURE__ */ import_react10.default.createElement("div", { className: "navbar-left" }, /* @__PURE__ */ import_react10.default.createElement("button", { className: "hamburger-btn", onClick: onToggleCollapse }, collapsed ? /* @__PURE__ */ import_react10.default.createElement(MenuUnfoldOutlined_default2, null) : /* @__PURE__ */ import_react10.default.createElement(MenuFoldOutlined_default2, null)), /* @__PURE__ */ import_react10.default.createElement(Breadcrumb_default, { items: breadcrumbItems, onNavigate })), /* @__PURE__ */ import_react10.default.createElement("div", { className: "navbar-right" }, /* @__PURE__ */ import_react10.default.createElement(import_antd8.Dropdown, { overlay: menu, placement: "bottomRight" }, /* @__PURE__ */ import_react10.default.createElement("div", { className: "user-info" }, /* @__PURE__ */ import_react10.default.createElement(import_antd8.Avatar, { size: 32, icon: /* @__PURE__ */ import_react10.default.createElement(UserOutlined_default2, null), className: "user-avatar" }), /* @__PURE__ */ import_react10.default.createElement(import_antd8.Space, { size: 4, className: "username" }, /* @__PURE__ */ import_react10.default.createElement("span", null, "管理员"))))));
+  };
+  var Navbar_default = Navbar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/MainContent.tsx
+  var import_react12 = __toESM(require_react());
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/TabBar.tsx
+  var import_react11 = __toESM(require_react());
+  var import_antd9 = __toESM(require_antd());
+  var TabBar = ({
+    tabs,
+    activeTabKey,
+    onTabClick,
+    onCloseTab,
+    onCloseOther,
+    onCloseAll,
+    closableTabs = true
+  }) => {
+    const [hoveredKey, setHoveredKey] = (0, import_react11.useState)(null);
+    const [contextMenuVisible, setContextMenuVisible] = (0, import_react11.useState)(false);
+    const [contextMenuKey, setContextMenuKey] = (0, import_react11.useState)("");
+    const [menuPosition, setMenuPosition] = (0, import_react11.useState)({ x: 0, y: 0 });
+    const scrollContainerRef = (0, import_react11.useRef)(null);
+    (0, import_react11.useEffect)(() => {
+      if (scrollContainerRef.current && activeTabKey) {
+        const activeElement = scrollContainerRef.current.querySelector(`[data-tab-key="${activeTabKey}"]`);
+        if (activeElement) {
+          activeElement.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
+      }
+    }, [activeTabKey]);
+    (0, import_react11.useEffect)(() => {
+      const handleClick = () => setContextMenuVisible(false);
+      if (contextMenuVisible) {
+        document.addEventListener("click", handleClick);
+        return () => document.removeEventListener("click", handleClick);
+      }
+    }, [contextMenuVisible]);
+    const handleContextMenu = (e, tabKey) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setContextMenuKey(tabKey);
+      setMenuPosition({ x: e.clientX, y: e.clientY });
+      setContextMenuVisible(true);
+    };
+    const handleMenuClick = (key) => {
+      setContextMenuVisible(false);
+      switch (key) {
+        case "close":
+          onCloseTab(contextMenuKey);
+          break;
+        case "closeOther":
+          onCloseOther(contextMenuKey);
+          break;
+        case "closeAll":
+          onCloseAll();
+          break;
+        case "refresh":
+          window.location.reload();
+          break;
+      }
+    };
+    if (!tabs || tabs.length === 0) {
+      return null;
+    }
+    const contextMenuItems = [
+      {
+        key: "refresh",
+        icon: /* @__PURE__ */ import_react11.default.createElement(ReloadOutlined_default2, null),
+        label: "刷新当前页"
+      },
+      {
+        key: "close",
+        icon: /* @__PURE__ */ import_react11.default.createElement(CloseOutlined_default2, null),
+        label: "关闭当前",
+        disabled: !closableTabs || tabs.find((t) => t.key === contextMenuKey)?.closable === false
+      },
+      {
+        type: "divider"
+      },
+      {
+        key: "closeOther",
+        icon: /* @__PURE__ */ import_react11.default.createElement(CloseCircleOutlined_default2, null),
+        label: "关闭其他",
+        disabled: tabs.length <= 1
+      },
+      {
+        key: "closeAll",
+        icon: /* @__PURE__ */ import_react11.default.createElement(CloseCircleOutlined_default2, null),
+        label: "关闭所有"
+      }
+    ];
+    const menu = /* @__PURE__ */ import_react11.default.createElement(import_antd9.Menu, { items: contextMenuItems, onClick: ({ key }) => handleMenuClick(key) });
+    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement("div", { className: "tab-bar-container" }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "tab-bar-scroll", ref: scrollContainerRef }, tabs.map((tab) => /* @__PURE__ */ import_react11.default.createElement(
+      "div",
+      {
+        key: tab.key,
+        "data-tab-key": tab.key,
+        className: `tab-item ${activeTabKey === tab.key ? "active" : ""} ${hoveredKey === tab.key ? "hovered" : ""}`,
+        onClick: () => onTabClick(tab.key),
+        onMouseEnter: () => setHoveredKey(tab.key),
+        onMouseLeave: () => setHoveredKey(null),
+        onContextMenu: (e) => handleContextMenu(e, tab.key)
+      },
+      tab.icon && /* @__PURE__ */ import_react11.default.createElement("span", { className: "tab-icon" }, tab.icon),
+      /* @__PURE__ */ import_react11.default.createElement("span", { className: "tab-label" }, tab.label),
+      closableTabs && tab.closable && /* @__PURE__ */ import_react11.default.createElement(
+        "span",
+        {
+          className: `tab-close-btn ${hoveredKey === tab.key || activeTabKey === tab.key ? "visible" : ""}`,
+          onClick: (e) => {
+            e.stopPropagation();
+            onCloseTab(tab.key);
+          }
+        },
+        /* @__PURE__ */ import_react11.default.createElement(CloseOutlined_default2, { style: { fontSize: 10 } })
+      )
+    ))), closableTabs && tabs.length > 1 && /* @__PURE__ */ import_react11.default.createElement("div", { className: "tab-actions" }, /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        className: "close-all-btn",
+        onClick: onCloseAll,
+        title: "关闭全部标签"
+      },
+      /* @__PURE__ */ import_react11.default.createElement(CloseCircleOutlined_default2, null)
+    ))), contextMenuVisible && /* @__PURE__ */ import_react11.default.createElement(
+      "div",
+      {
+        style: {
+          position: "fixed",
+          left: menuPosition.x,
+          top: menuPosition.y,
+          zIndex: 1e3
+        }
+      },
+      /* @__PURE__ */ import_react11.default.createElement(
+        import_antd9.Dropdown,
+        {
+          overlay: menu,
+          visible: contextMenuVisible,
+          onVisibleChange: setContextMenuVisible,
+          trigger: ["click"]
+        },
+        /* @__PURE__ */ import_react11.default.createElement("div", { style: { width: 0, height: 0 } })
+      )
+    ));
+  };
+  var TabBar_default = TabBar;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/MainContent.tsx
+  var MainContent = ({
+    children,
+    pageKey,
+    tabs,
+    activeTabKey,
+    onTabClick,
+    onCloseTab,
+    onCloseOther,
+    onCloseAll,
+    enableTabs = true,
+    closableTabs = true,
+    className = ""
+  }) => {
+    return /* @__PURE__ */ import_react12.default.createElement("main", { className: `main-content ${className}` }, enableTabs && tabs.length > 0 && /* @__PURE__ */ import_react12.default.createElement(
+      TabBar_default,
+      {
+        tabs,
+        activeTabKey,
+        onTabClick,
+        onCloseTab,
+        onCloseOther,
+        onCloseAll,
+        closableTabs
+      }
+    ), /* @__PURE__ */ import_react12.default.createElement("div", { className: "content-wrapper" }, /* @__PURE__ */ import_react12.default.createElement("div", { className: "page-container", key: pageKey }, children)));
+  };
+  var MainContent_default = MainContent;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/AdminLayout.tsx
+  var findMenuItem = (items, key) => {
+    for (const item of items) {
+      if (item.key === key) return item;
+      if (item.children) {
+        const found = findMenuItem(item.children, key);
+        if (found) return found;
+      }
+    }
+    return void 0;
+  };
+  var getLabelFromKey = (key) => {
+    const parts = key.split("/");
+    const labelMap2 = {
+      dashboard: "工作台",
+      permission: "权限管理",
+      product: "商品管理",
+      order: "订单管理",
+      marketing: "营销管理",
+      users: "用户管理",
+      roles: "角色管理",
+      resources: "资源管理",
+      menus: "菜单管理",
+      list: "列表",
+      add: "添加",
+      category: "分类",
+      brand: "品牌",
+      attribute: "属性",
+      setting: "设置",
+      return: "退货申请",
+      reason: "退货原因",
+      coupon: "优惠券管理",
+      promotion: "促销活动",
+      flash: "秒杀活动",
+      new: "新品推荐",
+      hot: "人气推荐",
+      advertise: "广告管理",
+      subject: "专题管理"
+    };
+    return labelMap2[parts[parts.length - 1]] || parts[parts.length - 1];
+  };
+  var AdminLayout = ({
+    defaultSelectedKey = "dashboard",
+    defaultOpenKeys,
+    collapsible = true,
+    enableTabs = true,
+    maxTabs = 10,
+    closableTabs = true,
+    logoText = "Mall Admin",
+    menuItems: customMenuItems,
+    style,
+    className,
+    children,
+    __designMode,
+    componentId
+  }) => {
+    const items = customMenuItems || defaultMenuItems;
+    const [collapsed, setCollapsed] = (0, import_react13.useState)(false);
+    const [selectedKey, setSelectedKey] = (0, import_react13.useState)(defaultSelectedKey);
+    const [openKeys, setOpenKeys] = (0, import_react13.useState)(defaultOpenKeys || []);
+    const [tabs, setTabs] = (0, import_react13.useState)(() => {
+      const initialItem = findMenuItem(items, defaultSelectedKey);
+      return [{
+        key: defaultSelectedKey,
+        label: initialItem?.label || getLabelFromKey(defaultSelectedKey),
+        icon: initialItem?.icon,
+        closable: false,
+        path: initialItem?.path || `/${defaultSelectedKey}`
+      }];
+    });
+    const [activeTabKey, setActiveTabKey] = (0, import_react13.useState)(defaultSelectedKey);
+    const activeTabKeyRef = (0, import_react13.useRef)(activeTabKey);
+    activeTabKeyRef.current = activeTabKey;
+    const initializedRef = (0, import_react13.useRef)(false);
+    (0, import_react13.useEffect)(() => {
+      if (__designMode !== "design" || !componentId || initializedRef.current) return;
+      const timer = setTimeout(() => {
+        try {
+          const engine = window.AliLowCodeEngine;
+          if (!engine?.project?.currentDocument) return;
+          const documentModel = engine.project.currentDocument;
+          const adminLayoutNode = documentModel.getNodeById(componentId);
+          if (!adminLayoutNode) return;
+          const childrenArr = Array.isArray(adminLayoutNode.children) ? adminLayoutNode.children : adminLayoutNode.children?.toArray ? adminLayoutNode.children.toArray() : [];
+          const existingTabPanes = childrenArr.filter((child) => child.componentName === "TabPane");
+          console.log("[AdminLayout] 🔍 Found existing TabPanes:", existingTabPanes.length);
+          if (existingTabPanes.length > 0) {
+            const restoredTabs = existingTabPanes.map((tp) => {
+              const tabKey = tp.props?.tabKey || tp.getPropValue?.("tabKey") || "unknown";
+              const tabLabel = tp.props?.tab || tp.getPropValue?.("tab") || getLabelFromKey(tabKey);
+              const menuItem = findMenuItem(items, tabKey);
+              return {
+                key: tabKey,
+                label: tabLabel,
+                icon: menuItem?.icon,
+                closable: tabKey !== "dashboard",
+                path: menuItem?.path || `/${tabKey}`
+              };
+            });
+            console.log("[AdminLayout] 📋 Restored tabs from schema:", restoredTabs.map((t) => t.key));
+            setTabs(restoredTabs);
+            const currentActiveTab = restoredTabs[restoredTabs.length - 1];
+            if (currentActiveTab) {
+              setActiveTabKey(currentActiveTab.key);
+              setSelectedKey(currentActiveTab.key);
+            }
+          } else {
+            const tabPaneNode = documentModel.createNode({
+              componentName: "TabPane",
+              props: {
+                tab: "工作台",
+                tabKey: "dashboard",
+                activeTabKey: "dashboard"
+              }
+            });
+            if (tabPaneNode) {
+              documentModel.insertNode(adminLayoutNode, tabPaneNode);
+              console.log("[AdminLayout] ✅ Created default TabPane for dashboard");
+            }
+          }
+          initializedRef.current = true;
+        } catch (e) {
+          console.error("[AdminLayout] Init TabPane error:", e);
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }, [componentId, __designMode, items]);
+    (0, import_react13.useEffect)(() => {
+      if (__designMode !== "design" || !componentId) return;
+      try {
+        const engine = window.AliLowCodeEngine;
+        if (!engine?.project?.currentDocument) return;
+        const documentModel = engine.project.currentDocument;
+        const adminLayoutNode = documentModel.getNodeById(componentId);
+        if (adminLayoutNode?.children) {
+          const childrenArr = Array.isArray(adminLayoutNode.children) ? adminLayoutNode.children : adminLayoutNode.children.toArray ? adminLayoutNode.children.toArray() : [];
+          childrenArr.forEach((child) => {
+            if (child.componentName === "TabPane") {
+              child.setPropValue("activeTabKey", activeTabKey);
+            }
+          });
+        }
+      } catch (e) {
+      }
+    }, [activeTabKey, componentId, __designMode]);
+    const handleToggleCollapse = (0, import_react13.useCallback)(() => {
+      if (collapsible) setCollapsed((prev) => !prev);
+    }, [collapsible]);
+    const createTabPane = (0, import_react13.useCallback)((tabKey, tabLabel) => {
+      if (typeof window === "undefined") return false;
+      try {
+        const engine = window.AliLowCodeEngine;
+        if (!engine?.project?.currentDocument) return false;
+        const documentModel = engine.project.currentDocument;
+        const adminLayoutNode = componentId ? documentModel.getNodeById(componentId) : null;
+        if (!adminLayoutNode) return false;
+        const allChildren = Array.isArray(adminLayoutNode.children) ? adminLayoutNode.children : adminLayoutNode.children?.toArray ? adminLayoutNode.children.toArray() : [];
+        console.log(
+          "[AdminLayout] 🔍 All children before create:",
+          allChildren.map((c) => ({ id: c.id, name: c.componentName, tabKey: c.props?.tabKey }))
+        );
+        for (const child of allChildren) {
+          const ck = child.props?.tabKey || child.getPropValue?.("tabKey");
+          if (child.componentName === "TabPane" && ck === tabKey) {
+            console.log("[AdminLayout] ⚠️ Found existing TabPane, removing first:", child.id);
+            if (child.children) {
+              const grandChildren = Array.isArray(child.children) ? [...child.children] : child.children.toArray ? [...child.children.toArray()] : [];
+              console.log("[AdminLayout] 🗑️ Removing", grandChildren.length, "children from existing TabPane");
+              for (const gc of grandChildren) {
+                try {
+                  documentModel.removeNode(gc);
+                } catch (e) {
+                }
+              }
+            }
+            documentModel.removeNode(child);
+            break;
+          }
+        }
+        const tabPaneNode = documentModel.createNode({
+          componentName: "TabPane",
+          props: {
+            tab: tabLabel,
+            tabKey,
+            activeTabKey: activeTabKeyRef.current
+          }
+        });
+        if (!tabPaneNode) return false;
+        documentModel.insertNode(adminLayoutNode, tabPaneNode);
+        console.log("[AdminLayout] ✅ Created new TabPane:", tabKey, "nodeId:", tabPaneNode.id);
+        return true;
+      } catch (error) {
+        console.error("[AdminLayout] createTabPane error:", error);
+        return false;
+      }
+    }, [componentId]);
+    const removeTabPane = (0, import_react13.useCallback)((tabKey) => {
+      if (typeof window === "undefined") return false;
+      let removed = false;
+      try {
+        const engine = window.AliLowCodeEngine;
+        if (!engine?.project?.currentDocument) return false;
+        const documentModel = engine.project.currentDocument;
+        const adminLayoutNode = componentId ? documentModel.getNodeById(componentId) : null;
+        console.log("[AdminLayout] 🗑️ removeTabPane called:", tabKey);
+        console.log("[AdminLayout] componentId:", componentId);
+        console.log("[AdminLayout] adminLayoutNode:", adminLayoutNode ? "found" : "NOT FOUND");
+        console.log("[AdminLayout] adminLayoutNode.id:", adminLayoutNode?.id);
+        console.log("[AdminLayout] adminLayoutNode.componentName:", adminLayoutNode?.componentName);
+        if (!adminLayoutNode) return false;
+        let childrenArr = [];
+        if (adminLayoutNode.children) {
+          if (Array.isArray(adminLayoutNode.children)) {
+            childrenArr = adminLayoutNode.children;
+          } else if (typeof adminLayoutNode.children.toArray === "function") {
+            childrenArr = adminLayoutNode.children.toArray();
+          } else if (typeof adminLayoutNode.children.map === "function") {
+            childrenArr = adminLayoutNode.children.map((c) => c);
+          }
+        }
+        if (childrenArr.length === 0 && adminLayoutNode.schema?.children) {
+          console.log("[AdminLayout] Trying schema.children...");
+          const schemaChildren = adminLayoutNode.schema.children;
+          if (Array.isArray(schemaChildren)) {
+            childrenArr = schemaChildren.map((childSchema) => {
+              return documentModel.getNodeById(childSchema.id);
+            }).filter(Boolean);
+          }
+        }
+        if (childrenArr.length === 0) {
+          console.log("[AdminLayout] Trying documentModel.getRoot()...");
+          const root = documentModel.getRoot();
+          console.log("[AdminLayout] Root node:", root?.componentName);
+          const findNode = (node, targetId) => {
+            if (!targetId) return null;
+            if (node.id === targetId) return node;
+            if (node.children) {
+              const arr = Array.isArray(node.children) ? node.children : node.children.toArray ? node.children.toArray() : [];
+              for (const child of arr) {
+                const found = findNode(child, targetId);
+                if (found) return found;
+              }
+            }
+            return null;
+          };
+          const foundNode = findNode(root, componentId);
+          if (foundNode && foundNode.children) {
+            childrenArr = Array.isArray(foundNode.children) ? foundNode.children : foundNode.children.toArray ? foundNode.children.toArray() : [];
+          }
+        }
+        console.log("[AdminLayout] Final children count:", childrenArr.length);
+        console.log(
+          "[AdminLayout] Children details:",
+          childrenArr.map((c) => ({
+            id: c?.id,
+            name: c?.componentName,
+            tabKey: c?.props?.tabKey || c?.getPropValue?.("tabKey"),
+            childrenCount: c?.children ? Array.isArray(c.children) ? c.children.length : c.children.toArray ? c.children.toArray().length : 0 : 0
+          }))
+        );
+        childrenArr.forEach((c, idx) => {
+          console.log(`[AdminLayout] Child[${idx}] ${c?.componentName}:`, {
+            id: c?.id,
+            tabKey: c?.props?.tabKey || c?.getPropValue?.("tabKey"),
+            hasChildren: !!c?.children,
+            childrenType: c?.children ? Array.isArray(c.children) ? "array" : typeof c.children.toArray === "function" ? "array-like" : typeof c.children : "none"
+          });
+          if (c?.componentName === "TabPane" && c?.children) {
+            const tpChildren = Array.isArray(c.children) ? c.children : c.children.toArray ? c.children.toArray() : [];
+            console.log(
+              `[AdminLayout]   TabPane children:`,
+              tpChildren.map((gc) => ({ id: gc?.id, name: gc?.componentName }))
+            );
+            if (tpChildren.length === 0) {
+              console.log(`[AdminLayout]   Trying alternative methods...`);
+              if (c.schema?.children) {
+                console.log(`[AdminLayout]   schema.children:`, c.schema.children);
+              }
+              if (typeof c.getChildren === "function") {
+                const gChildren = c.getChildren();
+                console.log(`[AdminLayout]   getChildren():`, gChildren);
+              }
+              if (c.slots) {
+                console.log(`[AdminLayout]   slots:`, c.slots);
+              }
+            }
+          }
+          if (c?.componentName !== "TabPane") {
+            console.log(`[AdminLayout] ⚠️ Found non-TabPane child! This might be a dragged component.`);
+          }
+        });
+        for (const child of childrenArr) {
+          if (!child) continue;
+          const childTabKey = child.props?.tabKey || child.getPropValue?.("tabKey");
+          if (child.componentName === "TabPane" && childTabKey === tabKey) {
+            console.log("[AdminLayout] ✅ Found TabPane to remove:", child.id);
+            const schemaChildren = child.schema?.children;
+            if (schemaChildren && Array.isArray(schemaChildren) && schemaChildren.length > 0) {
+              console.log("[AdminLayout] Removing", schemaChildren.length, "grandchildren from schema.children");
+              for (let i = schemaChildren.length - 1; i >= 0; i--) {
+                const childSchema = schemaChildren[i];
+                const grandChildNode = documentModel.getNodeById(childSchema.id);
+                if (grandChildNode) {
+                  try {
+                    documentModel.removeNode(grandChildNode);
+                    console.log("[AdminLayout]   ✓ Removed grandchild:", grandChildNode.id, grandChildNode.componentName);
+                  } catch (e) {
+                    console.warn("[AdminLayout]   ✗ Failed to remove grandchild:", e);
+                  }
+                }
+              }
+            } else {
+              console.log("[AdminLayout] No grandchildren to remove");
+            }
+            try {
+              documentModel.removeNode(child);
+              removed = true;
+              console.log("[AdminLayout] ✅ Removed TabPane node:", tabKey);
+            } catch (e) {
+              console.error("[AdminLayout] Failed to remove TabPane:", e);
+            }
+            break;
+          }
+        }
+        if (!removed) {
+          console.warn("[AdminLayout] ⚠️ TabPane not found for key:", tabKey);
+        }
+        return removed;
+      } catch (error) {
+        console.error("[AdminLayout] removeTabPane error:", error);
+        return false;
+      }
+    }, [componentId]);
+    const handleMenuClick = (0, import_react13.useCallback)((key) => {
+      setSelectedKey(key);
+      const existingTab = tabs.find((tab) => tab.key === key);
+      if (!existingTab) {
+        const menuItem = findMenuItem(items, key);
+        const newTab = {
+          key,
+          label: menuItem?.label || getLabelFromKey(key),
+          icon: menuItem?.icon,
+          closable: key !== "dashboard",
+          path: menuItem?.path || `/${key}`
+        };
+        setTabs((prev) => {
+          if (prev.length >= maxTabs) {
+            const filtered = prev.filter((t) => t.closable);
+            if (filtered.length > 0) {
+              return [...prev.filter((t) => t.key !== filtered[0].key), newTab];
+            }
+          }
+          return [...prev, newTab];
+        });
+        if (__designMode === "design") {
+          setTimeout(() => createTabPane(key, menuItem?.label || getLabelFromKey(key)), 0);
+        }
+      }
+      setActiveTabKey(key);
+    }, [tabs, items, maxTabs, __designMode, createTabPane]);
+    const handleOpenChange = (0, import_react13.useCallback)((keys) => setOpenKeys(keys), []);
+    const handleNavigate = (0, import_react13.useCallback)((key) => {
+      setSelectedKey(key);
+      setActiveTabKey(key);
+    }, []);
+    const handleTabClick = (0, import_react13.useCallback)((key) => {
+      setSelectedKey(key);
+      setActiveTabKey(key);
+    }, []);
+    const handleCloseTab = (0, import_react13.useCallback)((key) => {
+      if (key === "dashboard") return;
+      removeTabPane(key);
+      setTabs((prev) => prev.filter((tab) => tab.key !== key));
+      if (key === activeTabKey) {
+        const remainingTabs = tabs.filter((tab) => tab.key !== key);
+        if (remainingTabs.length > 0) {
+          const currentIndex = tabs.findIndex((tab) => tab.key === key);
+          const nextTab = remainingTabs[currentIndex] || remainingTabs[remainingTabs.length - 1];
+          setSelectedKey(nextTab.key);
+          setActiveTabKey(nextTab.key);
+        }
+      }
+    }, [tabs, activeTabKey, removeTabPane]);
+    const handleCloseOther = (0, import_react13.useCallback)((keepKey) => {
+      tabs.forEach((tab) => {
+        if (tab.key !== keepKey && tab.key !== "dashboard") {
+          removeTabPane(tab.key);
+        }
+      });
+      setTabs((prev) => prev.filter((tab) => tab.key === keepKey || tab.key === "dashboard"));
+      setSelectedKey(keepKey);
+      setActiveTabKey(keepKey);
+    }, [tabs, removeTabPane]);
+    const handleCloseAll = (0, import_react13.useCallback)(() => {
+      tabs.forEach((tab) => {
+        if (tab.key !== "dashboard") {
+          removeTabPane(tab.key);
+        }
+      });
+      const dashboardTab = tabs.find((tab) => tab.key === "dashboard");
+      if (dashboardTab) {
+        setTabs([dashboardTab]);
+        setSelectedKey("dashboard");
+        setActiveTabKey("dashboard");
+      }
+    }, [tabs, removeTabPane]);
+    const breadcrumbItems = (0, import_react13.useMemo)(() => {
+      if (selectedKey === "dashboard") return [];
+      const parts = selectedKey.split("/");
+      if (parts.length === 1) return [{ key: selectedKey, label: "", path: selectedKey }];
+      return [{ key: selectedKey, label: "", path: selectedKey }];
+    }, [selectedKey]);
+    const filteredChildren = (0, import_react13.useMemo)(() => {
+      if (!children) return null;
+      if (__designMode === "design") {
+        const childArray = import_react13.Children.toArray(children);
+        const activeTabPane = childArray.find((child) => {
+          if ((0, import_react13.isValidElement)(child)) {
+            const childProps = child.props;
+            return childProps?.tabKey === activeTabKey;
+          }
+          return false;
+        });
+        return activeTabPane || null;
+      }
+      return children;
+    }, [children, activeTabKey, __designMode]);
+    const defaultContent = /* @__PURE__ */ import_react13.default.createElement("div", { style: { padding: 24, color: "#999" } }, "点击侧边栏菜单创建选项卡，然后拖拽组件到对应面板");
+    const content = filteredChildren || defaultContent;
+    return /* @__PURE__ */ import_react13.default.createElement("div", { className: `admin-layout ${collapsed ? "is-collapse" : ""} ${className || ""}`, style, "data-active-tab": activeTabKey }, /* @__PURE__ */ import_react13.default.createElement(
+      Sidebar_default,
+      {
+        collapsed,
+        selectedKey,
+        openKeys,
+        onMenuClick: handleMenuClick,
+        onOpenChange: handleOpenChange,
+        menuItems: items
+      }
+    ), /* @__PURE__ */ import_react13.default.createElement("div", { className: "layout-right" }, /* @__PURE__ */ import_react13.default.createElement(
+      Navbar_default,
+      {
+        collapsed,
+        onToggleCollapse: handleToggleCollapse,
+        breadcrumbItems,
+        onNavigate: handleNavigate
+      }
+    ), /* @__PURE__ */ import_react13.default.createElement(
+      MainContent_default,
+      {
+        pageKey: selectedKey,
+        tabs,
+        activeTabKey,
+        onTabClick: handleTabClick,
+        onCloseTab: handleCloseTab,
+        onCloseOther: handleCloseOther,
+        onCloseAll: handleCloseAll,
+        enableTabs,
+        closableTabs,
+        className: collapsed ? "collapsed" : ""
+      },
+      content
+    )), collapsible && /* @__PURE__ */ import_react13.default.createElement(
+      "div",
+      {
+        className: `mobile-overlay ${!collapsed ? "visible" : ""}`,
+        onClick: handleToggleCollapse
+      }
+    ));
+  };
+  var AdminLayout_default = AdminLayout;
+
+  // src/plugins/plugin-mall-components/components/AdminLayout/TabPane.tsx
+  var import_react14 = __toESM(require_react());
+  var TabPane = ({
+    tab,
+    tabKey,
+    activeTabKey,
+    children,
+    className,
+    style
+  }) => {
+    const isActive = activeTabKey === tabKey;
+    return /* @__PURE__ */ import_react14.default.createElement(
+      "div",
+      {
+        className: `tab-pane ${isActive ? "tab-pane--active" : ""} ${className || ""}`,
+        style: {
+          ...style,
+          display: isActive ? void 0 : "none"
+        },
+        "data-tab-key": tabKey,
+        "data-active": isActive ? "true" : "false"
+      },
+      children
+    );
+  };
+  var TabPane_default = TabPane;
+
+  // src/plugins/plugin-mall-components/entry-components.ts
+  var MallComponents = {
+    ProductList: ProductList_default,
+    ProductForm: ProductForm_default,
+    OrderList: OrderList_default,
+    MarketingManager: MarketingManager_default,
+    RestApiTester: RestApiTester_default,
+    AdminLayout: AdminLayout_default,
+    TabPane: TabPane_default
+  };
+  var entry_components_default = MallComponents;
+  return __toCommonJS(entry_components_exports);
+})();
+/*! Bundled license information:
+
+classnames/index.js:
+  (*!
+  	Copyright (c) 2018 Jed Watson.
+  	Licensed under the MIT License (MIT), see
+  	http://jedwatson.github.io/classnames
+  *)
+*/
 
 MallComponents = MallComponents.default || MallComponents;
+
 if (typeof window !== 'undefined') {
   window.MallComponents = MallComponents;
   console.log('[MallComponents] Registered:', Object.keys(MallComponents));

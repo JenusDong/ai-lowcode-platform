@@ -2,7 +2,7 @@ import type { IPublicTypeComponentMetadata } from '@alilc/lowcode-types'
 
 const TabPaneMeta: IPublicTypeComponentMetadata = {
   componentName: 'TabPane',
-  title: '标签页面板',
+  title: '选项卡面板',
   docUrl: 'https://github.com/alibaba/lowcode-engine',
   screenshot: '',
   npm: {
@@ -15,13 +15,14 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
     {
       name: 'tab',
       propType: 'string',
-      description: '标签页标题',
-      defaultValue: '标签页',
+      description: '选项卡标题',
+      defaultValue: '新选项卡',
     },
     {
       name: 'tabKey',
       propType: 'string',
-      description: '标签页唯一标识',
+      description: '选项卡唯一标识',
+      defaultValue: 'tab1',
     },
   ],
   configure: {
@@ -32,16 +33,23 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
     },
     props: [
       {
-        name: 'tab',
-        title: '标签标题',
-        setter: 'InputSetter',
-        extraProps: { display: 'block' },
-      },
-      {
-        name: 'tabKey',
-        title: '标签标识',
-        setter: 'InputSetter',
-        extraProps: { display: 'block' },
+        type: 'group',
+        title: '基础配置',
+        display: 'accordion',
+        items: [
+          { 
+            name: 'tab', 
+            title: '选项卡标题', 
+            setter: 'InputSetter', 
+            extraProps: { display: 'block', placeholder: '例如：商品列表' }
+          },
+          { 
+            name: 'tabKey', 
+            title: '选项卡标识', 
+            setter: 'InputSetter', 
+            extraProps: { display: 'block', placeholder: '例如：product' }
+          },
+        ],
       },
     ],
     component: {
@@ -49,23 +57,13 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
       nestingRule: {
         parentWhitelist: ['AdminLayout'],
       },
+      disableBehaviors: ['remove'],
     },
   },
-  icon: 'https://img.alicdn.com/tfs/TB1p9Nqy.T1gK0jSZFrXXcNCXXa-200-200.png',
-  category: '电商业务组件',
+  icon: '',
+  category: '隐藏组件',
   group: '布局容器',
-  snippets: [
-    {
-      title: '标签页面板',
-      schema: {
-        componentName: 'TabPane',
-        props: {
-          tab: '新标签页',
-          tabKey: 'new-tab',
-        },
-      },
-    },
-  ],
+  snippets: [],
 }
 
 export default TabPaneMeta
