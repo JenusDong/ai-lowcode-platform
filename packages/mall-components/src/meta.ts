@@ -6,6 +6,8 @@ import CouponCardMeta from './meta/couponCardMeta'
 import PromotionCardMeta from './meta/promotionCardMeta'
 import UserCardMeta from './meta/userCardMeta'
 import RoleCardMeta from './meta/roleCardMeta'
+import adminLayoutMeta from './meta/adminLayoutMeta'
+import tabPaneMeta from './meta/tabPaneMeta'
 
 export default {
   components: [
@@ -17,5 +19,7 @@ export default {
     PromotionCardMeta,
     UserCardMeta,
     RoleCardMeta,
+    adminLayoutMeta,
+    tabPaneMeta,
   ],
 }

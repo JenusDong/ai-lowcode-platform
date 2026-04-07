@@ -86,11 +86,11 @@ var __META_RAW__ = (() => {
       return Icon ? import_react.default.createElement(Icon) : null;
     },
     get radar() {
-      const Icon = getIconComponent("RadarChartOutlined");
+      const Icon = getIconComponent("DotChartOutlined");
       return Icon ? import_react.default.createElement(Icon) : null;
     },
     get gauge() {
-      const Icon = getIconComponent("DashboardOutlined");
+      const Icon = getIconComponent("DashboardFilled");
       return Icon ? import_react.default.createElement(Icon) : null;
     },
     get funnel() {
@@ -603,7 +603,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsPie", destructuring: true },
       props: baseProps,
       configure: pieConfigure,
       icon: Icons.pie,
@@ -620,7 +620,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsLine", destructuring: true },
       props: baseProps,
       configure: lineConfigure,
       icon: Icons.line,
@@ -637,7 +637,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsBar", destructuring: true },
       props: baseProps,
       configure: barConfigure,
       icon: Icons.bar,
@@ -654,7 +654,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsScatter", destructuring: true },
       props: baseProps,
       configure: scatterConfigure,
       icon: Icons.scatter,
@@ -670,7 +670,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsArea", destructuring: true },
       props: baseProps,
       configure: areaConfigure,
       icon: Icons.area,
@@ -686,7 +686,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsRadar", destructuring: true },
       props: baseProps,
       configure: radarConfigure,
       icon: Icons.radar,
@@ -702,7 +702,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsGauge", destructuring: true },
       props: baseProps,
       configure: gaugeConfigure,
       icon: Icons.gauge,
@@ -718,7 +718,7 @@ var __META_RAW__ = (() => {
       docUrl: "",
       screenshot: "",
       devMode: "proCode",
-      npm: { package: "echarts-for-react", version: "1.0.0", exportName: "default", destructuring: false },
+      npm: { package: "plugin-echarts", version: "1.0.0", exportName: "EChartsFunnel", destructuring: true },
       props: baseProps,
       configure: funnelConfigure,
       icon: Icons.funnel,

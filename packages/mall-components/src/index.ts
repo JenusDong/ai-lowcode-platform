@@ -6,6 +6,7 @@ import CouponCard from './components/CouponCard'
 import PromotionCard from './components/PromotionCard'
 import UserCard from './components/UserCard'
 import RoleCard from './components/RoleCard'
+import { AdminLayout, TabPane } from './components/AdminLayout'
 
 const MallComponents = {
   ProductList,
@@ -16,6 +17,8 @@ const MallComponents = {
   PromotionCard,
   UserCard,
   RoleCard,
+  AdminLayout,
+  TabPane,
 }
 
 export default MallComponents
@@ -28,4 +31,6 @@ export {
   PromotionCard,
   UserCard,
   RoleCard,
+  AdminLayout,
+  TabPane,
 }

@@ -64,7 +64,7 @@ const AdminLayoutMeta: IPublicTypeComponentMetadata = {
         type: 'group',
         title: '布局配置',
         display: 'accordion',
-        items: [
+        items: [ 
           { 
             name: 'defaultSelectedKey', 
             title: '默认选中菜单', 

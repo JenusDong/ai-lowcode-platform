@@ -6,6 +6,7 @@ import CouponCard from './components/CouponCard'
 import PromotionCard from './components/PromotionCard'
 import UserCard from './components/UserCard'
 import RoleCard from './components/RoleCard'
+import { AdminLayout, TabPane } from './components/AdminLayout'
 import RestApiTester from './setters/RestApiTester'
 
 const MallComponents = {
@@ -17,6 +18,8 @@ const MallComponents = {
   PromotionCard,
   UserCard,
   RoleCard,
+  AdminLayout,
+  TabPane,
   RestApiTester
 }
 
@@ -30,5 +33,7 @@ export {
   PromotionCard,
   UserCard,
   RoleCard,
+  AdminLayout,
+  TabPane,
   RestApiTester
 }

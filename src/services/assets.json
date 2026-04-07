@@ -105,6 +105,19 @@
       ]
     },
     {
+      "package": "mall-components",
+      "version": "1.0.0",
+      "library": "MallComponents",
+      "urls": [
+        "/mall-components.umd.js",
+        "/mall-components.umd.css"
+      ],
+      "editUrls": [
+        "/mall-components.umd.js",
+        "/mall-components.umd.css"
+      ]
+    },
+    {
       "package": "echarts",
       "version": "5.4.3",
       "library": "echarts",
@@ -124,17 +137,6 @@
       ],
       "editUrls": [
         "/echarts-component.umd.js"
-      ]
-    },
-    {
-      "package": "mall-components",
-      "version": "1.0.0",
-      "library": "MallComponents",
-      "urls": [
-        "/mall-components.umd.js"
-      ],
-      "editUrls": [
-        "/mall-components.umd.js"
       ]
     },
     {
@@ -168,14 +170,6 @@
         "version": "1.26.0"
       },
       "url": "/alifd-next-meta.js"
-    },
-    {
-      "exportName": "MallComponentsMeta",
-      "npm": {
-        "package": "mall-components",
-        "version": "1.0.0"
-      },
-      "url": "/mall-components-meta.js"
     },
     {
       "exportName": "PluginEchartsMeta",

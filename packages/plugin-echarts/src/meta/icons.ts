@@ -31,11 +31,11 @@ export const Icons = {
     return Icon ? React.createElement(Icon) : null;
   },
   get radar() {
-    const Icon = getIconComponent('RadarChartOutlined');
+    const Icon = getIconComponent('DotChartOutlined');
     return Icon ? React.createElement(Icon) : null;
   },
   get gauge() {
-    const Icon = getIconComponent('DashboardOutlined');
+    const Icon = getIconComponent('DashboardFilled');
     return Icon ? React.createElement(Icon) : null;
   },
   get funnel() {

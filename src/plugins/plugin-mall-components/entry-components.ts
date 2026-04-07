@@ -3,7 +3,7 @@ import ProductForm from './components/ProductForm'
 import OrderList from './components/OrderList'
 import MarketingManager from './components/MarketingManager'
 import RestApiTester from './setters/RestApiTester'
-import { AdminLayout } from './components/AdminLayout'
+import { AdminLayout, TabPane } from './components/AdminLayout'
 
 const MallComponents = {
   ProductList,
@@ -12,6 +12,7 @@ const MallComponents = {
   MarketingManager,
   RestApiTester,
   AdminLayout,
+  TabPane,
 }
 
 export default MallComponents

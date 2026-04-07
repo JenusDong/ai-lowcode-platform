@@ -1,6 +1,7 @@
 const esbuild = require('esbuild');
 const path = require('path');
 const fs = require('fs');
+const sass = require('sass');
 
 const isWatch = process.argv.includes('--watch');
 const outDir = path.resolve(__dirname, '../build');
@@ -36,6 +37,7 @@ const externalPlugin = {
 };
 
 async function buildComponents() {
+  // Build JS
   await esbuild.build({
     entryPoints: [path.resolve(__dirname, '../src/index.ts')],
     outfile: path.join(outDir, 'mall-components.umd.js'),
@@ -61,6 +63,27 @@ if (typeof window !== 'undefined') {
     },
   });
   console.log('✓ Built mall-components.umd.js');
+}
+
+async function buildCSS() {
+  // Compile SCSS to CSS using sass
+  const scssEntry = path.resolve(__dirname, '../src/index.scss');
+  const cssOutput = path.join(outDir, 'mall-components.umd.css');
+  
+  try {
+    const result = sass.compile(scssEntry, {
+      style: isWatch ? 'expanded' : 'compressed',
+      sourceMap: isWatch,
+      loadPaths: [path.resolve(__dirname, '../src')],
+    });
+    
+    fs.writeFileSync(cssOutput, result.css);
+    console.log('✓ Built mall-components.umd.css');
+  } catch (e) {
+    console.error('✗ CSS build failed:', e.message);
+    // Create empty CSS file to prevent errors
+    fs.writeFileSync(cssOutput, '/* Mall Components CSS - Build Error */');
+  }
 }
 
 async function buildMeta() {
@@ -103,7 +126,7 @@ ${raw}
 
 function copyToPublic() {
   if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
-  ['mall-components.umd.js', 'mall-components-meta.js'].forEach((file) => {
+  ['mall-components.umd.js', 'mall-components.umd.css', 'mall-components-meta.js'].forEach((file) => {
     const src = path.join(outDir, file);
     const dest = path.join(publicDir, file);
     if (fs.existsSync(src)) { fs.copyFileSync(src, dest); console.log(`✓ Copied ${file}`); }
@@ -113,7 +136,7 @@ function copyToPublic() {
 async function main() {
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   console.log('Building mall-components...');
-  await Promise.all([buildComponents(), buildMeta()]);
+  await Promise.all([buildComponents(), buildCSS(), buildMeta()]);
   copyToPublic();
   console.log('Done!');
   if (isWatch) {
@@ -121,7 +144,7 @@ async function main() {
     const chokidar = require('chokidar');
     chokidar.watch(path.resolve(__dirname, '../src')).on('change', async () => {
       console.log('Rebuilding...');
-      await Promise.all([buildComponents(), buildMeta()]);
+      await Promise.all([buildComponents(), buildCSS(), buildMeta()]);
       copyToPublic();
     });
   }
