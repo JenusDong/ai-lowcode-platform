@@ -112,23 +112,28 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
         const documentModel = engine.project.currentDocument
         const adminLayoutNode = documentModel.getNodeById(componentId)
         
-        if (!adminLayoutNode) return
+        if (!adminLayoutNode) {
+          console.log('[AdminLayout] ⚠️ AdminLayout node not found')
+          return
+        }
         
-        // 获取所有现有的 TabPane 子节点
-        const childrenArr = Array.isArray(adminLayoutNode.children)
-          ? adminLayoutNode.children
-          : (adminLayoutNode.children?.toArray ? adminLayoutNode.children.toArray() : [])
+        // 使用 schema.children 获取子节点（因为 children.toArray() 可能返回空）
+        const schemaChildren = adminLayoutNode.schema?.children || []
+        console.log('[AdminLayout] 🔍 Schema children:', schemaChildren.length, schemaChildren.map((c: any) => c.componentName))
         
-        const existingTabPanes = childrenArr.filter((child: any) => child.componentName === 'TabPane')
+        // 获取所有 TabPane 子节点
+        const existingTabPanes = schemaChildren.filter((child: any) => child.componentName === 'TabPane')
         
         console.log('[AdminLayout] 🔍 Found existing TabPanes:', existingTabPanes.length)
         
         // 从 schema 恢复 tabs state
         if (existingTabPanes.length > 0) {
-          const restoredTabs: TabItem[] = existingTabPanes.map((tp: any) => {
-            const tabKey = tp.props?.tabKey || tp.getPropValue?.('tabKey') || 'unknown'
-            const tabLabel = tp.props?.tab || tp.getPropValue?.('tab') || getLabelFromKey(tabKey)
+          const restoredTabs: TabItem[] = existingTabPanes.map((tpSchema: any) => {
+            const tabKey = tpSchema.props?.tabKey || 'unknown'
+            const tabLabel = tpSchema.props?.tab || getLabelFromKey(tabKey)
             const menuItem = findMenuItem(items, tabKey)
+            
+            console.log('[AdminLayout] 📋 Restoring tab:', tabKey, tabLabel)
             
             return {
               key: tabKey,
@@ -142,7 +147,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
           console.log('[AdminLayout] 📋 Restored tabs from schema:', restoredTabs.map(t => t.key))
           setTabs(restoredTabs)
           
-          // 设置当前激活的 tab
+          // 设置当前激活的 tab（使用最后一个）
           const currentActiveTab = restoredTabs[restoredTabs.length - 1]
           if (currentActiveTab) {
             setActiveTabKey(currentActiveTab.key)
@@ -150,6 +155,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
           }
         } else {
           // 没有 TabPane，为工作台创建默认 TabPane
+          console.log('[AdminLayout] 📋 No TabPane found, creating default dashboard TabPane')
           const tabPaneNode = documentModel.createNode({
             componentName: 'TabPane',
             props: {
@@ -173,6 +179,50 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
     
     return () => clearTimeout(timer)
   }, [componentId, __designMode, items])
+
+  // 监听 schema 变化，自动保存（防抖）
+  useEffect(() => {
+    if (__designMode !== 'design') return
+    
+    const engine = (window as any).AliLowCodeEngine
+    if (!engine?.project?.currentDocument) return
+    
+    const documentModel = engine.project.currentDocument
+    
+    let saveTimer: ReturnType<typeof setTimeout> | null = null
+    
+    const debouncedSave = () => {
+      if (saveTimer) clearTimeout(saveTimer)
+      saveTimer = setTimeout(() => {
+        saveSchemaToLocalStorage()
+      }, 500)
+    }
+    
+    // 监听节点添加
+    const offAddNode = documentModel.onAddNode?.(() => {
+      console.log('[AdminLayout] 📌 onAddNode triggered')
+      debouncedSave()
+    })
+    
+    // 监听节点删除
+    const offRemoveNode = documentModel.onRemoveNode?.(() => {
+      console.log('[AdminLayout] 📌 onRemoveNode triggered')
+      debouncedSave()
+    })
+    
+    // 监听节点挂载（拖拽完成）
+    const offMountNode = documentModel.onMountNode?.(() => {
+      console.log('[AdminLayout] 📌 onMountNode triggered')
+      debouncedSave()
+    })
+    
+    return () => {
+      if (saveTimer) clearTimeout(saveTimer)
+      offAddNode?.()
+      offRemoveNode?.()
+      offMountNode?.()
+    }
+  }, [__designMode])
 
   // 同步 activeTabKey 到所有 TabPane
   useEffect(() => {
@@ -262,6 +312,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
 
       documentModel.insertNode(adminLayoutNode, tabPaneNode)
       console.log('[AdminLayout] ✅ Created new TabPane:', tabKey, 'nodeId:', tabPaneNode.id)
+      
+      // 保存 schema 到 localStorage
+      setTimeout(() => saveSchemaToLocalStorage(), 100)
+      
       return true
     } catch (error) {
       console.error('[AdminLayout] createTabPane error:', error)
@@ -435,6 +489,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
             documentModel.removeNode(child)
             removed = true
             console.log('[AdminLayout] ✅ Removed TabPane node:', tabKey)
+            
+            // 保存 schema 到 localStorage
+            setTimeout(() => saveSchemaToLocalStorage(), 100)
           } catch (e) {
             console.error('[AdminLayout] Failed to remove TabPane:', e)
           }
