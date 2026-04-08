@@ -2368,7 +2368,7 @@ var __META_RAW__ = (() => {
         name: "logoText",
         propType: "string",
         description: "Logo \u6587\u5B57",
-        defaultValue: "Mall Admin"
+        defaultValue: "Mall Admin@"
       }
     ],
     configure: {
@@ -2450,7 +2450,7 @@ var __META_RAW__ = (() => {
             enableTabs: true,
             maxTabs: 10,
             closableTabs: true,
-            logoText: "Mall Admin"
+            logoText: "Mall Admin@"
           }
         }
       },
@@ -2462,7 +2462,7 @@ var __META_RAW__ = (() => {
             defaultSelectedKey: "dashboard",
             collapsible: true,
             enableTabs: false,
-            logoText: "Mall Admin"
+            logoText: "Mall Admin@"
           }
         }
       }

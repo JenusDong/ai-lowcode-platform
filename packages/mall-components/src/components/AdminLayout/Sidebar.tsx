@@ -216,7 +216,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className={`sidebar-container ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        {!collapsed && <span className="logo-text">Mall Admin</span>}
+        {!collapsed && <span className="logo-text">Mall Admin@</span>}
         {collapsed && <span className="logo-icon">M</span>}
       </div>
       <Menu

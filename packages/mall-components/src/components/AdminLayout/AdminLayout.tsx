@@ -71,7 +71,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
   enableTabs = true,
   maxTabs = 10,
   closableTabs = true,
-  logoText = 'Mall Admin',
+  logoText = 'Mall Admin@',
   menuItems: customMenuItems,
   style,
   className,
