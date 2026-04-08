@@ -218,14 +218,6 @@
         "version": "1.0.0"
       },
       "url": "/layout-components-meta.js"
-    },
-    {
-      "exportName": "MallComponentsMeta",
-      "npm": {
-        "package": "mall-components",
-        "version": "1.0.0"
-      },
-      "url": "/mall-components-meta.js"
     }
   ],
   "sort": {

@@ -1,73 +1,95 @@
 var React = (typeof window !== 'undefined' && window.React) || {};
 
-var createIcon = function(name) {
-  return function(props) {
-    var className = props && props.className ? props.className + ' anticon' : 'anticon';
-    return React.createElement('svg', {
-      className: className,
-      viewBox: '0 0 1024 1024',
-      width: '1em',
-      height: '1em',
-      fill: 'currentColor',
-      style: props && props.style || {}
-    });
+var globalIcons = (typeof window !== 'undefined' && window.icons) || null;
+
+if (globalIcons) {
+  module.exports = globalIcons;
+} else {
+  var createIcon = function(name) {
+    var iconMap = {
+      DashboardOutlined: 'M924 283.6c-18.8-18.9-49.2-18.9-68 0L512 627.6 168 283.6c-18.8-18.9-49.2-18.9-67.9 0s-18.8 49.3 0 68.1l360 360.4c18.8 18.9 49.2 18.9 68 0l359.9-360.4c18.8-18.9 18.8-49.3 0-68.1z',
+      ShoppingOutlined: 'M826 320H698l-36.8-92a78 78 0 0 0-72.1-48H434.9a78 78 0 0 0-72.1 48L326 320H198c-37.5 0-68 30.5-68 68v444c0 37.5 30.5 68 68 68h628c37.5 0 68-30.5 68-68V388c0-37.5-30.5-68-68-68zM512 760c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm212-340H300v-32c0-17.6 14.4-32 32-32h360c17.6 0 32 14.4 32 32v32z',
+      FileTextOutlined: 'M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.6 3.4 22.6 9.4l215.3 215.3zM790.2 326L602 137.8V326h188.2zM512 572c-55.2 0-100 44.8-100 100s44.8 100 100 100 100-44.8 100-100-44.8-100-100-100zm0 156c-30.9 0-56-25.1-56-56s25.1-56 56-56 56 25.1 56 56-25.1 56-56 56z',
+      TeamOutlined: 'M323 667c0 53-43 96-96 96s-96-43-96-96 43-96 96-96 96 43 96 96zm327 0c0 53-43 96-96 96s-96-43-96-96 43-96 96-96 96 43 96 96zm295 0c0 53-43 96-96 96s-96-43-96-96 43-96 96-96 96 43 96 96zM128 384c0 35.3 28.7 64 64 64s64-28.7 64-64-28.7-64-64-64-64 28.7-64 64zm256 0c0 35.3 28.7 64 64 64s64-28.7 64-64-28.7-64-64-64-64 28.7-64 64zm256 0c0 35.3 28.7 64 64 64s64-28.7 64-64-28.7-64-64-64-64 28.7-64 64z',
+      SettingOutlined: 'M924 480H544V200c0-17.7-14.3-32-32-32H320c-17.7 0-32 14.3-32 32v280H108c-17.7 0-32 14.3-32 32v312c0 17.7 14.3 32 32 32h180v136c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32V856h180c17.7 0 32-14.3 32-32V512c0-17.7-14.3-32-32-32zm-396-232v200H344V248h184zm-360 304h152v248H168V552zm520 408H504V720h184v240zm168-160H740V552h152v248z',
+      SafetyCertificateOutlined: 'M866.9 169.9L527.1 54.5C523 52.7 517.5 52 512 52s-11 .7-15.1 2.5L157.1 169.9c-8.3 3-15.1 12.9-15.1 21.9v487.8c0 8.7 5.5 19.5 12.2 24.1l339.9 228.9c3.6 2.4 8.3 3.8 13 3.8s9.4-1.4 13-3.8l339.9-228.9c6.7-4.5 12.2-15.3 12.2-24.1V191.8c0-9-6.8-18.9-15.1-21.9zM810 654.3L512 886.5 214 654.3V226.7l298-109.8 298 109.8v427.6zM402.5 331.4L320 413.9l82.5 82.5-45 45L275 458.9l127.5-127.5 45 45zm219 0l45 45L794 458.9 650.9 541.4l-45-45L677.5 413.9 595 331.4z',
+      UserOutlined: 'M862 460.6c-18.8-18.9-49.2-18.9-68 0L512 742.6 230 460.6c-18.8-18.9-49.2-18.9-68 0s-18.8 49.3 0 68.1l306 306.4c18.8 18.9 49.2 18.9 68 0l306-306.4c18.8-18.9 18.8-49.3 0-68.1zM512 128c70.7 0 128 57.3 128 128S582.7 384 512 384 384 326.7 384 256 441.3 128 512 128m0-64C400.6 64 304 160.6 304 272s96.6 208 208 208 208-96.6 208-208S623.4 64 512 64z',
+      MenuFoldOutlined: 'M488 424.4V207.6c0-17.7-14.3-32-32-32s-32 14.3-32 32v216.8c0 17.7 14.3 32 32 32s32-14.4 32-32.1zm144-216.8v216.8c0 17.7 14.3 32 32 32s32-14.3 32-32V207.6c0-17.7-14.3-32-32-32s-32 14.3-32 32zM176 80h672c17.7 0 32-14.3 32-32s-14.3-32-32-32H176c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0 800h672c17.7 0 32-14.3 32-32s-14.3-32-32-32H176c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-536h672c17.7 0 32-14.3 32-32s-14.3-32-32-32H176c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0 272h672c17.7 0 32-14.3 32-32s-14.3-32-32-32H176c-17.7 0-32 14.3-32 32s14.3 32 32 32z',
+      MenuUnfoldOutlined: 'M424 207.6v216.8c0 17.7 14.3 32 32 32s32-14.3 32-32V207.6c0-17.7-14.3-32-32-32s-32 14.3-32 32.1zm-144 0v216.8c0 17.7 14.3 32 32 32s32-14.3 32-32V207.6c0-17.7-14.3-32-32-32s-32 14.3-32 32.1zM848 16H176c-17.7 0-32 14.3-32 32s14.3 32 32 32h672c17.7 0 32-14.3 32-32s-14.3-32-32-32zm0 800H176c-17.7 0-32 14.3-32 32s14.3 32 32 32h672c17.7 0 32-14.3 32-32s-14.3-32-32-32zm0-536H176c-17.7 0-32 14.3-32 32s14.3 32 32 32h672c17.7 0 32-14.3 32-32s-14.3-32-32-32zm0 272H176c-17.7 0-32 14.3-32 32s14.3 32 32 32h672c17.7 0 32-14.3 32-32s-14.3-32-32-32z',
+      LogoutOutlined: 'M862 464H594a30 30 0 0 0-30 30v84a30 30 0 0 0 30 30h268a30 30 0 0 0 30-30v-84a30 30 0 0 0-30-30zM758.8 550L618.4 409.6c-11.7-11.7-30.7-11.7-42.4 0-11.7 11.7-11.7 30.7 0 42.4l140.4 140.4c11.7 11.7 30.7 11.7 42.4 0 11.7-11.7 11.7-30.7 0-42.4zM162 464h268a30 30 0 0 1 30 30v84a30 30 0 0 1-30 30H162a30 30 0 0 1-30-30v-84a30 30 0 0 1 30-30zM265.2 550l140.4-140.4c11.7-11.7 11.7-30.7 0-42.4-11.7-11.7-30.7-11.7-42.4 0L222.8 507.6c-11.7 11.7-11.7 30.7 0 42.4 11.7 11.7 30.7 11.7 42.4 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z',
+      CloseOutlined: 'M563.8 512l262.5-262.5c12.3-12.3 12.3-32.2 0-44.5s-32.2-12.3-44.5 0L519.3 467.5 256.9 205.1c-12.3-12.3-32.2-12.3-44.5 0s-12.3 32.2 0 44.5L474.8 512 212.4 774.5c-12.3 12.3-12.3 32.2 0 44.5s32.2 12.3 44.5 0l262.5-262.5 262.5 262.5c12.3 12.3 32.2 12.3 44.5 0s12.3-32.2 0-44.5L563.8 512z',
+      CloseCircleOutlined: 'M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359c-1.2-1.5-1.9-3.3-1.9-5.2 0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 522l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z',
+      ReloadOutlined: 'M909.6 854.5L649.9 594.8C690.2 542.7 714.7 477.2 714.7 406c0-165.7-134.4-300.1-300.1-300.1S114.6 240.3 114.6 406s134.4 300.1 300.1 300.1c71.2 0 136.7-24.6 188.8-64.9l259.7 259.7c3.2 3.2 8.4 3.2 11.6 0l34.8-34.8c3.2-3.2 3.2-8.4 0-11.6zM414.6 632.8c-125.1 0-226.8-101.7-226.8-226.8s101.7-226.8 226.8-226.8 226.8 101.7 226.8 226.8-101.7 226.8-226.8 226.8z',
+      GiftOutlined: 'M160 892c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V380H160v512zm192-308c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V584zm192 0c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V584zm192 0c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V584zM892 120H768c0-52.9-43.1-96-96-96H352c-52.9 0-96 43.1-96 96H132c-17.7 0-32 14.3-32 32v104h824V152c0-17.7-14.3-32-32-32zM512 64c26.5 0 48 21.5 48 48H464c0-26.5 21.5-48 48-48z',
+      TagsOutlined: 'M483.1 537.4l113-113c4.5-4.5 4.5-11.8 0-16.3l-113-113c-4.5-4.5-11.8-4.5-16.3 0l-113 113c-4.5 4.5-4.5 11.8 0 16.3l113 113c4.5 4.5 11.8 4.5 16.3 0zM903.1 537.4l113-113c4.5-4.5 4.5-11.8 0-16.3l-113-113c-4.5-4.5-11.8-4.5-16.3 0l-113 113c-4.5 4.5-4.5 11.8 0 16.3l113 113c4.5 4.5 11.8 4.5 16.3 0zM63.1 537.4l113-113c4.5-4.5 4.5-11.8 0-16.3l-113-113c-4.5-4.5-11.8-4.5-16.3 0l-113 113c-4.5 4.5-4.5 11.8 0 16.3l113 113c4.5 4.5 11.8 4.5 16.3 0zM693.1 217.4l113-113c4.5-4.5 4.5-11.8 0-16.3l-113-113c-4.5-4.5-11.8-4.5-16.3 0l-113 113c-4.5 4.5-4.5 11.8 0 16.3l113 113c4.5 4.5 11.8 4.5 16.3 0zM330.9 217.4l-113-113c-4.5-4.5-11.8-4.5-16.3 0l-113 113c-4.5 4.5-4.5 11.8 0 16.3l113 113c4.5 4.5 11.8 4.5 16.3 0l113-113c4.5-4.5 4.5-11.8 0-16.3z',
+      InboxOutlined: 'M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-80.8 108.9L518.6 598.2c-3.7 3.7-10.3 3.7-14 0L176.9 268.9A8.01 8.01 0 0 1 182.5 256h659a8.01 8.01 0 0 1 5.7 12.9z',
+      DollarOutlined: 'M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm.4-592c-48.3 0-87.4 39.1-87.4 87.4 0 48.3 39.1 87.4 87.4 87.4 48.3 0 87.4-39.1 87.4-87.4 0-48.3-39.1-87.4-87.4-87.4zm0 140c-29 0-52.6-23.6-52.6-52.6s23.6-52.6 52.6-52.6 52.6 23.6 52.6 52.6-23.6 52.6-52.6 52.6z',
+      ThunderboltOutlined: 'M848 359.3H627.7L698 163.6c5.8-14.3-.3-30.7-14.6-36.6-14.3-5.8-30.7.3-36.6 14.6L505.2 361.3c-3.5 8.7-.7 18.7 6.9 24.3l141.3 105.8c4.8 3.6 10.6 5.5 16.5 5.5 7.5 0 14.8-3.3 19.7-9.5 9.1-11.5 7.2-28.2-4.3-37.4L576.8 416H800c13.3 0 24-10.7 24-24s-10.7-24-24-24H648zM344 648h220.3L494 843.7c-5.8 14.3.3 30.7 14.6 36.6 14.3 5.8 30.7-.3 36.6-14.6l141.8-319.7c3.5-8.7.7-18.7-6.9-24.3L539 415.9c-4.8-3.6-10.6-5.5-16.5-5.5-7.5 0-14.8 3.3-19.7 9.5-9.1 11.5-7.2 28.2 4.3 37.4L447.2 592H224c-13.3 0-24 10.7-24 24s10.7 24 24 24h152z',
+      FireOutlined: 'M834.1 463.6c-19.6-39.4-48.7-73.2-84.2-97.6-35.5-24.4-76.6-39.2-119.4-43-10.2-.9-19.5 5.9-20.4 16.1-.9 10.2 5.9 19.5 16.1 20.4 36.2 3.2 70.9 15.8 100.8 36.4 29.9 20.6 54.4 49.4 71 83.1 16.6 33.7 24.4 71.2 22.6 109.2-1.8 38-13.4 74.4-33.6 106-20.2 31.6-48.2 57.4-81.2 75.4-33 18-70 26.6-107.6 24.8-37.6-1.8-73.6-14-104.8-34.6-31.2-20.6-56.4-49.2-73.2-83-16.8-33.8-24.8-71.6-23-110 1.8-38.4 13.6-75.2 34-107 20.4-31.8 48.8-57.8 82.2-76 33.4-18.2 70.8-27 108.8-25.2 10.2.5 18.9-7.4 19.4-17.6.5-10.2-7.4-18.9-17.6-19.4-43.8-2.1-86.6 8.2-124.4 29-37.8 20.8-69.8 51-92.4 87.8-22.6 36.8-35.6 79-37.6 122.8-2 43.8 8 86.2 29.2 124 21.2 37.8 51.6 69.4 88.6 91.8 37 22.4 79.4 34.2 123.2 36.2 3.2.2 6.4.2 9.6.2 41.4 0 81.8-10.2 117.6-29.8 35.8-19.6 66-48.2 87.8-83 21.8-34.8 34.4-74.8 36.4-116.2 2-41.4-7.2-81.8-27.2-117.8z',
+    };
+    
+    var pathD = iconMap[name];
+    
+    return function(props) {
+      var className = (props && props.className || '') + ' anticon';
+      var style = props && props.style ? props.style : {};
+      style.fontSize = style.fontSize || '14px';
+      
+      if (pathD) {
+        return React.createElement('svg', {
+          className: className,
+          viewBox: '0 0 1024 1024',
+          width: '1em',
+          height: '1em',
+          fill: 'currentColor',
+          style: style
+        }, React.createElement('path', { d: pathD }));
+      }
+      
+      return React.createElement('i', { className: className, style: style });
+    };
   };
-};
 
-var icons = {
-  // ========== 图表类 ==========
-  PieChartOutlined: createIcon('PieChartOutlined'),
-  LineChartOutlined: createIcon('LineChartOutlined'),
-  BarChartOutlined: createIcon('BarChartOutlined'),
-  DotChartOutlined: createIcon('DotChartOutlined'),
-  AreaChartOutlined: createIcon('AreaChartOutlined'),
-  
-  // ========== 操作类 ==========
-  DashboardFilled: createIcon('DashboardFilled'),
-  FunnelPlotOutlined: createIcon('FunnelPlotOutlined'),
-  PlusOutlined: createIcon('PlusOutlined'),
-  MinusOutlined: createIcon('MinusOutlined'),
-  EditOutlined: createIcon('EditOutlined'),
-  DeleteOutlined: createIcon('DeleteOutlined'),
-  SearchOutlined: createIcon('SearchOutlined'),
-  SettingOutlined: createIcon('SettingOutlined'),
-  ReloadOutlined: createIcon('ReloadOutlined'),
-  CloseOutlined: createIcon('CloseOutlined'),
-  CloseCircleOutlined: createIcon('CloseCircleOutlined'),
-  
-  // ========== 导航类 ==========
-  MenuFoldOutlined: createIcon('MenuFoldOutlined'),
-  MenuUnfoldOutlined: createIcon('MenuUnfoldOutlined'),
-  HomeOutlined: createIcon('HomeOutlined'),
-  
-  // ========== 用户与权限类 ==========
-  UserOutlined: createIcon('UserOutlined'),
-  TeamOutlined: createIcon('TeamOutlined'),
-  SafetyCertificateOutlined: createIcon('SafetyCertificateOutlined'),
-  LogoutOutlined: createIcon('LogoutOutlined'),
-  
-  // ========== 商城与商品类 ==========
-  ShoppingCartOutlined: createIcon('ShoppingCartOutlined'),
-  ShoppingOutlined: createIcon('ShoppingOutlined'),
-  ShopOutlined: createIcon('ShopOutlined'),
-  GiftOutlined: createIcon('GiftOutlined'),
-  TagsOutlined: createIcon('TagsOutlined'),
-  InboxOutlined: createIcon('InboxOutlined'),
-  DollarOutlined: createIcon('DollarOutlined'),
-  
-  // ========== 文件与内容类 ==========
-  FileTextOutlined: createIcon('FileTextOutlined'),
-  
-  // ========== 营销与活动类 ==========
-  ThunderboltOutlined: createIcon('ThunderboltOutlined'),
-  FireOutlined: createIcon('FireOutlined'),
-  
-  // ========== 仪表盘类 ==========
-  DashboardOutlined: createIcon('DashboardOutlined'),
-};
+  var icons = {
+    PieChartOutlined: createIcon('PieChartOutlined'),
+    LineChartOutlined: createIcon('LineChartOutlined'),
+    BarChartOutlined: createIcon('BarChartOutlined'),
+    DotChartOutlined: createIcon('DotChartOutlined'),
+    AreaChartOutlined: createIcon('AreaChartOutlined'),
+    DashboardFilled: createIcon('DashboardFilled'),
+    FunnelPlotOutlined: createIcon('FunnelPlotOutlined'),
+    PlusOutlined: createIcon('PlusOutlined'),
+    MinusOutlined: createIcon('MinusOutlined'),
+    EditOutlined: createIcon('EditOutlined'),
+    DeleteOutlined: createIcon('DeleteOutlined'),
+    SearchOutlined: createIcon('SearchOutlined'),
+    SettingOutlined: createIcon('SettingOutlined'),
+    ReloadOutlined: createIcon('ReloadOutlined'),
+    CloseOutlined: createIcon('CloseOutlined'),
+    CloseCircleOutlined: createIcon('CloseCircleOutlined'),
+    MenuFoldOutlined: createIcon('MenuFoldOutlined'),
+    MenuUnfoldOutlined: createIcon('MenuUnfoldOutlined'),
+    HomeOutlined: createIcon('HomeOutlined'),
+    UserOutlined: createIcon('UserOutlined'),
+    TeamOutlined: createIcon('TeamOutlined'),
+    SafetyCertificateOutlined: createIcon('SafetyCertificateOutlined'),
+    LogoutOutlined: createIcon('LogoutOutlined'),
+    ShoppingCartOutlined: createIcon('ShoppingCartOutlined'),
+    ShoppingOutlined: createIcon('ShoppingOutlined'),
+    ShopOutlined: createIcon('ShopOutlined'),
+    GiftOutlined: createIcon('GiftOutlined'),
+    TagsOutlined: createIcon('TagsOutlined'),
+    InboxOutlined: createIcon('InboxOutlined'),
+    DollarOutlined: createIcon('DollarOutlined'),
+    FileTextOutlined: createIcon('FileTextOutlined'),
+    ThunderboltOutlined: createIcon('ThunderboltOutlined'),
+    FireOutlined: createIcon('FireOutlined'),
+    DashboardOutlined: createIcon('DashboardOutlined'),
+  };
 
-if (typeof window !== 'undefined') {
-  window.icons = icons;
+  if (typeof window !== 'undefined') {
+    window.icons = icons;
+  }
+
+  module.exports = icons;
 }
-
-module.exports = icons;
