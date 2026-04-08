@@ -109,12 +109,12 @@
       "version": "1.0.0",
       "library": "MallComponents",
       "urls": [
-        "/mall-components.umd.js",
-        "/mall-components.umd.css"
+        "https://cdn.jsdelivr.net/gh/JenusDong/ai-lowcode-platform@346653f/public/mall-components.umd.js",
+        "https://cdn.jsdelivr.net/gh/JenusDong/ai-lowcode-platform@346653f/public/mall-components.umd.css"
       ],
       "editUrls": [
-        "/mall-components.umd.js",
-        "/mall-components.umd.css"
+        "https://cdn.jsdelivr.net/gh/JenusDong/ai-lowcode-platform@346653f/public/mall-components.umd.js",
+        "https://cdn.jsdelivr.net/gh/JenusDong/ai-lowcode-platform@346653f/public/mall-components.umd.css"
       ]
     },
     {
