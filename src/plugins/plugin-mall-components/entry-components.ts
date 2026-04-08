@@ -4,6 +4,7 @@ import OrderList from './components/OrderList'
 import MarketingManager from './components/MarketingManager'
 import RestApiTester from './setters/RestApiTester'
 import { AdminLayout, TabPane } from './components/AdminLayout'
+import { getMenuItems } from './components/AdminLayout/Sidebar'
 
 const MallComponents = {
   ProductList,
@@ -13,7 +14,8 @@ const MallComponents = {
   RestApiTester,
   AdminLayout,
   TabPane,
+  getMenuItems,
 }
 
 export default MallComponents
-export { MallComponents }
+export { MallComponents, getMenuItems }

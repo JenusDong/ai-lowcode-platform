@@ -129,18 +129,7 @@
       ]
     },
     {
-      "package": "echarts-component",
-      "version": "1.0.0",
-      "library": "EChartsComponent",
-      "urls": [
-        "/echarts-component.umd.js"
-      ],
-      "editUrls": [
-        "/echarts-component.umd.js"
-      ]
-    },
-    {
-      "package": "echarts-for-react",
+      "package": "react-echarts",
       "version": "3.0.2",
       "library": "ReactECharts",
       "urls": [
@@ -163,6 +152,14 @@
     }
   ],
   "components": [
+    {
+      "exportName": "MallComponentsMeta",
+      "npm": {
+        "package": "mall-components",
+        "version": "1.0.0"
+      },
+      "url": "https://cdn.jsdelivr.net/gh/JenusDong/ai-lowcode-platform@5e1572c/public/mall-components-meta.js"
+    },
     {
       "exportName": "AlifdNextMeta",
       "npm": {

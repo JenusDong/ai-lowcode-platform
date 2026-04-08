@@ -158,16 +158,16 @@ async function build() {
       js: `
 MallComponents = MallComponents.default || MallComponents;
 
-if (typeof window !== 'undefined') {
-  window.MallComponents = MallComponents;
-  console.log('[MallComponents] Registered:', Object.keys(MallComponents));
-  
-  // 确保 @ant-design/icons 可用
-  if (!window.icons && typeof require !== 'undefined') {
-    try {
-      window.icons = require('@ant-design/icons');
-    } catch(e) {}
-  }
+// Use globalThis for compatibility with CodeSandbox sandbox
+const _global = typeof globalThis !== 'undefined' ? globalThis : (typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : {}));
+_global.MallComponents = MallComponents;
+console.log('[MallComponents] Registered:', Object.keys(MallComponents));
+
+// Ensure @ant-design/icons is available
+if (!_global.icons && typeof require !== 'undefined') {
+  try {
+    _global.icons = require('@ant-design/icons');
+  } catch(e) {}
 }
 `
     }
