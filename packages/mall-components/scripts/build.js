@@ -47,7 +47,7 @@ async function buildComponents() {
     minify: !isWatch,
     sourcemap: isWatch,
     plugins: [externalPlugin],
-    define: { 'process.env.NODE_ENV': '"production"' },
+    define: { 'process.env.NODE_ENV': '"production"', 'process.env.IS_CDN': 'true' },
     loader: { '.scss': 'css', '.css': 'css', '.tsx': 'tsx', '.ts': 'ts' },
     jsx: 'transform',
     jsxFactory: 'React.createElement',

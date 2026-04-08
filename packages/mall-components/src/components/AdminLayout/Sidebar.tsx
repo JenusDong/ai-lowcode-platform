@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu } from 'antd'
+import { Menu, Tag } from 'antd'
 import type { MenuProps } from 'antd'
 import {
   UserOutlined,
@@ -17,6 +17,8 @@ import {
   DashboardOutlined,
 } from '@ant-design/icons'
 import type { MenuItem } from './types'
+
+const IS_CDN = process.env.IS_CDN === 'true'
 
 const { SubMenu } = Menu
 
@@ -216,7 +218,12 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className={`sidebar-container ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        {!collapsed && <span className="logo-text">Mall Admin@</span>}
+        {!collapsed && (
+          <span className="logo-text">
+            Mall Admin@
+            {IS_CDN && <Tag color="orange" style={{ marginLeft: 8, fontSize: 10 }}>CDN</Tag>}
+          </span>
+        )}
         {collapsed && <span className="logo-icon">M</span>}
       </div>
       <Menu
