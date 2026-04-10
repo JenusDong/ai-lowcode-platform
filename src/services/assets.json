@@ -113,6 +113,19 @@
       ]
     },
     {
+      "package": "mall-components",
+      "version": "1.1.0",
+      "library": "MallComponents",
+      "urls": [
+        "/mall-components.umd.js",
+        "/mall-components.umd.css"
+      ],
+      "editUrls": [
+        "/mall-components.umd.js",
+        "/mall-components.umd.css"
+      ]
+    },
+    {
       "package": "echarts",
       "version": "5.4.3",
       "library": "echarts",
@@ -191,6 +204,14 @@
         "version": "1.0.0"
       },
       "url": "/layout-components-meta.js"
+    },
+    {
+      "exportName": "MallComponentsMeta",
+      "npm": {
+        "package": "mall-components",
+        "version": "1.1.0"
+      },
+      "url": "/mall-components-meta.js"
     }
   ],
   "sort": {
