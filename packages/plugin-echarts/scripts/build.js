@@ -144,7 +144,12 @@ async function buildMeta() {
     write: true,
   });
 
-  const raw = fs.readFileSync(tmpFile, 'utf-8');
+  let raw = fs.readFileSync(tmpFile, 'utf-8');
+  
+  // Replace npm package references
+  raw = raw.replace(/@local\/plugin-echarts/g, '@jenusdong/echarts-for-lowcode');
+  raw = raw.replace(/version: ['"]1\.0\.0['"]/g, "version: '1.1.8'");
+  
   const cleaned = `(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory);

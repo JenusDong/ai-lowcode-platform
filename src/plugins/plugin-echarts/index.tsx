@@ -413,7 +413,7 @@ function createComponentDef(name: string, title: string, icon: React.ReactNode, 
     title,
     docUrl: '',
     screenshot: '',
-    npm: { package: 'echarts-for-react', version: '^3.0.2', exportName: 'default', destructuring: false },
+    npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.1.8', exportName: name, destructuring: true },
     props: [
       { name: 'option', propType: 'object', description: `${title} 配置对象`, defaultValue: defaultOpt },
       { name: 'style', propType: 'object', description: '样式', defaultValue: { width: '100%', height: '400px' },

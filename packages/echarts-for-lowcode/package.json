@@ -1,0 +1,42 @@
+{
+  "name": "@jenusdong/echarts-for-lowcode",
+  "version": "1.1.8",
+  "description": "ECharts adapter for Ali LowCode Engine with auto-selection support",
+  "main": "build/echarts-for-lowcode.umd.js",
+  "module": "build/echarts-for-lowcode.esm.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "JenusDong",
+  "license": "MIT",
+  "keywords": [
+    "lowcode",
+    "echarts",
+    "ali-lowcode-engine",
+    "react"
+  ],
+  "dependencies": {
+    "echarts": "^5.4.0"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "react": "^16.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jenus/lowcode-echarts.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

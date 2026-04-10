@@ -1,6 +1,14 @@
 {
   "packages": [
     {
+      "package": "echarts",
+      "version": "5.4.3",
+      "urls": [
+        "https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"
+      ],
+      "library": "echarts"
+    },
+    {
       "package": "moment",
       "version": "2.24.0",
       "urls": [
@@ -56,7 +64,7 @@
     },
     {
       "package": "@alilc/lowcode-materials",
-      "version": "1.0.7",
+      "version": "1.1.0",
       "library": "AlilcLowcodeMaterials",
       "urls": [
         "https://unpkg.com/@alilc/lowcode-materials@1.0.7/dist/AlilcLowcodeMaterials.js",
@@ -105,19 +113,6 @@
       ]
     },
     {
-      "package": "mall-components",
-      "version": "1.1.0",
-      "library": "MallComponents",
-      "urls": [
-        "/mall-components.umd.js",
-        "/mall-components.umd.css"
-      ],
-      "editUrls": [
-        "/mall-components.umd.js",
-        "/mall-components.umd.css"
-      ]
-    },
-    {
       "package": "echarts",
       "version": "5.4.3",
       "library": "echarts",
@@ -129,36 +124,14 @@
       ]
     },
     {
-      "package": "echarts-component",
-      "version": "1.0.0",
-      "library": "EChartsComponent",
+      "package": "@jenusdong/echarts-for-lowcode",
+      "version": "1.1.8",
+      "library": "EChartsForLowCode",
       "urls": [
-        "/echarts-component.umd.js"
+        "https://unpkg.com/@jenusdong/echarts-for-lowcode@1.1.8/build/echarts-for-lowcode.umd.js"
       ],
       "editUrls": [
-        "/echarts-component.umd.js"
-      ]
-    },
-    {
-      "package": "echarts-for-react",
-      "version": "3.0.2",
-      "library": "ReactECharts",
-      "urls": [
-        "/react-echarts-adapter.js"
-      ],
-      "editUrls": [
-        "/react-echarts-adapter.js"
-      ]
-    },
-    {
-      "package": "plugin-echarts",
-      "version": "1.0.0",
-      "library": "PluginEcharts",
-      "urls": [
-        "/plugin-echarts.umd.js"
-      ],
-      "editUrls": [
-        "/plugin-echarts.umd.js"
+        "https://unpkg.com/@jenusdong/echarts-for-lowcode@1.1.8/build/echarts-for-lowcode.umd.js"
       ]
     }
   ],
@@ -174,8 +147,8 @@
     {
       "exportName": "PluginEchartsMeta",
       "npm": {
-        "package": "plugin-echarts",
-        "version": "1.0.0"
+        "package": "@jenusdong/echarts-for-lowcode",
+        "version": "1.1.8"
       },
       "url": "/plugin-echarts-meta.js"
     },
@@ -191,7 +164,7 @@
       "exportName": "AlilcLowcodeMaterialsMeta",
       "npm": {
         "package": "@alilc/lowcode-materials",
-        "version": "1.0.7"
+        "version": "1.1.0"
       },
       "url": "https://unpkg.com/@alilc/lowcode-materials@1.0.7/build/lowcode/meta.js"
     },
@@ -218,14 +191,6 @@
         "version": "1.0.0"
       },
       "url": "/layout-components-meta.js"
-    },
-    {
-      "exportName": "MallComponentsMeta",
-      "npm": {
-        "package": "mall-components",
-        "version": "1.1.0"
-      },
-      "url": "/mall-components-meta.js"
     }
   ],
   "sort": {

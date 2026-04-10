@@ -4,13 +4,13 @@ const path = require('path');
 const libFile = path.join(__dirname, '..', 'node_modules/@alilc/lowcode-plugin-code-generator/lib/components/CodeGenPreview/fixPreviewCode.js');
 const esFile = path.join(__dirname, '..', 'node_modules/@alilc/lowcode-plugin-code-generator/es/components/CodeGenPreview/fixPreviewCode.js');
 
-const oldDeps = `'react-dom': '^16.8.3'\n      }, (_JSON$parse`;
-const newDeps = `'react-dom': '^16.8.3',\n        '@alifd/next': '^1.26.0',\n        '@alifd/pro-layout': '^1.0.1',\n        '@alifd/layout': '^2.4.1',\n        '@alilc/antd-lowcode-materials': '^1.1.1',\n        '@alifd/fusion-ui': '^2.0.2',\n        'prop-types': '^15.7.2',\n        'echarts': '^5.4.3',\n        'echarts-for-react': '^3.0.2',\n        'mall-components': '^1.0.0',\n        'plugin-echarts': '^1.0.0',\n        'layout-components': '^1.0.0'\n      }, (_JSON$parse`;
+const oldDeps = `'prop-types': '^15.7.2'\n      }, JSON.parse`;
+const newDeps = `'prop-types': '^15.7.2',\n        'rc-util': '^5.24.8',\n        'rc-align': '^4.0.12',\n        'rc-trigger': '^5.3.4',\n        'rc-resize-observer': '^1.3.1',\n        '@jenusdong/echarts-for-lowcode': '^1.0.0'\n      }, JSON.parse`;
 
 function patchFile(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    if (content.includes('layout-components')) {
+    if (content.includes('rc-util')) {
       console.log(`[patch-codegen] Already patched: ${filePath}`);
       return true;
     }
