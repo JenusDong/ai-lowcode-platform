@@ -42,6 +42,9 @@ function makeDataEditor(defaultData?: any) {
 
 const pieConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '位置', display: 'accordion', items: [
       { name: 'piePosition', title: '位置', setter: makeSetter('series.0.center', 'SelectSetter', {
@@ -135,6 +138,9 @@ const lineDefaultOption = {
 
 const lineConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '数据', display: 'accordion', items: [
       { name: 'chartData', title: '图表数据', setter: makeDataEditor([
@@ -187,6 +193,9 @@ const barDefaultOption = {
 
 const barConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '数据', display: 'accordion', items: [
       { name: 'chartData', title: '图表数据', setter: makeDataEditor([
@@ -241,6 +250,9 @@ const scatterDefaultOption = {
 
 const scatterConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '数据', display: 'accordion', items: [
       { name: 'chartData', title: '图表数据', setter: makeDataEditor([
@@ -296,6 +308,9 @@ const mixDefaultOption = {
 
 const mixConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '数据', display: 'accordion', items: [
       { name: 'chartData', title: '图表数据', setter: makeDataEditor([
@@ -349,6 +364,9 @@ const areaDefaultOption = {
 
 const areaConfigure = {
   supports: { style: true, events: [{ name: 'onClick', description: '点击事件' }] },
+  component: {
+    selectionSelector: '[_echarts_instance_], [_echarts_instance_] *',
+  },
   props: [
     { type: 'group', title: '数据', display: 'accordion', items: [
       { name: 'chartData', title: '图表数据', setter: makeDataEditor([
@@ -405,6 +423,7 @@ function createComponentDef(name: string, title: string, icon: React.ReactNode, 
         ] } } } },
       { name: 'className', propType: 'string', description: '类名', setter: 'StringSetter' },
       { name: 'theme', propType: 'string', description: '主题', setter: 'StringSetter' },
+      { name: '__designMode', propType: 'string', description: '设计模式' },
     ],
     configure,
     icon,

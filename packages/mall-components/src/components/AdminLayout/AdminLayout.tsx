@@ -1,7 +1,8 @@
-import React, { useState, useCallback, useMemo, useEffect, useRef, Children, isValidElement } from 'react'
+import React, { useState, useCallback, useMemo, useEffect, useRef, Children, isValidElement, cloneElement } from 'react'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import MainContent from './MainContent'
+import TabPane from './TabPane'
 import type { AdminLayoutProps, TabItem, BreadcrumbItem, MenuItem } from './types'
 import { defaultMenuItems } from './Sidebar'
 import './AdminLayout.scss'
@@ -71,7 +72,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
   enableTabs = true,
   maxTabs = 10,
   closableTabs = true,
-  logoText = 'Mall Admin@',
+  logoText = 'Mall Admin',
   menuItems: customMenuItems,
   style,
   className,
@@ -179,6 +180,39 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
     
     return () => clearTimeout(timer)
   }, [componentId, __designMode, items])
+
+  // 预览模式：从 children 恢复 tabs state
+  useEffect(() => {
+    if (__designMode === 'design' || !children) return
+    
+    const childArray = Children.toArray(children)
+    const tabPanes = childArray.filter((child) => {
+      if (isValidElement(child)) {
+        return child.type === TabPane || (child.props as any)?.tabKey
+      }
+      return false
+    })
+    
+    if (tabPanes.length > 0) {
+      const restoredTabs: TabItem[] = tabPanes.map((child) => {
+        const props = (child as any).props
+        const tabKey = props?.tabKey || 'unknown'
+        const tabLabel = props?.tab || getLabelFromKey(tabKey)
+        const menuItem = findMenuItem(items, tabKey)
+        
+        return {
+          key: tabKey,
+          label: tabLabel,
+          icon: menuItem?.icon,
+          closable: tabKey !== 'dashboard',
+          path: menuItem?.path || `/${tabKey}`,
+        }
+      })
+      
+      console.log('[AdminLayout] Preview mode - restored tabs:', restoredTabs.map(t => t.key))
+      setTabs(restoredTabs)
+    }
+  }, [children, __designMode, items])
 
   // 监听 schema 变化，自动保存（防抖）
   useEffect(() => {
@@ -608,23 +642,64 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
 
   // 条件渲染：只渲染 activeTabKey 对应的 TabPane
   const filteredChildren = useMemo(() => {
-    if (!children) return null
+    if (!children) {
+      console.log('[AdminLayout] 🔍 No children')
+      return null
+    }
+    
+    console.log('[AdminLayout] 🔍 Rendering children:', {
+      __designMode,
+      activeTabKey,
+      childrenCount: Children.count(children),
+    })
     
     // 在设计模式下，过滤 children 只渲染当前 activeTabKey 的 TabPane
     if (__designMode === 'design') {
       const childArray = Children.toArray(children)
+      console.log('[AdminLayout] 🔍 Design mode - all children:', childArray.map((c: any) => ({
+        type: c?.type?.displayName || c?.type?.name || 'unknown',
+        props: c?.props ? { tabKey: c?.props?.tabKey, tab: c?.props?.tab } : null,
+      })))
+      
       const activeTabPane = childArray.find((child) => {
         if (isValidElement(child)) {
           const childProps = child.props as any
+          console.log('[AdminLayout] 🔍 Checking child:', {
+            tabKey: childProps?.tabKey,
+            activeTabKey,
+            isMatch: childProps?.tabKey === activeTabKey,
+          })
           return childProps?.tabKey === activeTabKey
         }
         return false
       })
+      
+      // 给 TabPane 传递 __designMode 和 activeTabKey
+      if (activeTabPane && isValidElement(activeTabPane)) {
+        console.log('[AdminLayout] 🔍 Found active TabPane, cloning with props:', {
+          activeTabKey,
+          __designMode,
+        })
+        return cloneElement(activeTabPane, {
+          activeTabKey,
+          __designMode,
+        } as any)
+      }
+      console.log('[AdminLayout] ⚠️ No active TabPane found')
       return activeTabPane || null
     }
     
-    // 预览模式下，渲染所有 children（TabPane 内部会处理显隐）
-    return children
+    // 预览模式下，渲染所有 children 并传递 activeTabKey 给 TabPane
+    return Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        // 给 TabPane 传递 activeTabKey 和 __designMode
+        return cloneElement(child, {
+          activeTabKey,
+          __designMode,
+        } as any)
+      }
+      return child
+    })
   }, [children, activeTabKey, __designMode])
 
   const defaultContent = (

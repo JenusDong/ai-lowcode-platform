@@ -43,4 +43,5 @@ export interface TabPaneProps {
   children?: React.ReactNode
   className?: string
   style?: React.CSSProperties
+  __designMode?: 'design' | 'preview'
 }

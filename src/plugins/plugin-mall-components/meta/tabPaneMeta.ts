@@ -7,7 +7,7 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
   screenshot: '',
   npm: {
     package: 'mall-components',
-    version: '1.0.0',
+    version: '1.0.9',
     exportName: 'TabPane',
     destructuring: true,
   },
@@ -57,7 +57,31 @@ const TabPaneMeta: IPublicTypeComponentMetadata = {
       nestingRule: {
         parentWhitelist: ['AdminLayout'],
       },
+      // 只禁用 TabPane 本身的删除，不影响内部组件
       disableBehaviors: ['remove'],
+      // 确保内部组件可以被选中
+      // 当点击 TabPane 内部时，不阻止事件传播，让内部组件可以被选中
+      callbacks: {
+        onClickHook: (e: any, node: any) => {
+          console.log('[TabPane Meta] 🎯 onClickHook triggered:', {
+            event: e,
+            node: node?.componentName,
+            target: e?.target,
+            targetClassName: e?.target?.className,
+          })
+          // 返回 false 表示不阻止事件传播，让内部组件可以被选中
+          return false
+        },
+        // 添加 onSelect 回调，调试选择行为
+        onSelect: (node: any) => {
+          console.log('[TabPane Meta] ✅ onSelect triggered:', {
+            node: node?.componentName,
+            nodeId: node?.id,
+          })
+        },
+      },
+      // 选择器配置，确保可以选中内部组件
+      selectionSelector: '.tab-pane > *',
     },
   },
   icon: '',

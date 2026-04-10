@@ -24,7 +24,7 @@ import lowcodePlugin from './plugins/plugin-lowcode-component';
 import CustomToolbarPlugin from './plugins/plugin-custom-toolbar';
 import ThemeTogglePlugin from './plugins/plugin-theme-toggle';
 import EChartsPlugin from './plugins/plugin-echarts';
-// 屏蔽本地插件，使用 packages/mall-components UMD 包
+// 屏蔽本地插件，使用 CDN mall-components UMD 包（验证首次选中问题）
 import MallComponentsPlugin from './plugins/plugin-mall-components';
 import appHelper from './appHelper';
 import './global.scss';
@@ -117,7 +117,7 @@ async function registerPlugins() {
 
   await plugins.register(EChartsPlugin);
 
-  // 屏蔽本地插件，使用 packages/mall-components UMD 包
+  // 屏蔽本地插件，使用 CDN mall-components UMD 包（验证首次选中问题）
   await plugins.register(MallComponentsPlugin);
 };
 

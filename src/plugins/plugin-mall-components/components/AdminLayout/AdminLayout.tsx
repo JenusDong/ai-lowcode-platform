@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import MainContent from './MainContent'
 import type { AdminLayoutProps, TabItem, BreadcrumbItem, MenuItem } from './types'
-import { getMenuItems } from './Sidebar'
+import { defaultMenuItems } from './Sidebar'
 import './AdminLayout.scss'
 
 const SCENARIO_NAME = 'general'
@@ -79,7 +79,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
   __designMode,
   componentId,
 }) => {
-  const items = customMenuItems || getMenuItems()
+  const items = customMenuItems || defaultMenuItems
 
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKey, setSelectedKey] = useState(defaultSelectedKey)

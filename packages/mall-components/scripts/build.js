@@ -4,7 +4,6 @@ const fs = require('fs');
 const sass = require('sass');
 
 const isWatch = process.argv.includes('--watch');
-const isCDN = process.argv.includes('--cdn');
 const outDir = path.resolve(__dirname, '../build');
 const publicDir = path.resolve(__dirname, '../../../public');
 
@@ -38,17 +37,17 @@ const externalPlugin = {
 };
 
 async function buildComponents() {
-  const baseName = isCDN ? 'mall-components.cdn' : 'mall-components';
+  // Build JS
   await esbuild.build({
     entryPoints: [path.resolve(__dirname, '../src/index.ts')],
-    outfile: path.join(outDir, `${baseName}.umd.js`),
+    outfile: path.join(outDir, 'mall-components.umd.js'),
     format: 'iife',
     globalName: 'MallComponents',
     bundle: true,
     minify: !isWatch,
     sourcemap: isWatch,
     plugins: [externalPlugin],
-    define: { 'process.env.NODE_ENV': '"production"', 'process.env.IS_CDN': isCDN ? '"true"' : '"false"' },
+    define: { 'process.env.NODE_ENV': '"production"' },
     loader: { '.scss': 'css', '.css': 'css', '.tsx': 'tsx', '.ts': 'ts' },
     jsx: 'transform',
     jsxFactory: 'React.createElement',
@@ -63,13 +62,13 @@ if (typeof window !== 'undefined') {
 `,
     },
   });
-  console.log(`✓ Built ${baseName}.umd.js${isCDN ? ' (CDN version)' : ' (Local version)'}`);
+  console.log('✓ Built mall-components.umd.js');
 }
 
 async function buildCSS() {
-  const baseName = isCDN ? 'mall-components.cdn' : 'mall-components';
+  // Compile SCSS to CSS using sass
   const scssEntry = path.resolve(__dirname, '../src/index.scss');
-  const cssOutput = path.join(outDir, `${baseName}.umd.css`);
+  const cssOutput = path.join(outDir, 'mall-components.umd.css');
   
   try {
     const result = sass.compile(scssEntry, {
@@ -79,9 +78,10 @@ async function buildCSS() {
     });
     
     fs.writeFileSync(cssOutput, result.css);
-    console.log(`✓ Built ${baseName}.umd.css`);
+    console.log('✓ Built mall-components.umd.css');
   } catch (e) {
     console.error('✗ CSS build failed:', e.message);
+    // Create empty CSS file to prevent errors
     fs.writeFileSync(cssOutput, '/* Mall Components CSS - Build Error */');
   }
 }
@@ -126,12 +126,7 @@ ${raw}
 
 function copyToPublic() {
   if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
-  const baseName = isCDN ? 'mall-components.cdn' : 'mall-components';
-  const files = [`${baseName}.umd.js`, `${baseName}.umd.css`];
-  if (!isCDN) {
-    files.push('mall-components-meta.js');
-  }
-  files.forEach((file) => {
+  ['mall-components.umd.js', 'mall-components.umd.css', 'mall-components-meta.js'].forEach((file) => {
     const src = path.join(outDir, file);
     const dest = path.join(publicDir, file);
     if (fs.existsSync(src)) { fs.copyFileSync(src, dest); console.log(`✓ Copied ${file}`); }
@@ -140,8 +135,8 @@ function copyToPublic() {
 
 async function main() {
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-  console.log(`Building mall-components${isCDN ? ' (CDN version)' : ''}...`);
-  await Promise.all([buildComponents(), buildCSS(), ...(isCDN ? [] : [buildMeta()])]);
+  console.log('Building mall-components...');
+  await Promise.all([buildComponents(), buildCSS(), buildMeta()]);
   copyToPublic();
   console.log('Done!');
   if (isWatch) {
@@ -149,7 +144,7 @@ async function main() {
     const chokidar = require('chokidar');
     chokidar.watch(path.resolve(__dirname, '../src')).on('change', async () => {
       console.log('Rebuilding...');
-      await Promise.all([buildComponents(), buildCSS(), ...(isCDN ? [] : [buildMeta()])]);
+      await Promise.all([buildComponents(), buildCSS(), buildMeta()]);
       copyToPublic();
     });
   }

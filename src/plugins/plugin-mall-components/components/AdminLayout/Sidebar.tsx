@@ -29,7 +29,7 @@ interface SidebarProps {
   menuItems?: MenuItem[]
 }
 
-const getMenuItems = (): MenuItem[] => [
+const defaultMenuItems: MenuItem[] = [
   {
     key: 'dashboard',
     label: '工作台',
@@ -193,7 +193,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onOpenChange,
   menuItems: customMenuItems,
 }) => {
-  const items = customMenuItems || getMenuItems()
+  const items = customMenuItems || defaultMenuItems
   const [internalOpenKeys, setInternalOpenKeys] = useState<string[]>(
     items.filter(item => item.children).map(item => item.key)
   )
@@ -253,4 +253,4 @@ const Sidebar: React.FC<SidebarProps> = ({
 }
 
 export default Sidebar
-export { getMenuItems }
+export { defaultMenuItems }

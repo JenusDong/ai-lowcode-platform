@@ -1,3 +1,6 @@
+// Import antd styles first to ensure correct loading order
+import 'antd/dist/antd.css'
+
 import ProductList from './components/ProductList'
 import ProductForm from './components/ProductForm'
 import OrderList from './components/OrderList'
