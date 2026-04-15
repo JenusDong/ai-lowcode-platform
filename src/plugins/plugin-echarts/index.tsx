@@ -535,7 +535,7 @@ function createComponentDef(name: string, title: string, icon: React.ReactNode, 
     title,
     docUrl: '',
     screenshot: '',
-    npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.1.8', exportName: overrideExportName || name, destructuring: true },
+    npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: overrideExportName || name, destructuring: true },
     props: [
       { name: 'option', propType: 'object', description: `${title} 配置对象`, defaultValue: defaultOpt },
       { name: 'style', propType: 'object', description: '样式', defaultValue: { width: '100%', height: '400px' },
@@ -598,7 +598,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => ({
           title: 'ECharts 地图',
           docUrl: '',
           screenshot: '',
-          npm: { package: '@local/echarts-map', version: '1.0.0', exportName: 'EChartsMap', destructuring: true },
+          npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: 'EChartsMap', destructuring: true },
           props: [
             { name: 'option', propType: 'object', description: '地图配置对象', defaultValue: mapDefaultOption },
             { name: 'style', propType: 'object', description: '样式', defaultValue: { width: '100%', height: '500px' },
@@ -625,7 +625,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => ({
           title: '数据卡片',
           docUrl: '',
           screenshot: '',
-          npm: { package: '@local/echarts-map', version: '1.0.0', exportName: 'DataCard', destructuring: true },
+          npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: 'DataCard', destructuring: true },
           props: [
             { name: 'title', propType: 'string', description: '标题', defaultValue: '数据卡片', setter: 'StringSetter' },
             { name: 'value', propType: 'string', description: '数值', defaultValue: '0', setter: 'StringSetter' },
@@ -657,7 +657,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => ({
           title: '大屏布局',
           docUrl: '',
           screenshot: '',
-          npm: { package: '@local/echarts-map', version: '1.0.0', exportName: 'DashboardLayout', destructuring: true },
+          npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: 'DashboardLayout', destructuring: true },
           props: [
             { name: 'title', propType: 'string', description: '主标题', defaultValue: '数据可视化大屏', setter: 'StringSetter' },
             { name: 'subtitle', propType: 'string', description: '副标题', setter: 'StringSetter' },
@@ -688,7 +688,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => ({
           title: '图表面板',
           docUrl: '',
           screenshot: '',
-          npm: { package: '@local/echarts-map', version: '1.0.0', exportName: 'ChartPanel', destructuring: true },
+          npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: 'ChartPanel', destructuring: true },
           props: [
             { name: 'title', propType: 'string', description: '面板标题', defaultValue: '图表面板', setter: 'StringSetter' },
             { name: 'style', propType: 'object', description: '样式', setter: 'ObjectSetter' },
@@ -713,7 +713,7 @@ const EChartsPlugin = (ctx: IPublicModelPluginContext) => ({
           title: '地图面板',
           docUrl: '',
           screenshot: '',
-          npm: { package: '@local/echarts-map', version: '1.0.0', exportName: 'MapPanel', destructuring: true },
+          npm: { package: '@jenusdong/echarts-for-lowcode', version: '1.2.1', exportName: 'MapPanel', destructuring: true },
           props: [
             { name: 'title', propType: 'string', description: '面板标题', defaultValue: '地图面板', setter: 'StringSetter' },
             { name: 'mapType', propType: 'string', description: '地图类型', defaultValue: 'fillColor', setter: 'StringSetter' },

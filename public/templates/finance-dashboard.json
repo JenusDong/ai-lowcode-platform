@@ -58,7 +58,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "总资产(亿)"
                               },
                               "children": [
@@ -82,7 +82,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#52c41a", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "今日交易额(万)"
                               },
                               "children": [
@@ -106,7 +106,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#faad14", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "活跃用户数"
                               },
                               "children": [
@@ -130,7 +130,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#f5222d", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "风险指数"
                               },
                               "children": [
@@ -167,7 +167,7 @@
                               "props": {
                                 "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "资金流向分析"
                               },
                               "children": [
@@ -230,7 +230,7 @@
                               "props": {
                                 "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "投资组合分布"
                               },
                               "children": [
@@ -283,7 +283,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "近半年收益率趋势"
                               },
                               "children": [

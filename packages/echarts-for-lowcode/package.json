@@ -1,6 +1,6 @@
 {
   "name": "@jenusdong/echarts-for-lowcode",
-  "version": "1.1.8",
+  "version": "1.2.1",
   "description": "ECharts adapter for Ali LowCode Engine with auto-selection support",
   "main": "build/echarts-for-lowcode.umd.js",
   "module": "build/echarts-for-lowcode.esm.js",

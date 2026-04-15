@@ -62,7 +62,7 @@ ${raw}
       var moduleObj = window.EChartsForLowCode;
       if (!moduleObj) return false;
 
-      var components = ['EChartsPie', 'EChartsLine', 'EChartsBar', 'EChartsArea', 'EChartsScatter', 'EChartsRadar', 'EChartsGauge', 'EChartsFunnel', 'EChartsForLowCode'];
+      var components = ['EChartsPie', 'EChartsLine', 'EChartsBar', 'EChartsArea', 'EChartsScatter', 'EChartsRadar', 'EChartsGauge', 'EChartsFunnel', 'EChartsMap', 'EChartsForLowCode'];
       var registered = [];
       components.forEach(function(name) {
         if (moduleObj[name]) {

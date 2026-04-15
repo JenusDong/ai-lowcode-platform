@@ -58,7 +58,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#52c41a", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "在途车辆"
                               },
                               "children": [
@@ -83,7 +83,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#faad14", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "今日订单"
                               },
                               "children": [
@@ -108,7 +108,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "仓库节点"
                               },
                               "children": [
@@ -137,7 +137,7 @@
                       "props": {
                         "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                         "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                        "headStyle": { "color": "#333333", "background": "transparent" },
+                        
                         "title": "全国物流流向监控"
                       },
                       "children": [
@@ -206,7 +206,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "运输方式分布"
                               },
                               "children": [
@@ -247,7 +247,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "配送时效分析"
                               },
                               "children": [

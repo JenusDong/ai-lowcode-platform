@@ -58,7 +58,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "总销售额"
                               },
                               "children": [
@@ -83,7 +83,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "订单数量"
                               },
                               "children": [
@@ -108,7 +108,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "活跃用户"
                               },
                               "children": [
@@ -133,7 +133,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "转化率"
                               },
                               "children": [
@@ -170,7 +170,7 @@
                               "props": {
                                 "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "销售渠道分布"
                               },
                               "children": [
@@ -212,7 +212,7 @@
                               "props": {
                                 "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "Top 5 销售省份"
                               },
                               "children": [
@@ -256,7 +256,7 @@
                               "props": {
                                 "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "产品类别销售"
                               },
                               "children": [
@@ -314,7 +314,7 @@
                       "props": {
                         "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                         "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                        "headStyle": { "color": "#333333", "background": "transparent" },
+                        
                         "title": "销售趋势"
                       },
                       "children": [

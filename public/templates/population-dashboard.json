@@ -58,7 +58,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "总人口"
                               },
                               "children": [
@@ -82,7 +82,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#52c41a", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "城镇人口"
                               },
                               "children": [
@@ -106,7 +106,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#faad14", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "乡村人口"
                               },
                               "children": [
@@ -130,7 +130,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "16px" },
-                                "headStyle": { "color": "#722ed1", "background": "transparent", "borderBottom": "none" },
+                                
                                 "title": "人口密度(人/km²)"
                               },
                               "children": [
@@ -158,7 +158,7 @@
                       "props": {
                         "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                         "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                        "headStyle": { "color": "#333333", "background": "transparent" },
+                        
                         "title": "全国人口密度分布图"
                       },
                       "children": [
@@ -253,7 +253,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "各年龄段人口占比"
                               },
                               "children": [
@@ -294,7 +294,7 @@
                               "props": {
                                 "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
                                 "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
-                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                
                                 "title": "近十年人口变化趋势"
                               },
                               "children": [
