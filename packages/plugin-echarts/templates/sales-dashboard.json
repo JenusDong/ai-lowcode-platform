@@ -1,0 +1,535 @@
+{
+  "componentName": "Page",
+  "props": {
+    "style": {
+      "backgroundColor": "#0a1a3a",
+      "minHeight": "100vh",
+      "padding": "20px",
+      "boxSizing": "border-box",
+      "fontFamily": "Arial, sans-serif"
+    }
+  },
+  "children": [
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "textAlign": "center",
+          "marginBottom": "30px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "全国销售数据监控大屏",
+            "style": {
+              "fontSize": "36px",
+              "color": "#ffffff",
+              "fontWeight": "bold",
+              "textShadow": "0 0 20px rgba(26, 144, 255, 0.5)",
+              "letterSpacing": "2px"
+            }
+          }
+        },
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "实时更新 | 数据截止: 2024-04-15 18:00",
+            "style": {
+              "fontSize": "14px",
+              "color": "#00ffcc",
+              "marginTop": "10px",
+              "display": "block"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "linear-gradient(135deg, rgba(26, 144, 255, 0.15) 0%, rgba(0, 255, 204, 0.05) 100%)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px",
+              "boxShadow": "0 4px 15px rgba(26, 144, 255, 0.2)"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "总销售额",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "marginBottom": "10px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "¥ 12,345,678",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 23.5%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "marginTop": "5px", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "linear-gradient(135deg, rgba(26, 144, 255, 0.15) 0%, rgba(0, 255, 204, 0.05) 100%)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px",
+              "boxShadow": "0 4px 15px rgba(26, 144, 255, 0.2)"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "订单数量",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "marginBottom": "10px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "8,234 单",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 15.2%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "marginTop": "5px", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "linear-gradient(135deg, rgba(26, 144, 255, 0.15) 0%, rgba(0, 255, 204, 0.05) 100%)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px",
+              "boxShadow": "0 4px 15px rgba(26, 144, 255, 0.2)"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "活跃用户",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "marginBottom": "10px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "56,789 人",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 8.7%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "marginTop": "5px", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "linear-gradient(135deg, rgba(26, 144, 255, 0.15) 0%, rgba(0, 255, 204, 0.05) 100%)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px",
+              "boxShadow": "0 4px 15px rgba(26, 144, 255, 0.2)"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "转化率",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "marginBottom": "10px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "14.5%",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 2.3%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "marginTop": "5px", "display": "block" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "销售渠道分布",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsPie",
+              "props": {
+                "style": { "width": "100%", "height": "300px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "item" },
+                  "legend": {
+                    "orient": "vertical",
+                    "right": 10,
+                    "top": "center",
+                    "textStyle": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "center": ["40%", "50%"],
+                    "data": [
+                      { "value": 1048, "name": "线上商城", "itemStyle": { "color": "#1a90ff" } },
+                      { "value": 735, "name": "线下门店", "itemStyle": { "color": "#00ffcc" } },
+                      { "value": 580, "name": "代理商", "itemStyle": { "color": "#ffcc00" } },
+                      { "value": 484, "name": "批发商", "itemStyle": { "color": "#d94e5d" } }
+                    ],
+                    "label": { "color": "#ffffff" }
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "2",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "全国销售分布地图",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsMap",
+              "props": {
+                "style": { "width": "100%", "height": "400px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": {
+                    "trigger": "item",
+                    "formatter": "{b}<br/>销售额: ¥{c}"
+                  },
+                  "visualMap": {
+                    "min": 0,
+                    "max": 2000,
+                    "left": "left",
+                    "bottom": 10,
+                    "text": ["高", "低"],
+                    "calculable": true,
+                    "inRange": { "color": ["#50a3ba", "#eac736", "#d94e5d"] },
+                    "textStyle": { "color": "#ffffff" },
+                    "show": false
+                  },
+                  "geo": {
+                    "map": "china",
+                    "roam": true,
+                    "zoom": 1.2,
+                    "center": [104, 35],
+                    "label": { "show": false },
+                    "itemStyle": {
+                      "areaColor": "#1a5276",
+                      "borderColor": "#1a90ff",
+                      "borderWidth": 1
+                    },
+                    "emphasis": {
+                      "itemStyle": {
+                        "areaColor": "#2980b9",
+                        "borderColor": "#ffcc00",
+                        "borderWidth": 2
+                      }
+                    }
+                  },
+                  "series": [{
+                    "name": "销售额",
+                    "type": "map",
+                    "geoIndex": 0,
+                    "data": [
+                      { "name": "北京", "value": 1800 },
+                      { "name": "上海", "value": 2000 },
+                      { "name": "广东", "value": 1900 },
+                      { "name": "浙江", "value": 1600 },
+                      { "name": "江苏", "value": 1700 },
+                      { "name": "山东", "value": 1500 },
+                      { "name": "河南", "value": 1200 },
+                      { "name": "四川", "value": 1400 },
+                      { "name": "湖北", "value": 1300 },
+                      { "name": "湖南", "value": 1100 }
+                    ]
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "Top 5 销售省份",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsBar",
+              "props": {
+                "style": { "width": "100%", "height": "300px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "axis" },
+                  "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true },
+                  "xAxis": {
+                    "type": "value",
+                    "axisLine": { "lineStyle": { "color": "#18579e" } },
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "yAxis": {
+                    "type": "category",
+                    "data": ["上海", "广东", "北京", "江苏", "浙江"],
+                    "axisLine": { "lineStyle": { "color": "#18579e" } },
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "type": "bar",
+                    "data": [2000, 1900, 1800, 1700, 1600],
+                    "itemStyle": {
+                      "color": {
+                        "type": "linear",
+                        "x": 0,
+                        "y": 0,
+                        "x2": 1,
+                        "y2": 0,
+                        "colorStops": [
+                          { "offset": 0, "color": "#1a90ff" },
+                          { "offset": 1, "color": "#00ffcc" }
+                        ]
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "销售趋势",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsLine",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "axis" },
+                  "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true },
+                  "xAxis": {
+                    "type": "category",
+                    "boundaryGap": false,
+                    "data": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+                    "axisLine": { "lineStyle": { "color": "#18579e" } },
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "yAxis": {
+                    "type": "value",
+                    "axisLine": { "lineStyle": { "color": "#18579e" } },
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "data": [820, 932, 901, 934, 1290, 1330, 1320],
+                    "type": "line",
+                    "smooth": true,
+                    "lineStyle": { "color": "#1a90ff", "width": 2 },
+                    "areaStyle": {
+                      "color": {
+                        "type": "linear",
+                        "x": 0,
+                        "y": 0,
+                        "x2": 0,
+                        "y2": 1,
+                        "colorStops": [
+                          { "offset": 0, "color": "rgba(26, 144, 255, 0.3)" },
+                          { "offset": 1, "color": "rgba(26, 144, 255, 0)" }
+                        ]
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "产品类别销售",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsRadar",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": {},
+                  "radar": {
+                    "indicator": [
+                      { "name": "电子产品", "max": 6500 },
+                      { "name": "服装", "max": 16000 },
+                      { "name": "食品", "max": 30000 },
+                      { "name": "家居", "max": 38000 },
+                      { "name": "美妆", "max": 52000 },
+                      { "name": "运动", "max": 25000 }
+                    ],
+                    "axisLine": { "lineStyle": { "color": "#18579e" } },
+                    "splitLine": { "lineStyle": { "color": "#18579e" } },
+                    "splitArea": { "show": false }
+                  },
+                  "series": [{
+                    "type": "radar",
+                    "data": [{
+                      "value": [4200, 3000, 20000, 35000, 50000, 18000],
+                      "name": "销售量",
+                      "areaStyle": { "color": "rgba(26, 144, 255, 0.3)" },
+                      "lineStyle": { "color": "#1a90ff" }
+                    }]
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

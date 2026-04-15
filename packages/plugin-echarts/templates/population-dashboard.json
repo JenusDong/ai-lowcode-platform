@@ -1,0 +1,312 @@
+{
+  "componentName": "Page",
+  "props": {
+    "style": {
+      "backgroundColor": "#0a1a3a",
+      "minHeight": "100vh",
+      "padding": "20px",
+      "boxSizing": "border-box"
+    }
+  },
+  "children": [
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "textAlign": "center",
+          "marginBottom": "30px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "全国人口数据统计大屏",
+            "style": {
+              "fontSize": "36px",
+              "color": "#ffffff",
+              "fontWeight": "bold",
+              "textShadow": "0 0 20px rgba(217, 78, 93, 0.5)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(217, 78, 93, 0.1)",
+              "border": "1px solid #d94e5d",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "总人口",
+                "style": { "color": "#d94e5d", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "14.12 亿",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(82, 196, 26, 0.1)",
+              "border": "1px solid #52c41a",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "城镇化率",
+                "style": { "color": "#52c41a", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "65.2%",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(255, 204, 0, 0.1)",
+              "border": "1px solid #ffcc00",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "老龄化率",
+                "style": { "color": "#ffcc00", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "18.7%",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "background": "rgba(26, 144, 255, 0.05)",
+          "border": "1px solid #18579e",
+          "borderRadius": "8px",
+          "padding": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "全国人口密度分布",
+            "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+          }
+        },
+        {
+          "componentName": "EChartsMap",
+          "props": {
+            "style": { "width": "100%", "height": "450px" },
+            "option": {
+              "backgroundColor": "transparent",
+              "tooltip": {
+                "trigger": "item",
+                "formatter": "{b}<br/>人口: {c}万"
+              },
+              "visualMap": {
+                "min": 0,
+                "max": 12000,
+                "left": "left",
+                "bottom": 10,
+                "text": ["高密度", "低密度"],
+                "calculable": true,
+                "inRange": { "color": ["#eac736", "#d94e5d"] },
+                "textStyle": { "color": "#ffffff" },
+                "show": true
+              },
+              "geo": {
+                "map": "china",
+                "roam": true,
+                "zoom": 1.2,
+                "center": [104, 35],
+                "label": { "show": true, "color": "#ffffff", "fontSize": 9 },
+                "itemStyle": {
+                  "areaColor": "#1a5276",
+                  "borderColor": "#d94e5d",
+                  "borderWidth": 1
+                },
+                "emphasis": {
+                  "itemStyle": {
+                    "areaColor": "#d94e5d",
+                    "borderColor": "#ffcc00"
+                  }
+                }
+              },
+              "series": [{
+                "name": "人口",
+                "type": "map",
+                "geoIndex": 0,
+                "data": [
+                  { "name": "北京", "value": 2189 },
+                  { "name": "上海", "value": 2487 },
+                  { "name": "广东", "value": 12601 },
+                  { "name": "山东", "value": 10153 },
+                  { "name": "河南", "value": 9883 },
+                  { "name": "江苏", "value": 8505 },
+                  { "name": "四川", "value": 8367 },
+                  { "name": "河北", "value": 7461 },
+                  { "name": "湖南", "value": 6622 },
+                  { "name": "浙江", "value": 6457 },
+                  { "name": "安徽", "value": 6103 },
+                  { "name": "湖北", "value": 5775 }
+                ]
+              }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "年龄结构",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsPie",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "item" },
+                  "series": [{
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "data": [
+                      { "value": 17.95, "name": "0-14岁", "itemStyle": { "color": "#52c41a" } },
+                      { "value": 63.35, "name": "15-64岁", "itemStyle": { "color": "#1a90ff" } },
+                      { "value": 18.70, "name": "65岁以上", "itemStyle": { "color": "#d94e5d" } }
+                    ]
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "人口增长趋势",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsLine",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "axis" },
+                  "xAxis": {
+                    "type": "category",
+                    "data": ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "yAxis": {
+                    "type": "value",
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "data": [13.95, 14.00, 14.05, 14.10, 14.12, 14.11, 14.12],
+                    "type": "line",
+                    "smooth": true,
+                    "lineStyle": { "color": "#d94e5d", "width": 2 },
+                    "areaStyle": { "color": "rgba(217, 78, 93, 0.2)" }
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

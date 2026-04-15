@@ -1,0 +1,226 @@
+{
+  "version": "1.0.0",
+  "componentsMap": [],
+  "componentsTree": [
+    {
+      "componentName": "Page",
+      "fileName": "interactive-map-dashboard",
+      "props": {
+        "ref": "outerView",
+        "style": { "height": "100%", "backgroundColor": "#f0f2f5" }
+      },
+      "dataSource": { "list": [] },
+      "state": {},
+      "css": "",
+      "children": [
+        {
+          "componentName": "FDSection",
+          "props": {
+            "style": {
+              "backgroundColor": "#f0f2f5",
+              "minHeight": "100vh",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "FDBlock",
+              "props": { "align": "left", "verAlign": "top" },
+              "children": [
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "marginBottom": "20px", "textAlign": "center" } },
+                  "children": [
+                    {
+                      "componentName": "Typography.Title",
+                      "props": {
+                        "level": 2,
+                        "style": { "color": "#1a1a2e", "margin": 0 },
+                        "children": "交互地图 - 数据可视化大屏"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "width": "100%" } },
+                  "children": [
+                    {
+                      "componentName": "Row",
+                      "props": { "gutter": 20, "style": { "height": "calc(100vh - 160px)" } },
+                      "children": [
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 14, "style": { "height": "100%" } },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "height": "100%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "height": "calc(100% - 57px)", "padding": "12px", "display": "flex", "flexDirection": "column" },
+                                "title": "中国地图数据展示",
+                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "1px solid #e8e8e8" }
+                              },
+                              "children": [
+                                {
+                                  "componentName": "EChartsMap",
+                                  "props": {
+                                    "option": {
+                                      "backgroundColor": "transparent",
+                                      "tooltip": { "trigger": "item", "formatter": "{b}<br/>销售数量: {c}" },
+                                      "visualMap": {
+                                        "min": 0,
+                                        "max": 25000,
+                                        "left": "left",
+                                        "bottom": 10,
+                                        "text": ["高", "低"],
+                                        "calculable": true,
+                                        "inRange": { "color": ["#91d5ff", "#1890ff", "#0050b3"] },
+                                        "textStyle": { "color": "#666666" }
+                                      },
+                                      "geo": {
+                                        "map": "china",
+                                        "roam": true,
+                                        "zoom": 1.15,
+                                        "center": [104.5, 36],
+                                        "label": { "show": true, "color": "#333333", "fontSize": 9 },
+                                        "itemStyle": { "areaColor": "#f0f5ff", "borderColor": "#bae7ff", "borderWidth": 1 },
+                                        "emphasis": { "itemStyle": { "areaColor": "#bae7ff", "borderColor": "#1890ff", "borderWidth": 2 } }
+                                      },
+                                      "series": [
+                                        {
+                                          "name": "销售数量",
+                                          "type": "map",
+                                          "geoIndex": 0,
+                                          "data": [
+                                            { "name": "北京", "value": 18500 },
+                                            { "name": "天津", "value": 8200 },
+                                            { "name": "河北", "value": 12300 },
+                                            { "name": "上海", "value": 22500 },
+                                            { "name": "江苏", "value": 19800 },
+                                            { "name": "浙江", "value": 17200 },
+                                            { "name": "广东", "value": 21000 },
+                                            { "name": "湖南", "value": 22500 },
+                                            { "name": "四川", "value": 16500 },
+                                            { "name": "山东", "value": 15600 },
+                                            { "name": "河南", "value": 14200 },
+                                            { "name": "湖北", "value": 12800 }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "style": { "width": "100%", "flex": "1", "minHeight": "400px" }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 10 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "height": "48%", "marginBottom": "20px", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
+                                "title": "全国各类服饰销量占比",
+                                "headStyle": { "color": "#333333", "background": "transparent", "borderBottom": "1px solid #e8e8e8" }
+                              },
+                              "children": [
+                                {
+                                  "componentName": "EChartsBar",
+                                  "props": {
+                                    "option": {
+                                      "backgroundColor": "transparent",
+                                      "grid": { "left": "3%", "right": "18%", "top": "5%", "bottom": "5%", "containLabel": true },
+                                      "xAxis": { "type": "value", "show": false },
+                                      "yAxis": {
+                                        "type": "category",
+                                        "data": ["光皮皮衣", "长袖衬衫", "礼服西裤", "直筒牛仔裤", "长袖T恤", "休闲夹克"],
+                                        "axisLine": { "lineStyle": { "color": "#d9d9d9" } },
+                                        "axisTick": { "show": false },
+                                        "axisLabel": { "color": "#333333", "fontSize": 11 }
+                                      },
+                                      "series": [
+                                        {
+                                          "type": "bar",
+                                          "data": [28500, 24800, 22600, 21500, 19200, 17800],
+                                          "barWidth": "55%",
+                                          "itemStyle": { "color": "#1890ff", "borderRadius": [0, 4, 4, 0] },
+                                          "label": { "show": true, "position": "right", "color": "#333333", "fontSize": 10 }
+                                        }
+                                      ]
+                                    },
+                                    "style": { "width": "100%", "flex": "1", "minHeight": "200px" }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "height": "48%", "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
+                                "title": "全国各色系服饰销量情况",
+                                "headStyle": { "color": "#333333", "background": "transparent", "borderBottom": "1px solid #e8e8e8" }
+                              },
+                              "children": [
+                                {
+                                  "componentName": "EChartsBar",
+                                  "props": {
+                                    "option": {
+                                      "backgroundColor": "transparent",
+                                      "grid": { "left": "3%", "right": "5%", "top": "10%", "bottom": "15%", "containLabel": true },
+                                      "xAxis": {
+                                        "type": "category",
+                                        "data": ["黑白色系", "蓝色系", "红色系", "棕色系", "黄色系", "灰色系"],
+                                        "axisLine": { "lineStyle": { "color": "#d9d9d9" } },
+                                        "axisTick": { "show": false },
+                                        "axisLabel": { "color": "#333333", "fontSize": 10 }
+                                      },
+                                      "yAxis": {
+                                        "type": "value",
+                                        "axisLine": { "show": false },
+                                        "axisTick": { "show": false },
+                                        "splitLine": { "lineStyle": { "color": "rgba(217, 217, 217, 0.5)" } },
+                                        "axisLabel": { "color": "#666666" }
+                                      },
+                                      "series": [
+                                        {
+                                          "type": "bar",
+                                          "data": [
+                                            { "value": 19166, "itemStyle": { "color": "#1890ff" } },
+                                            { "value": 14237, "itemStyle": { "color": "#52c41a" } },
+                                            { "value": 11789, "itemStyle": { "color": "#f5222d" } },
+                                            { "value": 8500, "itemStyle": { "color": "#faad14" } },
+                                            { "value": 7827, "itemStyle": { "color": "#722ed1" } },
+                                            { "value": 7531, "itemStyle": { "color": "#8c8c8c" } }
+                                          ],
+                                          "barWidth": "45%",
+                                          "itemStyle": { "borderRadius": [4, 4, 0, 0] },
+                                          "label": { "show": true, "position": "top", "color": "#333333", "fontSize": 10 }
+                                        }
+                                      ]
+                                    },
+                                    "style": { "width": "100%", "flex": "1", "minHeight": "200px" }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "i18n": {}
+}

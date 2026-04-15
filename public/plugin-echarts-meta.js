@@ -588,6 +588,134 @@ var __META_RAW__ = (() => {
       ] }
     ]
   };
+  var defaultMapOption = {
+    backgroundColor: "#0a1a3a",
+    title: { text: "\u4E2D\u56FD\u5730\u56FE\u6570\u636E\u5C55\u793A", left: "center", textStyle: { color: "#ffffff", fontSize: 18 } },
+    tooltip: { trigger: "item" },
+    visualMap: {
+      min: 0,
+      max: 2e3,
+      left: "left",
+      top: "bottom",
+      text: ["\u9AD8", "\u4F4E"],
+      calculable: true,
+      inRange: { color: ["#50a3ba", "#eac736", "#d94e5d"] },
+      textStyle: { color: "#ffffff" }
+    },
+    geo: {
+      map: "china",
+      roam: true,
+      zoom: 1.2,
+      center: [104, 35],
+      label: { show: true, color: "#ffffff", fontSize: 10 },
+      itemStyle: {
+        areaColor: "#1a5276",
+        borderColor: "#1a90ff",
+        borderWidth: 1
+      },
+      emphasis: {
+        itemStyle: {
+          areaColor: "#2980b9",
+          borderColor: "#ffcc00",
+          borderWidth: 2
+        }
+      }
+    },
+    series: [{
+      name: "\u6570\u636E\u91CF",
+      type: "map",
+      geoIndex: 0,
+      data: [
+        { name: "\u5317\u4EAC", value: 1e3 },
+        { name: "\u4E0A\u6D77", value: 1300 },
+        { name: "\u5E7F\u4E1C", value: 1500 },
+        { name: "\u6D59\u6C5F", value: 1250 },
+        { name: "\u6C5F\u82CF", value: 1400 },
+        { name: "\u5C71\u4E1C", value: 1350 },
+        { name: "\u6CB3\u5357", value: 1150 },
+        { name: "\u56DB\u5DDD", value: 1180 },
+        { name: "\u6E56\u5317", value: 1080 }
+      ]
+    }],
+    animationDuration: 1e3
+  };
+  var mapConfigure = {
+    supports: { style: true, events: [
+      { name: "onRegionClick", description: "\u533A\u57DF\u70B9\u51FB\u4E8B\u4EF6" },
+      { name: "onRegionHover", description: "\u533A\u57DF\u60AC\u505C\u4E8B\u4EF6" },
+      { name: "onMapReady", description: "\u5730\u56FE\u5C31\u7EEA\u4E8B\u4EF6" }
+    ] },
+    props: [
+      { type: "group", title: "\u5730\u56FE\u57FA\u7840", display: "accordion", items: [
+        { name: "mapType", title: "\u5730\u56FE\u7C7B\u578B", setter: makeSetter("mapType", "SelectSetter", {
+          options: [
+            { label: "\u4E2D\u56FD\u5730\u56FE", value: "china" },
+            { label: "\u4E16\u754C\u5730\u56FE", value: "world" },
+            { label: "\u7701\u4EFD\u5730\u56FE", value: "province" }
+          ],
+          defaultValue: "china"
+        }) },
+        { name: "visualType", title: "\u53EF\u89C6\u5316\u7C7B\u578B", setter: makeSetter("visualType", "SelectSetter", {
+          options: [
+            { label: "\u5206\u7701\u586B\u8272", value: "fillColor" },
+            { label: "\u6563\u70B9\u56FE", value: "scatter" },
+            { label: "\u70ED\u529B\u56FE", value: "heatMap" },
+            { label: "\u52A8\u6001\u6563\u70B9", value: "effectScatter" },
+            { label: "\u6D41\u5411\u7EBF", value: "lines" }
+          ],
+          defaultValue: "fillColor"
+        }) },
+        { name: "roam", title: "\u7F29\u653E\u5E73\u79FB", setter: makeSetter("roam", "BoolSetter", { defaultValue: true }) },
+        { name: "zoom", title: "\u7F29\u653E\u6BD4\u4F8B", setter: makeSetter("zoom", "NumberSetter", { defaultValue: 1.2 }) }
+      ] },
+      { type: "group", title: "\u6570\u636E\u914D\u7F6E", display: "accordion", items: [
+        { name: "mapData", title: "\u5730\u56FE\u6570\u636E", setter: makeDataEditor([
+          { name: "\u5317\u4EAC", value: 1e3 },
+          { name: "\u4E0A\u6D77", value: 1300 },
+          { name: "\u5E7F\u4E1C", value: 1500 },
+          { name: "\u6D59\u6C5F", value: 1250 },
+          { name: "\u6C5F\u82CF", value: 1400 },
+          { name: "\u5C71\u4E1C", value: 1350 },
+          { name: "\u6CB3\u5357", value: 1150 },
+          { name: "\u56DB\u5DDD", value: 1180 }
+        ]) },
+        { name: "enableDrillDown", title: "\u542F\u7528\u94BB\u53D6", setter: makeSetter("enableDrillDown", "BoolSetter", { defaultValue: false }) }
+      ] },
+      { type: "group", title: "\u6837\u5F0F\u4E3B\u9898", display: "accordion", items: [
+        { name: "theme", title: "\u4E3B\u9898\u98CE\u683C", setter: makeSetter("theme", "SelectSetter", {
+          options: [
+            { label: "\u6697\u8272(\u5927\u5C4F)", value: "dark" },
+            { label: "\u4EAE\u8272", value: "light" },
+            { label: "\u81EA\u5B9A\u4E49", value: "custom" }
+          ],
+          defaultValue: "dark"
+        }) },
+        { name: "backgroundColor", title: "\u80CC\u666F\u989C\u8272", setter: makeSetter("backgroundColor", "StringSetter", { defaultValue: "#0a1a3a" }) },
+        { name: "colorScheme", title: "\u914D\u8272\u65B9\u6848", setter: makeSetter("colorScheme", "SelectSetter", {
+          options: [
+            { label: "\u84DD\u8272\u7CFB", value: "blue" },
+            { label: "\u7EA2\u8272\u7CFB", value: "red" },
+            { label: "\u7EFF\u8272\u7CFB", value: "green" },
+            { label: "\u5F69\u8679\u6E10\u53D8", value: "rainbow" }
+          ],
+          defaultValue: "blue"
+        }) }
+      ] },
+      { type: "group", title: "\u6807\u9898\u8BBE\u7F6E", display: "accordion", items: [
+        { name: "titleText", title: "\u4E3B\u6807\u9898", setter: makeSetter("title.text", "StringSetter", { defaultValue: "\u4E2D\u56FD\u5730\u56FE\u6570\u636E\u5C55\u793A" }) },
+        { name: "titleColor", title: "\u6807\u9898\u989C\u8272", setter: makeSetter("title.textStyle.color", "StringSetter", { defaultValue: "#ffffff" }) },
+        { name: "titleFontSize", title: "\u6807\u9898\u5B57\u53F7", setter: makeSetter("title.textStyle.fontSize", "NumberSetter", { defaultValue: 18 }) }
+      ] },
+      { type: "group", title: "\u4EA4\u4E92\u8BBE\u7F6E", display: "accordion", items: [
+        { name: "showTooltip", title: "\u663E\u793A\u63D0\u793A\u6846", setter: makeSetter("showTooltip", "BoolSetter", { defaultValue: true }) },
+        { name: "showLegend", title: "\u663E\u793A\u56FE\u4F8B", setter: makeSetter("showLegend", "BoolSetter", { defaultValue: true }) },
+        { name: "animationDuration", title: "\u52A8\u753B\u65F6\u957F(ms)", setter: makeSetter("animationDuration", "NumberSetter", { defaultValue: 1e3 }) }
+      ] },
+      { type: "group", title: "\u5B8C\u6574\u914D\u7F6E", display: "accordion", items: [
+        { name: "option", title: "\u914D\u7F6E\u5BF9\u8C61", setter: { componentName: "JsonSetter", props: { placeholder: "ECharts \u5730\u56FE\u914D\u7F6E\u5BF9\u8C61" } } }
+      ] }
+    ]
+  };
   var baseProps = [
     { name: "option", propType: "object", description: "ECharts \u914D\u7F6E\u5BF9\u8C61" },
     { name: "style", propType: "object", description: "\u6837\u5F0F", defaultValue: { width: "100%", height: "400px" } },
@@ -596,6 +724,70 @@ var __META_RAW__ = (() => {
     { name: "notMerge", propType: "bool", description: "\u662F\u5426\u4E0D\u5408\u5E76\u914D\u7F6E", defaultValue: false },
     { name: "lazyUpdate", propType: "bool", description: "\u662F\u5426\u61D2\u66F4\u65B0", defaultValue: true }
   ];
+  var dataCardConfigure = {
+    supports: { style: true },
+    props: [
+      { type: "group", title: "\u57FA\u7840\u914D\u7F6E", display: "accordion", items: [
+        { name: "title", title: "\u6807\u9898", setter: "StringSetter", defaultValue: "\u6570\u636E\u5361\u7247" },
+        { name: "value", title: "\u6570\u503C", setter: "StringSetter", defaultValue: "0" },
+        { name: "unit", title: "\u5355\u4F4D", setter: "StringSetter", defaultValue: "" },
+        { name: "color", title: "\u4E3B\u9898\u8272", setter: "StringSetter", defaultValue: "#1a90ff" }
+      ] },
+      { type: "group", title: "\u8D8B\u52BF\u914D\u7F6E", display: "accordion", items: [
+        { name: "trendValue", title: "\u8D8B\u52BF\u503C", setter: "StringSetter" },
+        { name: "trendType", title: "\u8D8B\u52BF\u7C7B\u578B", setter: { componentName: "SelectSetter", props: {
+          options: [
+            { label: "\u4E0A\u5347", value: "up" },
+            { label: "\u4E0B\u964D", value: "down" },
+            { label: "\u6301\u5E73", value: "stable" }
+          ],
+          defaultValue: "up"
+        } } }
+      ] }
+    ]
+  };
+  var dashboardLayoutConfigure = {
+    supports: { style: true },
+    props: [
+      { type: "group", title: "\u6807\u9898\u914D\u7F6E", display: "accordion", items: [
+        { name: "title", title: "\u4E3B\u6807\u9898", setter: "StringSetter", defaultValue: "\u6570\u636E\u53EF\u89C6\u5316\u5927\u5C4F" },
+        { name: "subtitle", title: "\u526F\u6807\u9898", setter: "StringSetter" }
+      ] },
+      { type: "group", title: "\u6837\u5F0F\u914D\u7F6E", display: "accordion", items: [
+        { name: "backgroundColor", title: "\u80CC\u666F\u989C\u8272", setter: "StringSetter", defaultValue: "#0a1a3a" }
+      ] }
+    ]
+  };
+  var chartPanelConfigure = {
+    supports: { style: true },
+    props: [
+      { type: "group", title: "\u9762\u677F\u914D\u7F6E", display: "accordion", items: [
+        { name: "title", title: "\u9762\u677F\u6807\u9898", setter: "StringSetter", defaultValue: "\u56FE\u8868\u9762\u677F" }
+      ] }
+    ]
+  };
+  var mapPanelConfigure = {
+    supports: { style: true },
+    props: [
+      { type: "group", title: "\u9762\u677F\u914D\u7F6E", display: "accordion", items: [
+        { name: "title", title: "\u9762\u677F\u6807\u9898", setter: "StringSetter", defaultValue: "\u5730\u56FE\u9762\u677F" },
+        { name: "mapType", title: "\u5730\u56FE\u7C7B\u578B", setter: { componentName: "SelectSetter", props: {
+          options: [
+            { label: "\u5206\u7701\u586B\u8272", value: "fillColor" },
+            { label: "\u6563\u70B9\u56FE", value: "scatter" },
+            { label: "\u52A8\u6001\u6563\u70B9", value: "effectScatter" },
+            { label: "\u70ED\u529B\u56FE", value: "heatMap" },
+            { label: "\u6D41\u5411\u7EBF", value: "lines" }
+          ],
+          defaultValue: "fillColor"
+        } } },
+        { name: "height", title: "\u9AD8\u5EA6", setter: "StringSetter", defaultValue: "500px" }
+      ] },
+      { type: "group", title: "\u6570\u636E\u914D\u7F6E", display: "accordion", items: [
+        { name: "mapData", title: "\u5730\u56FE\u6570\u636E", setter: { componentName: "JsonSetter", props: { placeholder: "\u5730\u56FE\u6570\u636E" } } }
+      ] }
+    ]
+  };
   var components = [
     {
       componentName: "EChartsPie",
@@ -726,6 +918,110 @@ var __META_RAW__ = (() => {
       group: "ECharts\u56FE\u8868",
       snippets: [
         { title: "\u57FA\u7840\u6F0F\u6597\u56FE", schema: { componentName: "EChartsFunnel", props: { option: defaultFunnelOption, style: { width: "100%", height: "400px" } } } }
+      ]
+    },
+    {
+      componentName: "EChartsMap",
+      title: "ECharts \u5730\u56FE",
+      docUrl: "",
+      screenshot: "",
+      devMode: "proCode",
+      npm: { package: "@jenusdong/echarts-for-lowcode", version: '1.1.8', exportName: "EChartsMap", destructuring: true },
+      props: baseProps,
+      configure: mapConfigure,
+      icon: Icons.pie,
+      category: "\u56FE\u8868\u7EC4\u4EF6",
+      group: "ECharts\u56FE\u8868",
+      snippets: [
+        { title: "\u5206\u7701\u586B\u8272\u5730\u56FE", schema: { componentName: "EChartsMap", props: { option: defaultMapOption, style: { width: "100%", height: "500px" }, mapType: "china", visualType: "fillColor" } } },
+        { title: "\u6563\u70B9\u5730\u56FE", schema: { componentName: "EChartsMap", props: { option: defaultMapOption, style: { width: "100%", height: "500px" }, mapType: "china", visualType: "scatter" } } },
+        { title: "\u52A8\u6001\u6563\u70B9\u5730\u56FE", schema: { componentName: "EChartsMap", props: { option: defaultMapOption, style: { width: "100%", height: "500px" }, mapType: "china", visualType: "effectScatter" } } },
+        { title: "\u70ED\u529B\u56FE\u5730\u56FE", schema: { componentName: "EChartsMap", props: { option: defaultMapOption, style: { width: "100%", height: "500px" }, mapType: "china", visualType: "heatMap" } } },
+        { title: "\u6D41\u5411\u7EBF\u5730\u56FE", schema: { componentName: "EChartsMap", props: { option: defaultMapOption, style: { width: "100%", height: "500px" }, mapType: "china", visualType: "lines" } } }
+      ]
+    },
+    {
+      componentName: "DataCard",
+      title: "\u6570\u636E\u5361\u7247",
+      docUrl: "",
+      screenshot: "",
+      devMode: "proCode",
+      npm: { package: "@jenusdong/echarts-for-lowcode", version: '1.1.8', exportName: "DataCard", destructuring: true },
+      props: [
+        { name: "title", propType: "string", description: "\u6807\u9898", defaultValue: "\u6570\u636E\u5361\u7247" },
+        { name: "value", propType: "string", description: "\u6570\u503C", defaultValue: "0" },
+        { name: "unit", propType: "string", description: "\u5355\u4F4D" },
+        { name: "color", propType: "string", description: "\u4E3B\u9898\u8272", defaultValue: "#1a90ff" },
+        { name: "style", propType: "object", description: "\u6837\u5F0F" }
+      ],
+      configure: dataCardConfigure,
+      icon: Icons.pie,
+      category: "\u590D\u5408\u7EC4\u4EF6",
+      group: "\u5927\u5C4F\u7EC4\u4EF6",
+      snippets: [
+        { title: "\u6570\u636E\u5361\u7247", schema: { componentName: "DataCard", props: { title: "\u603B\u9500\u552E\u989D", value: "1,234,567", unit: "\u5143", color: "#1a90ff" } } },
+        { title: "\u8D8B\u52BF\u5361\u7247", schema: { componentName: "DataCard", props: { title: "\u6708\u589E\u957F", value: "+15.8%", color: "#52c41a", trend: { value: "\u8F83\u4E0A\u6708", type: "up" } } } }
+      ]
+    },
+    {
+      componentName: "DashboardLayout",
+      title: "\u5927\u5C4F\u5E03\u5C40",
+      docUrl: "",
+      screenshot: "",
+      devMode: "proCode",
+      npm: { package: "@jenusdong/echarts-for-lowcode", version: '1.1.8', exportName: "DashboardLayout", destructuring: true },
+      props: [
+        { name: "title", propType: "string", description: "\u4E3B\u6807\u9898", defaultValue: "\u6570\u636E\u53EF\u89C6\u5316\u5927\u5C4F" },
+        { name: "subtitle", propType: "string", description: "\u526F\u6807\u9898" },
+        { name: "backgroundColor", propType: "string", description: "\u80CC\u666F\u989C\u8272", defaultValue: "#0a1a3a" },
+        { name: "style", propType: "object", description: "\u6837\u5F0F" }
+      ],
+      configure: dashboardLayoutConfigure,
+      icon: Icons.pie,
+      category: "\u590D\u5408\u7EC4\u4EF6",
+      group: "\u5927\u5C4F\u7EC4\u4EF6",
+      snippets: [
+        { title: "\u5927\u5C4F\u5E03\u5C40", schema: { componentName: "DashboardLayout", props: { title: "\u6570\u636E\u53EF\u89C6\u5316\u5927\u5C4F", backgroundColor: "#0a1a3a" } } }
+      ]
+    },
+    {
+      componentName: "ChartPanel",
+      title: "\u56FE\u8868\u9762\u677F",
+      docUrl: "",
+      screenshot: "",
+      devMode: "proCode",
+      npm: { package: "@jenusdong/echarts-for-lowcode", version: '1.1.8', exportName: "ChartPanel", destructuring: true },
+      props: [
+        { name: "title", propType: "string", description: "\u9762\u677F\u6807\u9898", defaultValue: "\u56FE\u8868\u9762\u677F" },
+        { name: "style", propType: "object", description: "\u6837\u5F0F" }
+      ],
+      configure: chartPanelConfigure,
+      icon: Icons.pie,
+      category: "\u590D\u5408\u7EC4\u4EF6",
+      group: "\u5927\u5C4F\u7EC4\u4EF6",
+      snippets: [
+        { title: "\u56FE\u8868\u9762\u677F", schema: { componentName: "ChartPanel", props: { title: "\u9500\u552E\u8D8B\u52BF" } } }
+      ]
+    },
+    {
+      componentName: "MapPanel",
+      title: "\u5730\u56FE\u9762\u677F",
+      docUrl: "",
+      screenshot: "",
+      devMode: "proCode",
+      npm: { package: "@jenusdong/echarts-for-lowcode", version: '1.1.8', exportName: "MapPanel", destructuring: true },
+      props: [
+        { name: "title", propType: "string", description: "\u9762\u677F\u6807\u9898", defaultValue: "\u5730\u56FE\u9762\u677F" },
+        { name: "mapType", propType: "string", description: "\u5730\u56FE\u7C7B\u578B", defaultValue: "fillColor" },
+        { name: "height", propType: "string", description: "\u9AD8\u5EA6", defaultValue: "500px" },
+        { name: "style", propType: "object", description: "\u6837\u5F0F" }
+      ],
+      configure: mapPanelConfigure,
+      icon: Icons.pie,
+      category: "\u590D\u5408\u7EC4\u4EF6",
+      group: "\u5927\u5C4F\u7EC4\u4EF6",
+      snippets: [
+        { title: "\u5730\u56FE\u9762\u677F", schema: { componentName: "MapPanel", props: { title: "\u5168\u56FD\u9500\u552E\u5206\u5E03", mapType: "fillColor", height: "500px" } } }
       ]
     }
   ];

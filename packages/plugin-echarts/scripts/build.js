@@ -59,16 +59,16 @@ if (PluginEcharts.default) {
   PluginEcharts = merged;
 }
 if (typeof window !== 'undefined') {
-  window.PluginEcharts = PluginEcharts;
-  console.log('[PluginEcharts] Registered:', Object.keys(PluginEcharts));
+  window.EChartsMapComponents = PluginEcharts;
+  console.log('[EChartsMapComponents] Registered:', Object.keys(PluginEcharts));
 
   if (PluginEcharts.DataEditorSetter && window.AliLowCodeEngine && window.AliLowCodeEngine.setters) {
     window.AliLowCodeEngine.setters.registerSetter('DataEditorSetter', PluginEcharts.DataEditorSetter);
-    console.log('[PluginEcharts] Registered DataEditorSetter');
+    console.log('[EChartsMapComponents] Registered DataEditorSetter');
   }
   if (PluginEcharts.JSONPathSetter && window.AliLowCodeEngine && window.AliLowCodeEngine.setters) {
     window.AliLowCodeEngine.setters.registerSetter('JSONPathSetter', PluginEcharts.JSONPathSetter);
-    console.log('[PluginEcharts] Registered JSONPathSetter');
+    console.log('[EChartsMapComponents] Registered JSONPathSetter');
   }
 
   function registerToRenderer() {
@@ -79,7 +79,7 @@ if (typeof window !== 'undefined') {
         return false;
       }
 
-      var components = ['EChartsPie', 'EChartsLine', 'EChartsBar', 'EChartsArea', 'EChartsScatter', 'EChartsRadar', 'EChartsGauge', 'EChartsFunnel', 'EChartsBase'];
+      var components = ['EChartsMap', 'DataCard', 'DashboardLayout', 'ChartPanel', 'MapPanel'];
       var registered = [];
       components.forEach(function(name) {
         if (PluginEcharts[name]) {

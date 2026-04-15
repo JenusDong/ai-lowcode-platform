@@ -1,0 +1,419 @@
+{
+  "componentName": "Page",
+  "props": {
+    "style": {
+      "backgroundColor": "#0a1a3a",
+      "minHeight": "100vh",
+      "padding": "20px",
+      "boxSizing": "border-box"
+    }
+  },
+  "children": [
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "textAlign": "center",
+          "marginBottom": "30px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "金融数据监控大屏",
+            "style": {
+              "fontSize": "36px",
+              "color": "#ffffff",
+              "fontWeight": "bold",
+              "textShadow": "0 0 20px rgba(255, 204, 0, 0.5)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(255, 204, 0, 0.1)",
+              "border": "1px solid #ffcc00",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "总资产",
+                "style": { "color": "#ffcc00", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "¥ 8,567.89 亿",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 12.5%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.1)",
+              "border": "1px solid #1a90ff",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "交易额",
+                "style": { "color": "#1a90ff", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "¥ 2,345.67 亿",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 8.3%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(0, 255, 204, 0.1)",
+              "border": "1px solid #00ffcc",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "客户数",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "1,234 万",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "↑ 15.7%",
+                "style": { "color": "#52c41a", "fontSize": "12px", "display": "block" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "2",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "全国业务分布",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsMap",
+              "props": {
+                "style": { "width": "100%", "height": "400px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": {
+                    "trigger": "item",
+                    "formatter": "{b}<br/>资产: ¥{c}亿"
+                  },
+                  "visualMap": {
+                    "min": 0,
+                    "max": 1000,
+                    "left": "left",
+                    "bottom": 10,
+                    "text": ["高", "低"],
+                    "calculable": true,
+                    "inRange": { "color": ["#eac736", "#ffcc00"] },
+                    "textStyle": { "color": "#ffffff" },
+                    "show": false
+                  },
+                  "geo": {
+                    "map": "china",
+                    "roam": true,
+                    "zoom": 1.2,
+                    "center": [104, 35],
+                    "label": { "show": false },
+                    "itemStyle": {
+                      "areaColor": "#1a5276",
+                      "borderColor": "#ffcc00",
+                      "borderWidth": 1
+                    },
+                    "emphasis": {
+                      "itemStyle": {
+                        "areaColor": "#ffcc00",
+                        "borderColor": "#ffffff"
+                      }
+                    }
+                  },
+                  "series": [{
+                    "name": "资产",
+                    "type": "map",
+                    "geoIndex": 0,
+                    "data": [
+                      { "name": "北京", "value": 950 },
+                      { "name": "上海", "value": 1000 },
+                      { "name": "广东", "value": 850 },
+                      { "name": "浙江", "value": 700 },
+                      { "name": "江苏", "value": 750 },
+                      { "name": "山东", "value": 600 },
+                      { "name": "四川", "value": 550 },
+                      { "name": "湖北", "value": 500 }
+                    ]
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "业务类型分布",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsPie",
+              "props": {
+                "style": { "width": "100%", "height": "400px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "item" },
+                  "legend": {
+                    "orient": "horizontal",
+                    "bottom": 10,
+                    "textStyle": { "color": "#ffffff", "fontSize": 12 }
+                  },
+                  "series": [{
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "center": ["50%", "45%"],
+                    "data": [
+                      { "value": 4235, "name": "贷款业务", "itemStyle": { "color": "#ffcc00" } },
+                      { "value": 3310, "name": "存款业务", "itemStyle": { "color": "#1a90ff" } },
+                      { "value": 2234, "name": "理财业务", "itemStyle": { "color": "#00ffcc" } },
+                      { "value": 1595, "name": "保险业务", "itemStyle": { "color": "#d94e5d" } },
+                      { "value": 848, "name": "其他业务", "itemStyle": { "color": "#52c41a" } }
+                    ]
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "资产趋势",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsArea",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "axis" },
+                  "xAxis": {
+                    "type": "category",
+                    "boundaryGap": false,
+                    "data": ["1月", "2月", "3月", "4月", "5月", "6月"],
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "yAxis": {
+                    "type": "value",
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "data": [8200, 8320, 8400, 8450, 8520, 8568],
+                    "type": "line",
+                    "smooth": true,
+                    "areaStyle": { "color": "rgba(255, 204, 0, 0.3)" },
+                    "lineStyle": { "color": "#ffcc00", "width": 2 }
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "风险评估",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsGauge",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "series": [{
+                    "type": "gauge",
+                    "center": ["50%", "60%"],
+                    "radius": "80%",
+                    "startAngle": 200,
+                    "endAngle": -20,
+                    "min": 0,
+                    "max": 100,
+                    "splitNumber": 10,
+                    "axisLine": {
+                      "lineStyle": {
+                        "width": 20,
+                        "color": [
+                          [0.3, "#52c41a"],
+                          [0.7, "#ffcc00"],
+                          [1, "#d94e5d"]
+                        ]
+                      }
+                    },
+                    "pointer": {
+                      "itemStyle": { "color": "auto" }
+                    },
+                    "axisTick": { "show": false },
+                    "splitLine": { "show": false },
+                    "axisLabel": { "show": false },
+                    "title": {
+                      "offsetCenter": [0, "30%"],
+                      "fontSize": 14,
+                      "color": "#ffffff"
+                    },
+                    "detail": {
+                      "valueAnimation": true,
+                      "offsetCenter": [0, "0%"],
+                      "fontSize": 24,
+                      "color": "#ffffff",
+                      "formatter": "{value}%"
+                    },
+                    "data": [{ "value": 23, "name": "风险指数" }]
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,22 @@
 
+  if (typeof window !== 'undefined') {
+    const es = new window.EventSource('http://localhost:5557/esbuild-livereload');
+    es.onmessage = () => {
+      try {
+        if (window.AliLowCodeEngine && window.AliLowCodeEngine.project) {
+          const scenarioName = 'general';
+          const schema = window.AliLowCodeEngine.project.exportSchema('save');
+          window.localStorage.setItem(scenarioName + ':projectSchema', JSON.stringify(schema));
+          console.log('Auto-saved schema before reload.');
+        }
+      } catch (e) {
+        console.error('Auto-save failed:', e);
+      }
+      console.log('Reloading page due to UMD changes...');
+      window.location.reload();
+    };
+  }
+
 // MallComponents - LowCode Component Library
 // Uses global React/AntD instances (shared with LowCode Engine)
 // No duplicate React instances!

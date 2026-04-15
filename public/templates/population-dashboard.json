@@ -1,0 +1,351 @@
+{
+  "version": "1.0.0",
+  "componentsMap": [],
+  "componentsTree": [
+    {
+      "componentName": "Page",
+      "fileName": "population-dashboard",
+      "props": {
+        "ref": "outerView",
+        "style": { "height": "100%", "backgroundColor": "#f0f2f5" }
+      },
+      "dataSource": { "list": [] },
+      "state": {},
+      "css": "",
+      "children": [
+        {
+          "componentName": "FDSection",
+          "props": {
+            "style": {
+              "backgroundColor": "#f0f2f5",
+              "minHeight": "100vh",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "FDBlock",
+              "props": { "align": "left", "verAlign": "top" },
+              "children": [
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "marginBottom": "20px", "textAlign": "center" } },
+                  "children": [
+                    {
+                      "componentName": "Typography.Title",
+                      "props": {
+                        "level": 2,
+                        "style": { "color": "#1a1a2e", "margin": 0 },
+                        "children": "全国人口统计大屏"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "width": "100%", "marginBottom": "20px" } },
+                  "children": [
+                    {
+                      "componentName": "Row",
+                      "props": { "gutter": 16 },
+                      "children": [
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 6 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "16px" },
+                                "headStyle": { "color": "#1890ff", "background": "transparent", "borderBottom": "none" },
+                                "title": "总人口"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "value": 1411780000,
+                                    "valueStyle": { "color": "#1a1a2e", "fontSize": 24 }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 6 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "16px" },
+                                "headStyle": { "color": "#52c41a", "background": "transparent", "borderBottom": "none" },
+                                "title": "城镇人口"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "value": 914250000,
+                                    "valueStyle": { "color": "#1a1a2e", "fontSize": 24 }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 6 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "16px" },
+                                "headStyle": { "color": "#faad14", "background": "transparent", "borderBottom": "none" },
+                                "title": "乡村人口"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "value": 497530000,
+                                    "valueStyle": { "color": "#1a1a2e", "fontSize": 24 }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 6 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "16px" },
+                                "headStyle": { "color": "#722ed1", "background": "transparent", "borderBottom": "none" },
+                                "title": "人口密度(人/km²)"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "Statistic",
+                                  "props": {
+                                    "value": 147,
+                                    "valueStyle": { "color": "#1a1a2e", "fontSize": 28 }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "width": "100%", "marginBottom": "20px" } },
+                  "children": [
+                    {
+                      "componentName": "Card",
+                      "props": {
+                        "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                        "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
+                        "headStyle": { "color": "#333333", "background": "transparent" },
+                        "title": "全国人口密度分布图"
+                      },
+                      "children": [
+                        {
+                          "componentName": "EChartsMap",
+                          "props": {
+                            "style": { "width": "100%", "flex": "1", "minHeight": "380px" },
+                            "option": {
+                              "backgroundColor": "transparent",
+                              "tooltip": { "trigger": "item", "formatter": "{b}<br/>人口密度: {c} 人/km²" },
+                              "visualMap": {
+                                "min": 0,
+                                "max": 12000,
+                                "left": "left",
+                                "bottom": 10,
+                                "text": ["高密度", "低密度"],
+                                "calculable": true,
+                                "inRange": { "color": ["#91d5ff", "#69c0ff", "#40a9ff", "#1890ff", "#096dd9"] },
+                                "textStyle": { "color": "#666666" },
+                                "show": true
+                              },
+                              "geo": {
+                                "map": "china",
+                                "roam": true,
+                                "zoom": 1.15,
+                                "center": [104.5, 36],
+                                "label": { "show": false },
+                                "itemStyle": { "areaColor": "#f0f5ff", "borderColor": "#bae7ff", "borderWidth": 1 },
+                                "emphasis": { "itemStyle": { "areaColor": "#bae7ff", "borderColor": "#1890ff", "borderWidth": 2 } }
+                              },
+                              "series": [
+                                {
+                                  "name": "人口密度",
+                                  "type": "map",
+                                  "geoIndex": 0,
+                                  "data": [
+                                    { "name": "北京", "value": 1323 },
+                                    { "name": "天津", "value": 1134 },
+                                    { "name": "河北", "value": 393 },
+                                    { "name": "山西", "value": 227 },
+                                    { "name": "内蒙古", "value": 21 },
+                                    { "name": "辽宁", "value": 295 },
+                                    { "name": "吉林", "value": 140 },
+                                    { "name": "黑龙江", "value": 83 },
+                                    { "name": "上海", "value": 3829 },
+                                    { "name": "江苏", "value": 794 },
+                                    { "name": "浙江", "value": 573 },
+                                    { "name": "安徽", "value": 430 },
+                                    { "name": "福建", "value": 310 },
+                                    { "name": "江西", "value": 271 },
+                                    { "name": "山东", "value": 639 },
+                                    { "name": "河南", "value": 593 },
+                                    { "name": "湖北", "value": 315 },
+                                    { "name": "湖南", "value": 308 },
+                                    { "name": "广东", "value": 704 },
+                                    { "name": "广西", "value": 207 },
+                                    { "name": "海南", "value": 254 },
+                                    { "name": "重庆", "value": 374 },
+                                    { "name": "四川", "value": 180 },
+                                    { "name": "贵州", "value": 222 },
+                                    { "name": "云南", "value": 122 },
+                                    { "name": "西藏", "value": 3 },
+                                    { "name": "陕西", "value": 191 },
+                                    { "name": "甘肃", "value": 62 },
+                                    { "name": "青海", "value": 8 },
+                                    { "name": "宁夏", "value": 114 },
+                                    { "name": "新疆", "value": 15 }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "componentName": "FDCell",
+                  "props": { "style": { "width": "100%" } },
+                  "children": [
+                    {
+                      "componentName": "Row",
+                      "props": { "gutter": 16 },
+                      "children": [
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 12 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
+                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                "title": "各年龄段人口占比"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "EChartsPie",
+                                  "props": {
+                                    "style": { "width": "100%", "flex": "1", "minHeight": "220px" },
+                                    "option": {
+                                      "backgroundColor": "transparent",
+                                      "tooltip": { "trigger": "item" },
+                                      "legend": { "bottom": 10, "textStyle": { "color": "#666666" } },
+                                      "series": [
+                                        {
+                                          "type": "pie",
+                                          "radius": ["35%", "65%"],
+                                          "center": ["50%", "45%"],
+                                          "data": [
+                                            { "value": 17.95, "name": "0-14岁", "itemStyle": { "color": "#1890ff" } },
+                                            { "value": 63.35, "name": "15-64岁", "itemStyle": { "color": "#52c41a" } },
+                                            { "value": 18.70, "name": "65岁及以上", "itemStyle": { "color": "#faad14" } }
+                                          ],
+                                          "label": { "color": "#666666", "fontSize": 11, "formatter": "{b}: {d}%" }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "componentName": "Col",
+                          "props": { "span": 12 },
+                          "children": [
+                            {
+                              "componentName": "Card",
+                              "props": {
+                                "style": { "background": "#ffffff", "border": "1px solid #e8e8e8", "borderRadius": "8px" },
+                                "bodyStyle": { "padding": "12px", "display": "flex", "flexDirection": "column" },
+                                "headStyle": { "color": "#333333", "background": "transparent" },
+                                "title": "近十年人口变化趋势"
+                              },
+                              "children": [
+                                {
+                                  "componentName": "EChartsLine",
+                                  "props": {
+                                    "style": { "width": "100%", "flex": "1", "minHeight": "220px" },
+                                    "option": {
+                                      "backgroundColor": "transparent",
+                                      "tooltip": { "trigger": "axis" },
+                                      "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true },
+                                      "xAxis": {
+                                        "type": "category",
+                                        "data": ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+                                        "axisLine": { "lineStyle": { "color": "#d9d9d9" } },
+                                        "axisTick": { "show": false },
+                                        "axisLabel": { "color": "#666666", "fontSize": 10 }
+                                      },
+                                      "yAxis": {
+                                        "type": "value",
+                                        "axisLine": { "show": false },
+                                        "axisTick": { "show": false },
+                                        "splitLine": { "lineStyle": { "color": "rgba(217, 217, 217, 0.5)" } },
+                                        "axisLabel": { "color": "#666666" }
+                                      },
+                                      "series": [
+                                        {
+                                          "data": [136782, 137462, 138271, 139008, 139538, 140005, 141212, 141260, 141175, 141178],
+                                          "type": "line",
+                                          "smooth": true,
+                                          "lineStyle": { "color": "#1890ff", "width": 2 },
+                                          "areaStyle": { "color": "rgba(24, 144, 255, 0.15)" }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "i18n": {}
+}

@@ -146,6 +146,17 @@
       "editUrls": [
         "https://unpkg.com/@jenusdong/echarts-for-lowcode@1.1.8/build/echarts-for-lowcode.umd.js"
       ]
+    },
+    {
+      "package": "@local/echarts-map",
+      "version": "1.0.0",
+      "library": "EChartsMapComponents",
+      "urls": [
+        "/plugin-echarts.umd.js"
+      ],
+      "editUrls": [
+        "/plugin-echarts.umd.js"
+      ]
     }
   ],
   "components": [

@@ -1,0 +1,329 @@
+{
+  "componentName": "Page",
+  "props": {
+    "style": {
+      "backgroundColor": "#0a1a3a",
+      "minHeight": "100vh",
+      "padding": "20px",
+      "boxSizing": "border-box"
+    }
+  },
+  "children": [
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "textAlign": "center",
+          "marginBottom": "30px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "全国物流监控中心",
+            "style": {
+              "fontSize": "36px",
+              "color": "#ffffff",
+              "fontWeight": "bold",
+              "textShadow": "0 0 20px rgba(0, 255, 204, 0.5)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(0, 255, 204, 0.1)",
+              "border": "1px solid #00ffcc",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "在途车辆",
+                "style": { "color": "#00ffcc", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "2,456 辆",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(255, 204, 0, 0.1)",
+              "border": "1px solid #ffcc00",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "今日订单",
+                "style": { "color": "#ffcc00", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "15,678 单",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.1)",
+              "border": "1px solid #1a90ff",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "仓库节点",
+                "style": { "color": "#1a90ff", "fontSize": "14px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "128 个",
+                "style": { "color": "#ffffff", "fontSize": "32px", "fontWeight": "bold", "display": "block" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "background": "rgba(26, 144, 255, 0.05)",
+          "border": "1px solid #18579e",
+          "borderRadius": "8px",
+          "padding": "20px",
+          "marginBottom": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Text",
+          "props": {
+            "children": "全国物流流向监控",
+            "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+          }
+        },
+        {
+          "componentName": "EChartsMap",
+          "props": {
+            "style": { "width": "100%", "height": "500px" },
+            "option": {
+              "backgroundColor": "transparent",
+              "title": {
+                "text": "实时物流路径追踪",
+                "left": "center",
+                "top": 10,
+                "textStyle": { "color": "#ffffff", "fontSize": 16 }
+              },
+              "tooltip": { "trigger": "item" },
+              "geo": {
+                "map": "china",
+                "roam": true,
+                "zoom": 1.2,
+                "center": [104, 35],
+                "label": { "show": false },
+                "itemStyle": {
+                  "areaColor": "#0d2647",
+                  "borderColor": "#18579e"
+                }
+              },
+              "series": [
+                {
+                  "type": "effectScatter",
+                  "coordinateSystem": "geo",
+                  "data": [
+                    { "name": "北京仓库", "value": [116.46, 39.92, 100] },
+                    { "name": "上海仓库", "value": [121.48, 31.22, 130] },
+                    { "name": "广州仓库", "value": [113.23, 23.16, 80] },
+                    { "name": "成都仓库", "value": [104.06, 30.67, 70] },
+                    { "name": "西安仓库", "value": [108.95, 34.27, 50] }
+                  ],
+                  "symbolSize": 20,
+                  "rippleEffect": { "scale": 5, "period": 4 },
+                  "itemStyle": { "color": "#00ffcc" },
+                  "label": { "show": true, "formatter": "{b}", "position": "right", "color": "#ffffff" }
+                },
+                {
+                  "type": "lines",
+                  "coordinateSystem": "geo",
+                  "data": [
+                    {
+                      "coords": [[116.46, 39.92], [121.48, 31.22]],
+                      "lineStyle": { "color": "#1a90ff", "width": 2, "curveness": 0.2 }
+                    },
+                    {
+                      "coords": [[116.46, 39.92], [113.23, 23.16]],
+                      "lineStyle": { "color": "#00ffcc", "width": 2, "curveness": 0.2 }
+                    },
+                    {
+                      "coords": [[121.48, 31.22], [113.23, 23.16]],
+                      "lineStyle": { "color": "#ffcc00", "width": 2, "curveness": 0.2 }
+                    },
+                    {
+                      "coords": [[104.06, 30.67], [116.46, 39.92]],
+                      "lineStyle": { "color": "#d94e5d", "width": 2, "curveness": 0.2 }
+                    },
+                    {
+                      "coords": [[108.95, 34.27], [116.46, 39.92]],
+                      "lineStyle": { "color": "#52c41a", "width": 2, "curveness": 0.2 }
+                    }
+                  ],
+                  "effect": {
+                    "show": true,
+                    "period": 6,
+                    "trailLength": 0.7,
+                    "symbol": "arrow",
+                    "symbolSize": 6,
+                    "color": "#ffffff"
+                  },
+                  "lineStyle": { "opacity": 0.6 }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentName": "Div",
+      "props": {
+        "style": {
+          "display": "flex",
+          "gap": "20px"
+        }
+      },
+      "children": [
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "运输方式分布",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsPie",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "item" },
+                  "series": [{
+                    "type": "pie",
+                    "radius": ["40%", "70%"],
+                    "data": [
+                      { "value": 1048, "name": "公路运输", "itemStyle": { "color": "#1a90ff" } },
+                      { "value": 735, "name": "铁路运输", "itemStyle": { "color": "#00ffcc" } },
+                      { "value": 580, "name": "航空运输", "itemStyle": { "color": "#ffcc00" } },
+                      { "value": 484, "name": "水路运输", "itemStyle": { "color": "#d94e5d" } }
+                    ]
+                  }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "componentName": "Div",
+          "props": {
+            "style": {
+              "flex": "1",
+              "background": "rgba(26, 144, 255, 0.05)",
+              "border": "1px solid #18579e",
+              "borderRadius": "8px",
+              "padding": "20px"
+            }
+          },
+          "children": [
+            {
+              "componentName": "Text",
+              "props": {
+                "children": "配送时效分析",
+                "style": { "color": "#ffffff", "fontSize": "16px", "fontWeight": "bold", "marginBottom": "15px", "display": "block" }
+              }
+            },
+            {
+              "componentName": "EChartsBar",
+              "props": {
+                "style": { "width": "100%", "height": "250px" },
+                "option": {
+                  "backgroundColor": "transparent",
+                  "tooltip": { "trigger": "axis" },
+                  "xAxis": {
+                    "type": "category",
+                    "data": ["当日达", "次日达", "2-3日", "3-5日", "5日以上"],
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "yAxis": {
+                    "type": "value",
+                    "axisLabel": { "color": "#ffffff" }
+                  },
+                  "series": [{
+                    "type": "bar",
+                    "data": [3200, 4500, 2800, 1500, 800],
+                    "itemStyle": { "color": "#00ffcc" }
+                  }]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

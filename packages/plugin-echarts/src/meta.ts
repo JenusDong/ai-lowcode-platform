@@ -449,6 +449,125 @@ const funnelConfigure = {
   ],
 };
 
+const defaultMapOption: ChartOption = {
+  backgroundColor: '#0a1a3a',
+  title: { text: '中国地图数据展示', left: 'center', textStyle: { color: '#ffffff', fontSize: 18 } },
+  tooltip: { trigger: 'item' },
+  visualMap: {
+    min: 0,
+    max: 2000,
+    left: 'left',
+    top: 'bottom',
+    text: ['高', '低'],
+    calculable: true,
+    inRange: { color: ['#50a3ba', '#eac736', '#d94e5d'] },
+    textStyle: { color: '#ffffff' }
+  },
+  geo: {
+    map: 'china',
+    roam: true,
+    zoom: 1.2,
+    center: [104, 35],
+    label: { show: true, color: '#ffffff', fontSize: 10 },
+    itemStyle: {
+      areaColor: '#1a5276',
+      borderColor: '#1a90ff',
+      borderWidth: 1
+    },
+    emphasis: {
+      itemStyle: {
+        areaColor: '#2980b9',
+        borderColor: '#ffcc00',
+        borderWidth: 2
+      }
+    }
+  },
+  series: [{
+    name: '数据量',
+    type: 'map',
+    geoIndex: 0,
+    data: [
+      { name: '北京', value: 1000 }, { name: '上海', value: 1300 }, { name: '广东', value: 1500 },
+      { name: '浙江', value: 1250 }, { name: '江苏', value: 1400 }, { name: '山东', value: 1350 },
+      { name: '河南', value: 1150 }, { name: '四川', value: 1180 }, { name: '湖北', value: 1080 }
+    ]
+  }],
+  animationDuration: 1000
+};
+
+const mapConfigure = {
+  supports: { style: true, events: [
+    { name: 'onRegionClick', description: '区域点击事件' },
+    { name: 'onRegionHover', description: '区域悬停事件' },
+    { name: 'onMapReady', description: '地图就绪事件' }
+  ]},
+  props: [
+    { type: 'group', title: '地图基础', display: 'accordion', items: [
+      { name: 'mapType', title: '地图类型', setter: makeSetter('mapType', 'SelectSetter', {
+        options: [
+          { label: '中国地图', value: 'china' },
+          { label: '世界地图', value: 'world' },
+          { label: '省份地图', value: 'province' }
+        ],
+        defaultValue: 'china'
+      })},
+      { name: 'visualType', title: '可视化类型', setter: makeSetter('visualType', 'SelectSetter', {
+        options: [
+          { label: '分省填色', value: 'fillColor' },
+          { label: '散点图', value: 'scatter' },
+          { label: '热力图', value: 'heatMap' },
+          { label: '动态散点', value: 'effectScatter' },
+          { label: '流向线', value: 'lines' }
+        ],
+        defaultValue: 'fillColor'
+      })},
+      { name: 'roam', title: '缩放平移', setter: makeSetter('roam', 'BoolSetter', { defaultValue: true }) },
+      { name: 'zoom', title: '缩放比例', setter: makeSetter('zoom', 'NumberSetter', { defaultValue: 1.2 }) },
+    ]},
+    { type: 'group', title: '数据配置', display: 'accordion', items: [
+      { name: 'mapData', title: '地图数据', setter: makeDataEditor([
+        { name: '北京', value: 1000 }, { name: '上海', value: 1300 }, { name: '广东', value: 1500 },
+        { name: '浙江', value: 1250 }, { name: '江苏', value: 1400 }, { name: '山东', value: 1350 },
+        { name: '河南', value: 1150 }, { name: '四川', value: 1180 }
+      ])},
+      { name: 'enableDrillDown', title: '启用钻取', setter: makeSetter('enableDrillDown', 'BoolSetter', { defaultValue: false }) },
+    ]},
+    { type: 'group', title: '样式主题', display: 'accordion', items: [
+      { name: 'theme', title: '主题风格', setter: makeSetter('theme', 'SelectSetter', {
+        options: [
+          { label: '暗色(大屏)', value: 'dark' },
+          { label: '亮色', value: 'light' },
+          { label: '自定义', value: 'custom' }
+        ],
+        defaultValue: 'dark'
+      })},
+      { name: 'backgroundColor', title: '背景颜色', setter: makeSetter('backgroundColor', 'StringSetter', { defaultValue: '#0a1a3a' }) },
+      { name: 'colorScheme', title: '配色方案', setter: makeSetter('colorScheme', 'SelectSetter', {
+        options: [
+          { label: '蓝色系', value: 'blue' },
+          { label: '红色系', value: 'red' },
+          { label: '绿色系', value: 'green' },
+          { label: '彩虹渐变', value: 'rainbow' }
+        ],
+        defaultValue: 'blue'
+      })},
+    ]},
+    { type: 'group', title: '标题设置', display: 'accordion', items: [
+      { name: 'titleText', title: '主标题', setter: makeSetter('title.text', 'StringSetter', { defaultValue: '中国地图数据展示' }) },
+      { name: 'titleColor', title: '标题颜色', setter: makeSetter('title.textStyle.color', 'StringSetter', { defaultValue: '#ffffff' }) },
+      { name: 'titleFontSize', title: '标题字号', setter: makeSetter('title.textStyle.fontSize', 'NumberSetter', { defaultValue: 18 }) },
+    ]},
+    { type: 'group', title: '交互设置', display: 'accordion', items: [
+      { name: 'showTooltip', title: '显示提示框', setter: makeSetter('showTooltip', 'BoolSetter', { defaultValue: true }) },
+      { name: 'showLegend', title: '显示图例', setter: makeSetter('showLegend', 'BoolSetter', { defaultValue: true }) },
+      { name: 'animationDuration', title: '动画时长(ms)', setter: makeSetter('animationDuration', 'NumberSetter', { defaultValue: 1000 }) },
+    ]},
+    { type: 'group', title: '完整配置', display: 'accordion', items: [
+      { name: 'option', title: '配置对象', setter: { componentName: 'JsonSetter', props: { placeholder: 'ECharts 地图配置对象' } } },
+    ]},
+  ],
+};
+
 const baseProps = [
   { name: 'option', propType: 'object', description: 'ECharts 配置对象' },
   { name: 'style', propType: 'object', description: '样式', defaultValue: { width: '100%', height: '400px' } },
@@ -457,6 +576,74 @@ const baseProps = [
   { name: 'notMerge', propType: 'bool', description: '是否不合并配置', defaultValue: false },
   { name: 'lazyUpdate', propType: 'bool', description: '是否懒更新', defaultValue: true },
 ];
+
+const dataCardConfigure = {
+  supports: { style: true },
+  props: [
+    { type: 'group', title: '基础配置', display: 'accordion', items: [
+      { name: 'title', title: '标题', setter: 'StringSetter', defaultValue: '数据卡片' },
+      { name: 'value', title: '数值', setter: 'StringSetter', defaultValue: '0' },
+      { name: 'unit', title: '单位', setter: 'StringSetter', defaultValue: '' },
+      { name: 'color', title: '主题色', setter: 'StringSetter', defaultValue: '#1a90ff' },
+    ]},
+    { type: 'group', title: '趋势配置', display: 'accordion', items: [
+      { name: 'trendValue', title: '趋势值', setter: 'StringSetter' },
+      { name: 'trendType', title: '趋势类型', setter: { componentName: 'SelectSetter', props: {
+        options: [
+          { label: '上升', value: 'up' },
+          { label: '下降', value: 'down' },
+          { label: '持平', value: 'stable' },
+        ],
+        defaultValue: 'up'
+      }}},
+    ]},
+  ],
+};
+
+const dashboardLayoutConfigure = {
+  supports: { style: true },
+  props: [
+    { type: 'group', title: '标题配置', display: 'accordion', items: [
+      { name: 'title', title: '主标题', setter: 'StringSetter', defaultValue: '数据可视化大屏' },
+      { name: 'subtitle', title: '副标题', setter: 'StringSetter' },
+    ]},
+    { type: 'group', title: '样式配置', display: 'accordion', items: [
+      { name: 'backgroundColor', title: '背景颜色', setter: 'StringSetter', defaultValue: '#0a1a3a' },
+    ]},
+  ],
+};
+
+const chartPanelConfigure = {
+  supports: { style: true },
+  props: [
+    { type: 'group', title: '面板配置', display: 'accordion', items: [
+      { name: 'title', title: '面板标题', setter: 'StringSetter', defaultValue: '图表面板' },
+    ]},
+  ],
+};
+
+const mapPanelConfigure = {
+  supports: { style: true },
+  props: [
+    { type: 'group', title: '面板配置', display: 'accordion', items: [
+      { name: 'title', title: '面板标题', setter: 'StringSetter', defaultValue: '地图面板' },
+      { name: 'mapType', title: '地图类型', setter: { componentName: 'SelectSetter', props: {
+        options: [
+          { label: '分省填色', value: 'fillColor' },
+          { label: '散点图', value: 'scatter' },
+          { label: '动态散点', value: 'effectScatter' },
+          { label: '热力图', value: 'heatMap' },
+          { label: '流向线', value: 'lines' },
+        ],
+        defaultValue: 'fillColor'
+      }}},
+      { name: 'height', title: '高度', setter: 'StringSetter', defaultValue: '500px' },
+    ]},
+    { type: 'group', title: '数据配置', display: 'accordion', items: [
+      { name: 'mapData', title: '地图数据', setter: { componentName: 'JsonSetter', props: { placeholder: '地图数据' } } },
+    ]},
+  ],
+};
 
 export const components = [
   {
@@ -588,6 +775,110 @@ export const components = [
     group: 'ECharts图表',
     snippets: [
       { title: '基础漏斗图', schema: { componentName: 'EChartsFunnel', props: { option: defaultFunnelOption, style: { width: '100%', height: '400px' } } } },
+    ],
+  },
+  {
+    componentName: 'EChartsMap',
+    title: 'ECharts 地图',
+    docUrl: '',
+    screenshot: '',
+    devMode: 'proCode',
+    npm: { package: '@local/plugin-echarts', version: '1.0.0', exportName: 'EChartsMap', destructuring: true },
+    props: baseProps,
+    configure: mapConfigure,
+    icon: Icons.pie,
+    category: '图表组件',
+    group: 'ECharts图表',
+    snippets: [
+      { title: '分省填色地图', schema: { componentName: 'EChartsMap', props: { option: defaultMapOption, style: { width: '100%', height: '500px' }, mapType: 'china', visualType: 'fillColor' } } },
+      { title: '散点地图', schema: { componentName: 'EChartsMap', props: { option: defaultMapOption, style: { width: '100%', height: '500px' }, mapType: 'china', visualType: 'scatter' } } },
+      { title: '动态散点地图', schema: { componentName: 'EChartsMap', props: { option: defaultMapOption, style: { width: '100%', height: '500px' }, mapType: 'china', visualType: 'effectScatter' } } },
+      { title: '热力图地图', schema: { componentName: 'EChartsMap', props: { option: defaultMapOption, style: { width: '100%', height: '500px' }, mapType: 'china', visualType: 'heatMap' } } },
+      { title: '流向线地图', schema: { componentName: 'EChartsMap', props: { option: defaultMapOption, style: { width: '100%', height: '500px' }, mapType: 'china', visualType: 'lines' } } },
+    ],
+  },
+  {
+    componentName: 'DataCard',
+    title: '数据卡片',
+    docUrl: '',
+    screenshot: '',
+    devMode: 'proCode',
+    npm: { package: '@local/plugin-echarts', version: '1.0.0', exportName: 'DataCard', destructuring: true },
+    props: [
+      { name: 'title', propType: 'string', description: '标题', defaultValue: '数据卡片' },
+      { name: 'value', propType: 'string', description: '数值', defaultValue: '0' },
+      { name: 'unit', propType: 'string', description: '单位' },
+      { name: 'color', propType: 'string', description: '主题色', defaultValue: '#1a90ff' },
+      { name: 'style', propType: 'object', description: '样式' },
+    ],
+    configure: dataCardConfigure,
+    icon: Icons.pie,
+    category: '复合组件',
+    group: '大屏组件',
+    snippets: [
+      { title: '数据卡片', schema: { componentName: 'DataCard', props: { title: '总销售额', value: '1,234,567', unit: '元', color: '#1a90ff' } } },
+      { title: '趋势卡片', schema: { componentName: 'DataCard', props: { title: '月增长', value: '+15.8%', color: '#52c41a', trend: { value: '较上月', type: 'up' } } } },
+    ],
+  },
+  {
+    componentName: 'DashboardLayout',
+    title: '大屏布局',
+    docUrl: '',
+    screenshot: '',
+    devMode: 'proCode',
+    npm: { package: '@local/plugin-echarts', version: '1.0.0', exportName: 'DashboardLayout', destructuring: true },
+    props: [
+      { name: 'title', propType: 'string', description: '主标题', defaultValue: '数据可视化大屏' },
+      { name: 'subtitle', propType: 'string', description: '副标题' },
+      { name: 'backgroundColor', propType: 'string', description: '背景颜色', defaultValue: '#0a1a3a' },
+      { name: 'style', propType: 'object', description: '样式' },
+    ],
+    configure: dashboardLayoutConfigure,
+    icon: Icons.pie,
+    category: '复合组件',
+    group: '大屏组件',
+    snippets: [
+      { title: '大屏布局', schema: { componentName: 'DashboardLayout', props: { title: '数据可视化大屏', backgroundColor: '#0a1a3a' } } },
+    ],
+  },
+  {
+    componentName: 'ChartPanel',
+    title: '图表面板',
+    docUrl: '',
+    screenshot: '',
+    devMode: 'proCode',
+    npm: { package: '@local/plugin-echarts', version: '1.0.0', exportName: 'ChartPanel', destructuring: true },
+    props: [
+      { name: 'title', propType: 'string', description: '面板标题', defaultValue: '图表面板' },
+      { name: 'style', propType: 'object', description: '样式' },
+    ],
+    configure: chartPanelConfigure,
+    icon: Icons.pie,
+    category: '复合组件',
+    group: '大屏组件',
+    snippets: [
+      { title: '图表面板', schema: { componentName: 'ChartPanel', props: { title: '销售趋势' } } },
+    ],
+  },
+  {
+    componentName: 'MapPanel',
+    title: '地图面板',
+    docUrl: '',
+    screenshot: '',
+    devMode: 'proCode',
+    npm: { package: '@local/plugin-echarts', version: '1.0.0', exportName: 'MapPanel', destructuring: true },
+    props: [
+      { name: 'title', propType: 'string', description: '面板标题', defaultValue: '地图面板' },
+      { name: 'mapType', propType: 'string', description: '地图类型', defaultValue: 'fillColor' },
+      { name: 'height', propType: 'string', description: '高度', defaultValue: '500px' },
+      { name: 'style', propType: 'object', description: '样式' },
+    ],
+    configure: mapPanelConfigure,
+    icon: Icons.pie,
+    category: '复合组件',
+    group: '大屏组件',
+    snippets: [
+      { title: '地图面板', schema: { componentName: 'MapPanel', props: { title: '全国销售分布', mapType: 'fillColor', height: '500px' } } },
     ],
   },
 ];
