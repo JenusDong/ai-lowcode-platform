@@ -5,7 +5,7 @@ const http = require('http');
 const sass = require('sass');
 
 const outDir = path.resolve(__dirname, '../public');
-const isWatch = process.argv.includes('--watch');
+const isWatch = false && process.argv.includes('--watch');
 
 let clients = [];
 if (isWatch) {
@@ -25,9 +25,6 @@ if (isWatch) {
       res.writeHead(404);
       res.end();
     }
-  });
-  sseServer.listen(5557, () => {
-    console.log('Live reload server running on http://localhost:5557');
   });
 }
 

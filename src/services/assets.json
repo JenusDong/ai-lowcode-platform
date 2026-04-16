@@ -137,14 +137,25 @@
       ]
     },
     {
-      "package": "@jenusdong/echarts-for-lowcode",
-      "version": "1.2.1",
-      "library": "EChartsForLowCode",
+      "package": "echarts-extension-amap",
+      "version": "1.12.0",
+      "library": "echartsExtensionAmap",
       "urls": [
-        "https://unpkg.com/@jenusdong/echarts-for-lowcode@1.2.1/build/echarts-for-lowcode.umd.js"
+        "https://cdn.jsdelivr.net/npm/echarts-extension-amap@1.12.0/dist/echarts-extension-amap.min.js"
       ],
       "editUrls": [
-        "https://unpkg.com/@jenusdong/echarts-for-lowcode@1.2.1/build/echarts-for-lowcode.umd.js"
+        "https://cdn.jsdelivr.net/npm/echarts-extension-amap@1.12.0/dist/echarts-extension-amap.min.js"
+      ]
+    },
+    {
+      "package": "@jenusdong/echarts-for-lowcode",
+      "version": "1.3.0",
+      "library": "EChartsForLowCode",
+      "urls": [
+        "/echarts-for-lowcode.umd.js"
+      ],
+      "editUrls": [
+        "/echarts-for-lowcode.umd.js"
       ]
     }
   ],
@@ -161,7 +172,7 @@
       "exportName": "PluginEchartsMeta",
       "npm": {
         "package": "@jenusdong/echarts-for-lowcode",
-        "version": "1.2.1"
+        "version": "1.3.0"
       },
       "url": "/plugin-echarts-meta.js"
     },

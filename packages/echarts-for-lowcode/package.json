@@ -1,7 +1,7 @@
 {
   "name": "@jenusdong/echarts-for-lowcode",
-  "version": "1.2.1",
-  "description": "ECharts adapter for Ali LowCode Engine with auto-selection support",
+  "version": "1.3.0",
+  "description": "ECharts adapter for Ali LowCode Engine with auto-selection support and AMap integration",
   "main": "build/echarts-for-lowcode.umd.js",
   "module": "build/echarts-for-lowcode.esm.js",
   "types": "src/index.d.ts",
@@ -19,10 +19,13 @@
     "lowcode",
     "echarts",
     "ali-lowcode-engine",
-    "react"
+    "react",
+    "amap",
+    "gaode-map"
   ],
   "dependencies": {
-    "echarts": "^5.4.0"
+    "echarts": "^5.4.0",
+    "echarts-extension-amap": "^1.12.0"
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0"

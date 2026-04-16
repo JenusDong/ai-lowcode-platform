@@ -18,6 +18,11 @@ async function buildUMD() {
       if (!echarts) { throw new Error('[EChartsForLowCode] echarts not found'); }
       return echarts;
     }
+    if (mod === 'echarts-extension-amap') {
+      // echarts-extension-amap is a side-effect import that registers itself to echarts
+      // It doesn't export anything, so we return a dummy object
+      return {};
+    }
     throw new Error('[EChartsForLowCode] Unknown module: ' + mod);
   };
 })();
@@ -30,7 +35,7 @@ async function buildUMD() {
     globalName: '_EChartsForLowCode',
     bundle: true,
     minify: false,
-    external: ['react', 'react-dom', 'echarts'],
+    external: ['react', 'react-dom', 'echarts', 'echarts-extension-amap'],
     define: {
       'process.env.NODE_ENV': '"production"',
     },
@@ -117,8 +122,7 @@ async function buildESM() {
     format: 'esm',
     bundle: true,
     minify: false,
-    external: ['react', 'react-dom', 'echarts'],
-    define: { 'process.env.NODE_ENV': '"production"' },
+    external: ['react', 'react-dom', 'echarts', 'echarts-extension-amap'],
     loader: { '.tsx': 'tsx', '.ts': 'ts' },
     jsx: 'transform',
     jsxFactory: 'React.createElement',

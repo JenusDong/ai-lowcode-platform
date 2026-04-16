@@ -11,6 +11,20 @@ const TEMPLATE_LIST = [
     file: '/templates/interactive-map-dashboard.json',
   },
   {
+    id: 'weather-dashboard',
+    name: '全国天气大屏',
+    description: '全国今日天气数据可视化大屏，展示气温分布',
+    tags: ['天气', '大屏', '地图'],
+    file: '/templates/weather-dashboard.json',
+  },
+  {
+    id: 'amap-weather-dashboard',
+    name: '高德地图天气大屏',
+    description: '使用高德地图展示全国天气数据（需配置API密钥）',
+    tags: ['高德地图', '天气', '大屏'],
+    file: '/templates/amap-weather-dashboard.json',
+  },
+  {
     id: 'sales-dashboard',
     name: '销售数据大屏',
     description: '销售数据可视化大屏，包含多种图表展示',
